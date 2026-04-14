@@ -14,6 +14,13 @@
    Adapted from Forge Motorsport Cyberpunk × Industrial
    ═══════════════════════════════════════════════════ */
 
+/* Minimalist scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,85,0,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,85,0,0.6); }
+html { scrollbar-width: thin; scrollbar-color: rgba(255,85,0,0.3) transparent; }
+
 :root {
   --neon-cyan: #00f0ff;
   --neon-cyan-dim: #008899;
@@ -1151,6 +1158,7 @@ img { max-width: 100%; display: block; }
   <div class="hero-content">
     <span class="hero-stamp">// Gloucester's Trusted Garage</span>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <div class="hero-brand" style="display: inline-block; font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 22px; margin-bottom: 16px; letter-spacing: 2px; background: linear-gradient(135deg, var(--weld-orange), #ff0055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,85,0,0.4));">GD AUTOCENTRE LTD</div>
     <h1 class="hero-title" style="font-family: 'Outfit', sans-serif;">Your Car<br>In <span class="accent">Expert</span><br>Hands</h1>
     <p class="hero-subtitle">Independent garage with 10+ years experience. Honest service, fair prices, and no unnecessary work. All makes and models welcome.</p>
     <div class="hero-ctas">
