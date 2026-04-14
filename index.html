@@ -217,7 +217,7 @@ img { max-width: 100%; display: block; }
   display: none;
   align-items: center;
   justify-content: center;
-  width: 40px; height: 38px;
+  width: 40px; height: 38px; min-width: 40px; min-height: 38px; flex-shrink: 0;
   background: var(--weld-orange);
   border: none;
   color: #000;
@@ -1023,7 +1023,7 @@ img { max-width: 100%; display: block; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .header-phone span { display: none; }
+  .header-phone span:not(.icon) { display: none; }
 }
 @media (max-width: 480px) {
   .services-grid { grid-template-columns: 1fr; }
