@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<!--
+  ============================================================
+  GD AUTOCENTRE — "POSTER GARAGE" LANDING PAGE
+  ============================================================
+  Design: Typography-as-art, poster-per-section, scroll-snap
+  Chain: chrome · velocity · exhaust-note · pit-lane · asphalt · night-shift
+
+  Typography System:
+    Display — Big Shoulders Display (100–900 variable), industrial
+    Body    — Outfit (200–700), geometric sans
+    Mono    — Space Grotesk (300–700), data/labels
+    Scale   — Golden Ratio 1.618, 8px baseline
+
+  Color:
+    Dark (default): #0a0a0a bg, #141414 surface, #d0d0d0 chrome, #ff6b00 accent
+    Light: #f0f0ec bg, #1a1a1a text, #d45a00 accent
+
+  Layout: Scroll-snap (100svh sections), dot nav, mobile fallback
+  Techniques: Chromatic aberration, ghost letterform, kinetic marquee,
+              weight axis breathing, parallax scroll offset, SVG noise
+
+  Business: GD Autocentre Ltd — 153a Bristol Road, Gloucester, GL1 5SY
+  Built: 2026-04-08
+  ============================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gin's GD Autocentre — MOTs, Servicing & Repairs in Gloucester</title>
+<meta name="description" content="Independent garage in Gloucester. MOTs, full servicing, computer diagnostics, tyres, welding, engine work. 71+ five-star reviews. Honest pricing, no upselling. Call Gin: 01452 422 405.">
+<meta name="theme-color" content="#0a0a0a">
+
+<!-- Preconnect & Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Outfit:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "GD Autocentre Ltd",
+  "alternateName": "Gin's GD Autocentre",
+  "url": "https://www.facebook.com/GDAutocentreLtd/",
+  "telephone": "+441452422405",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "153a Bristol Road",
+    "addressLocality": "Gloucester",
+    "addressRegion": "Gloucestershire",
+    "postalCode": "GL1 5SY",
+    "addressCountry": "GB"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 51.8543,
+    "longitude": -2.2467
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "17:30"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "71",
+    "bestRating": "5"
+  },
+  "priceRange": "$$",
+  "image": "",
+  "description": "Independent garage in Gloucester offering MOTs, full servicing, computer diagnostics, tyre fitting, welding, clutch replacement, timing belts, gearbox and engine replacement, and air conditioning. High-performance specialist. 71+ five-star reviews.",
+  "foundingDate": "2015",
+  "sameAs": ["https://www.facebook.com/GDAutocentreLtd/"]
+}
+</script>
+
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  /* --- Palette: Dark (default) --- */
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --text: #d0d0d0;
+  --text-dim: #888888;
+  --accent: #ff6b00;
+  --accent-hover: #ff8a33;
+  --accent-subtle: rgba(255, 107, 0, 0.12);
+  --overlay: rgba(10, 10, 10, 0.78);
+  --overlay-heavy: rgba(10, 10, 10, 0.88);
+  --aberration-warm: rgba(255, 107, 0, 0.35);
+  --aberration-cool: rgba(0, 200, 255, 0.25);
+
+  /* --- Typography scale (golden ratio 1.618) --- */
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'Space Grotesk', sans-serif;
+
+  --fs-xs:   clamp(0.625rem, 0.55rem + 0.25vw, 0.75rem);    /* ~10–12px */
+  --fs-sm:   clamp(0.75rem, 0.65rem + 0.35vw, 0.875rem);    /* ~12–14px */
+  --fs-base: clamp(0.875rem, 0.75rem + 0.4vw, 1rem);        /* ~14–16px */
+  --fs-md:   clamp(1rem, 0.85rem + 0.5vw, 1.25rem);         /* ~16–20px */
+  --fs-lg:   clamp(1.25rem, 1rem + 0.75vw, 1.625rem);       /* ~20–26px */
+  --fs-xl:   clamp(1.625rem, 1.2rem + 1.5vw, 2.625rem);     /* ~26–42px */
+  --fs-2xl:  clamp(2.25rem, 1.5rem + 2.5vw, 4.25rem);       /* ~36–68px */
+  --fs-3xl:  clamp(3rem, 2rem + 4vw, 6.875rem);              /* ~48–110px */
+  --fs-4xl:  clamp(4rem, 2.5rem + 6vw, 11rem);               /* ~64–176px */
+  --fs-hero: clamp(4.5rem, 3rem + 8vw, 14rem);               /* ~72–224px */
+
+  /* --- Spacing (8px baseline) --- */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 40px;
+  --sp-6: 48px;
+  --sp-8: 64px;
+  --sp-10: 80px;
+  --sp-12: 96px;
+  --sp-16: 128px;
+
+  /* --- Tracking --- */
+  --tracking-tight: -0.04em;
+  --tracking-tighter: -0.06em;
+  --tracking-loose: 0.10em;
+  --tracking-wider: 0.16em;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 800ms;
+
+  /* --- Misc --- */
+  --radius: 2px;
+  --max-prose: 65ch;
+  --nav-dot-size: 10px;
+}
+
+/* --- Light theme overrides --- */
+[data-theme="light"] {
+  --bg: #f0f0ec;
+  --surface: #e4e4e0;
+  --text: #1a1a1a;
+  --text-dim: #666666;
+  --accent: #d45a00;
+  --accent-hover: #b84d00;
+  --accent-subtle: rgba(212, 90, 0, 0.10);
+  --overlay: rgba(240, 240, 236, 0.78);
+  --overlay-heavy: rgba(240, 240, 236, 0.90);
+  --aberration-warm: rgba(212, 90, 0, 0.30);
+  --aberration-cool: rgba(0, 150, 200, 0.20);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Custom Scrollbar (Webkit) --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: var(--radius);
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* --- Focus Visible --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- Links --- */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* --- SVG Noise Texture Overlay --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+[data-theme="light"] body::before {
+  opacity: 0.025;
+}
+
+/* ============================================================
+   POSTER SECTIONS (SCROLL SNAP)
+   ============================================================ */
+.poster {
+  position: relative;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--sp-6) var(--sp-4);
+}
+
+@media (max-width: 767px) {
+  .poster {
+    scroll-snap-align: none;
+    min-height: auto;
+    padding: var(--sp-12) var(--sp-3);
+  }
+  .poster--hero {
+    min-height: 100svh;
+  }
+}
+
+/* --- Section background images --- */
+.poster__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.poster__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-heavy);
+}
+
+/* --- Section reveal animation --- */
+.poster__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+.poster__content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   1. HERO SECTION
+   ============================================================ */
+.hero {
+  text-align: center;
+  position: relative;
+}
+
+/* Ghost letterform "G" */
+.hero__ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(20rem, 15rem + 25vw, 60rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(208, 208, 208, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+[data-theme="light"] .hero__ghost {
+  -webkit-text-stroke-color: rgba(26, 26, 26, 0.04);
+}
+
+/* Living Pulse */
+.hero__pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+}
+
+.hero__pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.hero__pulse-dot--open {
+  animation: pulse-glow 2s var(--ease-in-out) infinite;
+}
+.hero__pulse-dot--closed {
+  background: var(--text-dim);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent); opacity: 1; }
+  50% { box-shadow: 0 0 12px 4px var(--accent); opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__pulse-dot--open {
+    animation: none;
+    box-shadow: 0 0 6px 2px var(--accent);
+  }
+}
+
+.hero__pulse-label {
+  color: var(--accent);
+  font-weight: 700;
+}
+.hero__pulse-label--closed {
+  color: var(--text-dim);
+}
+
+.hero__pulse-time {
+  color: var(--text-dim);
+  font-size: var(--fs-xs);
+  margin-left: var(--sp-1);
+  font-weight: 400;
+}
+
+/* Hero title with chromatic aberration */
+.hero__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--fs-hero);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tighter);
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: var(--sp-3);
+  z-index: 1;
+}
+
+.hero__title-text {
+  position: relative;
+  display: block;
+}
+
+/* Chromatic aberration layers */
+.hero__title-text::before,
+.hero__title-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+.hero__title-text::before {
+  color: var(--aberration-warm);
+  transform: translate(var(--aberr-x, 3px), var(--aberr-y, -2px));
+  z-index: -1;
+}
+.hero__title-text::after {
+  color: var(--aberration-cool);
+  transform: translate(calc(var(--aberr-x, 3px) * -1), calc(var(--aberr-y, -2px) * -1));
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title-text::before {
+    transform: translate(3px, -2px);
+  }
+  .hero__title-text::after {
+    transform: translate(-3px, 2px);
+  }
+}
+
+/* Hero subtitle */
+.hero__subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--sp-5);
+}
+
+/* Hero CTA */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: var(--sp-2) var(--sp-4);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+.hero__cta:hover {
+  background: var(--accent-hover);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+.hero__cta:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   2. KINETIC MARQUEE
+   ============================================================ */
+.marquee-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-6);
+}
+
+.marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: var(--sp-3) 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: var(--sp-2);
+  }
+}
+
+.marquee-track span {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--fs-3xl);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  padding: 0 var(--sp-3);
+}
+
+.marquee-track .marquee-sep {
+  color: var(--accent);
+  font-weight: 100;
+  padding: 0 var(--sp-2);
+}
+
+.marquee-tagline {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  font-weight: 300;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: var(--tracking-tight);
+}
+
+.marquee-tagline strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ============================================================
+   3. STATEMENT SECTION — "HONEST."
+   ============================================================ */
+.statement {
+  text-align: center;
+}
+
+.statement__word {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--fs-4xl);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tighter);
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: var(--sp-4);
+}
+
+/* Weight axis breathing on the period */
+.statement__breathe {
+  display: inline-block;
+  color: var(--accent);
+  animation: weight-breathe 3s var(--ease-in-out) infinite;
+}
+
+@keyframes weight-breathe {
+  0%, 100% { font-variation-settings: 'wght' 100; }
+  50% { font-variation-settings: 'wght' 900; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statement__breathe {
+    animation: none;
+    font-variation-settings: 'wght' 900;
+  }
+}
+
+.statement__body {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: var(--max-prose);
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   4. REVIEW SECTION — PULL QUOTE
+   ============================================================ */
+.review {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-4);
+}
+
+.review__stars {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-5);
+}
+
+.review__star {
+  width: clamp(20px, 2vw, 32px);
+  height: clamp(20px, 2vw, 32px);
+  fill: var(--accent);
+}
+
+.review__quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-3xl);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text);
+  max-width: 18ch;
+  margin: 0 auto var(--sp-5);
+  position: relative;
+}
+
+.review__quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.3em;
+  left: -0.15em;
+  font-size: 2.5em;
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0.2;
+  line-height: 1;
+}
+
+.review__attribution {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.review__count {
+  display: block;
+  margin-top: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 300;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   5. CONTACT SECTION
+   ============================================================ */
+.contact {
+  width: 100%;
+  max-width: 1400px;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+}
+
+/* Left side — phone & details */
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.contact__phone-link {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.contact__phone-link:hover {
+  color: var(--accent);
+}
+
+.contact__address {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+.contact__hours {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--text-dim);
+  line-height: 2;
+  border-left: 2px solid var(--accent);
+  padding-left: var(--sp-2);
+}
+
+.contact__hours-label {
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+  display: block;
+  margin-bottom: var(--sp-1);
+}
+
+.contact__links {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contact__link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  padding: var(--sp-1) 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.contact__link:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* Right side — map */
+.contact__map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(208, 208, 208, 0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.contact__map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.8) contrast(1.1);
+  opacity: 0.85;
+  transition: filter var(--duration-base) var(--ease-out),
+              opacity var(--duration-base) var(--ease-out);
+}
+.contact__map iframe:hover {
+  filter: grayscale(0.3) contrast(1.05);
+  opacity: 1;
+}
+
+[data-theme="light"] .contact__map iframe {
+  filter: grayscale(0.5) contrast(1.05);
+  opacity: 0.9;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-4);
+  border-top: 1px solid rgba(208, 208, 208, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.footer__text {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 300;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   DOT NAVIGATION
+   ============================================================ */
+.dot-nav {
+  position: fixed;
+  right: var(--sp-3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+@media (max-width: 767px) {
+  .dot-nav {
+    display: none;
+  }
+}
+
+.dot-nav__dot {
+  width: var(--nav-dot-size);
+  height: var(--nav-dot-size);
+  border-radius: 50%;
+  background: var(--text-dim);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.4;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.dot-nav__dot:hover {
+  opacity: 0.7;
+  transform: scale(1.3);
+}
+.dot-nav__dot.is-active {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+/* ============================================================
+   DARK MODE TOGGLE
+   ============================================================ */
+.theme-toggle {
+  position: fixed;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 200;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(208, 208, 208, 0.12);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+  padding: 0;
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.theme-toggle__sun { display: none; }
+.theme-toggle__moon { display: block; }
+
+[data-theme="light"] .theme-toggle__sun { display: block; }
+[data-theme="light"] .theme-toggle__moon { display: none; }
+
+/* ============================================================
+   WHATSAPP FLOAT
+   ============================================================ */
+.wa-float {
+  position: fixed;
+  bottom: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 200;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.wa-float:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+.wa-float svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+
+/* ============================================================
+   SECTION-SPECIFIC BACKGROUNDS
+   ============================================================ */
+.poster--hero .poster__bg {
+  background-image:
+    linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.85) 100%),
+    url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80&auto=format');
+  /* Dark, moody workshop / garage interior */
+}
+
+[data-theme="light"] .poster--hero .poster__bg {
+  background-image:
+    linear-gradient(180deg, rgba(240,240,236,0.6) 0%, rgba(240,240,236,0.85) 100%),
+    url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80&auto=format');
+}
+
+.poster--contact .poster__bg {
+  background-image:
+    linear-gradient(180deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.94) 100%),
+    url('https://images.unsplash.com/photo-1530124566582-a45a7c78e0e0?w=1920&q=80&auto=format');
+  /* Overhead workshop tools, dark moody */
+}
+
+[data-theme="light"] .poster--contact .poster__bg {
+  background-image:
+    linear-gradient(180deg, rgba(240,240,236,0.88) 0%, rgba(240,240,236,0.94) 100%),
+    url('https://images.unsplash.com/photo-1530124566582-a45a7c78e0e0?w=1920&q=80&auto=format');
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reveal states for sections */
+.poster__content--delay-1 { transition-delay: 100ms; }
+.poster__content--delay-2 { transition-delay: 200ms; }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     THEME TOGGLE
+     ============================================================ -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+  <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+  <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<!-- ============================================================
+     DOT NAVIGATION
+     ============================================================ -->
+<nav class="dot-nav" id="dotNav" aria-label="Page sections">
+  <button class="dot-nav__dot is-active" data-section="0" aria-label="Hero section"></button>
+  <button class="dot-nav__dot" data-section="1" aria-label="Services section"></button>
+  <button class="dot-nav__dot" data-section="2" aria-label="Values section"></button>
+  <button class="dot-nav__dot" data-section="3" aria-label="Reviews section"></button>
+  <button class="dot-nav__dot" data-section="4" aria-label="Contact section"></button>
+</nav>
+
+<!-- ============================================================
+     WHATSAPP FLOAT
+     ============================================================ -->
+<a class="wa-float"
+   href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please."
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Message us on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+</a>
+
+
+<!-- ============================================================
+     SECTION 1: HERO
+     ============================================================ -->
+<section class="poster poster--hero" id="section-0">
+  <div class="poster__bg"></div>
+  <div class="hero__ghost" aria-hidden="true">G</div>
+
+  <div class="poster__content hero" role="banner">
+    <!-- Living Pulse -->
+    <div class="hero__pulse" id="livingPulse">
+      <span class="hero__pulse-dot" id="pulseDot"></span>
+      <span class="hero__pulse-label" id="pulseLabel">OPEN</span>
+      <span class="hero__pulse-time" id="pulseTime"></span>
+    </div>
+
+    <!-- Title with chromatic aberration -->
+    <h1 class="hero__title">
+      <span class="hero__title-text" data-text="GIN'S GD">GIN'S GD</span>
+      <span class="hero__title-text" data-text="AUTOCENTRE">AUTOCENTRE</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero__subtitle">Bristol Road, Gloucester</p>
+
+    <!-- CTA -->
+    <a class="hero__cta" id="heroCta" href="tel:+441452422405" aria-label="Call Gin now">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <span id="ctaText">CALL GIN</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: KINETIC MARQUEE — SERVICES
+     ============================================================ -->
+<section class="poster marquee-section" id="section-1">
+  <div class="poster__content">
+    <div class="marquee-wrap" aria-label="Services offered">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- Doubled for seamless loop -->
+        <span>MOTs</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Servicing</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Diagnostics</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Tyres</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Welding</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Clutch</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Timing Belt</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Gearbox</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Engine</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>A/C</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <!-- Repeat -->
+        <span>MOTs</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Servicing</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Diagnostics</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Tyres</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Welding</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Clutch</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Timing Belt</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Gearbox</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>Engine</span><span class="marquee-sep" aria-hidden="true">/</span>
+        <span>A/C</span><span class="marquee-sep" aria-hidden="true">/</span>
+      </div>
+    </div>
+
+    <p class="marquee-tagline"><strong>All makes.</strong> All models. <strong>Sorted.</strong></p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: STATEMENT — "HONEST."
+     ============================================================ -->
+<section class="poster" id="section-2">
+  <div class="poster__content statement">
+    <h2 class="statement__word">
+      HONEST<span class="statement__breathe" aria-hidden="true">.</span>
+    </h2>
+    <p class="statement__body">
+      No upselling. No jargon. Just straight talk about what your car needs.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: REVIEW — PULL QUOTE
+     ============================================================ -->
+<section class="poster" id="section-3">
+  <div class="poster__content review">
+    <!-- 5 Stars -->
+    <div class="review__stars" aria-label="5 out of 5 stars">
+      <svg class="review__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg class="review__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg class="review__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg class="review__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg class="review__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+
+    <blockquote class="review__quote">
+      Trustworthy and reliable services.
+    </blockquote>
+
+    <p class="review__attribution">
+      Google Review
+      <span class="review__count">71+ five-star reviews on Google, Facebook &amp; Yelp</span>
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: CONTACT
+     ============================================================ -->
+<section class="poster poster--contact" id="section-4">
+  <div class="poster__bg"></div>
+
+  <div class="poster__content contact">
+    <div class="contact__grid">
+      <!-- Left: Phone & details -->
+      <div class="contact__info">
+        <a class="contact__phone-link" href="tel:+441452422405" aria-label="Call 01452 422 405">
+          01452 422 405
+        </a>
+
+        <address class="contact__address">
+          153a Bristol Road<br>
+          Gloucester, Gloucestershire<br>
+          GL1 5SY
+        </address>
+
+        <div class="contact__hours">
+          <span class="contact__hours-label">Hours</span>
+          Mon – Fri&emsp;09:00 – 17:30<br>
+          Sat – Sun&emsp;Closed
+        </div>
+
+        <div class="contact__links">
+          <a class="contact__link" href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a class="contact__link" href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="contact__link" href="tel:+441452422405">Call Now</a>
+        </div>
+      </div>
+
+      <!-- Right: Map -->
+      <div class="contact__map">
+        <iframe
+          src="https://www.google.com/maps?q=153a+Bristol+Road,+Gloucester,+GL1+5SY&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="GD Autocentre location on Google Maps"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="footer__text">&copy; 2026 GD Autocentre Ltd &middot; Company No. 12205703 &middot; Trading since 2015</span>
+      <span class="footer__text">Independent garage, Gloucester</span>
+    </footer>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* --------------------------------------------------------
+     THEME TOGGLE
+     -------------------------------------------------------- */
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('gd-theme');
+
+  if (stored) {
+    html.setAttribute('data-theme', stored);
+  }
+
+  toggleBtn.addEventListener('click', function() {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('gd-theme', next);
+  });
+
+
+  /* --------------------------------------------------------
+     LIVING PULSE — OPEN / CLOSED
+     -------------------------------------------------------- */
+  function updatePulse() {
+    var now = new Date();
+    // Convert to UK time
+    var ukTime;
+    try {
+      var ukStr = now.toLocaleString('en-GB', { timeZone: 'Europe/London' });
+      // Parse "DD/MM/YYYY, HH:MM:SS"
+      var parts = ukStr.split(', ');
+      var dateParts = parts[0].split('/');
+      var timeParts = parts[1].split(':');
+      ukTime = new Date(dateParts[2], dateParts[1] - 1, dateParts[0],
+                        parseInt(timeParts[0]), parseInt(timeParts[1]), parseInt(timeParts[2]));
+    } catch(e) {
+      ukTime = now;
+    }
+
+    var day = ukTime.getDay(); // 0=Sun, 6=Sat
+    var hours = ukTime.getHours();
+    var minutes = ukTime.getMinutes();
+    var timeDecimal = hours + minutes / 60;
+
+    var isOpen = day >= 1 && day <= 5 && timeDecimal >= 9 && timeDecimal < 17.5;
+
+    var dot = document.getElementById('pulseDot');
+    var label = document.getElementById('pulseLabel');
+    var time = document.getElementById('pulseTime');
+    var cta = document.getElementById('heroCta');
+    var ctaText = document.getElementById('ctaText');
+
+    if (isOpen) {
+      dot.className = 'hero__pulse-dot hero__pulse-dot--open';
+      label.className = 'hero__pulse-label';
+      label.textContent = 'OPEN';
+      time.textContent = 'Closes 17:30';
+      cta.href = 'tel:+441452422405';
+      cta.setAttribute('aria-label', 'Call Gin now');
+      ctaText.textContent = 'CALL GIN';
+    } else {
+      dot.className = 'hero__pulse-dot hero__pulse-dot--closed';
+      label.className = 'hero__pulse-label hero__pulse-label--closed';
+      label.textContent = 'CLOSED';
+
+      // Figure out next open time
+      if (day === 0) { // Sunday
+        time.textContent = 'Opens Mon 09:00';
+      } else if (day === 6) { // Saturday
+        time.textContent = 'Opens Mon 09:00';
+      } else if (timeDecimal >= 17.5) {
+        if (day === 5) { // Friday evening
+          time.textContent = 'Opens Mon 09:00';
+        } else {
+          time.textContent = 'Opens tomorrow 09:00';
+        }
+      } else { // Before 9am on a weekday
+        time.textContent = 'Opens today 09:00';
+      }
+
+      cta.href = 'https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please.';
+      cta.setAttribute('aria-label', 'Message us on WhatsApp');
+      cta.setAttribute('target', '_blank');
+      cta.setAttribute('rel', 'noopener noreferrer');
+      ctaText.textContent = 'MESSAGE';
+    }
+  }
+
+  updatePulse();
+  setInterval(updatePulse, 60000); // Update every minute
+
+
+  /* --------------------------------------------------------
+     INTERSECTION OBSERVER — Section reveals + dot nav
+     -------------------------------------------------------- */
+  var sections = document.querySelectorAll('.poster');
+  var dots = document.querySelectorAll('.dot-nav__dot');
+  var contents = document.querySelectorAll('.poster__content');
+
+  // Reveal observer
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  contents.forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // Dot nav observer
+  var navObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = Array.prototype.indexOf.call(sections, entry.target);
+        dots.forEach(function(d, i) {
+          d.classList.toggle('is-active', i === idx);
+        });
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  sections.forEach(function(s) {
+    navObserver.observe(s);
+  });
+
+  // Dot click
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      var idx = parseInt(this.getAttribute('data-section'));
+      var target = sections[idx];
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+
+  /* --------------------------------------------------------
+     CHROMATIC ABERRATION — Parallax scroll offset
+     -------------------------------------------------------- */
+  var heroTitleTexts = document.querySelectorAll('.hero__title-text');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reducedMotion) {
+    var ticking = false;
+
+    function updateAberration() {
+      var scrollY = window.scrollY || window.pageYOffset;
+      var vh = window.innerHeight;
+      // aberration increases as you scroll away from hero
+      var progress = Math.min(scrollY / vh, 1);
+      var baseX = 3 + progress * 5;  // 3px to 8px
+      var baseY = -2 - progress * 3;  // -2px to -5px
+
+      heroTitleTexts.forEach(function(el) {
+        el.style.setProperty('--aberr-x', baseX + 'px');
+        el.style.setProperty('--aberr-y', baseY + 'px');
+      });
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(updateAberration);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+
+  /* --------------------------------------------------------
+     KEYBOARD NAVIGATION — Dot nav
+     -------------------------------------------------------- */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      var active = document.querySelector('.dot-nav__dot.is-active');
+      if (!active) return;
+      var idx = parseInt(active.getAttribute('data-section'));
+      var next = e.key === 'ArrowDown' ? idx + 1 : idx - 1;
+      if (next >= 0 && next < sections.length) {
+        sections[next].scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

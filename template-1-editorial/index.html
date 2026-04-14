@@ -1,0 +1,1376 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  DESIGN DOCUMENTATION                                       ║
+  ╠══════════════════════════════════════════════════════════════╣
+  ║  Project:     Gin's GD Autocentre — Editorial Landing Page  ║
+  ║  Chain:       cast-iron · morning-coffee · workshop-bench   ║
+  ║               · honest-weight · hand-grip · sorted          ║
+  ║  Sensibility: The printed article about your local mechanic ║
+  ║               — warm, literary, editorial depth             ║
+  ║  Typography:  Cormorant Garamond (display, 300–700+i)       ║
+  ║               EB Garamond (body, 400–800+i)                 ║
+  ║               Space Mono (mono accents, 400/700)            ║
+  ║               Scale: Major Third (1.250), 8px baseline      ║
+  ║               OpenType: kern, liga, onum, calt              ║
+  ║  Palette:     Light — #f2f0eb / #0e0c0a / #a0522d          ║
+  ║               Dark  — #1a1816 / #e8e4dc / #c4734f          ║
+  ║  Techniques:  Dropcap (Cormorant 700i, 5-line)              ║
+  ║               Ghost letterform "G" behind hero              ║
+  ║               Pull quote with accent border-left            ║
+  ║               Ornamental dividers (❧)                       ║
+  ║               Space Mono tracked uppercase labels           ║
+  ║               Old-style numerals throughout (onum)          ║
+  ║               CSS columns newspaper layout                  ║
+  ║               SVG fractalNoise paper grain overlay          ║
+  ║  Layout:      Free scroll, editorial flow, no snap          ║
+  ║  Features:    Living Pulse open/closed status               ║
+  ║               Dark mode toggle + localStorage               ║
+  ║               WhatsApp float button                         ║
+  ║               Google Maps embed                             ║
+  ║               Schema.org JSON-LD (AutoRepair)               ║
+  ║               IntersectionObserver scroll reveal             ║
+  ║               Click-to-call phone links                     ║
+  ║               prefers-reduced-motion support                ║
+  ║               WCAG AA contrast                              ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gin's GD Autocentre — Independent Garage, Gloucester</title>
+<meta name="description" content="Honest, independent garage in Gloucester. MOTs, servicing, diagnostics, welding, and more. 71+ five-star reviews. No upselling, just good work done right.">
+<meta name="theme-color" content="#f2f0eb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "GD Autocentre Ltd",
+  "alternateName": "Gin's GD Autocentre",
+  "description": "Independent garage in Gloucester offering MOTs, servicing, diagnostics, welding, and specialist repairs. Honest, competitive pricing with no upselling.",
+  "url": "https://www.facebook.com/GDAutocentreLtd/",
+  "telephone": "+441452422405",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "153a Bristol Road",
+    "addressLocality": "Gloucester",
+    "addressRegion": "Gloucestershire",
+    "postalCode": "GL1 5SY",
+    "addressCountry": "GB"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 51.8528,
+    "longitude": -2.2459
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "17:30"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "71",
+    "bestRating": "5"
+  },
+  "priceRange": "$$",
+  "foundingDate": "2015",
+  "legalName": "GD Autocentre Ltd",
+  "taxID": "12205703",
+  "sameAs": ["https://www.facebook.com/GDAutocentreLtd/"]
+}
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   CUSTOM PROPERTIES
+   ═══════════════════════════════════════════════════ */
+:root {
+  /* ── Fonts ── */
+  --ff-display: 'Cormorant Garamond', serif;
+  --ff-body: 'EB Garamond', serif;
+  --ff-mono: 'Space Mono', monospace;
+
+  /* ── Type Scale — Major Third (1.250) ── */
+  --fs-xs:   clamp(0.64rem,  0.58rem + 0.25vw, 0.72rem);
+  --fs-sm:   clamp(0.8rem,   0.74rem + 0.28vw, 0.9rem);
+  --fs-base: clamp(1rem,     0.92rem + 0.35vw, 1.125rem);
+  --fs-md:   clamp(1.25rem,  1.12rem + 0.55vw, 1.406rem);
+  --fs-lg:   clamp(1.563rem, 1.35rem + 0.9vw,  1.758rem);
+  --fs-xl:   clamp(1.953rem, 1.6rem + 1.5vw,   2.197rem);
+  --fs-2xl:  clamp(2.441rem, 1.9rem + 2.3vw,   2.747rem);
+  --fs-3xl:  clamp(3.052rem, 2.2rem + 3.6vw,   3.815rem);
+  --fs-4xl:  clamp(3.815rem, 2.6rem + 5.1vw,   5.25rem);
+  --fs-hero: clamp(4.5rem,   3rem + 6.5vw,     7.5rem);
+
+  /* ── Spacing — 8px baseline ── */
+  --sp-1: 0.5rem;    /* 8px */
+  --sp-2: 1rem;      /* 16px */
+  --sp-3: 1.5rem;    /* 24px */
+  --sp-4: 2rem;      /* 32px */
+  --sp-5: 2.5rem;    /* 40px */
+  --sp-6: 3rem;      /* 48px */
+  --sp-8: 4rem;      /* 64px */
+  --sp-10: 5rem;     /* 80px */
+  --sp-12: 6rem;     /* 96px */
+  --sp-16: 8rem;     /* 128px */
+  --sp-20: 10rem;    /* 160px */
+
+  /* ── Layout ── */
+  --max-prose: 65ch;
+  --max-wide: 80rem;
+  --border-r: 2px;
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 200ms;
+  --dur-med: 400ms;
+  --dur-slow: 800ms;
+
+  /* ── OpenType ── */
+  --ot-features: "kern" 1, "liga" 1, "onum" 1, "calt" 1;
+
+  /* ── Light Palette (default) ── */
+  --c-bg:         #f2f0eb;
+  --c-bg-alt:     #e9e6df;
+  --c-surface:    #f7f5f0;
+  --c-ink:        #0e0c0a;
+  --c-ink-soft:   #3a3632;
+  --c-ink-muted:  #6b6560;
+  --c-accent:     #a0522d;
+  --c-accent-soft:#c4734f;
+  --c-border:     #d4d0c8;
+  --c-border-light:#e0ddd6;
+  --c-ghost:      rgba(14, 12, 10, 0.035);
+  --c-grain:      0.04;
+  --c-selection-bg: #a0522d;
+  --c-selection-fg: #f2f0eb;
+  --c-scrollbar:  #a0522d;
+  --c-scrollbar-bg: #e9e6df;
+  --c-pulse:      #2d8a4e;
+  --c-pulse-closed: #a0522d;
+  --c-whatsapp:   #25d366;
+}
+
+html.dark {
+  --c-bg:         #1a1816;
+  --c-bg-alt:     #231f1d;
+  --c-surface:    #2a2523;
+  --c-ink:        #e8e4dc;
+  --c-ink-soft:   #c8c2b8;
+  --c-ink-muted:  #8a837b;
+  --c-accent:     #c4734f;
+  --c-accent-soft:#d4956e;
+  --c-border:     #3d3632;
+  --c-border-light:#332e2a;
+  --c-ghost:      rgba(232, 228, 220, 0.03);
+  --c-grain:      0.03;
+  --c-selection-bg: #c4734f;
+  --c-selection-fg: #1a1816;
+  --c-scrollbar:  #c4734f;
+  --c-scrollbar-bg: #231f1d;
+  --c-pulse:      #4ade80;
+  --c-pulse-closed: #c4734f;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  hanging-punctuation: first last;
+}
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-base);
+  font-feature-settings: var(--ot-features);
+  line-height: 1.7;
+  color: var(--c-ink);
+  background-color: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: color var(--dur-med) var(--ease-out),
+              background-color var(--dur-med) var(--ease-out);
+}
+
+::selection {
+  background: var(--c-selection-bg);
+  color: var(--c-selection-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: var(--border-r);
+}
+
+a {
+  color: var(--c-accent);
+  text-decoration-color: var(--c-accent-soft);
+  text-underline-offset: 0.15em;
+  transition: color var(--dur-fast) var(--ease-out),
+              text-decoration-color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--c-accent-soft);
+  text-decoration-color: var(--c-accent);
+}
+
+img, svg { display: block; max-width: 100%; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--c-scrollbar-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: var(--border-r);
+}
+html { scrollbar-color: var(--c-scrollbar) var(--c-scrollbar-bg); scrollbar-width: thin; }
+
+/* ═══════════════════════════════════════════════════
+   GRAIN OVERLAY
+   ═══════════════════════════════════════════════════ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--c-grain);
+}
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════════ */
+.page-wrap {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 0 var(--sp-3);
+}
+
+@media (min-width: 768px) {
+  .page-wrap { padding: 0 var(--sp-6); }
+}
+
+.prose { max-width: var(--max-prose); }
+
+/* ═══════════════════════════════════════════════════
+   SECTION LABEL (Space Mono, tracked uppercase)
+   ═══════════════════════════════════════════════════ */
+.section-label {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  margin-bottom: var(--sp-4);
+}
+
+/* ═══════════════════════════════════════════════════
+   ORNAMENTAL DIVIDER
+   ═══════════════════════════════════════════════════ */
+.ornament {
+  text-align: center;
+  padding: var(--sp-8) 0;
+  font-size: var(--fs-lg);
+  color: var(--c-ink-muted);
+  opacity: 0.5;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   DARK MODE TOGGLE
+   ═══════════════════════════════════════════════════ */
+.theme-toggle {
+  position: fixed;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--border-r);
+  background: var(--c-bg-alt);
+  color: var(--c-ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+  line-height: 1;
+}
+.theme-toggle:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon { display: none; }
+html.light .theme-toggle .icon-moon { display: block; }
+html.dark .theme-toggle .icon-sun { display: block; }
+
+/* ═══════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  padding: var(--sp-16) 0 var(--sp-10);
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--ff-display);
+  font-weight: 300;
+  font-size: clamp(20rem, 15rem + 25vw, 50rem);
+  line-height: 1;
+  color: var(--c-ghost);
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__greeting {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.hero__name {
+  font-family: var(--ff-display);
+  font-weight: 300;
+  font-size: var(--fs-hero);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-2);
+}
+
+.hero__name em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero__tagline {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-xl);
+  color: var(--c-ink-soft);
+  line-height: 1.3;
+  max-width: 38ch;
+  margin-bottom: var(--sp-5);
+}
+
+.hero__status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+  padding: var(--sp-1) var(--sp-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--border-r);
+  background: var(--c-surface);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-pulse);
+  position: relative;
+  flex-shrink: 0;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--c-pulse);
+  opacity: 0;
+  animation: pulse-ring 2s var(--ease-out) infinite;
+}
+.pulse-dot.is-closed {
+  background: var(--c-pulse-closed);
+}
+.pulse-dot.is-closed::after {
+  background: var(--c-pulse-closed);
+  animation: none;
+}
+
+@keyframes pulse-ring {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot::after { animation: none; }
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  color: var(--c-bg);
+  background: var(--c-ink);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--border-r);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  letter-spacing: 0.01em;
+}
+.hero__cta:hover {
+  background: var(--c-accent);
+  color: var(--c-bg);
+  transform: translateY(-1px);
+}
+
+.hero__cta-arrow {
+  font-size: 0.85em;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.hero__cta:hover .hero__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ═══════════════════════════════════════════════════
+   THE STORY
+   ═══════════════════════════════════════════════════ */
+.story {
+  padding: var(--sp-6) 0 var(--sp-8);
+}
+
+.story__body {
+  max-width: 75ch;
+}
+
+@media (min-width: 768px) {
+  .story__body {
+    column-count: 2;
+    column-gap: var(--sp-6);
+    column-rule: 1px solid var(--c-border-light);
+    max-width: none;
+  }
+}
+
+.story__body p {
+  font-size: var(--fs-base);
+  line-height: 1.78;
+  color: var(--c-ink-soft);
+  margin-bottom: var(--sp-3);
+}
+.story__body p:last-child { margin-bottom: 0; }
+
+/* ── Dropcap ── */
+.dropcap::first-letter {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-style: italic;
+  float: left;
+  font-size: 4.5em;
+  line-height: 0.78;
+  padding-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--c-accent);
+}
+
+/* ═══════════════════════════════════════════════════
+   SERVICES
+   ═══════════════════════════════════════════════════ */
+.services {
+  padding: var(--sp-6) 0 var(--sp-8);
+}
+
+.services__list {
+  list-style: none;
+  max-width: 52rem;
+}
+
+.services__item {
+  display: grid;
+  grid-template-columns: clamp(2.5rem, 2rem + 2vw, 4rem) 1fr;
+  gap: var(--sp-2) var(--sp-3);
+  align-items: baseline;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-border-light);
+}
+.services__item:first-child {
+  border-top: 1px solid var(--c-border-light);
+}
+
+.services__number {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-lg);
+  color: var(--c-ink-muted);
+  font-feature-settings: "onum" 1;
+}
+
+.services__content {}
+
+.services__name {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  line-height: 1.3;
+  color: var(--c-ink);
+  margin-bottom: 2px;
+}
+
+.services__desc {
+  font-family: var(--ff-body);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-muted);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   PULL QUOTE
+   ═══════════════════════════════════════════════════ */
+.pull-quote {
+  padding: var(--sp-10) 0;
+  max-width: var(--max-wide);
+}
+
+.pull-quote__inner {
+  border-left: 3px solid var(--c-accent);
+  padding-left: var(--sp-4);
+  max-width: 50ch;
+}
+
+@media (min-width: 768px) {
+  .pull-quote__inner {
+    padding-left: var(--sp-6);
+    margin-left: var(--sp-6);
+  }
+}
+
+.pull-quote__text {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-2xl);
+  line-height: 1.25;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-3);
+}
+
+.pull-quote__attr {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+}
+
+/* ═══════════════════════════════════════════════════
+   HOURS & CONTACT
+   ═══════════════════════════════════════════════════ */
+.info {
+  padding: var(--sp-6) 0 var(--sp-8);
+}
+
+.info__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+  max-width: 52rem;
+}
+@media (min-width: 768px) {
+  .info__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6);
+  }
+}
+
+.info__heading {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  margin-bottom: var(--sp-4);
+  color: var(--c-ink);
+}
+
+/* ── Hours ── */
+.hours-list {
+  list-style: none;
+}
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--sp-1) 0;
+  border-bottom: 1px solid var(--c-border-light);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  transition: color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+  padding-left: var(--sp-1);
+  padding-right: var(--sp-1);
+}
+
+.hours-list li.is-today {
+  color: var(--c-ink);
+  font-weight: 600;
+  background: var(--c-bg-alt);
+  border-radius: var(--border-r);
+}
+
+.hours-list .day-name { font-family: var(--ff-body); }
+.hours-list .day-hours {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+}
+
+/* ── Contact ── */
+.contact-block {}
+
+.contact-item {
+  margin-bottom: var(--sp-3);
+}
+
+.contact-label {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.contact-value {
+  font-family: var(--ff-mono);
+  font-weight: 700;
+  font-size: var(--fs-base);
+  color: var(--c-ink);
+  word-break: break-word;
+}
+
+.contact-value a {
+  color: var(--c-ink);
+  text-decoration: none;
+}
+.contact-value a:hover {
+  color: var(--c-accent);
+}
+
+.contact-address {
+  font-family: var(--ff-body);
+  font-style: normal;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.6;
+}
+
+.directions-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: var(--sp-1);
+  color: var(--c-accent);
+  text-decoration: none;
+}
+.directions-link:hover { text-decoration: underline; }
+
+.company-info {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-muted);
+  letter-spacing: 0.04em;
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--c-border-light);
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════════════
+   MAP
+   ═══════════════════════════════════════════════════ */
+.map-section {
+  padding: var(--sp-6) 0 var(--sp-8);
+}
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 52rem;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--c-border);
+  border-radius: var(--border-r);
+  overflow: hidden;
+  background: var(--c-bg-alt);
+}
+
+.map-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.6) contrast(1.05);
+  transition: filter var(--dur-med) var(--ease-out);
+}
+
+html.dark .map-wrap iframe {
+  filter: saturate(0.4) contrast(1.1) brightness(0.75) invert(0.92) hue-rotate(180deg);
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════ */
+.footer {
+  padding: var(--sp-8) 0 var(--sp-6);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.footer__name {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: var(--c-ink);
+}
+
+.footer__legal {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-1);
+}
+.footer__links a {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  text-decoration: none;
+}
+.footer__links a:hover { color: var(--c-accent); }
+
+/* ═══════════════════════════════════════════════════
+   WHATSAPP FLOAT
+   ═══════════════════════════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.wa-float__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c-whatsapp);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.35);
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.wa-float:hover .wa-float__btn {
+  transform: scale(1.08);
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+}
+
+.wa-float__btn svg {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+}
+
+.wa-float__label {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  background: var(--c-surface);
+  color: var(--c-ink-soft);
+  padding: 6px 12px;
+  border-radius: var(--border-r);
+  border: 1px solid var(--c-border);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+}
+
+.wa-float:hover .wa-float__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 480px) {
+  .wa-float__btn { width: 46px; height: 46px; }
+  .wa-float__btn svg { width: 22px; height: 22px; }
+  .wa-float__label { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float__btn, .wa-float__label { transition: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ════════════════════ GRAIN OVERLAY ════════════════════ -->
+<svg class="grain" aria-hidden="true">
+  <filter id="grain-filter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain-filter)"/>
+</svg>
+
+<!-- ════════════════════ DARK MODE TOGGLE ════════════════════ -->
+<button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+  <span class="icon-sun" aria-hidden="true">&#9788;</span>
+  <span class="icon-moon" aria-hidden="true">&#9789;</span>
+</button>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero page-wrap">
+  <div class="hero__ghost" aria-hidden="true">G</div>
+  <div class="hero__content">
+    <p class="hero__greeting reveal" id="greeting">Good morning</p>
+    <h1 class="hero__name reveal reveal-delay-1">
+      <em>Gin's</em><br>GD Autocentre
+    </h1>
+    <p class="hero__tagline reveal reveal-delay-2">
+      Independent garage in Gloucester.<br>
+      Honest work, fair prices, no nonsense.
+    </p>
+    <div class="hero__status reveal reveal-delay-3">
+      <div class="pulse-badge" id="pulse-badge">
+        <span class="pulse-dot" id="pulse-dot"></span>
+        <span id="pulse-text">Checking hours&hellip;</span>
+      </div>
+    </div>
+    <a href="tel:+441452422405" class="hero__cta reveal reveal-delay-3" id="hero-cta">
+      <span id="cta-text">Talk to Gin</span>
+      <span class="hero__cta-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</header>
+
+<div class="ornament reveal" aria-hidden="true">&#10087;</div>
+
+<!-- ════════════════════ THE STORY ════════════════════ -->
+<section class="story page-wrap" aria-label="About Gin's GD Autocentre">
+  <p class="section-label reveal">The Story</p>
+  <div class="story__body reveal">
+    <p class="dropcap">Gin opened the doors at 153a Bristol Road back in 2015 with a straightforward idea: run a garage the way garages used to be run. No clipboard of invented faults. No sharp intake of breath through the teeth. Just an honest look at what your car actually needs, a clear price before any spanner turns, and the kind of conversation you might have over a mug of tea rather than a service counter. A decade on, that idea hasn't changed&thinsp;&mdash;&thinsp;it's just gathered 71 five-star reviews along the way.</p>
+    <p>What makes this place different is harder to list than it is to feel. Walk in and you'll notice it: the tone is warm, the language is plain English, and everyone is welcome&thinsp;&mdash;&thinsp;whether you know your camshaft from your crankshaft or you just know the dashboard light shouldn't be on. Gin's team handles everything from routine MOTs and servicing to the work other garages would rather not touch: gearbox swaps, engine replacements, welding repairs, high-performance builds. They treat a ten-year-old hatchback with the same care as a weekend track car.</p>
+    <p>The pricing is competitive because the overheads are honest. There's no showroom to pay for, no franchise fee baked into your bill. Just a workshop that runs the way it should&thinsp;&mdash;&thinsp;efficiently, carefully, and with your MOT certificate or your keys back when promised. If something doesn't need replacing, they'll tell you. If it does, they'll explain why in words that make sense. That's the whole philosophy, and it's why people keep coming back.</p>
+  </div>
+</section>
+
+<div class="ornament reveal" aria-hidden="true">&#10087;</div>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<section class="services page-wrap" aria-label="Services">
+  <p class="section-label reveal">What We Do</p>
+  <ol class="services__list">
+    <li class="services__item reveal">
+      <span class="services__number">i</span>
+      <div class="services__content">
+        <h3 class="services__name">MOT Testing</h3>
+        <p class="services__desc">Class 4 and 7 testing. Honest assessment, no pressure repairs.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">ii</span>
+      <div class="services__content">
+        <h3 class="services__name">Full Servicing</h3>
+        <p class="services__desc">Interim and major services for all makes and models. Manufacturer standards, independent pricing.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">iii</span>
+      <div class="services__content">
+        <h3 class="services__name">Computer Diagnostics</h3>
+        <p class="services__desc">Advanced fault-code reading and live data analysis. We find the actual problem, not just the symptom.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">iv</span>
+      <div class="services__content">
+        <h3 class="services__name">Tyre Fitting</h3>
+        <p class="services__desc">Supply and fit. Balancing, alignment, and pressure checks included.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">v</span>
+      <div class="services__content">
+        <h3 class="services__name">Welding Work</h3>
+        <p class="services__desc">Structural and cosmetic welding. MOT failure repairs and fabrication.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">vi</span>
+      <div class="services__content">
+        <h3 class="services__name">Clutch Replacement</h3>
+        <p class="services__desc">Complete clutch kits, dual-mass flywheels, and hydraulic systems.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">vii</span>
+      <div class="services__content">
+        <h3 class="services__name">Timing Belt &amp; Chain</h3>
+        <p class="services__desc">Replacement at manufacturer intervals. Water pump and tensioner kits available.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">viii</span>
+      <div class="services__content">
+        <h3 class="services__name">Gearbox Replacement</h3>
+        <p class="services__desc">Manual and automatic. Recon and new units sourced at best price.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">ix</span>
+      <div class="services__content">
+        <h3 class="services__name">Engine Replacement</h3>
+        <p class="services__desc">Full engine swaps, rebuilds, and head gasket work. The jobs other garages turn away.</p>
+      </div>
+    </li>
+    <li class="services__item reveal">
+      <span class="services__number">x</span>
+      <div class="services__content">
+        <h3 class="services__name">Air Conditioning</h3>
+        <p class="services__desc">Regas, leak detection, compressor and condenser replacement.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<div class="ornament reveal" aria-hidden="true">&#10087;</div>
+
+<!-- ════════════════════ PULL QUOTE ════════════════════ -->
+<section class="pull-quote page-wrap reveal" aria-label="Customer review">
+  <div class="pull-quote__inner">
+    <blockquote class="pull-quote__text">
+      &ldquo;Trustworthy and reliable services&thinsp;&mdash;&thinsp;I&rsquo;ve been coming here for years. They never try to sell you work you don&rsquo;t need.&rdquo;
+    </blockquote>
+    <p class="pull-quote__attr">&mdash; Five-star review, one of 71+</p>
+  </div>
+</section>
+
+<div class="ornament reveal" aria-hidden="true">&#10087;</div>
+
+<!-- ════════════════════ HOURS + CONTACT ════════════════════ -->
+<section class="info page-wrap" aria-label="Opening hours and contact details">
+  <p class="section-label reveal">Hours &amp; Contact</p>
+  <div class="info__grid">
+    <div class="reveal">
+      <h2 class="info__heading">Opening Hours</h2>
+      <ul class="hours-list" id="hours-list">
+        <li data-day="1"><span class="day-name">Monday</span><span class="day-hours">09:00 &ndash; 17:30</span></li>
+        <li data-day="2"><span class="day-name">Tuesday</span><span class="day-hours">09:00 &ndash; 17:30</span></li>
+        <li data-day="3"><span class="day-name">Wednesday</span><span class="day-hours">09:00 &ndash; 17:30</span></li>
+        <li data-day="4"><span class="day-name">Thursday</span><span class="day-hours">09:00 &ndash; 17:30</span></li>
+        <li data-day="5"><span class="day-name">Friday</span><span class="day-hours">09:00 &ndash; 17:30</span></li>
+        <li data-day="6"><span class="day-name">Saturday</span><span class="day-hours">Closed</span></li>
+        <li data-day="0"><span class="day-name">Sunday</span><span class="day-hours">Closed</span></li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <h2 class="info__heading">Get in Touch</h2>
+      <div class="contact-block">
+        <div class="contact-item">
+          <span class="contact-label">Telephone</span>
+          <span class="contact-value"><a href="tel:+441452422405">01452 422 405</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value"><a href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please." target="_blank" rel="noopener">Message us</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Facebook</span>
+          <span class="contact-value"><a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener">GDAutocentreLtd</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Address</span>
+          <address class="contact-address">
+            153a Bristol Road<br>
+            Gloucester, Gloucestershire<br>
+            GL1 5SY
+          </address>
+          <a class="directions-link" href="https://www.google.com/maps/dir/?api=1&destination=153a+Bristol+Road,+Gloucester,+GL1+5SY" target="_blank" rel="noopener">
+            Get directions <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+        <div class="company-info">
+          Company No. 12205703<br>
+          Trading since 2015
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament reveal" aria-hidden="true">&#10087;</div>
+
+<!-- ════════════════════ MAP ════════════════════ -->
+<section class="map-section page-wrap" aria-label="Location map">
+  <p class="section-label reveal">Find Us</p>
+  <div class="map-wrap reveal">
+    <iframe
+      src="https://www.google.com/maps?q=153a+Bristol+Road,+Gloucester,+GL1+5SY&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="GD Autocentre location on Google Maps"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="footer page-wrap">
+  <div class="footer__inner">
+    <div>
+      <p class="footer__name">Gin's GD Autocentre</p>
+      <p class="footer__legal">GD Autocentre Ltd &middot; Company 12205703 &middot; 153a Bristol Road, Gloucester GL1 5SY</p>
+    </div>
+    <div class="footer__links">
+      <a href="tel:+441452422405">Call</a>
+      <a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please." target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════ WHATSAPP FLOAT ════════════════════ -->
+<a class="wa-float"
+   href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please."
+   target="_blank"
+   rel="noopener"
+   aria-label="Message us on WhatsApp">
+  <span class="wa-float__label">WhatsApp us</span>
+  <span class="wa-float__btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </span>
+</a>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Dark Mode ── */
+  const html = document.documentElement;
+  const toggle = document.querySelector('.theme-toggle');
+  const STORAGE_KEY = 'gd-theme';
+
+  function setTheme(mode) {
+    html.classList.remove('light', 'dark');
+    html.classList.add(mode);
+    localStorage.setItem(STORAGE_KEY, mode);
+  }
+
+  // Init: check localStorage, then system preference
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    setTheme(stored);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setTheme('dark');
+  } else {
+    setTheme('light');
+  }
+
+  toggle.addEventListener('click', function() {
+    setTheme(html.classList.contains('light') ? 'dark' : 'light');
+  });
+
+  // Listen for system change
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  /* ── Living Pulse ── */
+  var SCHEDULE = {
+    // day: [openHour, openMin, closeHour, closeMin]  (0=Sunday)
+    1: [9, 0, 17, 30],
+    2: [9, 0, 17, 30],
+    3: [9, 0, 17, 30],
+    4: [9, 0, 17, 30],
+    5: [9, 0, 17, 30]
+  };
+
+  var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  function getUKTime() {
+    // Get current time in Europe/London
+    var str = new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
+    // Parse "DD/MM/YYYY, HH:MM:SS"
+    var parts = str.split(', ');
+    var dateParts = parts[0].split('/');
+    var timeParts = parts[1].split(':');
+    var d = new Date(
+      parseInt(dateParts[2]),
+      parseInt(dateParts[1]) - 1,
+      parseInt(dateParts[0]),
+      parseInt(timeParts[0]),
+      parseInt(timeParts[1]),
+      parseInt(timeParts[2])
+    );
+    return d;
+  }
+
+  function getStatus() {
+    var now = getUKTime();
+    var day = now.getDay();
+    var hour = now.getHours();
+    var min = now.getMinutes();
+    var currentMinutes = hour * 60 + min;
+
+    var sched = SCHEDULE[day];
+    var isOpen = false;
+    var closeTime = '';
+    var nextOpenDay = '';
+    var nextOpenTime = '';
+
+    if (sched) {
+      var openAt = sched[0] * 60 + sched[1];
+      var closeAt = sched[2] * 60 + sched[3];
+      isOpen = currentMinutes >= openAt && currentMinutes < closeAt;
+      closeTime = formatTime(sched[2], sched[3]);
+    }
+
+    if (!isOpen) {
+      // Find next open day
+      for (var i = 1; i <= 7; i++) {
+        var checkDay = (day + i) % 7;
+        if (SCHEDULE[checkDay]) {
+          nextOpenDay = DAY_NAMES[checkDay];
+          nextOpenTime = formatTime(SCHEDULE[checkDay][0], SCHEDULE[checkDay][1]);
+          break;
+        }
+      }
+      // Check if today is still upcoming
+      if (sched) {
+        var openAt2 = sched[0] * 60 + sched[1];
+        if (currentMinutes < openAt2) {
+          nextOpenDay = 'today';
+          nextOpenTime = formatTime(sched[0], sched[1]);
+        }
+      }
+    }
+
+    return {
+      isOpen: isOpen,
+      closeTime: closeTime,
+      nextOpenDay: nextOpenDay,
+      nextOpenTime: nextOpenTime,
+      hour: hour,
+      dayIndex: day
+    };
+  }
+
+  function formatTime(h, m) {
+    var suffix = h >= 12 ? 'pm' : 'am';
+    var displayH = h > 12 ? h - 12 : h;
+    if (displayH === 0) displayH = 12;
+    if (m === 0) return displayH + suffix;
+    return displayH + ':' + (m < 10 ? '0' : '') + m + suffix;
+  }
+
+  function updatePulse() {
+    var s = getStatus();
+    var dot = document.getElementById('pulse-dot');
+    var text = document.getElementById('pulse-text');
+    var cta = document.getElementById('hero-cta');
+    var ctaText = document.getElementById('cta-text');
+    var greeting = document.getElementById('greeting');
+
+    if (s.isOpen) {
+      dot.classList.remove('is-closed');
+      text.textContent = 'Open now \u00b7 closes at ' + s.closeTime;
+      ctaText.textContent = 'Call Now';
+      cta.href = 'tel:+441452422405';
+    } else {
+      dot.classList.add('is-closed');
+      if (s.nextOpenDay === 'today') {
+        text.textContent = 'Opens at ' + s.nextOpenTime;
+      } else {
+        text.textContent = 'Closed \u00b7 opens ' + s.nextOpenDay + ' at ' + s.nextOpenTime;
+      }
+      ctaText.textContent = 'Leave a Message';
+      cta.href = 'https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please.';
+    }
+
+    // Greeting
+    if (s.hour < 12) {
+      greeting.textContent = 'Good morning';
+    } else if (s.hour < 17) {
+      greeting.textContent = 'Good afternoon';
+    } else {
+      greeting.textContent = 'Good evening';
+    }
+
+    // Highlight today in hours
+    var items = document.querySelectorAll('#hours-list li');
+    for (var j = 0; j < items.length; j++) {
+      var dayAttr = parseInt(items[j].getAttribute('data-day'));
+      if (dayAttr === s.dayIndex) {
+        items[j].classList.add('is-today');
+      } else {
+        items[j].classList.remove('is-today');
+      }
+    }
+  }
+
+  updatePulse();
+  setInterval(updatePulse, 60000);
+
+  /* ── IntersectionObserver Scroll Reveal ── */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(function(el) { observer.observe(el); });
+  } else {
+    // Show everything immediately
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>

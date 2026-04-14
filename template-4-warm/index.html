@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<!--
+  ============================================================================
+  GD AUTOCENTRE — "WARM HANDS" TEMPLATE
+  ============================================================================
+
+  Design Direction:  "Warm Hands" — tea-steam, rag-wipe, warm-bulb,
+                     scratched-pine, biscuit-tin, keys-back.
+
+  Sensibility:       The garage where they know your name. Warmth, intimacy,
+                     personal connection. Like walking into a friend's
+                     workshop where there's always a kettle on.
+
+  Typography System:
+    Display:   DM Serif Display 400 — warm, round, confident serif
+    Body:      Source Serif 4 200–900 variable, italic — textured, readable
+    Mono:      JetBrains Mono 400, 500 — accents, phone, hours
+    Scale:     Minor Third (1.200) — gentle, not dramatic
+    Baseline:  8px
+    OpenType:  kern, liga, onum
+
+  Color:
+    Light — cream #faf5ed, panel #f5efe4, text #2a2118, accent #8b6914
+    Dark  — espresso #130f0a, panel #1e1812, text #f0e8d8, accent #c9a040
+    Time-of-day shifts: morning (brighter), afternoon (golden), evening (amber)
+
+  Layout:   Hero + contact are full-viewport; middle sections flow freely.
+  Images:   None. Pure typography. Warmth from color, type, and spacing.
+
+  Techniques:
+    - Ghost letterform "G" behind hero
+    - Dropcap on introduction paragraph
+    - Pull quotes staggered left/right with accent border
+    - Ornamental dividers (❧)
+    - Breathing weight animation on hero greeting (300–500, gated by
+      prefers-reduced-motion)
+    - Living Pulse: time-aware greeting, open/closed status
+    - Color temperature shift by time of day via CSS custom properties
+    - SVG fractalNoise paper grain at 0.04 opacity
+    - IntersectionObserver scroll reveal (0.8s, translateY 16px)
+    - Dark mode toggle + prefers-color-scheme + localStorage
+    - Custom scrollbar, ::selection, focus-visible
+    - Schema.org JSON-LD (AutoRepair)
+    - WCAG AA contrast throughout
+
+  Built:     2026-04-08
+  ============================================================================
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gin's GD Autocentre — Bristol Road, Gloucester</title>
+  <meta name="description" content="Independent garage on Bristol Road, Gloucester. MOTs, servicing, diagnostics, and more. Honest work, fair prices, friendly faces. Trading since 2015.">
+  <meta name="theme-color" content="#faf5ed">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "GD Autocentre Ltd",
+    "alternateName": "Gin's GD Autocentre",
+    "url": "https://www.facebook.com/GDAutocentreLtd/",
+    "telephone": "+441452422405",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "153a Bristol Road",
+      "addressLocality": "Gloucester",
+      "addressRegion": "Gloucestershire",
+      "postalCode": "GL1 5SY",
+      "addressCountry": "GB"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.8525,
+      "longitude": -2.2518
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "17:30"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "71",
+      "bestRating": "5"
+    },
+    "foundingDate": "2015",
+    "description": "Independent garage on Bristol Road, Gloucester. MOTs, servicing, diagnostics, welding, and more. Honest work, fair prices, friendly faces.",
+    "areaServed": "Gloucester",
+    "priceRange": "$$",
+    "sameAs": ["https://www.facebook.com/GDAutocentreLtd/"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Garage Services",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"MOT Testing"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Full Servicing"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Computer Diagnostics"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Tyre Fitting"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Welding Work"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Clutch Replacement"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Timing Belt Replacement"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Gearbox Replacement"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Engine Replacement"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Air Conditioning"}}
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CSS CUSTOM PROPERTIES
+       ========================================================================== */
+
+    :root {
+      /* --- Typography --- */
+      --ff-display: 'DM Serif Display', serif;
+      --ff-body: 'Source Serif 4', serif;
+      --ff-mono: 'JetBrains Mono', monospace;
+
+      /* Minor Third scale (1.200) from 1rem base */
+      --step-0: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);         /* ~16px */
+      --step-1: clamp(1.05rem, 1.02rem + 0.15vw, 1.2rem);       /* ~19px */
+      --step-2: clamp(1.26rem, 1.2rem + 0.3vw, 1.44rem);        /* ~23px */
+      --step-3: clamp(1.512rem, 1.4rem + 0.56vw, 1.728rem);     /* ~28px */
+      --step-4: clamp(1.814rem, 1.65rem + 0.82vw, 2.074rem);    /* ~33px */
+      --step-5: clamp(2.177rem, 1.95rem + 1.14vw, 2.488rem);    /* ~40px */
+      --step-6: clamp(2.613rem, 2.3rem + 1.56vw, 2.986rem);     /* ~48px */
+      --step-7: clamp(3.136rem, 2.7rem + 2.18vw, 3.583rem);     /* ~57px */
+
+      /* Baseline */
+      --baseline: 8px;
+
+      /* OpenType features */
+      --otf: "kern" 1, "liga" 1, "onum" 1;
+
+      /* --- Light theme (default) --- */
+      --bg: #faf5ed;
+      --bg-panel: #f5efe4;
+      --fg: #2a2118;
+      --fg-muted: #5a4d3e;
+      --accent: #8b6914;
+      --accent-soft: rgba(139, 105, 20, 0.12);
+      --accent-border: rgba(139, 105, 20, 0.3);
+      --grain-opacity: 0.04;
+      --ghost-opacity: 0.04;
+      --divider-opacity: 0.25;
+      --map-filter: none;
+      --scrollbar-track: #f5efe4;
+      --scrollbar-thumb: #c9a86a;
+
+      /* Time-of-day temperature (defaults to afternoon) */
+      --time-hue-shift: 0deg;
+      --time-warmth: 0%;
+      --time-brightness: 100%;
+
+      /* --- Transitions --- */
+      --transition-color: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+
+      /* --- Spacing --- */
+      --space-xs: calc(var(--baseline) * 1);    /*  8px */
+      --space-s: calc(var(--baseline) * 2);     /* 16px */
+      --space-m: calc(var(--baseline) * 3);     /* 24px */
+      --space-l: calc(var(--baseline) * 5);     /* 40px */
+      --space-xl: calc(var(--baseline) * 8);    /* 64px */
+      --space-2xl: calc(var(--baseline) * 13);  /* 104px */
+      --space-3xl: calc(var(--baseline) * 21);  /* 168px */
+    }
+
+    /* --- Dark theme --- */
+    [data-theme="dark"] {
+      --bg: #130f0a;
+      --bg-panel: #1e1812;
+      --fg: #f0e8d8;
+      --fg-muted: #a89a84;
+      --accent: #c9a040;
+      --accent-soft: rgba(201, 160, 64, 0.1);
+      --accent-border: rgba(201, 160, 64, 0.3);
+      --ghost-opacity: 0.035;
+      --divider-opacity: 0.2;
+      --map-filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.85);
+      --scrollbar-track: #1e1812;
+      --scrollbar-thumb: #8b6914;
+    }
+
+    /* System preference fallback */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #130f0a;
+        --bg-panel: #1e1812;
+        --fg: #f0e8d8;
+        --fg-muted: #a89a84;
+        --accent: #c9a040;
+        --accent-soft: rgba(201, 160, 64, 0.1);
+        --accent-border: rgba(201, 160, 64, 0.3);
+        --ghost-opacity: 0.035;
+        --divider-opacity: 0.2;
+        --map-filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.85);
+        --scrollbar-track: #1e1812;
+        --scrollbar-thumb: #8b6914;
+      }
+    }
+
+    /* ==========================================================================
+       RESET + BASE
+       ========================================================================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 100%;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      hanging-punctuation: first last;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      font-feature-settings: var(--otf);
+      font-weight: 350;
+      font-size: var(--step-0);
+      line-height: calc(var(--baseline) * 3);  /* 24px */
+      color: var(--fg);
+      background-color: var(--bg);
+      transition: var(--transition-color);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      filter: brightness(var(--time-brightness));
+    }
+
+    /* ==========================================================================
+       PAPER GRAIN — SVG fractalNoise
+       ========================================================================== */
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: var(--grain-opacity);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 400px 400px;
+    }
+
+    /* ==========================================================================
+       SCROLLBAR
+       ========================================================================== */
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* Firefox */
+    html {
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      scrollbar-width: thin;
+    }
+
+    /* ==========================================================================
+       SELECTION
+       ========================================================================== */
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ==========================================================================
+       FOCUS
+       ========================================================================== */
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       LINKS
+       ========================================================================== */
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.15em;
+      transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    }
+    a:hover {
+      color: var(--fg);
+      text-decoration-color: var(--accent);
+    }
+
+    /* ==========================================================================
+       LAYOUT WRAPPERS
+       ========================================================================== */
+
+    .section-wrap {
+      width: 100%;
+      max-width: 960px;
+      margin-inline: auto;
+      padding-inline: var(--space-m);
+    }
+
+    .prose {
+      max-width: 65ch;
+    }
+
+    /* ==========================================================================
+       SCROLL REVEAL
+       ========================================================================== */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ==========================================================================
+       ORNAMENTAL DIVIDER
+       ========================================================================== */
+
+    .ornament {
+      display: block;
+      text-align: center;
+      font-family: var(--ff-body);
+      font-size: var(--step-1);
+      color: var(--accent);
+      opacity: var(--divider-opacity);
+      padding: var(--space-l) 0;
+      user-select: none;
+      letter-spacing: 0.3em;
+    }
+
+    /* ==========================================================================
+       DARK MODE TOGGLE
+       ========================================================================== */
+
+    .theme-toggle {
+      position: fixed;
+      top: var(--space-m);
+      right: var(--space-m);
+      z-index: 100;
+      background: var(--bg-panel);
+      border: 1px solid var(--accent-border);
+      border-radius: 4px;
+      padding: var(--space-xs) calc(var(--space-xs) * 1.5);
+      cursor: pointer;
+      font-family: var(--ff-mono);
+      font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+      font-weight: 400;
+      color: var(--fg-muted);
+      transition: var(--transition-color), opacity 0.3s ease;
+      line-height: 1;
+      letter-spacing: 0.03em;
+    }
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ==========================================================================
+       HERO
+       ========================================================================== */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-2xl) var(--space-m);
+      overflow: hidden;
+    }
+
+    /* Ghost "G" letterform */
+    .hero::before {
+      content: 'G';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      font-family: var(--ff-display);
+      font-size: clamp(18rem, 15rem + 15vw, 38rem);
+      font-weight: 400;
+      color: var(--accent);
+      opacity: var(--ghost-opacity);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-greeting {
+      font-family: var(--ff-body);
+      font-size: var(--step-7);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin-bottom: var(--space-s);
+      font-style: italic;
+    }
+
+    /* Breathing weight animation */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-greeting {
+        animation: breathe 6s ease-in-out infinite;
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% { font-weight: 300; }
+      50% { font-weight: 500; }
+    }
+
+    .hero-question {
+      font-family: var(--ff-display);
+      font-size: var(--step-5);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--fg);
+      margin-bottom: var(--space-l);
+    }
+
+    .hero-sub {
+      font-family: var(--ff-body);
+      font-size: var(--step-1);
+      font-weight: 350;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-m);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-status {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.85rem);
+      font-weight: 400;
+      color: var(--fg-muted);
+      margin-bottom: var(--space-l);
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .status-dot.open {
+      background: #6b8f3a;
+    }
+    .status-dot.closed {
+      background: #9e6b4a;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--ff-display);
+      font-size: var(--step-2);
+      font-weight: 400;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-border);
+      padding-bottom: 4px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .hero-cta:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    /* ==========================================================================
+       INTRODUCTION
+       ========================================================================== */
+
+    .intro {
+      padding: var(--space-2xl) 0;
+    }
+
+    .intro .prose {
+      margin-inline: auto;
+    }
+
+    .intro p {
+      font-size: var(--step-1);
+      line-height: calc(var(--baseline) * 4); /* 32px */
+      margin-bottom: var(--space-m);
+      color: var(--fg);
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Dropcap */
+    .dropcap::first-letter {
+      font-family: var(--ff-display);
+      font-weight: 400;
+      font-size: clamp(3.2rem, 2.8rem + 2vw, 4.5rem);
+      float: left;
+      line-height: 0.75;
+      padding-right: 0.12em;
+      padding-top: 0.08em;
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       SERVICES
+       ========================================================================== */
+
+    .services {
+      padding: var(--space-xl) 0 var(--space-2xl);
+    }
+
+    .services-heading {
+      font-family: var(--ff-display);
+      font-size: var(--step-4);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--fg);
+    }
+
+    .services-list {
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
+    .services-list dl {
+      display: block;
+    }
+
+    .service-item {
+      padding: var(--space-m) 0;
+      border-bottom: 1px solid var(--accent-soft);
+    }
+    .service-item:last-child {
+      border-bottom: none;
+    }
+
+    .service-item dt {
+      font-family: var(--ff-display);
+      font-size: var(--step-2);
+      font-weight: 400;
+      color: var(--fg);
+      margin-bottom: var(--space-xs);
+    }
+
+    .service-item dd {
+      font-family: var(--ff-body);
+      font-size: var(--step-0);
+      font-weight: 350;
+      color: var(--fg-muted);
+      line-height: calc(var(--baseline) * 3);
+      max-width: 55ch;
+    }
+
+    /* ==========================================================================
+       REVIEWS / PULL QUOTES
+       ========================================================================== */
+
+    .reviews {
+      padding: var(--space-xl) 0 var(--space-2xl);
+    }
+
+    .reviews-heading {
+      font-family: var(--ff-display);
+      font-size: var(--step-4);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--fg);
+    }
+
+    .pull-quotes {
+      max-width: 720px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .pull-quote {
+      padding: var(--space-l) var(--space-m);
+    }
+
+    .pull-quote:nth-child(odd) {
+      border-left: 3px solid var(--accent-border);
+      padding-left: var(--space-l);
+      margin-right: 15%;
+    }
+
+    .pull-quote:nth-child(even) {
+      border-right: 3px solid var(--accent-border);
+      padding-right: var(--space-l);
+      margin-left: 15%;
+      text-align: right;
+    }
+
+    .pull-quote blockquote {
+      font-family: var(--ff-body);
+      font-size: var(--step-3);
+      font-weight: 350;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--fg);
+      margin-bottom: var(--space-s);
+    }
+
+    .pull-quote cite {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+      font-style: normal;
+      font-weight: 400;
+      color: var(--fg-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .reviews-note {
+      text-align: center;
+      margin-top: var(--space-l);
+      font-family: var(--ff-mono);
+      font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+      color: var(--fg-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .reviews-note a {
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       HOURS & LOCATION
+       ========================================================================== */
+
+    .location {
+      padding: var(--space-2xl) 0;
+      background-color: var(--bg-panel);
+      transition: var(--transition-color);
+    }
+
+    .location-heading {
+      font-family: var(--ff-display);
+      font-size: var(--step-4);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--fg);
+    }
+
+    .location-content {
+      max-width: 640px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .hours-prose {
+      font-family: var(--ff-body);
+      font-size: var(--step-1);
+      font-weight: 350;
+      line-height: calc(var(--baseline) * 4);
+      color: var(--fg);
+      margin-bottom: var(--space-xs);
+    }
+
+    .hours-detail {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+      font-weight: 400;
+      color: var(--fg-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-l);
+    }
+
+    .location-address {
+      font-family: var(--ff-body);
+      font-size: var(--step-0);
+      font-weight: 350;
+      color: var(--fg-muted);
+      font-style: normal;
+      margin-bottom: var(--space-l);
+      line-height: calc(var(--baseline) * 3);
+    }
+
+    .map-wrap {
+      width: 100%;
+      max-width: 640px;
+      margin-inline: auto;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--accent-soft);
+    }
+
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 320px;
+      border: 0;
+      filter: var(--map-filter);
+      transition: filter 0.4s ease;
+    }
+
+    /* ==========================================================================
+       CONTACT
+       ========================================================================== */
+
+    .contact {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-2xl) var(--space-m);
+    }
+
+    .contact-heading {
+      font-family: var(--ff-display);
+      font-size: var(--step-4);
+      font-weight: 400;
+      margin-bottom: var(--space-xl);
+      color: var(--fg);
+    }
+
+    .contact-phone {
+      display: block;
+      font-family: var(--ff-mono);
+      font-size: var(--step-5);
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: var(--space-m);
+      letter-spacing: 0.04em;
+      transition: color 0.3s ease;
+    }
+    .contact-phone:hover {
+      color: var(--fg);
+    }
+
+    .contact-address {
+      font-family: var(--ff-body);
+      font-size: var(--step-0);
+      font-weight: 350;
+      color: var(--fg-muted);
+      font-style: normal;
+      line-height: calc(var(--baseline) * 3);
+      margin-bottom: var(--space-m);
+    }
+
+    .contact-facebook {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+      font-weight: 400;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid var(--accent-border);
+      padding-bottom: 2px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      margin-bottom: var(--space-xl);
+      display: inline-block;
+    }
+    .contact-facebook:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    .contact-farewell {
+      font-family: var(--ff-body);
+      font-size: var(--step-1);
+      font-weight: 350;
+      font-style: italic;
+      color: var(--fg-muted);
+      max-width: 45ch;
+      line-height: calc(var(--baseline) * 4);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+
+    footer {
+      padding: var(--space-l) var(--space-m);
+      text-align: center;
+      border-top: 1px solid var(--accent-soft);
+    }
+
+    .footer-line {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.65rem, 0.6rem + 0.2vw, 0.75rem);
+      color: var(--fg-muted);
+      letter-spacing: 0.04em;
+      line-height: calc(var(--baseline) * 3);
+    }
+
+    .footer-line + .footer-line {
+      margin-top: var(--space-xs);
+    }
+
+    /* ==========================================================================
+       WHATSAPP FLOAT
+       ========================================================================== */
+
+    .wa-float {
+      position: fixed;
+      bottom: var(--space-m);
+      right: var(--space-m);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--bg-panel);
+      border: 1px solid var(--accent-border);
+      border-radius: 4px;
+      padding: calc(var(--space-xs) * 1.5) var(--space-s);
+      text-decoration: none;
+      transition: var(--transition-color), transform 0.2s ease;
+      box-shadow: none;
+    }
+    .wa-float:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .wa-float svg {
+      width: 20px;
+      height: 20px;
+      fill: #25d366;
+      flex-shrink: 0;
+    }
+
+    .wa-float-label {
+      font-family: var(--ff-mono);
+      font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.85rem);
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+
+    @media (max-width: 768px) {
+      .pull-quote:nth-child(odd) {
+        margin-right: 5%;
+        padding-left: var(--space-m);
+      }
+      .pull-quote:nth-child(even) {
+        margin-left: 5%;
+        padding-right: var(--space-m);
+      }
+
+      .hero {
+        padding: var(--space-xl) var(--space-s);
+      }
+
+      .contact {
+        padding: var(--space-xl) var(--space-s);
+      }
+
+      .map-wrap iframe {
+        height: 260px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-greeting {
+        font-size: var(--step-5);
+      }
+
+      .hero-question {
+        font-size: var(--step-3);
+      }
+
+      .hero::before {
+        font-size: clamp(12rem, 10rem + 10vw, 18rem);
+      }
+
+      .pull-quote:nth-child(odd),
+      .pull-quote:nth-child(even) {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        border-right: none;
+        border-left: 3px solid var(--accent-border);
+        padding-left: var(--space-s);
+        padding-right: 0;
+      }
+
+      .contact-phone {
+        font-size: var(--step-3);
+      }
+
+      .wa-float-label {
+        display: none;
+      }
+
+      .wa-float {
+        padding: calc(var(--space-xs) * 1.5);
+      }
+
+      .map-wrap iframe {
+        height: 220px;
+      }
+
+      .services-heading,
+      .reviews-heading,
+      .location-heading,
+      .contact-heading {
+        font-size: var(--step-3);
+      }
+    }
+
+    /* ==========================================================================
+       REDUCED MOTION
+       ========================================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" type="button" aria-label="Toggle dark mode" id="themeToggle">
+    <span id="themeLabel">dark</span>
+  </button>
+
+  <!-- =======================================================================
+       HERO
+       ======================================================================= -->
+  <section class="hero" aria-label="Welcome">
+    <div class="hero-content">
+      <p class="hero-greeting" id="heroGreeting">Afternoon.</p>
+      <h1 class="hero-question">Need your car looked at?</h1>
+      <p class="hero-sub">Gin's GD Autocentre&ensp;·&ensp;Bristol Road, Gloucester</p>
+      <p class="hero-status" id="heroStatus" aria-live="polite">
+        <span class="status-dot closed" id="statusDot"></span>
+        <span id="statusText">Checking hours&hellip;</span>
+      </p>
+      <a href="tel:+441452422405" class="hero-cta" id="heroCta">Give us a ring</a>
+    </div>
+  </section>
+
+  <!-- Ornament -->
+  <span class="ornament" aria-hidden="true">&#10087;</span>
+
+  <!-- =======================================================================
+       INTRODUCTION
+       ======================================================================= -->
+  <section class="intro" aria-label="About us">
+    <div class="section-wrap">
+      <div class="prose reveal">
+        <p class="dropcap">We're an independent garage on Bristol Road. Been here since 2015, fixing cars and making friends along the way. Whether it's a routine service or something more serious, we'll have a proper look, tell you what's what in plain English, and get you back on the road without the runaround.</p>
+        <p>Gin runs things here. It's always been about honest work and fair prices &mdash; no upselling, no jargon, no surprises on the bill. Everyone's welcome. Pop in for a chat, or just wave as you drive past.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ornament -->
+  <span class="ornament" aria-hidden="true">&middot;&ensp;&middot;&ensp;&middot;</span>
+
+  <!-- =======================================================================
+       SERVICES
+       ======================================================================= -->
+  <section class="services" aria-label="Services">
+    <div class="section-wrap">
+      <h2 class="services-heading reveal">What we do</h2>
+      <div class="services-list">
+        <dl>
+          <div class="service-item reveal">
+            <dt>MOT Testing</dt>
+            <dd>The annual check your car needs. We'll walk you through anything that comes up &mdash; no pressure, just the facts.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Full Servicing</dt>
+            <dd>Interim or full, all makes and models. Keeping your car running well so the small things never become big things.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Computer Diagnostics</dt>
+            <dd>Modern cars talk in codes. We listen, decode, and explain what's actually going on under the bonnet.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Tyre Fitting</dt>
+            <dd>Supply and fit. We'll find you the right tyres at a fair price &mdash; no need to shop around.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Welding Work</dt>
+            <dd>Structural and repair welding to keep older cars on the road safely. Done properly, done to last.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Clutch Replacement</dt>
+            <dd>Slipping, stiff, or stalling? We'll sort your clutch and get the gears behaving again.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Timing Belts</dt>
+            <dd>One of those jobs you don't want to leave too long. We'll tell you when it's due and get it done right.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Gearbox &amp; Engine Work</dt>
+            <dd>The big stuff. Replacements, rebuilds, diagnostics. If it's fixable, we'll fix it. If it's not, we'll tell you straight.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Air Conditioning</dt>
+            <dd>Regas, leak checks, and repairs. Because Gloucester summers are getting warmer and no one likes a sticky drive.</dd>
+          </div>
+          <div class="service-item reveal">
+            <dt>Performance &amp; Emergencies</dt>
+            <dd>High-performance specialist work and emergency repairs. Breakdowns happen &mdash; we'll get you sorted fast.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ornament -->
+  <span class="ornament" aria-hidden="true">&#10087;</span>
+
+  <!-- =======================================================================
+       REVIEWS
+       ======================================================================= -->
+  <section class="reviews" aria-label="What people say">
+    <div class="section-wrap">
+      <h2 class="reviews-heading reveal">What people say</h2>
+      <div class="pull-quotes">
+        <div class="pull-quote reveal">
+          <blockquote>&ldquo;Trustworthy and reliable. Excellent and friendly customer care every single time. I wouldn't go anywhere else.&rdquo;</blockquote>
+          <cite>&mdash; Google review</cite>
+        </div>
+        <div class="pull-quote reveal">
+          <blockquote>&ldquo;Competitive pricing &mdash; genuinely lower than other garages. They handle emergencies efficiently and always explain things clearly.&rdquo;</blockquote>
+          <cite>&mdash; Facebook review</cite>
+        </div>
+      </div>
+      <p class="reviews-note reveal">71+ five-star reviews across <a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener">Facebook</a>, Google &amp; Yelp</p>
+    </div>
+  </section>
+
+  <!-- Ornament -->
+  <span class="ornament" aria-hidden="true">&middot;&ensp;&middot;&ensp;&middot;</span>
+
+  <!-- =======================================================================
+       WHEN & WHERE
+       ======================================================================= -->
+  <section class="location" aria-label="When and where to find us">
+    <div class="section-wrap">
+      <h2 class="location-heading reveal">When &amp; where</h2>
+      <div class="location-content">
+        <p class="hours-prose reveal">Monday to Friday, nine til half five.<br>Weekends off &mdash; even mechanics need a rest.</p>
+        <p class="hours-detail reveal">mon&ndash;fri 09:00&ndash;17:30 &ensp;|&ensp; sat&ndash;sun closed</p>
+        <address class="location-address reveal">
+          153a Bristol Road<br>
+          Gloucester, Gloucestershire<br>
+          GL1 5SY
+        </address>
+        <div class="map-wrap reveal">
+          <iframe
+            src="https://www.google.com/maps?q=153a+Bristol+Road,+Gloucester,+GL1+5SY&output=embed"
+            title="GD Autocentre location on Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ornament -->
+  <span class="ornament" aria-hidden="true">&#10087;</span>
+
+  <!-- =======================================================================
+       CONTACT
+       ======================================================================= -->
+  <section class="contact" aria-label="Get in touch">
+    <div class="reveal">
+      <h2 class="contact-heading">Get in touch</h2>
+      <a href="tel:+441452422405" class="contact-phone">01452 422 405</a>
+      <address class="contact-address">
+        153a Bristol Road<br>
+        Gloucester, GL1 5SY
+      </address>
+      <a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener" class="contact-facebook">Find us on Facebook</a>
+      <p class="contact-farewell">Pop in, give us a ring, or just wave as you drive past.</p>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       FOOTER
+       ======================================================================= -->
+  <footer>
+    <p class="footer-line">GD Autocentre Ltd &ensp;·&ensp; Company No. 12205703 &ensp;·&ensp; Trading since 2015</p>
+    <p class="footer-line">153a Bristol Road, Gloucester, Gloucestershire, GL1 5SY</p>
+  </footer>
+
+  <!-- =======================================================================
+       WHATSAPP FLOAT
+       ======================================================================= -->
+  <a href="https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please." target="_blank" rel="noopener" class="wa-float" aria-label="Chat with Gin on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="wa-float-label">Chat with Gin</span>
+  </a>
+
+  <!-- =======================================================================
+       JAVASCRIPT
+       ======================================================================= -->
+  <script>
+    (function() {
+      'use strict';
+
+      /* ====================================================================
+         TIME-OF-DAY — Living Pulse & Color Temperature
+         ==================================================================== */
+
+      function updateTimePulse() {
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var day = now.getDay(); // 0 = Sunday
+
+        var greetingEl = document.getElementById('heroGreeting');
+        var statusDot = document.getElementById('statusDot');
+        var statusText = document.getElementById('statusText');
+        var ctaEl = document.getElementById('heroCta');
+        var root = document.documentElement;
+
+        // Greeting based on time
+        var greeting;
+        if (hour >= 5 && hour < 12) {
+          greeting = 'Morning.';
+        } else if (hour >= 12 && hour < 17) {
+          greeting = 'Afternoon.';
+        } else {
+          greeting = 'Evening.';
+        }
+        greetingEl.textContent = greeting;
+
+        // Color temperature shift
+        // Morning (5–12): slightly brighter, less amber
+        // Afternoon (12–17): baseline warm golden
+        // Evening (17+): deeper amber, like lamplight
+        if (hour >= 5 && hour < 12) {
+          root.style.setProperty('--time-brightness', '101%');
+          root.style.setProperty('--grain-opacity', '0.035');
+        } else if (hour >= 12 && hour < 17) {
+          root.style.setProperty('--time-brightness', '100%');
+          root.style.setProperty('--grain-opacity', '0.04');
+        } else {
+          root.style.setProperty('--time-brightness', '98%');
+          root.style.setProperty('--grain-opacity', '0.05');
+        }
+
+        // Open/closed status
+        // Open: Mon–Fri (day 1–5), 09:00–17:30
+        var isWeekday = day >= 1 && day <= 5;
+        var currentMinutes = hour * 60 + minute;
+        var openMinutes = 9 * 60;       // 09:00
+        var closeMinutes = 17 * 60 + 30; // 17:30
+        var isOpen = isWeekday && currentMinutes >= openMinutes && currentMinutes < closeMinutes;
+
+        if (isOpen) {
+          statusDot.className = 'status-dot open';
+
+          // Calculate closing time description
+          var minsLeft = closeMinutes - currentMinutes;
+          if (minsLeft <= 60) {
+            statusText.textContent = "We're open \u2014 closing soon";
+          } else {
+            statusText.textContent = "We're open \u2014 til half five";
+          }
+
+          ctaEl.textContent = 'Give us a ring';
+          ctaEl.href = 'tel:+441452422405';
+        } else {
+          statusDot.className = 'status-dot closed';
+
+          // Figure out next open time
+          if (isWeekday && currentMinutes < openMinutes) {
+            statusText.textContent = "We're closed \u2014 open at nine";
+          } else if (day === 5 && currentMinutes >= closeMinutes) {
+            statusText.textContent = "We're closed \u2014 back Monday morning";
+          } else if (day === 6) {
+            statusText.textContent = "We're closed \u2014 back Monday morning";
+          } else if (day === 0) {
+            statusText.textContent = "We're closed \u2014 back tomorrow morning";
+          } else {
+            statusText.textContent = "We're closed \u2014 back tomorrow at nine";
+          }
+
+          ctaEl.textContent = 'Drop us a message';
+          ctaEl.href = 'https://wa.me/441452422405?text=Hi%2C%20I%27d%20like%20a%20quote%20please.';
+        }
+      }
+
+      // Run immediately and then every 60 seconds
+      updateTimePulse();
+      setInterval(updateTimePulse, 60000);
+
+
+      /* ====================================================================
+         DARK MODE TOGGLE
+         ==================================================================== */
+
+      var toggle = document.getElementById('themeToggle');
+      var label = document.getElementById('themeLabel');
+      var root = document.documentElement;
+
+      // Check saved preference or system preference
+      var saved = localStorage.getItem('gd-theme');
+      if (saved) {
+        root.setAttribute('data-theme', saved);
+        label.textContent = saved === 'dark' ? 'light' : 'dark';
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.setAttribute('data-theme', 'dark');
+        label.textContent = 'light';
+      }
+
+      // Update meta theme-color
+      function updateMetaTheme() {
+        var theme = root.getAttribute('data-theme');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) {
+          meta.content = theme === 'dark' ? '#130f0a' : '#faf5ed';
+        }
+      }
+      updateMetaTheme();
+
+      toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('gd-theme', next);
+        label.textContent = next === 'dark' ? 'light' : 'dark';
+        updateMetaTheme();
+      });
+
+      // Listen for system change
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+          if (!localStorage.getItem('gd-theme')) {
+            var newTheme = e.matches ? 'dark' : 'light';
+            root.setAttribute('data-theme', newTheme);
+            label.textContent = newTheme === 'dark' ? 'light' : 'dark';
+            updateMetaTheme();
+          }
+        });
+      }
+
+
+      /* ====================================================================
+         SCROLL REVEAL — IntersectionObserver
+         ==================================================================== */
+
+      var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced && 'IntersectionObserver' in window) {
+        var reveals = document.querySelectorAll('.reveal');
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        reveals.forEach(function(el) {
+          observer.observe(el);
+        });
+      } else {
+        // Show everything immediately if reduced motion or no IO
+        document.querySelectorAll('.reveal').forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

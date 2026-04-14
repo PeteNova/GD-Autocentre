@@ -1,0 +1,65 @@
+=============================================
+  GD AUTOCENTRE — QUOTE FORM SETUP
+  (takes about 2 minutes)
+=============================================
+
+Hi! The "Request a Quote" form on your website is ready.
+When a customer fills it in, two things will happen:
+
+  1. You'll receive the full quote details to your email
+     (info@gdautocentre.com)
+
+  2. A WhatsApp notification will pop up on your phone
+     so you never miss a new enquiry
+
+There's just ONE quick step needed to activate it:
+
+
+STEP 1 — Get your free Access Key
+-----------------------------------
+1. Open this link in your browser:
+   https://web3forms.com/#start
+
+2. Type in your email:  info@gdautocentre.com
+
+3. Click "Create Access Key"
+
+4. Check your inbox (info@gdautocentre.com) for an email
+   from Web3Forms. It will contain your Access Key —
+   it looks something like this:
+
+   abcd1234-5678-efgh-9012-ijklmnopqrst
+
+
+STEP 2 — Send the key to Piotr
+-----------------------------------
+Just copy the Access Key from that email and send it
+to Piotr. He will plug it into the website code for you.
+
+That's it — you're done!
+
+
+=============================================
+  HOW IT WORKS (for your reference)
+=============================================
+
+- Customer fills in the quote form on your site
+- Form data is sent securely to info@gdautocentre.com
+- You get a nicely formatted email with:
+    * Customer name & phone
+    * Their email (if provided)
+    * Vehicle make & model
+    * Service needed
+    * Any extra details they wrote
+
+- At the same time, a WhatsApp message opens with
+  a summary of the quote so you get an instant alert
+  on your phone (to +447894550082)
+
+- The service (Web3Forms) is FREE for up to 250
+  submissions per month — more than enough!
+
+- No passwords, no accounts to manage, no monthly fees
+- Your email is never shared or sold
+
+If you have any questions, just ask Piotr!
