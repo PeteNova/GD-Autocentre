@@ -216,7 +216,7 @@
   /* cyber stat numbers — keep default accent color */
   body[data-variant="cyber"] .hero-title .accent-word { border-color: transparent; color: var(--accent); text-shadow: 0 0 12px color-mix(in oklab, var(--accent) 50%, transparent); }
   body[data-variant="cyber"] .hero-readout .val { color: var(--accent); text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 50%, transparent); }
-  body[data-variant="cyber"] .team-badge { background: linear-gradient(135deg, var(--neon-pink), var(--neon-violet)); color: #fff; clip-path: var(--clip-cyber-btn); }
+  body[data-variant="cyber"] .team-badge { clip-path: var(--clip-cyber-btn); }
   body[data-variant="cyber"] .theme-toggle,
   body[data-variant="cyber"] .nav-divider { display: none; }
   body[data-variant="cyber"] .nav-cta { clip-path: var(--clip-notch-tr); color: var(--neon-amber); border-color: rgba(255,170,0,0.3); }
@@ -345,11 +345,13 @@
   body[data-variant="editorial"] .btn { border-radius: 999px; }
   body[data-variant="cyber"] .btn { border-radius: 2px; }
 
-  /* quote highlight — light mode: no bg, pen blue */
-  body[data-theme="light"] .team-quote-highlight {
-    background: transparent !important;
-    color: #2c4a8a !important;
-    padding: 0 !important;
+  /* quote highlight — deep teal across all variants/themes */
+  .team-quote-highlight {
+    background: #7fb0a0 !important;
+    color: #0e0f10 !important;
+    padding: 0.08em 0.28em !important;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
   .theme-toggle {
     width: 28px; height: 28px;
@@ -787,20 +789,16 @@
   }
   body[data-variant="editorial"] .team-portrait img { filter: sepia(0.25) contrast(1.05); }
   body[data-variant="cyber"] .team-portrait img { filter: grayscale(0.4) contrast(1.1) hue-rotate(-10deg); }
-  .team-portrait::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--bg) 80%, transparent));
-    pointer-events: none;
-  }
+  .team-portrait::after { content: none; }
   .team-badge {
     position: absolute; left: 20px; bottom: 20px; z-index: 2;
-    background: var(--accent); color: var(--accent-contrast);
+    background: #0d1b3d; color: #ffffff;
     padding: 10px 14px;
     font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
   }
   body[data-variant="editorial"] .team-badge { border-radius: 2px; }
+  body[data-variant="cyber"] .team-badge { background: #0d1b3d; color: #ffffff; }
 
   .team-quote {
     font-family: var(--font-display);
@@ -1581,7 +1579,7 @@
       <div>
         <p class="eyebrow">Gintaras (Gin) · GD Autocentre</p>
         <h2 class="team-quote" style="margin-top: 24px; font-family:'Playwrite GB J',cursive; font-optical-sizing:auto; font-style:italic; font-weight:300; font-size:clamp(18px,2vw,26px); line-height:1.7; letter-spacing:0;">
-          <span style="background: var(--accent); color: var(--accent-contrast); padding: 0.1em 0.3em; box-decoration-break: clone; -webkit-box-decoration-break: clone;" class="team-quote-highlight">Honest work, fair prices — that's what we're about. Every customer gets a straight answer and quality they can count on.</span>
+          <span class="team-quote-highlight">Honest work, fair prices — that's what we're about. Every customer gets a straight answer and quality they can count on.</span>
         </h2>
         <div class="team-meta">
           <div class="team-meta-row">
