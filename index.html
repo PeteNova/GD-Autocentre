@@ -20,6 +20,10 @@
   button { font: inherit; cursor: pointer; border: 0; background: 0; }
   ul { list-style: none; }
 
+  html.no-transitions *,
+  html.no-transitions *::before,
+  html.no-transitions *::after { transition: none !important; animation: none !important; }
+
   ::selection { background: var(--accent); color: var(--bg); }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -1007,7 +1011,7 @@
   /* ═══════════ WHATSAPP FLOAT ═══════════ */
   .whatsapp-float {
     position: fixed;
-    bottom: 28px; right: 28px;
+    bottom: 80px; right: 28px;
     z-index: 80;
     width: 56px; height: 56px;
     background: #25d366; color: #fff;
@@ -1045,6 +1049,29 @@
     }
     .whatsapp-float svg { width: 24px; height: 24px; }
     .whatsapp-float::after { width: 6px; height: 6px; }
+  }
+
+  /* ═══════════ TWEAKS TOGGLE ═══════════ */
+  .tweaks-toggle {
+    position: fixed;
+    bottom: 28px; left: 28px;
+    z-index: 90;
+    width: 44px; height: 44px;
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    color: var(--fg-dim);
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s ease;
+  }
+  .tweaks-toggle svg { width: 20px; height: 20px; }
+  .tweaks-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 768px) {
+    .tweaks-toggle { bottom: 72px; left: 16px; width: 40px; height: 40px; }
+    .tweaks-toggle svg { width: 18px; height: 18px; }
   }
 
   /* ═══════════ TWEAKS PANEL ═══════════ */
@@ -1085,6 +1112,138 @@
     section.block { padding: 80px 0; }
     .block-head { margin-bottom: 40px; }
     .hero-meta { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ═══════════ MOBILE POLISH ═══════════ */
+  @media (max-width: 768px) {
+    :root { --gutter: 20px; }
+
+    .alert { font-size: 10.5px; padding: 8px 12px; letter-spacing: 0.06em; line-height: 1.4; }
+
+    .nav { height: 64px; }
+    .brand-logo { height: 36px; width: 170px; }
+    .theme-toggle { width: 34px; height: 34px; }
+
+    .nav-links.is-open {
+      display: flex !important;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      gap: 0;
+    }
+    .nav-links.is-open a {
+      padding: 14px var(--gutter);
+      text-align: left;
+      color: var(--fg);
+      transition: background .15s ease, color .15s ease;
+    }
+    .nav-links.is-open a::after { display: none; }
+    .nav-links.is-open a:active,
+    .nav-links.is-open a:focus {
+      background: color-mix(in oklab, var(--accent) 12%, transparent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .hero { min-height: 560px; height: auto; padding: 48px 0 40px; }
+    .hero .wrap { padding-top: 0; padding-bottom: 0; }
+    .hero-grid { gap: 32px; }
+    .hero-greeting { font-size: 22px !important; }
+    .h1 { font-size: clamp(44px, 11vw, 68px) !important; }
+    .hero-title { margin-top: 18px !important; }
+    .hero-sub { font-size: 15px; margin-top: 14px; }
+
+    .hero-ctas { width: 100%; gap: 10px; }
+    .hero-ctas .btn { flex: 1 1 100%; justify-content: center; min-height: 52px; }
+
+    .hero-meta { gap: 14px 16px; padding-top: 20px; }
+    .meta-item strong { font-size: 16px; }
+
+    .trust { padding: 18px 0; }
+    .trust-row { gap: 16px; }
+    .trust-ic { width: 34px; height: 34px; }
+    .trust-text { font-size: 13px !important; }
+    .trust-sub { font-size: 9px; }
+
+    section.block { padding: 64px 0 !important; }
+    .section-index { font-size: 10px; margin-bottom: 32px; flex-wrap: wrap; gap: 4px; }
+    .block-head { margin-bottom: 32px !important; gap: 16px !important; }
+    .block-head p { font-size: 15px; }
+    .h2 { font-size: clamp(30px, 8vw, 44px) !important; }
+    .h3 { font-size: 18px !important; }
+
+    .svc { min-height: auto; padding: 26px 22px; }
+    .svc-num { margin-bottom: 22px; }
+
+    .step { padding: 28px 22px; }
+    .step-mark { width: 24px; height: 24px; top: 28px; right: 22px; }
+
+    .why-lede { font-size: 16px; }
+    .why-list { margin-top: 26px; gap: 14px; }
+    .stat { padding: 26px 20px; min-height: 140px; }
+    .stat-n { font-size: 44px; }
+
+    .team-portrait { aspect-ratio: 3/4; }
+    .team-quote { font-size: 20px !important; line-height: 1.5 !important; }
+    .team-meta-row { flex-direction: column; gap: 4px; padding: 12px 0; }
+    .team-meta-row .k { min-width: 0; }
+
+    .pricing-wrap { gap: 28px; }
+    .price-table td { padding: 18px 0; font-size: 14px; }
+    .price-table td:first-child { padding-right: 12px; }
+    .price-name { font-size: 15px !important; }
+    .price-desc { font-size: 12px; }
+    .price-val { font-size: 22px; }
+    .price-unit { font-size: 10px; }
+
+    .rate-banner {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px 22px;
+      text-align: left;
+    }
+    .rate-banner .rate-n { font-size: 44px; }
+    .rate-banner .rate-desc { font-size: 14px; }
+
+    .review { padding: 24px 22px; }
+    .review blockquote { font-size: 15px !important; }
+    .review.primary blockquote { font-size: 17px !important; }
+    .review[style*="span 2"] { grid-column: span 1 !important; }
+
+    .cta-strip { padding: 48px 0; }
+    .cta-strip .big-phone { font-size: clamp(32px, 9vw, 52px) !important; }
+
+    .location-info { padding: 40px 22px !important; }
+    .location-addr { font-size: 22px !important; }
+    .location-map { min-height: 320px; }
+    .location-ctas .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
+
+    .contact-grid { gap: 32px; }
+    form.quote { padding: 24px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 10px; }
+    input, select, textarea { padding: 13px 14px; font-size: 16px; }
+
+    footer.site { padding: 56px 0 24px; }
+    .footer-grid { gap: 28px; margin-bottom: 32px; }
+    .footer-bottom { font-size: 10px; flex-direction: column; gap: 8px; }
+
+    .whatsapp-float { bottom: 72px; right: 16px; }
+
+    #tweaks {
+      right: 12px; left: 12px; top: auto; bottom: 80px;
+      width: auto; max-width: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero-meta { grid-template-columns: 1fr; }
+    .trust-row { grid-template-columns: 1fr; }
+    .section-index span:last-child { display: none; }
+    .location-ctas .btn { flex: 1 1 100%; }
   }
 </style>
 </head>
@@ -1197,11 +1356,11 @@
         <div class="hero-meta">
           <div class="meta-item">
             <span class="mono">// WORKSHOP RATE</span>
-            <strong>£55/hr</strong>
+            <strong>£75/hr + VAT</strong>
           </div>
           <div class="meta-item">
             <span class="mono">// MOT FROM</span>
-            <strong>£40</strong>
+            <strong>£50</strong>
           </div>
           <div class="meta-item">
             <span class="mono">// AVERAGE REVIEW</span>
@@ -1469,34 +1628,20 @@
 
     <div class="pricing-wrap">
       <div>
-        <h3 class="h3" style="color: var(--accent); margin-bottom: 16px;">Workshop rate</h3>
-        <p style="color: var(--fg-dim); font-size: 15px; line-height: 1.6;">Our labour is billed at a flat hourly rate — no hidden diagnostics charges, no "shop supplies" on top. Parts are sourced at trade and passed on transparently.</p>
-        <div class="pricing-note">
-          <strong>// A note on quotes</strong>
-          All prices below are indicative starting points for a typical passenger car on petrol or diesel. High-performance, hybrid and EV work priced separately. Parts additional.
-        </div>
+        <h3 class="h3" style="color: var(--accent); margin-bottom: 16px;">Servicing</h3>
+        <p style="color: var(--fg-dim); font-size: 15px; line-height: 1.6;">Indicative starting prices for servicing. For every other job Gin gives you a firm quote on-site — no guesswork, no surprises.</p>
       </div>
 
       <div>
         <table class="price-table">
           <tr>
             <td>
-              <div class="price-name">MOT Test</div>
-              <div class="price-desc">Class 4 · valid at DVSA-approved partner</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£40</div>
-              <div class="price-unit">Fixed price</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <div class="price-name">Interim Service</div>
               <div class="price-desc">Oil, filter, 30-point visual check</div>
             </td>
             <td>
-              <div class="price-val"><span class="from">From</span>£95</div>
-              <div class="price-unit">+ parts</div>
+              <div class="price-val"><span class="from">From</span>£125</div>
+              <div class="price-unit">Including parts</div>
             </td>
           </tr>
           <tr>
@@ -1505,68 +1650,8 @@
               <div class="price-desc">Oil, all filters, fluids, 60-point check</div>
             </td>
             <td>
-              <div class="price-val"><span class="from">From</span>£165</div>
-              <div class="price-unit">+ parts</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">Diagnostic Scan</div>
-              <div class="price-desc">Full OBD scan, fault codes &amp; live data</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£45</div>
-              <div class="price-unit">Refunded if repair booked</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">Tyre Fitting (per tyre)</div>
-              <div class="price-desc">Fit, balance, valve &amp; disposal</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£15</div>
-              <div class="price-unit">+ tyre cost</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">Brake Pads (axle)</div>
-              <div class="price-desc">Supply &amp; fit, brake system check</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£120</div>
-              <div class="price-unit">+ parts</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">Clutch Replacement</div>
-              <div class="price-desc">Typical hatchback / saloon</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£420</div>
-              <div class="price-unit">+ parts</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">A/C Re-gas &amp; Service</div>
-              <div class="price-desc">Regas, leak check, report</div>
-            </td>
-            <td>
-              <div class="price-val"><span class="from">From</span>£65</div>
-              <div class="price-unit">Fixed price</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="price-name">Welding / Exhaust Work</div>
-              <div class="price-desc">Priced per job after inspection</div>
-            </td>
-            <td>
-              <div class="price-val">POA</div>
-              <div class="price-unit">Quote on inspection</div>
+              <div class="price-val"><span class="from">From</span>£225</div>
+              <div class="price-unit">Including parts</div>
             </td>
           </tr>
         </table>
@@ -1576,7 +1661,7 @@
     <div class="rate-banner">
       <div>
         <div class="rate-label">Workshop labour</div>
-        <div class="rate-n">£55<span style="font-size: 22px; opacity: 0.6;">/hr</span></div>
+        <div class="rate-n">£75<span style="font-size: 22px; opacity: 0.6;">/hr + VAT</span></div>
       </div>
       <div class="rate-desc">
         Flat rate. No diagnostics surcharge, no inflated shop fees. Most repairs billed in 15-minute increments after the first hour.
@@ -1865,6 +1950,16 @@
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<!-- Tweaks toggle button -->
+<button class="tweaks-toggle" id="tweaksToggle" aria-label="Open design tweaks">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+    <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+    <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+  </svg>
+</button>
+
 <!-- TWEAKS PANEL -->
 <div id="tweaks">
   <button class="tw-close" onclick="toggleTweaks(false)" aria-label="Close">×</button>
@@ -1986,9 +2081,14 @@
   }
   function applyTheme(theme) {
     const effective = getEffectiveTheme(theme);
+    const root = document.documentElement;
+    root.classList.add('no-transitions');
     document.body.setAttribute('data-theme', effective);
     const icon = document.getElementById('themeIcon');
     if (icon) icon.innerHTML = effective === 'light' ? moonSVG : sunSVG;
+    // force reflow so the style change is committed while transitions are disabled
+    void root.offsetHeight;
+    setTimeout(() => root.classList.remove('no-transitions'), 60);
   }
   function toggleTheme() {
     const current = getEffectiveTheme(getSavedTheme());
@@ -2075,21 +2175,18 @@
   });
 
   document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('tweaksToggle')?.addEventListener('click', () => toggleTweaks());
 
   // Mobile nav
-  document.querySelector('.menu-btn')?.addEventListener('click', () => {
+  (function() {
     const nav = document.querySelector('.nav-links');
-    const open = nav.style.display === 'flex';
-    nav.style.display = open ? '' : 'flex';
-    nav.style.position = open ? '' : 'absolute';
-    nav.style.top = open ? '' : '76px';
-    nav.style.left = open ? '' : '0';
-    nav.style.right = open ? '' : '0';
-    nav.style.flexDirection = open ? '' : 'column';
-    nav.style.background = open ? '' : 'var(--bg-2)';
-    nav.style.borderBottom = open ? '' : '1px solid var(--line)';
-    nav.style.padding = open ? '' : '12px 0';
-  });
+    const btn = document.querySelector('.menu-btn');
+    if (!nav || !btn) return;
+    btn.addEventListener('click', () => nav.classList.toggle('is-open'));
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('is-open'));
+    });
+  })();
 
   // form submission
   (function() {
@@ -2117,15 +2214,7 @@
         var result = await response.json();
         if (result.success) {
           showStatus("Quote request sent! We'll get back to you soon.", 'success');
-          var waMsg = encodeURIComponent('NEW QUOTE REQUEST
-Name: ' + name + '
-Phone: ' + phone + (email ? '
-Email: ' + email : '') + (vehicle ? '
-Vehicle: ' + vehicle : '') + '
-Service: ' + service + (message ? '
-Details: ' + message : '') + '
-
--- GD Autocentre Website');
+          var waMsg = encodeURIComponent('NEW QUOTE REQUEST\nName: ' + name + '\nPhone: ' + phone + (email ? '\nEmail: ' + email : '') + (vehicle ? '\nVehicle: ' + vehicle : '') + '\nService: ' + service + (message ? '\nDetails: ' + message : '') + '\n\n-- GD Autocentre Website');
           setTimeout(function() { window.open('https://wa.me/447894550082?text=' + waMsg, '_blank'); }, 800);
           form.reset();
         } else { showStatus('Something went wrong. Please call us on 01452 422 405.', 'error'); }
