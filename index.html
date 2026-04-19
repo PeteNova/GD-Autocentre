@@ -612,8 +612,28 @@
     max-width: 46ch;
     margin-top: 16px;
   }
-  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; justify-content: flex-start; }
-  .hero-ctas .btn { width: auto; align-self: flex-start; }
+  .hero-cta-group {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 14px 12px;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+  .hero-ctas { display: contents; }
+  .hero-cta-group .btn { width: auto; align-self: start; }
+  .hero-cta-note {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    color: var(--fg-faint);
+    text-transform: uppercase;
+  }
+  .hero-cta-note a { color: var(--fg-dim); text-decoration: underline; }
 
   .hero-meta {
     display: grid;
@@ -1231,8 +1251,8 @@
     .hero-title { margin-top: 18px !important; }
     .hero-sub { font-size: 15px; margin-top: 14px; }
 
-    .hero-ctas { width: 100%; gap: 10px; }
-    .hero-ctas .btn { flex: 1 1 100%; justify-content: center; min-height: 52px; }
+    .hero-cta-group { grid-template-columns: 1fr; gap: 10px; width: 100%; }
+    .hero-cta-group .btn { width: 100%; justify-content: center; min-height: 52px; }
 
     .hero-meta { gap: 14px 16px; padding-top: 20px; }
     .meta-item strong { font-size: 16px; }
@@ -1491,18 +1511,20 @@
         <p class="hero-sub">
           Independent garage with 10+ years experience. Honest service, fair prices, and no unnecessary work. All makes and models welcome.
         </p>
-        <div class="hero-ctas">
-          <a href="tel:+447894550082" class="btn btn-primary">
-            <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
-          </a>
-          <a href="#contact" class="btn btn-ghost">
-            Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
-          </a>
+        <div class="hero-cta-group">
+          <div class="hero-ctas">
+            <a href="tel:+447894550082" class="btn btn-primary">
+              <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+              Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+          <p class="hero-cta-note">
+            Gin works on cars in the workshop — mobile gets picked up fastest.<br>
+            Office landline: <a href="tel:01452422405" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">01452 422 405</a>
+          </p>
         </div>
-        <p style="margin-top: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--fg-faint); text-transform: uppercase;">
-          Gin works on cars in the workshop — mobile gets picked up fastest.<br>
-          Office landline: <a href="tel:01452422405" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest." style="color: var(--fg-dim); text-decoration: underline;">01452 422 405</a>
-        </p>
       </div>
       <div>
         <div class="hero-meta">
