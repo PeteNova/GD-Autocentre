@@ -1053,7 +1053,7 @@
   body[data-variant="editorial"] textarea { border-radius: 4px; }
   input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--accent); }
   textarea { resize: vertical; min-height: 120px; }
-  .form-status { padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; display: none; }
+  .form-status { padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; display: none; }
   .form-status.show { display: block; }
   .form-status.success { background: color-mix(in oklab, #00e0a8 15%, transparent); color: #00e0a8; border: 1px solid #00e0a8; }
   .form-status.error { background: color-mix(in oklab, #ff3b5c 15%, transparent); color: #ff7b8c; border: 1px solid #ff3b5c; }
@@ -1997,7 +1997,7 @@
             <svg class="ic ic-lg"><use href="#i-mail"/></svg>
             <div>
               <span class="k">Email</span>
-              <div class="v"><a href="mailto:info@gdautocentre.co.uk">info@gdautocentre.co.uk</a></div>
+              <div class="v"><a href="mailto:info@gdautocentre.com">info@gdautocentre.com</a></div>
             </div>
           </div>
           <div class="contact-detail">
@@ -2370,6 +2370,7 @@
     var submitBtn = document.getElementById('submitBtn');
     var replyTo = document.getElementById('replyToField');
     var emailField = document.getElementById('emailField');
+    var statusTimer;
     if (!form) return;
     emailField.addEventListener('input', function() { replyTo.value = this.value; });
     form.addEventListener('submit', async function(e) {
@@ -2388,7 +2389,7 @@
         var response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
         var result = await response.json();
         if (result.success) {
-          showStatus("Quote request sent! We'll get back to you soon.", 'success');
+          showSuccess(name, email, phone);
           var waMsg = encodeURIComponent('NEW QUOTE REQUEST\nName: ' + name + '\nPhone: ' + phone + (email ? '\nEmail: ' + email : '') + (vehicle ? '\nVehicle: ' + vehicle : '') + '\nService: ' + service + (message ? '\nDetails: ' + message : '') + '\n\n-- GD Autocentre Website');
           setTimeout(function() { window.open('https://wa.me/447894550082?text=' + waMsg, '_blank'); }, 800);
           form.reset();
@@ -2401,7 +2402,38 @@
     function showStatus(msg, type) {
       statusEl.className = 'form-status show ' + type;
       statusEl.textContent = msg;
-      setTimeout(function() { statusEl.className = 'form-status'; }, 8000);
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 8000);
+    }
+    function showSuccess(name, email, phone) {
+      statusEl.className = 'form-status show success';
+      statusEl.innerHTML = '';
+
+      var line1 = document.createElement('div');
+      line1.appendChild(document.createTextNode(
+        (name ? 'Thanks ' + name + ' \u2014 your ' : 'Your ') +
+        'enquiry has been sent to '
+      ));
+      var strong = document.createElement('strong');
+      strong.textContent = 'info@gdautocentre.com';
+      line1.appendChild(strong);
+      line1.appendChild(document.createTextNode('.'));
+      statusEl.appendChild(line1);
+
+      var line2 = document.createElement('div');
+      line2.style.marginTop = '6px';
+      line2.style.opacity = '0.85';
+      if (email) {
+        line2.textContent = "We'll reply to " + email +
+          " or call you on " + phone + " within one working day.";
+      } else {
+        line2.textContent = "We'll call you on " + phone +
+          " within one working day.";
+      }
+      statusEl.appendChild(line2);
+
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 15000);
     }
   })();
 
