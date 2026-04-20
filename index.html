@@ -625,13 +625,9 @@
     padding-top: 24px;
     padding-bottom: 24px;
   }
-  /* Editorial runs on heavier serif display type — give the hero extra
-     bottom breathing room so hero-meta doesn't collide with the trust bar */
-  body[data-variant="editorial"] .hero {
-    height: calc(100vh - 77px - 39px + 56px);
-    height: calc(100dvh - 77px - 39px + 56px);
-  }
-  body[data-variant="editorial"] .hero .wrap { padding-bottom: 88px; }
+  /* Editorial runs on heavier serif display type — push the trust strip
+     away from hero-meta so they don't crowd each other */
+  body[data-variant="editorial"] .trust { margin-top: 64px; }
 
   .hero-grid {
     display: grid;
