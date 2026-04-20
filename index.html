@@ -625,6 +625,9 @@
     padding-top: 24px;
     padding-bottom: 24px;
   }
+  /* Editorial runs on heavier serif display type — give the hero extra
+     bottom breathing room so hero-meta doesn't collide with the trust bar */
+  body[data-variant="editorial"] .hero .wrap { padding-bottom: 72px; }
 
   .hero-grid {
     display: grid;
