@@ -1339,16 +1339,25 @@
       outline: none;
     }
 
-    /* Fill viewport so alert + nav + hero together read as one 100vh "above-the-fold" block.
-       --top-stack is set by JS from the actual alert+nav height (handles 1-line and 2-line alerts).
-       Fallback 104px = ~64 nav + ~40 single-line alert. */
+    /* Fold = alert + nav + hero text column. The border above hero-meta marks
+       the bottom of the viewport: hero-meta itself sits just below the fold
+       and trust bar follows naturally (no gap, no clipping).
+       --top-stack is set by JS from actual alert+nav height. Fallback 104px. */
     .hero {
-      min-height: calc(100vh - var(--top-stack, 104px));
-      min-height: calc(100dvh - var(--top-stack, 104px));
+      min-height: 0;
       height: auto;
-      padding: 28px 0;
+      padding: 28px 0 0;
     }
-    .hero .wrap { padding-top: 0; padding-bottom: 0; }
+    .hero .wrap { padding-top: 0; padding-bottom: 0; align-self: auto; }
+    /* 28 = .hero padding-top, 40 = .hero-grid gap → hero-meta's border-top
+       lands exactly at the viewport bottom (the fold line). */
+    .hero-grid > div:first-child {
+      min-height: calc(100vh - var(--top-stack, 104px) - 68px);
+      min-height: calc(100dvh - var(--top-stack, 104px) - 68px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .hero-grid { gap: 32px; }
     .hero-greeting { font-size: 22px !important; }
     .h1 { font-size: clamp(44px, 11vw, 68px) !important; }
