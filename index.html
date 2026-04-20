@@ -1057,6 +1057,19 @@
   .form-status.show { display: block; }
   .form-status.success { background: color-mix(in oklab, #00e0a8 15%, transparent); color: #00e0a8; border: 1px solid #00e0a8; }
   .form-status.error { background: color-mix(in oklab, #ff3b5c 15%, transparent); color: #ff7b8c; border: 1px solid #ff3b5c; }
+  .wa-followup-btn {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border: 1px solid currentColor;
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .wa-followup-btn:hover { background: #00e0a8; color: var(--bg); }
   button[type="submit"] {
     background: var(--accent); color: var(--accent-contrast);
     padding: 16px 28px;
@@ -2389,9 +2402,9 @@
         var response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
         var result = await response.json();
         if (result.success) {
-          showSuccess(name, email, phone);
           var waMsg = encodeURIComponent('NEW QUOTE REQUEST\nName: ' + name + '\nPhone: ' + phone + (email ? '\nEmail: ' + email : '') + (vehicle ? '\nVehicle: ' + vehicle : '') + '\nService: ' + service + (message ? '\nDetails: ' + message : '') + '\n\n-- GD Autocentre Website');
-          setTimeout(function() { window.open('https://wa.me/447894550082?text=' + waMsg, '_blank'); }, 800);
+          var waUrl = 'https://wa.me/447894550082?text=' + waMsg;
+          showSuccess(name, email, phone, waUrl);
           form.reset();
         } else { showStatus('Something went wrong. Please call us on 01452 422 405.', 'error'); }
       } catch (err) { showStatus('Connection error. Please call us on 01452 422 405.', 'error'); }
@@ -2405,7 +2418,7 @@
       clearTimeout(statusTimer);
       statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 8000);
     }
-    function showSuccess(name, email, phone) {
+    function showSuccess(name, email, phone, waUrl) {
       statusEl.className = 'form-status show success';
       statusEl.innerHTML = '';
 
@@ -2432,8 +2445,18 @@
       }
       statusEl.appendChild(line2);
 
+      if (waUrl) {
+        var waBtn = document.createElement('a');
+        waBtn.href = waUrl;
+        waBtn.target = '_blank';
+        waBtn.rel = 'noopener noreferrer';
+        waBtn.className = 'wa-followup-btn';
+        waBtn.textContent = 'Also send via WhatsApp for a faster reply \u2192';
+        statusEl.appendChild(waBtn);
+      }
+
       clearTimeout(statusTimer);
-      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 15000);
+      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 20000);
     }
   })();
 
