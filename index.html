@@ -681,7 +681,8 @@
   /* Contact-section live phone status tag (sibling of // Workshop — Gin / // Office landline) */
   .contact-detail .v:has(.phone-live) { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px; }
   .phone-live {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-left: auto;
     padding-left: 16px;
     font-family: var(--font-mono);
@@ -691,6 +692,15 @@
     color: var(--fg-faint);
     white-space: nowrap;
   }
+  .phone-live .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg-faint);
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .phone-live.is-online .dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
 
   .hero-meta {
     display: grid;
@@ -2455,9 +2465,15 @@
             callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
           }
         }
-        // Mobile / landline: static hours tag, right-aligned
-        if (mobileStatusEl) mobileStatusEl.textContent = 'Mon\u2013Fri 09:00\u201318:00';
-        if (landlineStatusEl) landlineStatusEl.textContent = 'Mon\u2013Fri 09:00\u201317:30';
+        // Mobile / landline: dot (green=online, grey=offline) + hours
+        if (mobileStatusEl) {
+          mobileStatusEl.classList.toggle('is-online', phoneOpen);
+          mobileStatusEl.innerHTML = '<span class="dot"></span>Mon\u2013Fri 09:00\u201318:00';
+        }
+        if (landlineStatusEl) {
+          landlineStatusEl.classList.toggle('is-online', s.open);
+          landlineStatusEl.innerHTML = '<span class="dot"></span>Mon\u2013Fri 09:00\u201317:30';
+        }
       }
 
       render();
