@@ -1128,11 +1128,12 @@
   input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--accent); }
   textarea { resize: vertical; min-height: 120px; }
 
-  /* Quote form fields: no hard border, slightly darker inset bg so they read as wells */
+  /* Quote form fields: no hard border, slightly darker inset bg so they read as wells
+     — mixed against black so they stay distinct in both dark and light themes */
   form.quote input,
   form.quote select,
   form.quote textarea {
-    background: var(--bg-2);
+    background: color-mix(in srgb, var(--bg-2), black 6%);
     border: 0;
   }
   form.quote input:focus,
