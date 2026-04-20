@@ -2514,16 +2514,21 @@
       const callGinWrap = document.getElementById('callGinWrap');
       const mobileStatusEl = document.getElementById('mobileStatus');
       const landlineStatusEl = document.getElementById('landlineStatus');
-      const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
       const ALERT_CLOSED = '<span class="offline-tag">OFFLINE</span> To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;18:00';
 
-      // Block clicks when offline (keep href for accessibility, just preventDefault)
-      if (callGinBtn) {
-        callGinBtn.addEventListener('click', function(e) {
-          if (callGinBtn.classList.contains('is-offline')) e.preventDefault();
-        });
+      // Build the offline tooltip from the same schedule source as the status dot.
+      // Keep tel: clickable — voicemail still picks up; the tooltip just sets expectations.
+      function callOfflineTip(statusText) {
+        // statusText examples:
+        //   "Closed today · opens Saturday at 09:00"
+        //   "Opens today at 09:00"
+        //   "Closed · opens Monday at 09:00"
+        //   "Closed today · Christmas Day"
+        var tail = statusText ? statusText.replace(/^Closed( today)?(\s·\s)?/, '').replace(/^Open(s)?\s/, 'opens ') : '';
+        if (!tail) return 'Phone out of hours. You can still try — voicemail will pick up.';
+        return 'Phone out of hours — ' + tail + '. You can still try; voicemail picks up.';
       }
 
       function isPhoneOpen() {
@@ -2568,7 +2573,7 @@
           if (phoneOpen) {
             callGinWrap.removeAttribute('data-tip');
           } else {
-            callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
+            callGinWrap.setAttribute('data-tip', callOfflineTip(s.text));
           }
         }
         // Mobile / landline: dot (green=online, grey=offline) + hours

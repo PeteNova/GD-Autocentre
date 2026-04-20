@@ -62,51 +62,103 @@ Rules:
 
 ---
 
-## Setting up the sheet (one-time, for Gin)
+## Setting up the sheet — step by step (one-time, for Gin)
 
-A starter CSV with UK bank holidays 2026–2027 lives at
-`docs/opening-hours-overrides.csv` in this repo. You can either:
+You need: a Google account, a web browser, and ~10 minutes.
+**No coding, no CLI, no software to install.**
 
-**Option A — Import the starter CSV (fastest):**
+### Part 1 — Download the starter file
 
-1. Go to https://sheets.google.com and create a new empty spreadsheet.
-   Name it `GD Autocentre — Opening Hours Overrides`.
-2. File → **Import** → **Upload** → drag
-   `docs/opening-hours-overrides.csv` from the repo.
-3. Import location: **Replace current sheet**. Separator: **Comma**.
-   Click Import data.
-4. Review the dates — remove anything you don't want, add more rows for
-   your own off-days.
-5. Skip to **Publish to the web** below.
+1. Open the repo on GitHub in your browser:
+   https://github.com/PeteNova/GD-Autocentre
+2. Click the folder **`docs`**.
+3. Click the file **`opening-hours-overrides.csv`**.
+4. On the right side, click **Download raw file** (the ⬇ icon).
+5. The file saves as `opening-hours-overrides.csv` in your Downloads.
 
-**Option B — Start from scratch:**
+### Part 2 — Create the Google Sheet
 
-1. Go to https://sheets.google.com and create a new spreadsheet.
-   Name it `GD Autocentre — Opening Hours Overrides`.
-2. In row 1, type the headers: `date`, `status`, `open`, `close`, `note`
-   (one per column).
-3. Add rows for the holidays / exceptions (example above).
+6. Go to https://sheets.google.com. Sign in if needed.
+7. Click **Blank spreadsheet** (the big `+` card).
+8. At the top left, click the filename "Untitled spreadsheet" and
+   rename it to: **`GD Autocentre — Opening Hours Overrides`**.
+9. Top menu: **File** → **Import**.
+10. In the dialog, click the **Upload** tab.
+11. Drag `opening-hours-overrides.csv` from your Downloads into the
+    dialog (or click "Browse" and pick it).
+12. Import settings:
+    - Import location: **Replace current sheet**
+    - Separator type: **Comma** (or "Detect automatically")
+    - Convert text to numbers, dates, and formulas: **No**
+    (important — keeps "09:00" as text, not a time number)
+13. Click **Import data**.
 
----
+You should now see 19 rows of UK bank holidays and Christmas /
+New Year early-closes. Row 1 is the header: `date, status, open,
+close, note`.
 
-**Publish to the web** (both options end here):
+### Part 3 — Review and adjust
 
-4. **Publish to the web:**
-   - File → Share → **Publish to web**
-   - On the left dropdown: choose the sheet (usually "Sheet1")
-   - On the right dropdown: **Comma-separated values (.csv)**
-   - Click **Publish**
-   - Confirm the dialog
-   - Copy the URL shown — it looks like:
-     `https://docs.google.com/spreadsheets/d/e/2PACX-…/pub?output=csv`
-5. Paste that URL into `index.html`, inside the `OVERRIDES_CSV_URL`
-   constant (search for the exact string `OVERRIDES_CSV_URL = ''` and
-   replace `''` with `'<that URL>'`). Commit and push — Vercel will
-   redeploy automatically.
+14. Scroll through the dates. Delete any row you don't want (right-click
+    the row number → Delete row).
+15. Add your own off-days: click into the next empty row and fill the
+    5 cells. Date format is strict: `YYYY-MM-DD` (e.g. `2026-07-15`).
+16. Any edits you make now — or at any time in the future — are saved
+    automatically. No "Save" button.
 
-Once the URL is set, every page visit refetches the sheet, so any edit
-Gin makes in the sheet is live on the next page load (no code change,
-no deploy).
+### Part 4 — Publish to the web as CSV
+
+17. Top menu: **File** → **Share** → **Publish to web**.
+18. In the dialog:
+    - Left dropdown: **Sheet1** (the default — whatever tab holds your
+      data)
+    - Right dropdown: **Comma-separated values (.csv)**
+19. Click **Publish**.
+20. Confirm the dialog ("Are you sure you want to publish this?") →
+    **OK**.
+21. Google shows a URL that looks like:
+    `https://docs.google.com/spreadsheets/d/e/2PACX-<long-code>/pub?output=csv`
+22. **Copy that URL** (Ctrl/Cmd + C). You'll paste it in Part 5.
+23. Close the dialog.
+
+### Part 5 — Point the website at the sheet
+
+This is the only code change — one line, done in GitHub's web editor.
+**No CLI, no Git, just clicks.**
+
+24. Go to the file on GitHub:
+    https://github.com/PeteNova/GD-Autocentre/blob/master/index.html
+25. Press **`t`** (GitHub shortcut opens the file finder — skip if
+    unfamiliar), or use **Ctrl/Cmd + F** to search the file.
+26. Click the pencil icon **✎** in the top-right of the file view
+    ("Edit this file").
+27. Press **Ctrl/Cmd + F** in the editor and search for:
+    `OVERRIDES_CSV_URL`
+28. You'll find this line:
+    `const OVERRIDES_CSV_URL = '';`
+29. Replace the empty quotes with your URL from step 22. The line
+    should now look like:
+    `const OVERRIDES_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-…/pub?output=csv';`
+    (keep the single quotes and the semicolon — only replace the empty
+    `''`).
+30. Scroll to the bottom of the page. In the **Commit changes** box:
+    - Commit message: `Wire opening-hours sheet URL`
+    - Leave "Commit directly to the master branch" selected.
+    - Click **Commit changes**.
+31. Done. Vercel automatically redeploys the site in ~30 seconds.
+
+### Part 6 — Verify
+
+32. After ~1 minute, open https://gd-autocentre.vercel.app in a private
+    browser window (to bypass cache).
+33. If today's date is in your sheet, you should see the override
+    reflected immediately (banner, Call Gin button state, phone tags).
+34. If today's date is **not** in the sheet, you should see the normal
+    Mon–Fri 09:00–17:30 / 09:00–18:00 behaviour — unchanged from
+    before. This is correct.
+35. From now on, just edit the Google Sheet — changes are live within
+    seconds of a page reload. Never touch GitHub again unless you
+    change the sheet's URL.
 
 ---
 
