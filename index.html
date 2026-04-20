@@ -446,16 +446,6 @@
     .call-gin-wrap { display: block; }
     .call-gin-wrap .btn { display: flex; }
   }
-  /* Offline: collapse to single-column + swap so Request a quote is on top
-     (applies on any viewport — mobile keeps column; desktop collapses into one) */
-  .hero-cta-group.call-offline-reorder { grid-template-columns: 1fr; }
-  .hero-cta-group.call-offline-reorder .call-gin-wrap { display: block; }
-  .hero-cta-group.call-offline-reorder .call-gin-wrap .btn { display: flex; }
-  .hero-cta-group.call-offline-reorder #callGinWrap { order: 2; }
-  .hero-cta-group.call-offline-reorder .hero-ctas .btn-ghost { order: 1; }
-  /* Caption always at the bottom regardless of reorder state */
-  .hero-cta-group .hero-cta-note { order: 99; }
-
   /* variant button shapes */
   body[data-variant="industrial"] .btn { border-radius: 0; }
   body[data-variant="industrial"] .btn-primary { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); padding-right: 36px; }
@@ -2404,7 +2394,6 @@
       const bookingAlertText = document.getElementById('bookingAlertText');
       const callGinBtn = document.getElementById('callGinBtn');
       const callGinWrap = document.getElementById('callGinWrap');
-      const heroCtaGroup = document.querySelector('.hero-cta-group');
       const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
@@ -2450,7 +2439,6 @@
             callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
           }
         }
-        if (heroCtaGroup) heroCtaGroup.classList.toggle('call-offline-reorder', !phoneOpen);
       }
 
       render();
