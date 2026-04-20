@@ -679,17 +679,16 @@
   .hero-cta-note .phone-hours { color: var(--fg-faint); white-space: nowrap; }
 
   /* Contact-section live phone status tag (sibling of // Workshop — Gin / // Office landline) */
+  .contact-detail .v:has(.phone-live) { display: flex; align-items: center; flex-wrap: wrap; }
   .phone-live {
-    display: inline-block;
-    margin-left: 10px;
-    padding-left: 10px;
-    border-left: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-faint);
-    vertical-align: 1px;
   }
   .phone-live.is-online { color: #22c55e; }
   .phone-live .dot {
