@@ -2068,7 +2068,7 @@
         <div class="form-row full">
           <textarea name="message" placeholder="Tell us about the issue or what you need..."></textarea>
         </div>
-        <button type="submit" id="submitBtn" class="btn btn-ghost"><svg class="ic"><use href="#i-mail"/></svg> Send enquiry <svg class="ic"><use href="#i-arrow"/></svg></button>
+        <button type="submit" id="submitBtn" class="btn btn-ghost">Send enquiry <svg class="ic"><use href="#i-mail"/></svg> <svg class="ic"><use href="#i-arrow"/></svg></button>
       </form>
     </div>
   </div>
@@ -2410,7 +2410,7 @@
         } else { showStatus('Something went wrong. Please call us on 01452 422 405.', 'error'); }
       } catch (err) { showStatus('Connection error. Please call us on 01452 422 405.', 'error'); }
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<svg class="ic"><use href="#i-mail"></use></svg> Send enquiry <svg class="ic"><use href="#i-arrow"></use></svg>';
+      submitBtn.innerHTML = 'Send enquiry <svg class="ic"><use href="#i-mail"></use></svg> <svg class="ic"><use href="#i-arrow"></use></svg>';
       submitBtn.style.opacity = '1';
     });
     function showStatus(msg, type) {
