@@ -678,6 +678,31 @@
   .hero-cta-note a { color: var(--fg-dim); text-decoration: underline; }
   .hero-cta-note .phone-hours { color: var(--fg-faint); white-space: nowrap; }
 
+  /* Contact-section live phone status tag (sibling of // Workshop — Gin / // Office landline) */
+  .phone-live {
+    display: inline-block;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    vertical-align: 1px;
+  }
+  .phone-live.is-online { color: #22c55e; }
+  .phone-live .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+  .phone-live.is-online .dot { box-shadow: 0 0 6px #22c55e; }
+
   .hero-meta {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2045,8 +2070,8 @@
             <svg class="ic ic-lg"><use href="#i-phone"/></svg>
             <div>
               <span class="k">Phone</span>
-              <div class="v"><a href="tel:+447894550082">07894 550 082</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px;">// Workshop — Gin</span></div>
-              <div class="v" style="margin-top:4px;"><a href="tel:01452422405" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">01452 422 405</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px; cursor: help;" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">// Office landline</span></div>
+              <div class="v"><a href="tel:+447894550082">07894 550 082</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px;">// Workshop — Gin</span><span class="phone-live" id="mobileStatus"></span></div>
+              <div class="v" style="margin-top:4px;"><a href="tel:01452422405" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">01452 422 405</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px; cursor: help;" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">// Office landline</span><span class="phone-live" id="landlineStatus"></span></div>
             </div>
           </div>
           <div class="contact-detail">
@@ -2394,6 +2419,8 @@
       const bookingAlertText = document.getElementById('bookingAlertText');
       const callGinBtn = document.getElementById('callGinBtn');
       const callGinWrap = document.getElementById('callGinWrap');
+      const mobileStatusEl = document.getElementById('mobileStatus');
+      const landlineStatusEl = document.getElementById('landlineStatus');
       const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
@@ -2438,6 +2465,16 @@
           } else {
             callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
           }
+        }
+        // Mobile phone status (follows phone window 09:00–18:00)
+        if (mobileStatusEl) {
+          mobileStatusEl.classList.toggle('is-online', phoneOpen);
+          mobileStatusEl.innerHTML = '<span class="dot"></span>' + (phoneOpen ? 'Online now' : 'Offline');
+        }
+        // Landline status (follows workshop hours 09:00–17:30)
+        if (landlineStatusEl) {
+          landlineStatusEl.classList.toggle('is-online', s.open);
+          landlineStatusEl.innerHTML = '<span class="dot"></span>' + (s.open ? 'Online now' : 'Offline');
         }
       }
 
