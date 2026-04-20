@@ -1122,6 +1122,19 @@
   body[data-variant="editorial"] textarea { border-radius: 4px; }
   input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--accent); }
   textarea { resize: vertical; min-height: 120px; }
+
+  /* Quote form fields: no hard border, slightly darker inset bg so they read as wells */
+  form.quote input,
+  form.quote select,
+  form.quote textarea {
+    background: var(--bg-2);
+    border: 0;
+  }
+  form.quote input:focus,
+  form.quote select:focus,
+  form.quote textarea:focus {
+    box-shadow: inset 0 -2px 0 0 var(--accent);
+  }
   .form-status { padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; display: none; }
   .form-status.show { display: block; }
   .form-status.success { background: color-mix(in oklab, #00e0a8 15%, transparent); color: #00e0a8; border: 1px solid #00e0a8; }
