@@ -1512,6 +1512,18 @@
   @media (hover: none) {
     [data-tip]::before,
     [data-tip]::after { display: none; }
+    /* Tap-to-reveal on touch devices: JS toggles .is-tip-open on the element
+       that owns data-tip (first tap shows, second tap allows default). */
+    [data-tip].is-tip-open::before,
+    [data-tip].is-tip-open::after {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition-delay: 0s;
+    }
+    [data-tip].is-tip-open::after {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
   }
 </style>
 </head>
@@ -2517,6 +2529,40 @@
       const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
       const ALERT_CLOSED = '<span class="offline-tag">OFFLINE</span> To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;18:00';
+
+      // Touch-device first-tap-reveals-tooltip behaviour for the offline Call Gin button.
+      // Desktop keeps hover tooltip + single-click dial. On touch: first tap shows the
+      // tooltip and blocks dial; second tap (within TIP_TAP_WINDOW ms) dials normally.
+      const TIP_TAP_WINDOW = 6000;
+      let tipDismissTimer = null;
+      function closeCallTip() {
+        if (callGinWrap) callGinWrap.classList.remove('is-tip-open');
+        clearTimeout(tipDismissTimer);
+        tipDismissTimer = null;
+      }
+      if (callGinBtn && callGinWrap) {
+        callGinBtn.addEventListener('click', function(e) {
+          const isOffline = callGinBtn.classList.contains('is-offline');
+          const isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+          if (!isOffline || !isTouch) return; // desktop or online → normal click
+          if (callGinWrap.classList.contains('is-tip-open')) {
+            // Second tap → allow dial, close tooltip.
+            closeCallTip();
+            return;
+          }
+          // First tap → reveal tooltip, suppress dial.
+          e.preventDefault();
+          callGinWrap.classList.add('is-tip-open');
+          clearTimeout(tipDismissTimer);
+          tipDismissTimer = setTimeout(closeCallTip, TIP_TAP_WINDOW);
+        });
+        // Tap anywhere else closes the tooltip.
+        document.addEventListener('click', function(e) {
+          if (!callGinWrap.classList.contains('is-tip-open')) return;
+          if (callGinWrap.contains(e.target)) return;
+          closeCallTip();
+        }, true);
+      }
 
       // Build the offline tooltip from the same schedule source as the status dot.
       // Keep tel: clickable — voicemail still picks up; the tooltip just sets expectations.
