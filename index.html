@@ -1459,10 +1459,10 @@
   </defs>
 </svg>
 
-<!-- Alert (shown only during opening hours by JS) -->
-<div class="alert" id="bookingAlert" style="display:none;">
+<!-- Alert (message swaps inside/outside opening hours by JS) -->
+<div class="alert" id="bookingAlert">
   <span class="dot"></span>
-  Now booking &mdash; call <a href="tel:+447894550082">+44 7894 550 082</a> to schedule your MOT or service
+  <span id="bookingAlertText">Now booking &mdash; call <a href="tel:+447894550082">+44 7894 550 082</a> to schedule your MOT or service</span>
 </div>
 
 <!-- Header -->
@@ -2344,7 +2344,10 @@
         return { open: true, text: 'Open · closes in ' + fmtDuration(minsLeft) };
       }
 
-      const bookingAlert = document.getElementById('bookingAlert');
+      const bookingAlertText = document.getElementById('bookingAlertText');
+      const PHONE_LINK = '<a href="tel:+447894550082">+44 7894 550 082</a>';
+      const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
+      const ALERT_CLOSED = 'Call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;17:30 to book your MOT or service';
 
       function render() {
         const s = getStatus();
@@ -2352,7 +2355,7 @@
         statusEl.innerHTML =
           `<span style="width:7px;height:7px;border-radius:50%;background:${dotColor};display:inline-block;flex-shrink:0;${s.open ? 'box-shadow:0 0 6px ' + dotColor : ''}"></span>` +
           `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.text}</span>`;
-        if (bookingAlert) bookingAlert.style.display = s.open ? '' : 'none';
+        if (bookingAlertText) bookingAlertText.innerHTML = s.open ? ALERT_OPEN : ALERT_CLOSED;
       }
 
       render();
