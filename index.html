@@ -2386,6 +2386,67 @@
       const CLOSE_H = WORKSHOP_CLOSE_H, CLOSE_M = WORKSHOP_CLOSE_M;
       const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+      // ── Opening-hours overrides (Google Sheets published as CSV) ───────────
+      // Gin edits a Google Sheet with columns: Date, Status, Open, Close, Note
+      // Sheet → File → Share → Publish to web → CSV. Paste the URL below.
+      // Empty URL = skip fetch; the site falls back to the default weekly schedule.
+      // See docs/opening-hours-sheet.md for the full template.
+      const OVERRIDES_CSV_URL = '';
+      let todayOverride = null; // { status: 'closed'|'open', openH, openM, closeH, closeM, note }
+
+      function todayISO() {
+        const d = new Date();
+        return d.getFullYear() + '-' +
+          String(d.getMonth() + 1).padStart(2, '0') + '-' +
+          String(d.getDate()).padStart(2, '0');
+      }
+      function parseCSV(text) {
+        const lines = text.trim().split(/\r?\n/);
+        if (!lines.length) return [];
+        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+        return lines.slice(1).map(line => {
+          const cells = line.split(',').map(c => c.trim());
+          const row = {};
+          headers.forEach((h, i) => row[h] = cells[i] || '');
+          return row;
+        });
+      }
+      function parseHM(s) {
+        if (!s) return null;
+        const [h, m] = s.split(':').map(Number);
+        if (isNaN(h)) return null;
+        return { h: h, m: isNaN(m) ? 0 : m };
+      }
+      async function fetchOverrides() {
+        if (!OVERRIDES_CSV_URL) return;
+        try {
+          const resp = await fetch(OVERRIDES_CSV_URL, { cache: 'no-store' });
+          if (!resp.ok) return;
+          const rows = parseCSV(await resp.text());
+          const today = todayISO();
+          const row = rows.find(r => r.date === today);
+          if (!row) return;
+          const status = (row.status || '').toLowerCase();
+          const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
+          if (status === 'open') {
+            const open = parseHM(row.open);
+            const close = parseHM(row.close);
+            if (open && close) {
+              o.openH = open.h; o.openM = open.m;
+              o.closeH = close.h; o.closeM = close.m;
+            } else {
+              return; // malformed row — ignore, use defaults
+            }
+          } else if (status !== 'closed') {
+            return; // unknown status — ignore
+          }
+          todayOverride = o;
+          if (typeof render === 'function') render();
+        } catch (e) {
+          // Silent fail — site continues on default schedule
+        }
+      }
+
       function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
       function minsUntil(h, m, nowH, nowM) { return (h * 60 + m) - (nowH * 60 + nowM); }
       function fmtDuration(mins) {
@@ -2407,10 +2468,31 @@
         const now = new Date();
         const dow = now.getDay(); // 0=Sun,6=Sat
         const h = now.getHours(), m = now.getMinutes();
+        const nowMins = h * 60 + m;
+
+        // Override path — today has a row in the Google Sheet
+        if (todayOverride) {
+          const note = todayOverride.note ? ' · ' + todayOverride.note : '';
+          if (todayOverride.status === 'closed') {
+            return { open: false, text: 'Closed today' + note };
+          }
+          if (todayOverride.status === 'open' && todayOverride.openH != null) {
+            const openMins = todayOverride.openH * 60 + todayOverride.openM;
+            const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
+            if (nowMins < openMins) {
+              return { open: false, text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + note };
+            }
+            if (nowMins >= closeMins) {
+              return { open: false, text: 'Closed' + note };
+            }
+            return { open: true, text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + note };
+          }
+        }
+
+        // Default path — regular Mon–Fri schedule
         const isWeekday = dow >= 1 && dow <= 5;
         const closeMins = CLOSE_H * 60 + CLOSE_M;
         const openMins = OPEN_H * 60;
-        const nowMins = h * 60 + m;
 
         if (!isWeekday) {
           return { open: false, text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0) };
@@ -2446,10 +2528,22 @@
 
       function isPhoneOpen() {
         const now = new Date();
+        const nowMins = now.getHours() * 60 + now.getMinutes();
+
+        // Override path — sheet row defines phone window same as workshop for overrides
+        if (todayOverride) {
+          if (todayOverride.status === 'closed') return false;
+          if (todayOverride.status === 'open' && todayOverride.openH != null) {
+            const openMins = todayOverride.openH * 60 + todayOverride.openM;
+            const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
+            return nowMins >= openMins && nowMins < closeMins;
+          }
+        }
+
+        // Default path — regular Mon–Fri 09:00–18:00
         const dow = now.getDay();
         const isWeekday = dow >= 1 && dow <= 5;
         if (!isWeekday) return false;
-        const nowMins = now.getHours() * 60 + now.getMinutes();
         return nowMins >= (OPEN_H * 60) && nowMins < (PHONE_CLOSE_H * 60 + PHONE_CLOSE_M);
       }
 
@@ -2489,6 +2583,7 @@
       }
 
       render();
+      fetchOverrides(); // async — will re-render if today has a row in the sheet
       // update every minute
       setInterval(render, 60000);
     })();
