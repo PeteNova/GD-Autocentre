@@ -456,6 +456,8 @@
   .hero-cta-group.call-offline-reorder .call-gin-wrap .btn { display: flex; }
   .hero-cta-group.call-offline-reorder #callGinWrap { order: 2; }
   .hero-cta-group.call-offline-reorder .hero-ctas .btn-ghost { order: 1; }
+  /* Caption always at the bottom regardless of reorder state */
+  .hero-cta-group .hero-cta-note { order: 99; }
 
   /* variant button shapes */
   body[data-variant="industrial"] .btn { border-radius: 0; }
