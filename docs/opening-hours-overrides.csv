@@ -1,0 +1,20 @@
+date,status,open,close,note
+2026-04-03,closed,,,Good Friday
+2026-04-06,closed,,,Easter Monday
+2026-05-04,closed,,,Early May bank holiday
+2026-05-25,closed,,,Spring bank holiday
+2026-08-31,closed,,,Summer bank holiday
+2026-12-24,open,09:00,14:00,Christmas Eve — early close
+2026-12-25,closed,,,Christmas Day
+2026-12-28,closed,,,Boxing Day (substitute day)
+2026-12-31,open,09:00,14:00,New Year's Eve — early close
+2027-01-01,closed,,,New Year's Day
+2027-03-26,closed,,,Good Friday
+2027-03-29,closed,,,Easter Monday
+2027-05-03,closed,,,Early May bank holiday
+2027-05-31,closed,,,Spring bank holiday
+2027-08-30,closed,,,Summer bank holiday
+2027-12-24,open,09:00,14:00,Christmas Eve — early close
+2027-12-27,closed,,,Christmas Day (substitute day)
+2027-12-28,closed,,,Boxing Day (substitute day)
+2027-12-31,open,09:00,14:00,New Year's Eve — early close

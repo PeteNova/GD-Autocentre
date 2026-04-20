@@ -64,11 +64,33 @@ Rules:
 
 ## Setting up the sheet (one-time, for Gin)
 
+A starter CSV with UK bank holidays 2026–2027 lives at
+`docs/opening-hours-overrides.csv` in this repo. You can either:
+
+**Option A — Import the starter CSV (fastest):**
+
+1. Go to https://sheets.google.com and create a new empty spreadsheet.
+   Name it `GD Autocentre — Opening Hours Overrides`.
+2. File → **Import** → **Upload** → drag
+   `docs/opening-hours-overrides.csv` from the repo.
+3. Import location: **Replace current sheet**. Separator: **Comma**.
+   Click Import data.
+4. Review the dates — remove anything you don't want, add more rows for
+   your own off-days.
+5. Skip to **Publish to the web** below.
+
+**Option B — Start from scratch:**
+
 1. Go to https://sheets.google.com and create a new spreadsheet.
-   Name it something like `GD Autocentre — Opening Hours Overrides`.
+   Name it `GD Autocentre — Opening Hours Overrides`.
 2. In row 1, type the headers: `date`, `status`, `open`, `close`, `note`
    (one per column).
 3. Add rows for the holidays / exceptions (example above).
+
+---
+
+**Publish to the web** (both options end here):
+
 4. **Publish to the web:**
    - File → Share → **Publish to web**
    - On the left dropdown: choose the sheet (usually "Sheet1")
