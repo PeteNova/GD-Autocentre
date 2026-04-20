@@ -304,7 +304,7 @@
   body[data-variant="cyber"] .alert { background: var(--bg-2); border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; }
   body[data-variant="cyber"] .alert > * { background: transparent; padding: 0; display: inline; color: var(--fg); }
   body[data-variant="cyber"] .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--neon-amber); margin-right: 10px; vertical-align: 1px; padding: 0; }
-  body[data-variant="cyber"] .alert a { color: var(--neon-amber); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  body[data-variant="cyber"] .alert a { color: var(--neon-amber); }
   body[data-variant="cyber"] .eyebrow { color: var(--accent); text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 40%, transparent); }
   body[data-variant="cyber"] .hero-corner::before,
   body[data-variant="cyber"] .hero-corner::after,
@@ -494,7 +494,7 @@
   }
   .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 10px; vertical-align: 1px; animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .alert a { color: var(--accent); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  .alert a { color: var(--accent); }
 
   header.site {
     position: sticky; top: 0; z-index: 50;
@@ -1459,8 +1459,8 @@
   </defs>
 </svg>
 
-<!-- Alert -->
-<div class="alert">
+<!-- Alert (shown only during opening hours by JS) -->
+<div class="alert" id="bookingAlert" style="display:none;">
   <span class="dot"></span>
   Now booking &mdash; call <a href="tel:+447894550082">+44 7894 550 082</a> to schedule your MOT or service
 </div>
@@ -2344,12 +2344,15 @@
         return { open: true, text: 'Open · closes in ' + fmtDuration(minsLeft) };
       }
 
+      const bookingAlert = document.getElementById('bookingAlert');
+
       function render() {
         const s = getStatus();
         const dotColor = s.open ? '#22c55e' : 'var(--fg-faint)';
         statusEl.innerHTML =
           `<span style="width:7px;height:7px;border-radius:50%;background:${dotColor};display:inline-block;flex-shrink:0;${s.open ? 'box-shadow:0 0 6px ' + dotColor : ''}"></span>` +
           `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.text}</span>`;
+        if (bookingAlert) bookingAlert.style.display = s.open ? '' : 'none';
       }
 
       render();
