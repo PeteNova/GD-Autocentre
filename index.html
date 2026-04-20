@@ -441,16 +441,13 @@
      without colliding with cyber's shine/corner pseudo-elements */
   .call-gin-wrap { display: inline-block; position: relative; }
   .call-gin-wrap .btn { display: inline-flex; }
-  /* Mobile: Request a quote on top, Call Gin directly above the hero-cta-note
-     so the mobile number is adjacent to its caption */
+  /* Mobile: single-column, but keep classic "call first" hierarchy when online */
   @media (max-width: 768px) {
     .call-gin-wrap { display: block; }
     .call-gin-wrap .btn { display: flex; }
-    .hero-cta-group #callGinWrap { order: 2; }
-    .hero-cta-group .hero-ctas .btn-ghost { order: 1; }
   }
-  /* Desktop: when phone is offline, collapse hero CTAs to the same single-column
-     layout as mobile (Request a quote on top, disabled Call Gin below the caption-adjacent slot) */
+  /* Offline: collapse to single-column + swap so Request a quote is on top
+     (applies on any viewport — mobile keeps column; desktop collapses into one) */
   .hero-cta-group.call-offline-reorder { grid-template-columns: 1fr; }
   .hero-cta-group.call-offline-reorder .call-gin-wrap { display: block; }
   .hero-cta-group.call-offline-reorder .call-gin-wrap .btn { display: flex; }
