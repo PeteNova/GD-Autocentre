@@ -493,6 +493,18 @@
     text-align: center;
   }
   .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 10px; vertical-align: 1px; animation: pulse 2s ease-in-out infinite; }
+  .alert.is-offline .dot { background: var(--fg-faint); animation: none; opacity: 0.5; }
+  .alert .offline-tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 1px 6px;
+    background: var(--fg-faint);
+    color: var(--bg);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    border-radius: 2px;
+    vertical-align: 1px;
+  }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .alert a { color: var(--accent); }
 
@@ -2068,7 +2080,7 @@
         <div class="form-row full">
           <textarea name="message" placeholder="Tell us about the issue or what you need..."></textarea>
         </div>
-        <button type="submit" id="submitBtn" class="btn btn-ghost"><svg class="ic"><use href="#i-mail"/></svg> Send enquiry <svg class="ic"><use href="#i-arrow"/></svg></button>
+        <button type="submit" id="submitBtn" class="btn btn-ghost">Send enquiry <svg class="ic"><use href="#i-arrow"/></svg></button>
       </form>
     </div>
   </div>
@@ -2301,7 +2313,11 @@
       const statusEl = document.getElementById('heroStatus');
       if (!statusEl) return;
 
-      const OPEN_H = 9, CLOSE_H = 17, CLOSE_M = 30;
+      const OPEN_H = 9;
+      const WORKSHOP_CLOSE_H = 17, WORKSHOP_CLOSE_M = 30; // cars on lift until 17:30
+      const PHONE_CLOSE_H = 18, PHONE_CLOSE_M = 0; // Gin picks up the phone until 18:00
+      // Legacy aliases used by existing status badge logic (workshop window)
+      const CLOSE_H = WORKSHOP_CLOSE_H, CLOSE_M = WORKSHOP_CLOSE_M;
       const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
       function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
@@ -2344,10 +2360,20 @@
         return { open: true, text: 'Open · closes in ' + fmtDuration(minsLeft) };
       }
 
+      const bookingAlert = document.getElementById('bookingAlert');
       const bookingAlertText = document.getElementById('bookingAlertText');
       const PHONE_LINK = '<a href="tel:+447894550082">+44 7894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
-      const ALERT_CLOSED = 'To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;17:30';
+      const ALERT_CLOSED = '<span class="offline-tag">OFFLINE</span> To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;18:00';
+
+      function isPhoneOpen() {
+        const now = new Date();
+        const dow = now.getDay();
+        const isWeekday = dow >= 1 && dow <= 5;
+        if (!isWeekday) return false;
+        const nowMins = now.getHours() * 60 + now.getMinutes();
+        return nowMins >= (OPEN_H * 60) && nowMins < (PHONE_CLOSE_H * 60 + PHONE_CLOSE_M);
+      }
 
       function render() {
         const s = getStatus();
@@ -2355,7 +2381,9 @@
         statusEl.innerHTML =
           `<span style="width:7px;height:7px;border-radius:50%;background:${dotColor};display:inline-block;flex-shrink:0;${s.open ? 'box-shadow:0 0 6px ' + dotColor : ''}"></span>` +
           `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.text}</span>`;
-        if (bookingAlertText) bookingAlertText.innerHTML = s.open ? ALERT_OPEN : ALERT_CLOSED;
+        const phoneOpen = isPhoneOpen();
+        if (bookingAlertText) bookingAlertText.innerHTML = phoneOpen ? ALERT_OPEN : ALERT_CLOSED;
+        if (bookingAlert) bookingAlert.classList.toggle('is-offline', !phoneOpen);
       }
 
       render();
@@ -2416,7 +2444,7 @@
         } else { showStatus('Something went wrong. Please call us on 01452 422 405.', 'error'); }
       } catch (err) { showStatus('Connection error. Please call us on 01452 422 405.', 'error'); }
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<svg class="ic"><use href="#i-mail"></use></svg> Send enquiry <svg class="ic"><use href="#i-arrow"></use></svg>';
+      submitBtn.innerHTML = 'Send enquiry <svg class="ic"><use href="#i-arrow"></use></svg>';
       submitBtn.style.opacity = '1';
     });
     function showStatus(msg, type) {
