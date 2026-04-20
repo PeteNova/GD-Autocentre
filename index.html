@@ -434,6 +434,13 @@
     color: var(--bg) !important;
     filter: none !important;
   }
+  /* Kill the cyber shine sweep on disabled buttons */
+  body[data-variant="cyber"] .btn.is-offline::before,
+  body[data-variant="cyber"] .btn.is-offline:hover::before { display: none !important; }
+  /* Wrapper for Call Gin button so tooltip can use its own ::before/::after
+     without colliding with cyber's shine/corner pseudo-elements */
+  .call-gin-wrap { display: inline-block; position: relative; }
+  .call-gin-wrap .btn { display: inline-flex; }
 
   /* variant button shapes */
   body[data-variant="industrial"] .btn { border-radius: 0; }
@@ -1556,9 +1563,11 @@
         </p>
         <div class="hero-cta-group">
           <div class="hero-ctas">
-            <a href="tel:+447894550082" id="callGinBtn" class="btn btn-primary">
-              <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
-            </a>
+            <span id="callGinWrap" class="call-gin-wrap" data-tip-pos="bottom">
+              <a href="tel:+447894550082" id="callGinBtn" class="btn btn-primary">
+                <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
+              </a>
+            </span>
             <a href="#contact" class="btn btn-ghost">
               Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
             </a>
@@ -2379,6 +2388,7 @@
       const bookingAlert = document.getElementById('bookingAlert');
       const bookingAlertText = document.getElementById('bookingAlertText');
       const callGinBtn = document.getElementById('callGinBtn');
+      const callGinWrap = document.getElementById('callGinWrap');
       const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">+44 7894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
@@ -2412,11 +2422,16 @@
         if (callGinBtn) {
           callGinBtn.classList.toggle('is-offline', !phoneOpen);
           if (phoneOpen) {
-            callGinBtn.removeAttribute('data-tip');
             callGinBtn.removeAttribute('aria-disabled');
           } else {
-            callGinBtn.setAttribute('data-tip', CALL_OFFLINE_TIP);
             callGinBtn.setAttribute('aria-disabled', 'true');
+          }
+        }
+        if (callGinWrap) {
+          if (phoneOpen) {
+            callGinWrap.removeAttribute('data-tip');
+          } else {
+            callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
           }
         }
       }
