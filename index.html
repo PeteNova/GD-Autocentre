@@ -441,6 +441,13 @@
      without colliding with cyber's shine/corner pseudo-elements */
   .call-gin-wrap { display: inline-block; position: relative; }
   .call-gin-wrap .btn { display: inline-flex; }
+  /* Mobile: when phone is offline, put Request a quote above Call Gin */
+  @media (max-width: 768px) {
+    .call-gin-wrap { display: block; }
+    .call-gin-wrap .btn { display: flex; }
+    .hero-cta-group.call-offline-reorder #callGinWrap { order: 2; }
+    .hero-cta-group.call-offline-reorder .hero-ctas .btn-ghost { order: 1; }
+  }
 
   /* variant button shapes */
   body[data-variant="industrial"] .btn { border-radius: 0; }
@@ -2390,6 +2397,7 @@
       const bookingAlertText = document.getElementById('bookingAlertText');
       const callGinBtn = document.getElementById('callGinBtn');
       const callGinWrap = document.getElementById('callGinWrap');
+      const heroCtaGroup = document.querySelector('.hero-cta-group');
       const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
@@ -2435,6 +2443,7 @@
             callGinWrap.setAttribute('data-tip', CALL_OFFLINE_TIP);
           }
         }
+        if (heroCtaGroup) heroCtaGroup.classList.toggle('call-offline-reorder', !phoneOpen);
       }
 
       render();
