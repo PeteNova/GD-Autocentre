@@ -1339,15 +1339,7 @@
       outline: none;
     }
 
-    /* Fill viewport so alert + nav + hero together read as one 100vh "above-the-fold" block.
-       --top-stack is set by JS from the actual alert+nav height (handles 1-line and 2-line alerts).
-       Fallback 104px = ~64 nav + ~40 single-line alert. */
-    .hero {
-      min-height: calc(100vh - var(--top-stack, 104px));
-      min-height: calc(100dvh - var(--top-stack, 104px));
-      height: auto;
-      padding: 28px 0;
-    }
+    .hero { min-height: 560px; height: auto; padding: 48px 0 40px; }
     .hero .wrap { padding-top: 0; padding-bottom: 0; }
     .hero-grid { gap: 32px; }
     .hero-greeting { font-size: 22px !important; }
@@ -2639,26 +2631,6 @@
           landlineStatusEl.classList.toggle('is-online', s.open);
           landlineStatusEl.innerHTML = '<span class="dot"></span>Mon\u2013Fri 09:00\u201317:30';
         }
-      }
-
-      // Mobile: measure alert + nav height so .hero can fill the rest of 100dvh.
-      // Alert text changes (online/offline/override) → different wrap count → different height.
-      // MutationObserver reacts to any DOM change inside .alert; ResizeObserver reacts to
-      // viewport-driven reflow (e.g. phone orientation change rewrapping the alert).
-      const navEl = document.querySelector('.nav');
-      const alertEl = document.querySelector('.alert');
-      function measureTopStack() {
-        const nav = navEl ? navEl.offsetHeight : 0;
-        const alert = alertEl ? alertEl.offsetHeight : 0;
-        document.documentElement.style.setProperty('--top-stack', (nav + alert) + 'px');
-      }
-      measureTopStack();
-      window.addEventListener('resize', measureTopStack, { passive: true });
-      if (alertEl && 'ResizeObserver' in window) {
-        new ResizeObserver(measureTopStack).observe(alertEl);
-      }
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(measureTopStack);
       }
 
       render();
