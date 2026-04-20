@@ -1041,8 +1041,13 @@
   /* ═══════════ CTA STRIP ═══════════ */
   .cta-strip {
     padding: 64px 0;
-    background: color-mix(in srgb, var(--bg) 75%, var(--bg-2) 25%);
+    background: color-mix(in srgb, var(--bg-2), white 4%);
     text-align: center;
+    /* Overlap the 1px borders of adjacent sections so this strip reads as a single block */
+    position: relative;
+    z-index: 1;
+    margin-top: -1px;
+    margin-bottom: -1px;
   }
   .cta-strip .big-phone {
     font-family: var(--font-display);
