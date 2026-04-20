@@ -418,6 +418,22 @@
   .btn-primary:hover { background: var(--fg); }
   .btn-ghost { border-color: var(--line-bright); color: var(--fg); }
   .btn-ghost:hover { border-color: var(--fg); background: var(--bg-raised); }
+  .btn.is-offline, .btn.is-offline:hover {
+    background: var(--fg-faint) !important;
+    border-color: var(--fg-faint) !important;
+    color: var(--bg) !important;
+    filter: none !important;
+    cursor: not-allowed;
+    opacity: 0.75;
+    transform: none !important;
+  }
+  body[data-variant="cyber"] .btn.is-offline,
+  body[data-variant="cyber"] .btn.is-offline:hover {
+    background: var(--fg-faint) !important;
+    border-color: var(--fg-faint) !important;
+    color: var(--bg) !important;
+    filter: none !important;
+  }
 
   /* variant button shapes */
   body[data-variant="industrial"] .btn { border-radius: 0; }
@@ -1540,7 +1556,7 @@
         </p>
         <div class="hero-cta-group">
           <div class="hero-ctas">
-            <a href="tel:+447894550082" class="btn btn-primary">
+            <a href="tel:+447894550082" id="callGinBtn" class="btn btn-primary">
               <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
             </a>
             <a href="#contact" class="btn btn-ghost">
@@ -2362,9 +2378,18 @@
 
       const bookingAlert = document.getElementById('bookingAlert');
       const bookingAlertText = document.getElementById('bookingAlertText');
+      const callGinBtn = document.getElementById('callGinBtn');
+      const CALL_OFFLINE_TIP = 'Phone answered Mon\u2013Fri 09:00\u201318:00. Outside those hours please use the enquiry form below.';
       const PHONE_LINK = '<a href="tel:+447894550082">+44 7894 550 082</a>';
       const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
       const ALERT_CLOSED = '<span class="offline-tag">OFFLINE</span> To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;18:00';
+
+      // Block clicks when offline (keep href for accessibility, just preventDefault)
+      if (callGinBtn) {
+        callGinBtn.addEventListener('click', function(e) {
+          if (callGinBtn.classList.contains('is-offline')) e.preventDefault();
+        });
+      }
 
       function isPhoneOpen() {
         const now = new Date();
@@ -2384,6 +2409,16 @@
         const phoneOpen = isPhoneOpen();
         if (bookingAlertText) bookingAlertText.innerHTML = phoneOpen ? ALERT_OPEN : ALERT_CLOSED;
         if (bookingAlert) bookingAlert.classList.toggle('is-offline', !phoneOpen);
+        if (callGinBtn) {
+          callGinBtn.classList.toggle('is-offline', !phoneOpen);
+          if (phoneOpen) {
+            callGinBtn.removeAttribute('data-tip');
+            callGinBtn.removeAttribute('aria-disabled');
+          } else {
+            callGinBtn.setAttribute('data-tip', CALL_OFFLINE_TIP);
+            callGinBtn.setAttribute('aria-disabled', 'true');
+          }
+        }
       }
 
       render();
