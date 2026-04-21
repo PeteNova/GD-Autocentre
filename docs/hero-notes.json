@@ -1,0 +1,38 @@
+[
+  {
+    "id": "warriors-match",
+    "text": "Warriors vs Bears\n02 May 6pm\nRiverside\nMatch day!",
+    "label": "Game",
+    "color": "blue",
+    "x": 76.17918554816163,
+    "y": 14.837756761759078,
+    "w": 162.800048828125,
+    "h": 177.20001220703125,
+    "rotation": 1.8,
+    "expires_at": "2026-05-02"
+  },
+  {
+    "id": "gmo8waise",
+    "text": "Garage Closed 4 May\nBank Holiday",
+    "x": 54.176536831459984,
+    "y": 11.710927957630446,
+    "w": 175.20001220703125,
+    "h": 100,
+    "color": "pink",
+    "rotation": -1.7,
+    "label": "notice",
+    "expires_at": "2026-05-04"
+  },
+  {
+    "id": "gmo8x8ldn",
+    "text": "Gloucester Warriors training\nthis Saturday 6pm\nRiverside, entry £5\nCasual — all welcome!",
+    "x": 59.07773627279933,
+    "y": 36.7256646170377,
+    "w": 175.20001220703125,
+    "h": 190.39999389648438,
+    "color": "orange",
+    "rotation": 2.1,
+    "label": "basketball",
+    "expires_at": "2026-04-25"
+  }
+]

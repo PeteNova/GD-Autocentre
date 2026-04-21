@@ -1,0 +1,684 @@
+<!-- ══════════════════════════════════════════════════════════════════════
+     HERO-NOTES EDITOR MODULE
+     Spliced into tools/hero-editor.html by tools/build-editor.mjs,
+     turning a 1:1 copy of the live site into a visual sticky-note editor
+     for Gin. Public index.html never includes this module.
+
+     What it does (after the pinboard module has booted):
+       1. Seeds the editor from docs/hero-notes.json (live state) OR
+          from localStorage (WIP from Gin's previous session).
+       2. Injects a floating control panel (bottom-right).
+       3. Enables drag + resize on each .sticky.is-hero (not done in
+          public render — only in the editor).
+       4. Every change flows through GD_PINBOARD_API.setHeroNotes() so
+          the visible stickies always match the model.
+       5. Exports a pretty-printed JSON for Gin to paste into
+          docs/hero-notes.json on GitHub (pencil → commit).
+     ══════════════════════════════════════════════════════════════════════ -->
+<style>
+  /* Panel container — fixed bottom-right, collapsible, above everything. */
+  #hero-editor-panel {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 9999;
+    width: 320px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    background: rgba(24, 26, 32, 0.96);
+    color: #e9ecf3;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  #hero-editor-panel * { box-sizing: border-box; }
+  #hero-editor-panel.is-collapsed { max-height: 44px; overflow: hidden; }
+
+  .hep-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    user-select: none;
+  }
+  .hep-title {
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #ff8a3c;
+    font-size: 11px;
+  }
+  .hep-count {
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  .hep-toggle {
+    background: transparent; border: 0; color: #e9ecf3;
+    font-size: 14px; cursor: pointer; padding: 2px 6px;
+    line-height: 1;
+  }
+
+  .hep-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 10px; }
+
+  .hep-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .hep-btn {
+    flex: 1 0 auto;
+    padding: 6px 9px;
+    background: rgba(255,255,255,0.06);
+    color: #e9ecf3;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .hep-btn:hover { background: rgba(255,140,60,0.18); border-color: rgba(255,140,60,0.45); }
+  .hep-btn.is-primary { background: rgba(255,140,60,0.22); border-color: rgba(255,140,60,0.5); color: #ffe0cc; }
+  .hep-btn.is-danger:hover { background: rgba(200,60,60,0.22); border-color: rgba(200,60,60,0.5); color: #ffdcdc; }
+  .hep-btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+  .hep-field { display: flex; flex-direction: column; gap: 4px; }
+  .hep-label {
+    font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .hep-input, .hep-textarea, .hep-number {
+    width: 100%;
+    padding: 5px 7px;
+    background: rgba(255,255,255,0.05);
+    color: #e9ecf3;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    font: inherit;
+  }
+  .hep-textarea { min-height: 54px; resize: vertical; font-family: 'Caveat', cursive; font-size: 16px; line-height: 1.3; color: #2a2010; background: #fff59d; }
+  .hep-number { width: 72px; }
+  .hep-pair { display: flex; gap: 6px; }
+
+  .hep-colors { display: flex; gap: 6px; }
+  .hep-color {
+    width: 22px; height: 22px; border-radius: 4px;
+    border: 2px solid rgba(255,255,255,0.12);
+    cursor: pointer;
+    transition: transform .12s ease, border-color .12s ease;
+  }
+  .hep-color.is-active { border-color: #fff; transform: scale(1.1); }
+  .hep-color[data-c="yellow"] { background: #fff59d; }
+  .hep-color[data-c="orange"] { background: #ffcc80; }
+  .hep-color[data-c="pink"]   { background: #f8bbd0; }
+  .hep-color[data-c="blue"]   { background: #b3e5fc; }
+  .hep-color[data-c="green"]  { background: #c8e6c9; }
+
+  .hep-range { width: 100%; }
+
+  .hep-empty { color: rgba(255,255,255,0.5); font-style: italic; padding: 4px 0; }
+
+  .hep-json {
+    width: 100%;
+    min-height: 90px;
+    max-height: 160px;
+    padding: 6px 8px;
+    background: rgba(0,0,0,0.35);
+    color: #c5d5ff;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 3px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 10px;
+    line-height: 1.4;
+    resize: vertical;
+    white-space: pre;
+    overflow: auto;
+  }
+
+  .hep-hint { font-size: 10px; color: rgba(255,255,255,0.42); line-height: 1.4; }
+
+  /* Selected sticky gets an outlined glow so Gin knows which one he's editing. */
+  .sticky.is-hero.is-editor-selected {
+    outline: 2px solid #ff8a3c !important;
+    outline-offset: 3px;
+    z-index: 5;
+  }
+
+  /* Editor-only resize corner, added to every hero sticky in edit mode. */
+  .sticky.is-hero .sticky-edit-resize {
+    position: absolute; right: 0; bottom: 0;
+    width: 16px; height: 16px;
+    cursor: nwse-resize;
+    z-index: 4;
+    touch-action: none;
+    background: linear-gradient(135deg,
+      transparent 0%, transparent 55%,
+      rgba(0,0,0,0.32) 56%, rgba(0,0,0,0.32) 62%,
+      transparent 63%, transparent 72%,
+      rgba(0,0,0,0.32) 73%, rgba(0,0,0,0.32) 79%,
+      transparent 80%);
+  }
+
+  .sticky.is-hero { cursor: grab; }
+  .sticky.is-hero.is-editor-dragging { cursor: grabbing; transition: none !important; }
+  .sticky.is-hero.is-editor-resizing { transition: none !important; }
+
+  /* On mobile the layout falls back to the pinboard column — editing
+     freeform positions doesn't make sense there. */
+  @media (max-width: 900px) {
+    #hero-editor-panel .hep-mobile-warn { display: block; }
+    #hero-editor-panel .hep-field-x, #hero-editor-panel .hep-field-y { display: none; }
+  }
+  .hep-mobile-warn {
+    display: none;
+    padding: 8px 10px;
+    background: rgba(255,140,60,0.12);
+    border: 1px solid rgba(255,140,60,0.35);
+    border-radius: 4px;
+    color: #ffd0a8;
+    font-size: 10.5px;
+    line-height: 1.4;
+  }
+</style>
+
+<div id="hero-editor-panel" role="dialog" aria-label="Hero-notes editor">
+  <div class="hep-head" id="hepHead">
+    <span class="hep-title">Hero editor <span class="hep-count" id="hepCount">(0)</span></span>
+    <button class="hep-toggle" id="hepToggle" type="button" aria-label="Collapse">–</button>
+  </div>
+  <div class="hep-body">
+    <div class="hep-mobile-warn">
+      Editor works best on desktop (≥901 px). Positions are ignored on
+      mobile so stickies fold into the top-right column.
+    </div>
+
+    <div class="hep-row">
+      <button class="hep-btn is-primary" id="hepAdd" type="button">+ Add sticky</button>
+      <button class="hep-btn is-danger" id="hepDelete" type="button" disabled>Delete selected</button>
+    </div>
+
+    <div class="hep-empty" id="hepEmpty">No sticky selected. Click a sticky on the page, or add one.</div>
+
+    <div class="hep-field" id="hepTextField" style="display:none;">
+      <span class="hep-label">Text</span>
+      <textarea class="hep-textarea" id="hepText" rows="3" placeholder="Write the note…"></textarea>
+    </div>
+
+    <div class="hep-field" id="hepLabelField" style="display:none;">
+      <span class="hep-label">Red-tape label (optional)</span>
+      <input class="hep-input" id="hepLabelInput" type="text" placeholder="From Gin" maxlength="24">
+    </div>
+
+    <div class="hep-field" id="hepColorField" style="display:none;">
+      <span class="hep-label">Colour</span>
+      <div class="hep-colors" id="hepColors">
+        <div class="hep-color" data-c="yellow" title="Yellow"></div>
+        <div class="hep-color" data-c="orange" title="Orange"></div>
+        <div class="hep-color" data-c="pink"   title="Pink"></div>
+        <div class="hep-color" data-c="blue"   title="Blue"></div>
+        <div class="hep-color" data-c="green"  title="Green"></div>
+      </div>
+    </div>
+
+    <div class="hep-field" id="hepRotField" style="display:none;">
+      <span class="hep-label">Rotation <span id="hepRotVal">0.0°</span></span>
+      <input class="hep-range" id="hepRot" type="range" min="-6" max="6" step="0.1" value="0">
+    </div>
+
+    <div class="hep-field" id="hepExpiryField" style="display:none;">
+      <span class="hep-label">Expires (optional)</span>
+      <input class="hep-input" id="hepExpiry" type="date">
+      <span class="hep-hint" style="font-size:9px;margin-top:4px;">Leave blank = always on. Sticky disappears after midnight on this date.</span>
+    </div>
+
+    <div class="hep-row" id="hepSizeField" style="display:none;">
+      <div class="hep-field" style="flex:1;">
+        <span class="hep-label">Width (px)</span>
+        <input class="hep-number" id="hepW" type="number" min="140" max="400" step="1">
+      </div>
+      <div class="hep-field" style="flex:1;">
+        <span class="hep-label">Height (px)</span>
+        <input class="hep-number" id="hepH" type="number" min="100" max="400" step="1">
+      </div>
+    </div>
+
+    <div class="hep-row" id="hepPosField" style="display:none;">
+      <div class="hep-field hep-field-x" style="flex:1;">
+        <span class="hep-label">X (%)</span>
+        <input class="hep-number" id="hepX" type="number" min="0" max="100" step="0.1">
+      </div>
+      <div class="hep-field hep-field-y" style="flex:1;">
+        <span class="hep-label">Y (%)</span>
+        <input class="hep-number" id="hepY" type="number" min="0" max="100" step="0.1">
+      </div>
+    </div>
+
+    <div class="hep-field">
+      <span class="hep-label">JSON output</span>
+      <textarea class="hep-json" id="hepJson" readonly></textarea>
+    </div>
+
+    <div class="hep-row">
+      <button class="hep-btn is-primary" id="hepCopy" type="button">Copy to clipboard</button>
+      <button class="hep-btn" id="hepDownload" type="button">Download JSON</button>
+    </div>
+    <div class="hep-row">
+      <button class="hep-btn" id="hepImport" type="button">Import JSON…</button>
+      <button class="hep-btn is-danger" id="hepReset" type="button">Reset all</button>
+    </div>
+
+    <div class="hep-hint">
+      Drag a sticky to reposition. Drag bottom-right corner to resize.
+      Paste the JSON into <code>docs/hero-notes.json</code> on GitHub,
+      commit, wait ~30 s, hard-reload the live site.
+    </div>
+  </div>
+</div>
+
+<script>
+(function heroEditorModule() {
+  const WIP_KEY = 'gd_hero_editor_wip';
+  const HERO_URL = 'docs/hero-notes.json';
+
+  // Wait for the main pinboard module to expose its API.
+  function waitForApi(cb, tries) {
+    tries = tries || 0;
+    if (window.GD_PINBOARD_API && typeof window.GD_PINBOARD_API.setHeroNotes === 'function') {
+      cb(window.GD_PINBOARD_API);
+    } else if (tries < 200) {
+      requestAnimationFrame(function() { waitForApi(cb, tries + 1); });
+    } else {
+      console.warn('[hero-editor] GD_PINBOARD_API never appeared — editor disabled.');
+    }
+  }
+
+  waitForApi(function(API) {
+    const heroNotesEl = document.getElementById('heroNotes');
+    const pinboardEl  = document.getElementById('pinboard');
+
+    let notes = [];
+    let selectedId = null;
+
+    // Panel wiring — must be defined BEFORE any function that uses hep.
+    const hep = {
+      count:    document.getElementById('hepCount'),
+      empty:    document.getElementById('hepEmpty'),
+      textF:    document.getElementById('hepTextField'),
+      text:     document.getElementById('hepText'),
+      labelF:   document.getElementById('hepLabelField'),
+      labelIn:  document.getElementById('hepLabelInput'),
+      colorF:   document.getElementById('hepColorField'),
+      colors:   document.getElementById('hepColors'),
+      rotF:     document.getElementById('hepRotField'),
+      rot:      document.getElementById('hepRot'),
+      rotVal:   document.getElementById('hepRotVal'),
+      sizeF:    document.getElementById('hepSizeField'),
+      w:        document.getElementById('hepW'),
+      h:        document.getElementById('hepH'),
+      posF:     document.getElementById('hepPosField'),
+      x:        document.getElementById('hepX'),
+      y:        document.getElementById('hepY'),
+      expiryF:  document.getElementById('hepExpiryField'),
+      expiry:   document.getElementById('hepExpiry'),
+      json:     document.getElementById('hepJson'),
+      add:      document.getElementById('hepAdd'),
+      del:      document.getElementById('hepDelete'),
+      copy:     document.getElementById('hepCopy'),
+      download: document.getElementById('hepDownload'),
+      import_:  document.getElementById('hepImport'),
+      reset:    document.getElementById('hepReset'),
+      head:     document.getElementById('hepHead'),
+      toggle:   document.getElementById('hepToggle'),
+      panel:    document.getElementById('hero-editor-panel')
+    };
+
+    // Prefer WIP (Gin's in-progress layout); else bootstrap from live JSON.
+    const wip = loadWip();
+    if (wip && Array.isArray(wip)) {
+      notes = wip;
+      pushToPage();
+    } else {
+      fetch(HERO_URL + '?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(r) { return r.ok ? r.json() : []; })
+        .then(function(data) {
+          if (Array.isArray(data)) { notes = data; pushToPage(); }
+          else { notes = []; pushToPage(); }
+        })
+        .catch(function() { notes = []; pushToPage(); });
+    }
+
+    function loadWip() {
+      try {
+        const raw = localStorage.getItem(WIP_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch { return null; }
+    }
+    function saveWip() {
+      try { localStorage.setItem(WIP_KEY, JSON.stringify(notes)); } catch {}
+    }
+
+    // Push current notes into the page model. Triggers a re-render from the
+    // public pinboard module, then we re-attach editor handles.
+    function pushToPage() {
+      API.setHeroNotes(notes);
+      saveWip();
+      attachEditorHandles();
+      refreshPanel();
+    }
+
+    function findNote(id) {
+      for (let i = 0; i < notes.length; i++) if (notes[i].id === id) return notes[i];
+      return null;
+    }
+
+    // ——— Editor handles: drag + resize + select — applied after every render.
+
+    function attachEditorHandles() {
+      const stickies = document.querySelectorAll('.sticky.is-hero');
+      stickies.forEach(function(el) {
+        if (el.__editorReady) return; // paranoia; re-render clears the node anyway
+        el.__editorReady = true;
+
+        // Ensure the resize handle exists. (Public render doesn't add one.)
+        let resize = el.querySelector('.sticky-edit-resize');
+        if (!resize) {
+          resize = document.createElement('div');
+          resize.className = 'sticky-edit-resize';
+          resize.title = 'Drag to resize';
+          el.appendChild(resize);
+        }
+
+        el.addEventListener('click', function(e) {
+          if (e.target === resize) return; // don't select when grabbing corner
+          const id = el.dataset.id;
+          if (id) selectNote(id);
+        });
+
+        attachDrag(el);
+        attachResize(el, resize);
+      });
+    }
+
+    function attachDrag(el) {
+      let dragging = false;
+      let startX = 0, startY = 0, startNoteX = 0, startNoteY = 0;
+
+      el.addEventListener('pointerdown', function(e) {
+        if (e.target.classList.contains('sticky-edit-resize')) return;
+        if (e.button !== undefined && e.button !== 0) return;
+        const note = findNote(el.dataset.id);
+        if (!note) return;
+        selectNote(note.id);
+        startX = e.clientX; startY = e.clientY;
+        startNoteX = note.x; startNoteY = note.y;
+        dragging = true;
+        el.classList.add('is-editor-dragging');
+        el.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      el.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        const note = findNote(el.dataset.id);
+        if (!note) return;
+        const host = heroNotesEl && heroNotesEl.offsetWidth > 0 ? heroNotesEl : el.parentElement;
+        const hostW = host.offsetWidth || 1;
+        const hostH = host.offsetHeight || 1;
+        const dxPct = ((e.clientX - startX) / hostW) * 100;
+        const dyPct = ((e.clientY - startY) / hostH) * 100;
+        note.x = Math.max(0, Math.min(100, startNoteX + dxPct));
+        note.y = Math.max(0, Math.min(100, startNoteY + dyPct));
+        el.style.left = note.x + '%';
+        el.style.top  = note.y + '%';
+        refreshPanelValuesOnly();
+      });
+
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove('is-editor-dragging');
+        try { el.releasePointerCapture(e.pointerId); } catch {}
+        saveWip();
+        refreshJson();
+      }
+      el.addEventListener('pointerup', endDrag);
+      el.addEventListener('pointercancel', endDrag);
+    }
+
+    function attachResize(el, handle) {
+      let resizing = false;
+      let startX = 0, startY = 0, startW = 0, startH = 0;
+
+      handle.addEventListener('pointerdown', function(e) {
+        if (e.button !== undefined && e.button !== 0) return;
+        const note = findNote(el.dataset.id);
+        if (!note) return;
+        selectNote(note.id);
+        startX = e.clientX; startY = e.clientY;
+        startW = note.w; startH = note.h;
+        resizing = true;
+        el.classList.add('is-editor-resizing');
+        handle.setPointerCapture(e.pointerId);
+        e.stopPropagation();
+        e.preventDefault();
+      });
+
+      handle.addEventListener('pointermove', function(e) {
+        if (!resizing) return;
+        const note = findNote(el.dataset.id);
+        if (!note) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        note.w = Math.max(140, Math.min(400, startW + dx));
+        note.h = Math.max(100, Math.min(400, startH + dy));
+        el.style.width  = note.w + 'px';
+        el.style.height = note.h + 'px';
+        refreshPanelValuesOnly();
+      });
+
+      function endResize(e) {
+        if (!resizing) return;
+        resizing = false;
+        el.classList.remove('is-editor-resizing');
+        try { handle.releasePointerCapture(e.pointerId); } catch {}
+        saveWip();
+        refreshJson();
+      }
+      handle.addEventListener('pointerup', endResize);
+      handle.addEventListener('pointercancel', endResize);
+    }
+
+    // ——— Selection.
+
+    function selectNote(id) {
+      selectedId = id;
+      document.querySelectorAll('.sticky.is-hero').forEach(function(el) {
+        el.classList.toggle('is-editor-selected', el.dataset.id === id);
+      });
+      refreshPanel();
+    }
+
+    // ——— Panel event wiring (hep object already defined above).
+
+    function refreshPanel() {
+      hep.count.textContent = '(' + notes.length + ')';
+      const sel = selectedId ? findNote(selectedId) : null;
+      const show = sel ? '' : 'none';
+      ['textF','labelF','colorF','rotF','sizeF','posF','expiryF'].forEach(function(k) {
+        hep[k].style.display = show;
+      });
+      hep.empty.style.display = sel ? 'none' : '';
+      hep.del.disabled = !sel;
+
+      if (sel) {
+        hep.text.value     = sel.text || '';
+        hep.labelIn.value  = sel.label || '';
+        hep.rot.value      = typeof sel.rotation === 'number' ? sel.rotation : 0;
+        hep.rotVal.textContent = Number(hep.rot.value).toFixed(1) + '°';
+        hep.w.value        = Math.round(sel.w);
+        hep.h.value        = Math.round(sel.h);
+        hep.x.value        = sel.x.toFixed(1);
+        hep.y.value        = sel.y.toFixed(1);
+        hep.expiry.value   = sel.expires_at || '';
+        const color = sel.color || 'yellow';
+        hep.colors.querySelectorAll('.hep-color').forEach(function(c) {
+          c.classList.toggle('is-active', c.dataset.c === color);
+        });
+      }
+      refreshJson();
+    }
+
+    function refreshPanelValuesOnly() {
+      const sel = selectedId ? findNote(selectedId) : null;
+      if (!sel) return;
+      hep.w.value = Math.round(sel.w);
+      hep.h.value = Math.round(sel.h);
+      hep.x.value = sel.x.toFixed(1);
+      hep.y.value = sel.y.toFixed(1);
+    }
+
+    function refreshJson() {
+      hep.json.value = JSON.stringify(notes, null, 2);
+    }
+
+    function mutateSelected(mutator) {
+      const sel = selectedId ? findNote(selectedId) : null;
+      if (!sel) return;
+      mutator(sel);
+      pushToPage();
+      selectNote(selectedId); // re-select after re-render (new DOM nodes)
+    }
+
+    // Field events.
+    hep.text.addEventListener('input', function() {
+      mutateSelected(function(n) { n.text = hep.text.value; });
+    });
+    hep.labelIn.addEventListener('input', function() {
+      mutateSelected(function(n) { n.label = hep.labelIn.value; });
+    });
+    hep.rot.addEventListener('input', function() {
+      const v = parseFloat(hep.rot.value) || 0;
+      hep.rotVal.textContent = v.toFixed(1) + '°';
+      mutateSelected(function(n) { n.rotation = v; });
+    });
+    hep.w.addEventListener('input', function() {
+      const v = parseInt(hep.w.value, 10);
+      if (!isNaN(v)) mutateSelected(function(n) { n.w = Math.max(140, Math.min(400, v)); });
+    });
+    hep.h.addEventListener('input', function() {
+      const v = parseInt(hep.h.value, 10);
+      if (!isNaN(v)) mutateSelected(function(n) { n.h = Math.max(100, Math.min(400, v)); });
+    });
+    hep.x.addEventListener('input', function() {
+      const v = parseFloat(hep.x.value);
+      if (!isNaN(v)) mutateSelected(function(n) { n.x = Math.max(0, Math.min(100, v)); });
+    });
+    hep.y.addEventListener('input', function() {
+      const v = parseFloat(hep.y.value);
+      if (!isNaN(v)) mutateSelected(function(n) { n.y = Math.max(0, Math.min(100, v)); });
+    });
+    hep.colors.addEventListener('click', function(e) {
+      const chip = e.target.closest('.hep-color');
+      if (!chip) return;
+      const c = chip.dataset.c;
+      mutateSelected(function(n) { n.color = c; });
+    });
+    hep.expiry.addEventListener('change', function() {
+      const v = hep.expiry.value || null;
+      mutateSelected(function(n) { n.expires_at = v; });
+    });
+
+    // Add / delete / export / import / reset.
+    hep.add.addEventListener('click', function() {
+      const id = 'g' + Date.now().toString(36);
+      notes.push({
+        id: id,
+        text: 'New note',
+        x: 40, y: 30,
+        w: 200, h: 140,
+        color: 'yellow',
+        rotation: (Math.random() * 4) - 2,
+        label: ''
+      });
+      pushToPage();
+      selectNote(id);
+    });
+    hep.del.addEventListener('click', function() {
+      if (!selectedId) return;
+      notes = notes.filter(function(n) { return n.id !== selectedId; });
+      selectedId = null;
+      pushToPage();
+    });
+    hep.copy.addEventListener('click', function() {
+      const text = JSON.stringify(notes, null, 2);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          flashBtn(hep.copy, 'Copied!');
+        }).catch(function() { fallbackCopy(text); });
+      } else { fallbackCopy(text); }
+    });
+    hep.download.addEventListener('click', function() {
+      const blob = new Blob([JSON.stringify(notes, null, 2) + '\n'], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'hero-notes.json';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    });
+    hep.import_.addEventListener('click', function() {
+      const txt = prompt('Paste hero-notes JSON:');
+      if (!txt) return;
+      try {
+        const parsed = JSON.parse(txt);
+        if (!Array.isArray(parsed)) throw new Error('not an array');
+        notes = parsed.filter(function(n) {
+          return n && typeof n.text === 'string'
+            && typeof n.x === 'number' && typeof n.y === 'number'
+            && typeof n.w === 'number' && typeof n.h === 'number';
+        });
+        selectedId = null;
+        pushToPage();
+      } catch (e) {
+        alert('Import failed: ' + e.message);
+      }
+    });
+    hep.reset.addEventListener('click', function() {
+      if (!confirm('Clear ALL hero-notes? (Doesn\u2019t affect the live site until you paste & commit.)')) return;
+      notes = [];
+      selectedId = null;
+      pushToPage();
+    });
+
+    // Collapse / expand.
+    function toggleCollapse() {
+      hep.panel.classList.toggle('is-collapsed');
+      hep.toggle.textContent = hep.panel.classList.contains('is-collapsed') ? '+' : '–';
+    }
+    hep.head.addEventListener('click', function(e) {
+      if (e.target === hep.toggle || e.target.closest('.hep-toggle')) return;
+      toggleCollapse();
+    });
+    hep.toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleCollapse();
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.top = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); flashBtn(hep.copy, 'Copied!'); }
+      catch { flashBtn(hep.copy, 'Copy failed'); }
+      document.body.removeChild(ta);
+    }
+    function flashBtn(btn, msg) {
+      const orig = btn.textContent;
+      btn.textContent = msg;
+      setTimeout(function() { btn.textContent = orig; }, 1200);
+    }
+  });
+})();
+</script>
