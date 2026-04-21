@@ -762,9 +762,61 @@
   }
   .pinboard.is-dragging .sticky-drag { cursor: grabbing; }
   @media (max-width: 900px) {
-    /* Sticky notes are desktop-only. Hide the whole pinboard on mobile
-       (hero-notes AND any legacy user-notes). */
-    .pinboard { display: none !important; }
+    /* Mobile: sticky notes are OFF by default. The pinboard only shows
+       hero-notes explicitly opted-in via visible_on_mobile:true (and not
+       yet dismissed by the visitor). If there's nothing to show,
+       render() adds .is-empty-mobile and we hide the whole column. */
+    .pinboard {
+      right: 12px;
+      width: auto;
+      gap: 10px;
+    }
+    .pinboard.is-empty-mobile { display: none !important; }
+    /* Swap the desktop tape for a 📌 emoji pin on mobile hero-stickies.
+       The emoji itself is a child element (.sticky-pin) — we just need
+       to suppress the tape pseudos here. */
+    .pinboard .sticky.is-hero::before,
+    .pinboard .sticky.is-hero::after { display: none !important; }
+    .pinboard .sticky.is-hero { padding-top: 22px; /* room for pin + close */ }
+    .sticky-pin {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
+      z-index: 2;
+    }
+    .sticky-close {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.08);
+      color: #2a2010;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 4;
+      transition: background 150ms ease;
+    }
+    .sticky-close:hover,
+    .sticky-close:focus-visible { background: rgba(0,0,0,0.18); outline: none; }
+  }
+  /* On desktop the close button and emoji pin never appear. */
+  @media (min-width: 901px) {
+    .sticky-close, .sticky-pin { display: none !important; }
   }
   .sticky {
     width: 200px;
@@ -2984,12 +3036,32 @@
 
     const STORAGE_KEY = 'gd_user_notes';
     const POS_KEY = 'gd_pinboard_pos';
+    const DISMISSED_KEY = 'gd_dismissed_hero_notes'; // mobile: ids the visitor has closed
     const MAX_USER_NOTES = 2;
     const HERO_NOTES_URL = 'docs/hero-notes.json';
 
     let heroNotes = [];              // from docs/hero-notes.json — public to all visitors
     let userNotes = loadUserNotes();
+    let dismissedIds = loadDismissed();
     let customPos = loadPos(); // {left, top} in px, or null = default top-right
+
+    function loadDismissed() {
+      try {
+        const raw = localStorage.getItem(DISMISSED_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter(x => typeof x === 'string') : [];
+      } catch { return []; }
+    }
+    function saveDismissed() {
+      try { localStorage.setItem(DISMISSED_KEY, JSON.stringify(dismissedIds)); } catch {}
+    }
+    function dismissHeroNote(id) {
+      if (!id) return;
+      if (dismissedIds.indexOf(id) === -1) dismissedIds.push(id);
+      saveDismissed();
+      render();
+    }
 
     function loadPos() {
       try {
@@ -3146,6 +3218,27 @@
 
       el.appendChild(label);
       el.appendChild(body);
+
+      // Mobile extras: 📌 pin emoji on top, × close button top-right.
+      // CSS hides these on desktop so we can append unconditionally.
+      if (!freeform) {
+        const pin = document.createElement('div');
+        pin.className = 'sticky-pin';
+        pin.setAttribute('aria-hidden', 'true');
+        pin.textContent = '📌';
+        el.appendChild(pin);
+
+        const close = document.createElement('button');
+        close.className = 'sticky-close';
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Dismiss this note');
+        close.title = 'Dismiss';
+        close.textContent = '\u00D7';
+        close.addEventListener('click', function() {
+          dismissHeroNote(note.id);
+        });
+        el.appendChild(close);
+      }
       return el;
     }
 
@@ -3155,16 +3248,32 @@
 
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
 
-      // B: Gin's hero-notes — desktop-only freeform overlay.
-      // Sticky notes don't render on mobile at all (pinboard is hidden
-      // via CSS and we skip rendering here too so no hidden DOM churn).
-      // Filter out any notes that have expired (optional expires_at field).
-      if (freeform) {
-        heroNotes.forEach(function(note) {
-          if (!isNotExpired(note)) return; // skip expired notes
-          const el = buildHeroSticky(note, true);
-          heroNotesEl.appendChild(el);
-        });
+      // B: Gin's hero-notes.
+      //   Desktop: freeform overlay inside .hero, all non-expired notes.
+      //   Mobile:  pinboard column, ONLY notes with visible_on_mobile:true
+      //            that the visitor hasn't dismissed yet (× button).
+      //            Pin emoji + close button get appended by buildHeroSticky.
+      let mobileRendered = 0;
+      heroNotes.forEach(function(note) {
+        if (!isNotExpired(note)) return; // skip expired notes
+        if (freeform) {
+          heroNotesEl.appendChild(buildHeroSticky(note, true));
+        } else {
+          if (!note.visible_on_mobile) return;
+          if (note.id && dismissedIds.indexOf(note.id) !== -1) return;
+          pinboard.appendChild(buildHeroSticky(note, false));
+          mobileRendered++;
+        }
+      });
+
+      // On mobile, hide the pinboard entirely if nothing survived the
+      // opt-in + dismissed filters. (Also hides it when legacy user-notes
+      // are absent, which is the normal case now that Add Note is gone.)
+      if (!freeform) {
+        const hasAnything = mobileRendered > 0 || userNotes.length > 0;
+        pinboard.classList.toggle('is-empty-mobile', !hasAnything);
+      } else {
+        pinboard.classList.remove('is-empty-mobile');
       }
 
       // A: user notes
