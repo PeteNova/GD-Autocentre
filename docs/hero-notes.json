@@ -21,7 +21,8 @@
     "color": "pink",
     "rotation": -1.7,
     "label": "notice",
-    "expires_at": "2026-05-04"
+    "expires_at": "2026-05-04",
+    "visible_on_mobile": true
   },
   {
     "id": "gmo8x8ldn",
