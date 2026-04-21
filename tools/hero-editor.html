@@ -730,6 +730,40 @@
 
   .hero-marks { display: none; }
 
+  /* Mobile announcements toggle button */
+  .pinboard-toggle {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 99;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pinboard-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+  .pinboard-toggle-icon { font-size: 16px; }
+  .pinboard-toggle-count { background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+
+  /* Mobile pinboard toggle states */
+  @media (max-width: 900px) {
+    .pinboard.is-hidden-mobile { max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; transition: all 200ms ease; }
+    .pinboard.is-shown-mobile { max-height: 80vh; opacity: 1; overflow-y: auto; pointer-events: auto; }
+  }
+
   /* ═══════════ PINBOARD (sticky notes) ═══════════
      A) Visitor personal notes — localStorage, yellow, editable/deletable,
         live in #pinboard (fixed top-right column).
@@ -2609,6 +2643,11 @@
 
 <!-- Sticky notes pinboard — body-level so nothing affects its fixed positioning.
      MUST be before the main <script> so pinboardModule can find it on run. -->
+<button class="pinboard-toggle" id="pinboardToggle" type="button" aria-label="Toggle announcements" style="display:none;">
+  <span class="pinboard-toggle-icon">📌</span>
+  <span class="pinboard-toggle-label">Aktualności</span>
+  <span class="pinboard-toggle-count" id="pinboardCount"></span>
+</button>
 <div class="pinboard" id="pinboard" aria-label="Sticky notes"></div>
 
 <script>
@@ -3275,8 +3314,33 @@
         }
       });
 
+      // Update mobile toggle button — show count of announcements (mobile-visible notes)
+      const mobileToggle = document.getElementById('pinboardToggle');
+      const mobileCount = heroNotes.filter(n => isNotExpired(n) && n.visible_on_mobile).length;
+      const isMobile = window.innerWidth <= 900;
+      if (mobileToggle) {
+        mobileToggle.style.display = isMobile && mobileCount > 0 ? 'flex' : 'none';
+        document.getElementById('pinboardCount').textContent = '(' + mobileCount + ')';
+        // On mobile, hide pinboard by default (only show when toggle clicked)
+        if (isMobile) pinboard.classList.add('is-hidden-mobile');
+      }
     }
     // "Add note" button removed — Gin's hero-notes only.
+
+    // Mobile announcements toggle
+    const mobileToggle = document.getElementById('pinboardToggle');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        pinboard.classList.toggle('is-hidden-mobile');
+        pinboard.classList.toggle('is-shown-mobile');
+      });
+    }
+    // On window resize, recompute toggle visibility
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() { render(); }, 100);
+    });
 
     function addNote() {
       if (userNotes.length >= MAX_USER_NOTES) return;
