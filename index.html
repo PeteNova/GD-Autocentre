@@ -808,25 +808,44 @@
       gap: 10px;
     }
     /* Mobile hero-stickies — swap tape for a pushpin at top-center.
-       Kills every tape variant (1–6, ::before + ::after) and draws a
-       single red pin head via ::before. Otherwise the sticky looks
-       identical to desktop. */
-    .pinboard .sticky.is-hero::after { display: none !important; }
+       ::before = pin head (red sphere with specular highlight + deep
+       shadow for 3D). ::after = small dark shadow on the paper where
+       the pin enters, selling the "pinned" effect. Otherwise the
+       sticky is identical to desktop. */
     .pinboard .sticky.is-hero::before {
       display: block !important;
-      top: -7px;
+      top: -11px;
       left: 50%;
       right: auto;
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       padding: 0;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ff6a6a 0%, #c62828 55%, #7a1414 100%);
+      /* Layered gradients: sharp white specular highlight on top of a
+         red sphere gradient. Gives the pin a convex, glossy feel. */
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 8%, rgba(255,255,255,0) 22%),
+        radial-gradient(circle at 50% 50%, #ee4747 0%, #c62828 55%, #7a1414 92%, #4a0a0a 100%);
       box-shadow:
-        0 2px 3px rgba(0,0,0,0.45),
-        inset -1px -1px 2px rgba(0,0,0,0.35),
-        inset 1px 1px 2px rgba(255,255,255,0.5);
+        0 4px 6px rgba(0,0,0,0.5),
+        0 1px 2px rgba(0,0,0,0.35),
+        inset -2px -3px 4px rgba(0,0,0,0.35);
       transform: translateX(-50%);
+    }
+    .pinboard .sticky.is-hero::after {
+      display: block !important;
+      content: "";
+      top: 3px;
+      left: 50%;
+      right: auto;
+      width: 8px;
+      height: 4px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      box-shadow: none;
+      transform: translateX(-50%);
+      filter: blur(1.5px);
     }
   }
   .sticky {
