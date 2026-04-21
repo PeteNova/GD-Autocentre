@@ -233,6 +233,14 @@
       <span class="hep-hint" style="font-size:9px;margin-top:4px;">Leave blank = always on. Sticky disappears after midnight on this date.</span>
     </div>
 
+    <div class="hep-field" id="hepMobileField" style="display:none;">
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+        <input type="checkbox" id="hepMobileCheck" style="width:16px; height:16px; cursor:pointer;">
+        <span class="hep-label" style="margin:0;">Show on mobile (aktualności)</span>
+      </label>
+      <span class="hep-hint" style="font-size:9px;margin-top:4px;">Ważne ogłoszenia dla użytkowników mobile.</span>
+    </div>
+
     <div class="hep-row" id="hepSizeField" style="display:none;">
       <div class="hep-field" style="flex:1;">
         <span class="hep-label">Width (px)</span>
@@ -322,6 +330,8 @@
       y:        document.getElementById('hepY'),
       expiryF:  document.getElementById('hepExpiryField'),
       expiry:   document.getElementById('hepExpiry'),
+      mobileF:  document.getElementById('hepMobileField'),
+      mobile:   document.getElementById('hepMobileCheck'),
       json:     document.getElementById('hepJson'),
       add:      document.getElementById('hepAdd'),
       del:      document.getElementById('hepDelete'),
@@ -506,7 +516,7 @@
       hep.count.textContent = '(' + notes.length + ')';
       const sel = selectedId ? findNote(selectedId) : null;
       const show = sel ? '' : 'none';
-      ['textF','labelF','colorF','rotF','sizeF','posF','expiryF'].forEach(function(k) {
+      ['textF','labelF','colorF','rotF','sizeF','posF','expiryF','mobileF'].forEach(function(k) {
         hep[k].style.display = show;
       });
       hep.empty.style.display = sel ? 'none' : '';
@@ -522,6 +532,7 @@
         hep.x.value        = sel.x.toFixed(1);
         hep.y.value        = sel.y.toFixed(1);
         hep.expiry.value   = sel.expires_at || '';
+        hep.mobile.checked = !!sel.visible_on_mobile;
         const color = sel.color || 'yellow';
         hep.colors.querySelectorAll('.hep-color').forEach(function(c) {
           c.classList.toggle('is-active', c.dataset.c === color);
@@ -588,6 +599,10 @@
     hep.expiry.addEventListener('change', function() {
       const v = hep.expiry.value || null;
       mutateSelected(function(n) { n.expires_at = v; });
+    });
+    hep.mobile.addEventListener('change', function() {
+      const v = hep.mobile.checked;
+      mutateSelected(function(n) { n.visible_on_mobile = v; });
     });
 
     // Add / delete / export / import / reset.

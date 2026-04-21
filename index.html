@@ -3156,8 +3156,10 @@
 
       // B: Gin's hero-notes — freeform overlay on desktop, folded into pinboard on mobile.
       // Filter out any notes that have expired (optional expires_at field).
+      // On mobile, only show notes explicitly marked visible_on_mobile.
       heroNotes.forEach(function(note) {
         if (!isNotExpired(note)) return; // skip expired notes
+        if (!freeform && !note.visible_on_mobile) return; // on mobile, skip notes not marked visible
         const el = buildHeroSticky(note, freeform);
         if (freeform) heroNotesEl.appendChild(el);
         else pinboard.appendChild(el);
