@@ -792,27 +792,28 @@
     .sticky-close {
       position: absolute;
       top: 4px;
-      right: 4px;
+      right: 6px;
       width: 22px;
       height: 22px;
       padding: 0;
       border: 0;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.08);
+      border-radius: 0;
+      background: transparent;
       color: #2a2010;
       font-family: inherit;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 500;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      opacity: 0.55;
       z-index: 4;
-      transition: background 150ms ease;
+      transition: opacity 150ms ease;
     }
     .sticky-close:hover,
-    .sticky-close:focus-visible { background: rgba(0,0,0,0.18); outline: none; }
+    .sticky-close:focus-visible { opacity: 1; outline: none; }
   }
   /* On desktop the close button and emoji pin never appear. */
   @media (min-width: 901px) {
