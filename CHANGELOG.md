@@ -11,33 +11,34 @@ Full narrative history lives in `../gd-data/roadmap.json` → `sessions[]`.
 
 ### Added
 - JSON-driven freeform hero pinboard (`docs/hero-notes.json` → `window.GD_PINBOARD_API`). Multiple stickies, each with position %, size px, colour, rotation, label, text. Empty array = no hero stickies (backwards-compatible).
-- Hero notes renderer in `index.html`: desktop absolute overlay `#heroNotes` inside `.hero`, mobile folds into existing `#pinboard` column. Resize listener handles breakpoint crossings.
+- Hero notes renderer in `index.html`: desktop absolute overlay `#heroNotes` inside `.hero`. Resize listener re-renders on breakpoint crossings.
 - Five sticky colour variants (yellow/orange/pink/blue/green) + wobble rotation + drop-shadow.
 - **Six tape variations** (`applyTape()`) distributed via deterministic hash of note `id`, so visual placement stays stable across re-renders. 35% v1, 15% each v2–v6.
-- **Auto-expiring stickies** via optional `expires_at: "YYYY-MM-DD"` field (p2_10). Notes filtered by `isNotExpired()` using London timezone, inclusive of the expiry day. Backwards-compatible — notes without the field never expire.
-- **Mobile announcements toggle**: fixed bottom-right button "📌 Aktualności (N)" appears only on mobile when any note has `visible_on_mobile: true`. Click expands/collapses the pinboard column (~200ms ease). Pinboard hidden by default on mobile to reduce clutter.
-- **`visible_on_mobile` flag** in editor UI + JSON schema — per-note opt-in to mobile display. Only Bank holiday notice currently carries it; Warriors match + training stay desktop-only.
-- Initial `docs/hero-notes.json` seeded with three real stickies: Warriors vs Bears match (blue, expires 2026-05-02), Bank holiday notice (pink, expires 2026-05-04, mobile-visible), Warriors training (orange, expires 2026-04-25).
-- `tools/editor-module.html` (25 KB): floating panel with Add/Delete, text/label/rotation/colour/W/H/X/Y controls, mobile-visibility checkbox, live JSON preview, Copy/Download/Import/Reset. Pointer-events drag + corner resize, clamped to hero bounds. WIP persisted in localStorage.
+- **Auto-expiring stickies** via optional `expires_at: "YYYY-MM-DD"` field (p2_10). `isNotExpired()` filters by London time, inclusive of the expiry day. Notes without the field never expire.
+- **Mobile opt-in stickies**: hero notes are OFF by default on mobile. Per-note opt-in via `visible_on_mobile: true` (editor checkbox). Opted-in notes render in the pinboard column on mobile with a 📌 emoji pin on top (replacing the desktop tape) and a plain × close button in the top-right corner.
+- **Per-visitor dismissal**: clicking × on a mobile sticky stores its id in `localStorage.gd_dismissed_hero_notes` so it stays hidden on subsequent visits. Pinboard collapses entirely when nothing opts-in and no legacy user-notes remain.
+- Initial `docs/hero-notes.json` seeded with three real stickies: Warriors vs Bears match (blue, expires 2026-05-02), Bank holiday notice (pink, expires 2026-05-04), Warriors training (orange, expires 2026-04-25). All default to desktop-only.
+- `tools/editor-module.html` (25 KB): floating panel with Add/Delete, text/label/rotation/colour/W/H/X/Y + `expires_at` + `visible_on_mobile` controls, live JSON preview, Copy/Download/Import/Reset. Pointer-events drag + corner resize, clamped to hero bounds. WIP persisted in localStorage.
 - `tools/build-editor.mjs`: zero-dep Node script that splices the editor module into a noindex'd copy of `index.html` → `tools/hero-editor.html` for Gin to use as a visual editor.
 - **Zero-dependency local dev server**: `tools/dev-server.mjs` (Node HTTP, port 8080, path-traversal guard), `tools/dev-server.cmd` (double-click launcher, auto-opens editor URL), `tools/dev-server-restart.cmd` (kills stale PID on port before restart).
 - `docs/hero-editor.md`: 5-part walkthrough for Gin (bookmark editor URL → design pinboard → copy JSON → paste into GitHub → verify).
 
 ### Changed
 - Replaced dormant `ANNOUNCEMENT_CSV_URL` single-cell-sheet branch with `HERO_NOTES_URL = 'docs/hero-notes.json'` + cache-bust + `isValidHeroNote()` schema validation (silent fallback on malformed JSON).
-- Removed user-facing "Add note" button on pinboard — stickies are now curated by Gin via editor only.
 - About section tagline font `Playwrite GB J` → `Caveat` to match sticky-note handwritten vibe.
 - Refined cyber `--fg-dim` brightened `#9098b0` → `#a4acc0` — WORKSHOP RATE / MOT FROM / AVERAGE REVIEW / TURNAROUND now readable without changing opacity.
 
 ### Removed
+- User-facing "Add note" button on the pinboard — stickies are curated by Gin via the editor only.
 - `docs/announcement-sheet.md` — single-cell Google Sheet approach obsoleted by JSON editor.
 
 ### Fixed
 - Editor module `ReferenceError: Cannot access 'hep' before initialization` — hoisted `const hep` declaration above dependent functions in `waitForApi()`.
 
 ### Internal
-- Roadmap `p2_10` rewritten as "Hero sticky notes: auto-expire via optional `expires_at` field" (minimal MVP vs. full calendar) — **shipped**.
-- Roadmap `p2_11` added as `to_consider` — full month-view calendar scheduling UI, only to be built if Gin explicitly asks after using `expires_at` for a few months.
+- Roadmap `p2_09` and `p2_10` marked **done** (completed 2026-04-21).
+- Roadmap `p2_11` remains `to_consider` — full month-view calendar scheduling UI, only to be built if Gin explicitly asks after using `expires_at` for a few months.
+- Mobile UX went through several iterations before landing on the final opt-in + emoji-pin + × dismiss model: desktop tape → CSS pushpin → bottom-right "Aktualności" toggle → hidden entirely → opt-in with 📌 emoji + dismiss. Iterations left no residue in the shipped code.
 
 ---
 
