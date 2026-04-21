@@ -750,8 +750,12 @@
 
   /* Mobile pinboard toggle states */
   @media (max-width: 900px) {
-    .pinboard.is-hidden-mobile { max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; transition: all 200ms ease; }
-    .pinboard.is-shown-mobile { max-height: 80vh; opacity: 1; overflow-y: auto; pointer-events: auto; }
+    /* Collapsed: zero size, invisible, no interactions. Overflow hidden
+       only in the collapsed state — when open we need the pushpin (which
+       sits at top: -6px, outside the sticky's box) to render freely. */
+    .pinboard.is-hidden-mobile { max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; transition: opacity 200ms ease, max-height 200ms ease; }
+    /* Expanded: intrinsic height (no scroll/clip), visible. */
+    .pinboard.is-shown-mobile { max-height: none; opacity: 1; overflow: visible; pointer-events: auto; }
   }
 
   /* ═══════════ PINBOARD (sticky notes) ═══════════
@@ -797,10 +801,32 @@
   .pinboard.is-dragging .sticky-drag { cursor: grabbing; }
   @media (max-width: 900px) {
     .pinboard {
-      /* Stay floating on mobile too, just smaller and closer to the edge */
+      /* Stay floating on mobile. Width auto so the sticky's own 200px
+         intrinsic width drives sizing — no clipping, no inner scrollbar. */
       right: 12px;
-      width: 168px;
+      width: auto;
       gap: 10px;
+    }
+    /* Mobile hero-stickies — swap tape for a pushpin at top-center.
+       Kills every tape variant (1–6, ::before + ::after) and draws a
+       single red pin head via ::before. Otherwise the sticky looks
+       identical to desktop. */
+    .pinboard .sticky.is-hero::after { display: none !important; }
+    .pinboard .sticky.is-hero::before {
+      display: block !important;
+      top: -7px;
+      left: 50%;
+      right: auto;
+      width: 14px;
+      height: 14px;
+      padding: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ff6a6a 0%, #c62828 55%, #7a1414 100%);
+      box-shadow:
+        0 2px 3px rgba(0,0,0,0.45),
+        inset -1px -1px 2px rgba(0,0,0,0.35),
+        inset 1px 1px 2px rgba(255,255,255,0.5);
+      transform: translateX(-50%);
     }
   }
   .sticky {
@@ -3158,17 +3184,19 @@
       el.dataset.id = note.id || '';
       applyTape(el, note.id || note.text || '');
 
-      // Size + rotation — always applied (both modes).
-      el.style.width  = Math.max(140, Math.min(400, note.w)) + 'px';
-      el.style.height = Math.max(100, Math.min(400, note.h)) + 'px';
+      // Rotation — always applied (both modes).
       const rot = typeof note.rotation === 'number'
         ? Math.max(-6, Math.min(6, note.rotation))
         : -1.4;
       el.style.transform = 'rotate(' + rot + 'deg)';
 
-      // Freeform (desktop overlay): absolute x%/y% relative to .hero.
-      // Stacked (mobile inside #pinboard): skip positional CSS, just flow.
+      // Freeform (desktop overlay): absolute x%/y% + full size from note.w/h.
+      // Stacked (mobile inside #pinboard): skip sizing + positioning, let
+      // the default .sticky CSS (200px wide, min-height 120px) drive layout
+      // so the sticky fits the pinboard column without clipping.
       if (freeform) {
+        el.style.width  = Math.max(140, Math.min(400, note.w)) + 'px';
+        el.style.height = Math.max(100, Math.min(400, note.h)) + 'px';
         const x = Math.max(0, Math.min(100, note.x));
         const y = Math.max(0, Math.min(100, note.y));
         el.style.left = x + '%';
