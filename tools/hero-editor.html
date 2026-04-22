@@ -724,45 +724,23 @@
     border-top: 1px solid var(--line);
   }
   .meta-item .mono { color: var(--fg-faint); opacity: 0.8; font-size: 11px; display: block; margin-bottom: 6px; }
+  /* Hero meta labels (// WORKSHOP RATE, // MOT FROM, …). Own class so
+     we can brighten them per-variant without disturbing other .mono
+     text. Default: inherit the faint .meta-item .mono look. */
+  .meta-label {}
+  /* Refined cyber: labels were hard to read at fg-faint 0.8. Bump to
+     a lighter blue-grey at full opacity + a touch more letter-spacing
+     so they read as a distinct caption rather than a murky accent. */
+  body[data-variant="cyber"] .meta-label {
+    color: #c2ccde;
+    opacity: 1;
+    letter-spacing: 0.08em;
+  }
   .meta-item strong { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
   body[data-variant="editorial"] .meta-item strong { text-transform: none; font-weight: 600; letter-spacing: -0.01em; }
   body[data-variant="cyber"] .meta-item strong { text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
 
   .hero-marks { display: none; }
-
-  /* Mobile announcements toggle button */
-  .pinboard-toggle {
-    display: none;
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 99;
-    padding: 10px 14px;
-    background: var(--accent);
-    color: #fff;
-    border: 0;
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 150ms ease, box-shadow 150ms ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .pinboard-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
-  .pinboard-toggle-icon { font-size: 16px; }
-  .pinboard-toggle-count { background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
-
-  /* Mobile pinboard toggle states */
-  @media (max-width: 900px) {
-    .pinboard.is-hidden-mobile { max-height: 0; opacity: 0; overflow: hidden; pointer-events: none; transition: all 200ms ease; }
-    .pinboard.is-shown-mobile { max-height: 80vh; opacity: 1; overflow-y: auto; pointer-events: auto; }
-  }
 
   /* ═══════════ PINBOARD (sticky notes) ═══════════
      A) Visitor personal notes — localStorage, yellow, editable/deletable,
@@ -806,12 +784,62 @@
   }
   .pinboard.is-dragging .sticky-drag { cursor: grabbing; }
   @media (max-width: 900px) {
+    /* Mobile: sticky notes are OFF by default. The pinboard only shows
+       hero-notes explicitly opted-in via visible_on_mobile:true (and not
+       yet dismissed by the visitor). If there's nothing to show,
+       render() adds .is-empty-mobile and we hide the whole column. */
     .pinboard {
-      /* Stay floating on mobile too, just smaller and closer to the edge */
       right: 12px;
-      width: 168px;
+      width: auto;
       gap: 10px;
     }
+    .pinboard.is-empty-mobile { display: none !important; }
+    /* Swap the desktop tape for a 📌 emoji pin on mobile hero-stickies.
+       The emoji itself is a child element (.sticky-pin) — we just need
+       to suppress the tape pseudos here. */
+    .pinboard .sticky.is-hero::before,
+    .pinboard .sticky.is-hero::after { display: none !important; }
+    .pinboard .sticky.is-hero { padding-top: 22px; /* room for pin + close */ }
+    .sticky-pin {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
+      z-index: 2;
+    }
+    .sticky-close {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #2a2010;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.55;
+      z-index: 4;
+      transition: opacity 150ms ease;
+    }
+    .sticky-close:hover,
+    .sticky-close:focus-visible { opacity: 1; outline: none; }
+  }
+  /* On desktop the close button and emoji pin never appear. */
+  @media (min-width: 901px) {
+    .sticky-close, .sticky-pin { display: none !important; }
   }
   .sticky {
     width: 200px;
@@ -2006,19 +2034,19 @@
       <div>
         <div class="hero-meta">
           <div class="meta-item">
-            <span class="mono">// WORKSHOP RATE</span>
+            <span class="mono meta-label">// WORKSHOP RATE</span>
             <strong>£75/hr + VAT</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// MOT FROM</span>
+            <span class="mono meta-label">// MOT FROM</span>
             <strong>£50</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// AVERAGE REVIEW</span>
+            <span class="mono meta-label">// AVERAGE REVIEW</span>
             <strong>4.9 / 5.0</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// TURNAROUND</span>
+            <span class="mono meta-label">// TURNAROUND</span>
             <strong>Same day*</strong>
           </div>
         </div>
@@ -2642,12 +2670,9 @@
 </div>
 
 <!-- Sticky notes pinboard — body-level so nothing affects its fixed positioning.
-     MUST be before the main <script> so pinboardModule can find it on run. -->
-<button class="pinboard-toggle" id="pinboardToggle" type="button" aria-label="Toggle announcements" style="display:none;">
-  <span class="pinboard-toggle-icon">📌</span>
-  <span class="pinboard-toggle-label">Aktualności</span>
-  <span class="pinboard-toggle-count" id="pinboardCount"></span>
-</button>
+     MUST be before the main <script> so pinboardModule can find it on run.
+     Mobile: pinboard is always visible; notes with visible_on_mobile:true
+     render here (no toggle). -->
 <div class="pinboard" id="pinboard" aria-label="Sticky notes"></div>
 
 <script>
@@ -3034,12 +3059,32 @@
 
     const STORAGE_KEY = 'gd_user_notes';
     const POS_KEY = 'gd_pinboard_pos';
+    const DISMISSED_KEY = 'gd_dismissed_hero_notes'; // mobile: ids the visitor has closed
     const MAX_USER_NOTES = 2;
     const HERO_NOTES_URL = '../docs/hero-notes.json';
 
     let heroNotes = [];              // from docs/hero-notes.json — public to all visitors
     let userNotes = loadUserNotes();
+    let dismissedIds = loadDismissed();
     let customPos = loadPos(); // {left, top} in px, or null = default top-right
+
+    function loadDismissed() {
+      try {
+        const raw = localStorage.getItem(DISMISSED_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter(x => typeof x === 'string') : [];
+      } catch { return []; }
+    }
+    function saveDismissed() {
+      try { localStorage.setItem(DISMISSED_KEY, JSON.stringify(dismissedIds)); } catch {}
+    }
+    function dismissHeroNote(id) {
+      if (!id) return;
+      if (dismissedIds.indexOf(id) === -1) dismissedIds.push(id);
+      saveDismissed();
+      render();
+    }
 
     function loadPos() {
       try {
@@ -3168,17 +3213,19 @@
       el.dataset.id = note.id || '';
       applyTape(el, note.id || note.text || '');
 
-      // Size + rotation — always applied (both modes).
-      el.style.width  = Math.max(140, Math.min(400, note.w)) + 'px';
-      el.style.height = Math.max(100, Math.min(400, note.h)) + 'px';
+      // Rotation — always applied (both modes).
       const rot = typeof note.rotation === 'number'
         ? Math.max(-6, Math.min(6, note.rotation))
         : -1.4;
       el.style.transform = 'rotate(' + rot + 'deg)';
 
-      // Freeform (desktop overlay): absolute x%/y% relative to .hero.
-      // Stacked (mobile inside #pinboard): skip positional CSS, just flow.
+      // Freeform (desktop overlay): absolute x%/y% + full size from note.w/h.
+      // Stacked (mobile inside #pinboard): skip sizing + positioning, let
+      // the default .sticky CSS (200px wide, min-height 120px) drive layout
+      // so the sticky fits the pinboard column without clipping.
       if (freeform) {
+        el.style.width  = Math.max(140, Math.min(400, note.w)) + 'px';
+        el.style.height = Math.max(100, Math.min(400, note.h)) + 'px';
         const x = Math.max(0, Math.min(100, note.x));
         const y = Math.max(0, Math.min(100, note.y));
         el.style.left = x + '%';
@@ -3194,6 +3241,27 @@
 
       el.appendChild(label);
       el.appendChild(body);
+
+      // Mobile extras: 📌 pin emoji on top, × close button top-right.
+      // CSS hides these on desktop so we can append unconditionally.
+      if (!freeform) {
+        const pin = document.createElement('div');
+        pin.className = 'sticky-pin';
+        pin.setAttribute('aria-hidden', 'true');
+        pin.textContent = '📌';
+        el.appendChild(pin);
+
+        const close = document.createElement('button');
+        close.className = 'sticky-close';
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Dismiss this note');
+        close.title = 'Dismiss';
+        close.textContent = '\u00D7';
+        close.addEventListener('click', function() {
+          dismissHeroNote(note.id);
+        });
+        el.appendChild(close);
+      }
       return el;
     }
 
@@ -3203,16 +3271,33 @@
 
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
 
-      // B: Gin's hero-notes — freeform overlay on desktop, folded into pinboard on mobile.
-      // Filter out any notes that have expired (optional expires_at field).
-      // On mobile, only show notes explicitly marked visible_on_mobile.
+      // B: Gin's hero-notes.
+      //   Desktop: freeform overlay inside .hero, all non-expired notes.
+      //   Mobile:  pinboard column, ONLY notes with visible_on_mobile:true
+      //            that the visitor hasn't dismissed yet (× button).
+      //            Pin emoji + close button get appended by buildHeroSticky.
+      let mobileRendered = 0;
       heroNotes.forEach(function(note) {
         if (!isNotExpired(note)) return; // skip expired notes
-        if (!freeform && !note.visible_on_mobile) return; // on mobile, skip notes not marked visible
-        const el = buildHeroSticky(note, freeform);
-        if (freeform) heroNotesEl.appendChild(el);
-        else pinboard.appendChild(el);
+        if (freeform) {
+          heroNotesEl.appendChild(buildHeroSticky(note, true));
+        } else {
+          if (!note.visible_on_mobile) return;
+          if (note.id && dismissedIds.indexOf(note.id) !== -1) return;
+          pinboard.appendChild(buildHeroSticky(note, false));
+          mobileRendered++;
+        }
       });
+
+      // On mobile, hide the pinboard entirely if nothing survived the
+      // opt-in + dismissed filters. (Also hides it when legacy user-notes
+      // are absent, which is the normal case now that Add Note is gone.)
+      if (!freeform) {
+        const hasAnything = mobileRendered > 0 || userNotes.length > 0;
+        pinboard.classList.toggle('is-empty-mobile', !hasAnything);
+      } else {
+        pinboard.classList.remove('is-empty-mobile');
+      }
 
       // A: user notes
       userNotes.forEach(function(note, idx) {
@@ -3314,28 +3399,10 @@
         }
       });
 
-      // Update mobile toggle button — show count of announcements (mobile-visible notes)
-      const mobileToggle = document.getElementById('pinboardToggle');
-      const mobileCount = heroNotes.filter(n => isNotExpired(n) && n.visible_on_mobile).length;
-      const isMobile = window.innerWidth <= 900;
-      if (mobileToggle) {
-        mobileToggle.style.display = isMobile && mobileCount > 0 ? 'flex' : 'none';
-        document.getElementById('pinboardCount').textContent = '(' + mobileCount + ')';
-        // On mobile, hide pinboard by default (only show when toggle clicked)
-        if (isMobile) pinboard.classList.add('is-hidden-mobile');
-      }
     }
     // "Add note" button removed — Gin's hero-notes only.
 
-    // Mobile announcements toggle
-    const mobileToggle = document.getElementById('pinboardToggle');
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', function() {
-        pinboard.classList.toggle('is-hidden-mobile');
-        pinboard.classList.toggle('is-shown-mobile');
-      });
-    }
-    // On window resize, recompute toggle visibility
+    // On window resize, re-render so hero-notes hop between overlay/pinboard
     let resizeTimeout;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimeout);

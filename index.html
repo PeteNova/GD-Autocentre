@@ -714,6 +714,18 @@
     border-top: 1px solid var(--line);
   }
   .meta-item .mono { color: var(--fg-faint); opacity: 0.8; font-size: 11px; display: block; margin-bottom: 6px; }
+  /* Hero meta labels (// WORKSHOP RATE, // MOT FROM, …). Own class so
+     we can brighten them per-variant without disturbing other .mono
+     text. Default: inherit the faint .meta-item .mono look. */
+  .meta-label {}
+  /* Refined cyber: labels were hard to read at fg-faint 0.8. Bump to
+     a lighter blue-grey at full opacity + a touch more letter-spacing
+     so they read as a distinct caption rather than a murky accent. */
+  body[data-variant="cyber"] .meta-label {
+    color: #c2ccde;
+    opacity: 1;
+    letter-spacing: 0.08em;
+  }
   .meta-item strong { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
   body[data-variant="editorial"] .meta-item strong { text-transform: none; font-weight: 600; letter-spacing: -0.01em; }
   body[data-variant="cyber"] .meta-item strong { text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
@@ -2012,19 +2024,19 @@
       <div>
         <div class="hero-meta">
           <div class="meta-item">
-            <span class="mono">// WORKSHOP RATE</span>
+            <span class="mono meta-label">// WORKSHOP RATE</span>
             <strong>£75/hr + VAT</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// MOT FROM</span>
+            <span class="mono meta-label">// MOT FROM</span>
             <strong>£50</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// AVERAGE REVIEW</span>
+            <span class="mono meta-label">// AVERAGE REVIEW</span>
             <strong>4.9 / 5.0</strong>
           </div>
           <div class="meta-item">
-            <span class="mono">// TURNAROUND</span>
+            <span class="mono meta-label">// TURNAROUND</span>
             <strong>Same day*</strong>
           </div>
         </div>
