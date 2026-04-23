@@ -1072,6 +1072,8 @@
       width: 100%;
       height: 210px;
       margin: 12px 0 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
       touch-action: pan-y;         /* let page scroll vertically; we handle horizontal */
       user-select: none;
       -webkit-user-select: none;
@@ -1101,12 +1103,7 @@
     }
     /* Pin emoji on mobile stack — subtler, top-center. Close button hidden
        (cycling replaces dismissal). */
-    .mobile-sticky-stack .sticky-pin {
-      top: 4px;
-      right: auto;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    .mobile-sticky-stack .sticky-pin { display: none; }
     .mobile-sticky-stack .sticky-close { display: none; }
     /* Hint text below the stack — only visible when >1 note. */
     .mobile-sticky-stack[data-count="1"] .stack-hint,
