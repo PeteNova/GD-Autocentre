@@ -2289,6 +2289,20 @@
 </section>
 
 <!-- Why / About -->
+<style>
+@media (max-width: 900px) {
+  #about .team-layout { display: flex; flex-direction: column; gap: 24px; }
+  #about .team-layout > div { display: contents; }
+  #about .team-layout .team-portrait { order: 1; }
+  #about .team-layout > div > .eyebrow { order: 2; margin-top: 8px; }
+  #about .team-layout > div > .h2 { order: 3; }
+  #about .team-layout > div > .team-quote { order: 4; }
+  #about .team-layout > div > .why-list { order: 5; }
+  #about .team-layout .stats { order: 6; margin-top: 0 !important; }
+  /* Collapse the duplicated border between the two adjacent stats grids */
+  #about .team-layout .stats + .stats { margin-top: -1px; }
+}
+</style>
 <!-- Unified About + Team — single viewport, no redundant CTAs -->
 <section class="block" id="about" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
   <div class="wrap">
