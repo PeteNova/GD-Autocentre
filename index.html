@@ -453,13 +453,14 @@
   body[data-variant="editorial"] .btn { border-radius: 999px; }
   body[data-variant="cyber"] .btn { border-radius: 2px; }
 
-  /* quote highlight — deep teal across all variants/themes */
+  /* quote highlight — pen-ink blue across variants, no background */
   .team-quote-highlight {
-    background: #7fb0a0 !important;
-    color: #0e0f10 !important;
-    padding: 0.08em 0.28em !important;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+    background: transparent !important;
+    color: #1e3a8a !important;
+    padding: 0 !important;
+  }
+  body[data-theme="dark"] .team-quote-highlight {
+    color: #7a96e8 !important;
   }
   .theme-toggle {
     width: 28px; height: 28px;
