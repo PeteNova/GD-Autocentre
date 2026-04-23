@@ -2790,17 +2790,16 @@
   // init
   applyTheme(getSavedTheme());
 
-  // greeting
+  // greeting + workshop status (combined into one conversational 2-line block)
   (function() {
-    const h = new Date().getHours();
-    const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-    const el = document.getElementById('heroGreeting');
-    if (el) el.textContent = greet;
+    const statusEl = document.getElementById('heroStatus');
+    const greetingEl = document.getElementById('heroGreeting');
+    if (!statusEl) return;
 
-    // workshop status
-    (function() {
-      const statusEl = document.getElementById('heroStatus');
-      if (!statusEl) return;
+    function getGreeting() {
+      const h = new Date().getHours();
+      return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+    }
 
       const OPEN_H = 9;
       const WORKSHOP_CLOSE_H = 17, WORKSHOP_CLOSE_M = 30; // cars on lift until 17:30
@@ -2871,6 +2870,11 @@
       }
 
       function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
+      function fmt12(h, m) {
+        const period = h < 12 ? 'AM' : 'PM';
+        const h12 = h % 12 === 0 ? 12 : h % 12;
+        return h12 + ':' + String(m).padStart(2,'0') + ' ' + period;
+      }
       function minsUntil(h, m, nowH, nowM) { return (h * 60 + m) - (nowH * 60 + nowM); }
       function fmtDuration(mins) {
         const h = Math.floor(mins / 60), m = mins % 60;
@@ -2895,20 +2899,42 @@
 
         // Override path — today has a row in the Google Sheet
         if (todayOverride) {
-          const note = todayOverride.note ? ' · ' + todayOverride.note : '';
+          const noteSep = todayOverride.note ? ' · ' + todayOverride.note : '';
+          const nextOpen = nextOpenDay(dow);
           if (todayOverride.status === 'closed') {
-            return { open: false, text: 'Closed today' + note };
+            const notePrefix = todayOverride.note ? todayOverride.note + ' · ' : '';
+            return {
+              open: false,
+              text: 'Closed today' + noteSep,
+              line1Tail: "we're closed today",
+              line2: notePrefix + 'opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+            };
           }
           if (todayOverride.status === 'open' && todayOverride.openH != null) {
             const openMins = todayOverride.openH * 60 + todayOverride.openM;
             const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
             if (nowMins < openMins) {
-              return { open: false, text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + note };
+              return {
+                open: false,
+                text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens at ' + fmt12(todayOverride.openH, todayOverride.openM) + ' · in ' + fmtDuration(openMins - nowMins)
+              };
             }
             if (nowMins >= closeMins) {
-              return { open: false, text: 'Closed' + note };
+              return {
+                open: false,
+                text: 'Closed' + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+              };
             }
-            return { open: true, text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + note };
+            return {
+              open: true,
+              text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + noteSep,
+              line1Tail: "we're open",
+              line2: 'Closes at ' + fmt12(todayOverride.closeH, todayOverride.closeM) + ' · in ' + fmtDuration(closeMins - nowMins)
+            };
           }
         }
 
@@ -2918,17 +2944,37 @@
         const openMins = OPEN_H * 60;
 
         if (!isWeekday) {
-          return { open: false, text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed today",
+            line2: 'Opens ' + nextOpenDay(dow) + ' at ' + fmt12(OPEN_H, 0)
+          };
         }
         if (nowMins < openMins) {
-          return { open: false, text: 'Opens today at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Opens today at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens at ' + fmt12(OPEN_H, 0) + ' · in ' + fmtDuration(openMins - nowMins)
+          };
         }
         if (nowMins >= closeMins) {
           const next = dow === 5 ? 'Monday' : DAYS[dow + 1];
-          return { open: false, text: 'Closed · opens ' + next + ' at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Closed · opens ' + next + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens ' + next + ' at ' + fmt12(OPEN_H, 0)
+          };
         }
         const minsLeft = minsUntil(CLOSE_H, CLOSE_M, h, m);
-        return { open: true, text: 'Open · closes in ' + fmtDuration(minsLeft) };
+        return {
+          open: true,
+          text: 'Open · closes in ' + fmtDuration(minsLeft),
+          line1Tail: "we're open",
+          line2: 'Closes at ' + fmt12(CLOSE_H, CLOSE_M) + ' · in ' + fmtDuration(minsLeft)
+        };
       }
 
       const bookingAlert = document.getElementById('bookingAlert');
@@ -3011,10 +3057,11 @@
 
       function render() {
         const s = getStatus();
-        const dotColor = s.open ? '#22c55e' : 'var(--fg-faint)';
+        if (greetingEl) {
+          greetingEl.textContent = getGreeting() + ' \u2014 ' + s.line1Tail + '.';
+        }
         statusEl.innerHTML =
-          `<span style="width:7px;height:7px;border-radius:50%;background:${dotColor};display:inline-block;flex-shrink:0;${s.open ? 'box-shadow:0 0 6px ' + dotColor : ''}"></span>` +
-          `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.text}</span>`;
+          `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.line2}</span>`;
         const phoneOpen = isPhoneOpen();
         if (bookingAlertText) bookingAlertText.innerHTML = phoneOpen ? ALERT_OPEN : ALERT_CLOSED;
         if (bookingAlert) bookingAlert.classList.toggle('is-offline', !phoneOpen);
@@ -3048,7 +3095,6 @@
       fetchOverrides(); // async — will re-render if today has a row in the sheet
       // update every minute
       setInterval(render, 60000);
-    })();
   })();
 
   // ═══════════ PINBOARD (sticky notes) ═══════════
