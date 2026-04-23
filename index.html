@@ -3515,7 +3515,16 @@
       if (heroNotesEl) heroNotesEl.innerHTML = '';
 
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
-      const visibleHeroNotes = heroNotes.filter(isNotExpired);
+      // Priority by date: soonest expires_at first; notes without expiry last.
+      // Stable within each group (preserves JSON order).
+      const visibleHeroNotes = heroNotes.filter(isNotExpired).slice().sort(function(a, b) {
+        const ax = a.expires_at || '';
+        const bx = b.expires_at || '';
+        if (ax && bx) return ax < bx ? -1 : ax > bx ? 1 : 0;
+        if (ax && !bx) return -1;
+        if (!ax && bx) return 1;
+        return 0;
+      });
 
       let freeformIdx = 0;
       if (freeform) {
