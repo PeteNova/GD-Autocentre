@@ -1,0 +1,3906 @@
+<!DOCTYPE html>
+<!--
+  GD Autocentre — Gloucester, UK
+  Owner:   Gintaras Druskis (GD Autocentre Ltd)
+  Author:  Piotr Nowakowski
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GD Autocentre | MOT, Servicing &amp; Car Repairs in Gloucester</title>
+<meta name="description" content="Independent Gloucester garage on Bristol Road. MOT testing, servicing, diagnostics, tyres, welding, clutch &amp; timing belt. Honest pricing. Call 01452 422 405.">
+<meta name="author" content="Piotr Nowakowski">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ff5a1f">
+<link rel="canonical" href="https://gd-autocentre.vercel.app/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="/GD_autocentre_logo.jpg">
+<link rel="apple-touch-icon" href="/GD_autocentre_logo.jpg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gd-autocentre.vercel.app/">
+<meta property="og:site_name" content="GD Autocentre Ltd">
+<meta property="og:title" content="GD Autocentre | MOT, Servicing &amp; Car Repairs in Gloucester">
+<meta property="og:description" content="Independent Gloucester garage on Bristol Road. MOT, servicing, diagnostics, tyres, welding. Honest pricing. Call 01452 422 405.">
+<meta property="og:image" content="https://gd-autocentre.vercel.app/GD_autocentre_logo.jpg">
+<meta property="og:locale" content="en_GB">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GD Autocentre | MOT, Servicing &amp; Car Repairs in Gloucester">
+<meta name="twitter:description" content="Independent Gloucester garage on Bristol Road. MOT, servicing, diagnostics, tyres, welding. Call 01452 422 405.">
+<meta name="twitter:image" content="https://gd-autocentre.vercel.app/GD_autocentre_logo.jpg">
+
+<!-- Schema.org LocalBusiness / AutoRepair -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "@id": "https://gd-autocentre.vercel.app/#business",
+  "name": "GD Autocentre Ltd",
+  "image": "https://gd-autocentre.vercel.app/GD_autocentre_logo.jpg",
+  "logo": "https://gd-autocentre.vercel.app/GD_autocentre_logo.jpg",
+  "url": "https://gd-autocentre.vercel.app/",
+  "telephone": "+441452422405",
+  "email": "info@gdautocentre.com",
+  "priceRange": "££",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "153a Bristol Road",
+    "addressLocality": "Gloucester",
+    "postalCode": "GL1 5SY",
+    "addressCountry": "GB"
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Gloucester" },
+    { "@type": "AdministrativeArea", "name": "Gloucestershire" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "17:30"
+    }
+  ],
+  "sameAs": [],
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MOT Testing" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Car Servicing" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vehicle Diagnostics" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tyre Fitting" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Welding Repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Clutch Replacement" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Timing Belt Replacement" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gearbox Repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Engine Repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Air Conditioning" } }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Instrument+Serif:ital@0;1&family=Barlow+Condensed:wght@500;600;700;800&family=Dancing+Script:wght@500;600&family=Exo+2:wght@300;400;600;700;800&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════
+     GD AUTOCENTRE — three variants, shared spine
+     ═══════════════════════════════════════════════════ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  button { font: inherit; cursor: pointer; border: 0; background: 0; }
+  ul { list-style: none; }
+
+  html.no-transitions *,
+  html.no-transitions *::before,
+  html.no-transitions *::after { transition: none !important; animation: none !important; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 0; }
+
+  :root {
+    --max: 1280px;
+    --gutter: 32px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ═══════════ VARIANT A — MODERN INDUSTRIAL ═══════════ */
+  body[data-variant="industrial"] {
+    --bg: #0e0f10;
+    --bg-2: #15171a;
+    --bg-raised: #1a1d20;
+    --fg: #ededec;
+    --fg-dim: #9a9a98;
+    --fg-faint: #5a5b58;
+    --line: #26282b;
+    --line-bright: #3a3d40;
+    --accent: #ff5a1f;
+    --accent-2: #ffb020;
+    --accent-contrast: #0e0f10;
+    --font-display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
+    --font-body: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display-tracking: 0.01em;
+    --display-weight: 700;
+  }
+
+  /* ═══════════ VARIANT B — EDITORIAL WORKSHOP ═══════════ */
+  body[data-variant="editorial"] {
+    --bg: #12110f;
+    --bg-2: #1a1814;
+    --bg-raised: #211e18;
+    --fg: #f4efe4;
+    --fg-dim: #b4ac9a;
+    --fg-faint: #6a6352;
+    --line: #2b2820;
+    --line-bright: #3e3a2e;
+    --accent: #d4a857;
+    --accent-2: #c45a3a;
+    --accent-contrast: #12110f;
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display-tracking: -0.02em;
+    --display-weight: 700;
+  }
+
+  /* ═══════════ VARIANT C — REFINED CYBER ═══════════ */
+  body[data-variant="cyber"] {
+    --bg: #050508;
+    --bg-2: #0a0b12;
+    --bg-raised: #11141c;
+    --fg: #f4f5fb;
+    --fg-dim: #a4acc0;
+    --fg-faint: #4a506a;
+    --line: #1a2036;
+    --line-bright: #2d3550;
+    --neon-cyan: #00f0ff;
+    --neon-pink: #ff2e88;
+    --neon-violet: #b26bff;
+    --neon-blue: #3d8bff;
+    --neon-amber: #ffaa00;
+    --weld-orange: #ff5500;
+    --accent: #00f0ff;
+    --accent-2: #ff2e88;
+    --accent-3: #b26bff;
+    --accent-4: #ffaa00;
+    --accent-contrast: #050508;
+    --font-display: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+    --font-body: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display-tracking: -0.03em;
+    --display-weight: 600;
+    --clip-cyber-btn: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+    --clip-notch-tl: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+    --clip-notch-tr: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+    --clip-notch-both: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+    --clip-notch-diag: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  }
+
+  /* scanlines on cyber */
+  body[data-variant="cyber"]::before {
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 200;
+    background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.015) 2px 3px);
+    mix-blend-mode: overlay;
+  }
+  body[data-variant="cyber"] section.block,
+  body[data-variant="cyber"] .trust,
+  body[data-variant="cyber"] .location-info,
+  body[data-variant="cyber"] footer.site {
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 4px);
+  }
+  /* rotating accent palette by section */
+  body[data-variant="cyber"] #services { --accent: var(--neon-cyan); }
+  body[data-variant="cyber"] #process { --accent: var(--neon-amber); }
+  body[data-variant="cyber"] #about { --accent: var(--neon-violet); }
+  body[data-variant="cyber"] #team { --accent: var(--neon-pink); }
+  body[data-variant="cyber"] #pricing { --accent: var(--neon-cyan); }
+  body[data-variant="cyber"] #reviews { --accent: var(--neon-amber); }
+  body[data-variant="cyber"] #location,
+  body[data-variant="cyber"] #contact { --accent: var(--neon-cyan); }
+  body[data-variant="cyber"] .cta-strip { --accent: var(--weld-orange); }
+  /* cyber-specific clip-path + glow styling for buttons */
+  body[data-variant="cyber"] .btn {
+    border-radius: 0;
+    clip-path: var(--clip-cyber-btn);
+    overflow: hidden;
+    position: relative;
+  }
+  body[data-variant="cyber"] .btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease-in-out;
+  }
+  body[data-variant="cyber"] .btn:hover::before { left: 150%; }
+  body[data-variant="cyber"] .btn::after {
+    content: "";
+    position: absolute; top: 0; right: 0;
+    width: 10px; height: 10px;
+    background: rgba(0,0,0,0.5);
+  }
+  body[data-variant="cyber"] .btn-primary {
+    background: linear-gradient(135deg, var(--weld-orange), var(--neon-pink));
+    border-color: var(--weld-orange);
+    color: #fff;
+    filter: drop-shadow(0 4px 12px rgba(255,85,0,0.3));
+  }
+  body[data-variant="cyber"] .btn-primary:hover {
+    filter: drop-shadow(0 0 18px rgba(255,46,136,0.7)) brightness(1.1);
+    color: #fff;
+  }
+  body[data-variant="cyber"] .btn-ghost {
+    background: rgba(0,240,255,0.04);
+    border-color: rgba(0,240,255,0.5);
+    color: var(--neon-cyan);
+  }
+  body[data-variant="cyber"] .btn-ghost:hover {
+    background: rgba(0,240,255,0.15);
+    border-color: var(--neon-cyan);
+    color: #fff;
+    filter: drop-shadow(0 0 12px rgba(0,240,255,0.6));
+  }
+  body[data-variant="cyber"] button[type="submit"].btn-ghost {
+    background: rgba(37,211,102,0.06);
+    border-color: rgba(37,211,102,0.55);
+    color: #25D366;
+  }
+  body[data-variant="cyber"] button[type="submit"].btn-ghost:hover {
+    background: rgba(37,211,102,0.18);
+    border-color: #25D366;
+    color: #fff;
+    filter: drop-shadow(0 0 12px rgba(37,211,102,0.6));
+  }
+  /* notched surfaces */
+  body[data-variant="cyber"] .svc { clip-path: var(--clip-notch-tl); background: rgba(17,20,28,0.65); backdrop-filter: blur(6px); }
+  /* cyber .stat — keep default card look */
+  body[data-variant="cyber"] .review { clip-path: var(--clip-notch-tl); }
+  body[data-variant="cyber"] .review:nth-child(even) { clip-path: var(--clip-notch-tr); }
+  body[data-variant="cyber"] form.quote { clip-path: var(--clip-notch-diag); }
+  body[data-variant="cyber"] .rate-banner { clip-path: var(--clip-notch-both); background: var(--weld-orange); color: #fff; }
+  body[data-variant="cyber"] .trust-ic { clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); border: 0; background: rgba(0,240,255,0.08); }
+  body[data-variant="cyber"] .contact-detail .ic { color: var(--neon-cyan); }
+  /* cyber accent roles by section */
+  body[data-variant="cyber"] #services .svc:nth-child(4n+1) .svc-ic { color: var(--neon-cyan); }
+  body[data-variant="cyber"] #services .svc:nth-child(4n+2) .svc-ic { color: var(--neon-pink); }
+  body[data-variant="cyber"] #services .svc:nth-child(4n+3) .svc-ic { color: var(--neon-violet); }
+  body[data-variant="cyber"] #services .svc:nth-child(4n+4) .svc-ic { color: var(--neon-amber); }
+  body[data-variant="cyber"] #services .svc:hover { background: var(--bg-2); }
+  body[data-variant="cyber"] #process .step::before { color: var(--neon-amber); }
+  body[data-variant="cyber"] #process .step:nth-child(2)::before { color: var(--neon-cyan); }
+  body[data-variant="cyber"] #process .step:nth-child(3)::before { color: var(--neon-violet); }
+  body[data-variant="cyber"] #process .step:nth-child(4)::before { color: var(--neon-pink); }
+  /* cyber stat numbers — keep default accent color */
+  body[data-variant="cyber"] .hero-title .accent-word { border-color: transparent; color: var(--accent); text-shadow: 0 0 12px color-mix(in oklab, var(--accent) 50%, transparent); }
+  body[data-variant="cyber"] .hero-readout .val { color: var(--accent); text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 50%, transparent); }
+  body[data-variant="cyber"] .team-badge { clip-path: var(--clip-cyber-btn); }
+  body[data-variant="cyber"] .theme-toggle,
+  body[data-variant="cyber"] .nav-divider { display: none; }
+  body[data-variant="cyber"] .nav-cta { clip-path: var(--clip-notch-tr); color: var(--neon-amber); border-color: rgba(255,170,0,0.3); }
+  body[data-variant="cyber"] .nav-cta:hover { border-color: var(--neon-amber); background: rgba(255,170,0,0.1); color: var(--neon-amber); text-shadow: 0 0 8px rgba(255,170,0,0.5); }
+  body[data-variant="cyber"] .alert { background: var(--bg-2); border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; }
+  body[data-variant="cyber"] .alert > * { background: transparent; padding: 0; display: inline; color: var(--fg); }
+  body[data-variant="cyber"] .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--neon-amber); margin-right: 10px; vertical-align: 1px; padding: 0; }
+  body[data-variant="cyber"] .alert a { color: var(--neon-amber); }
+  body[data-variant="cyber"] .eyebrow { color: var(--accent); text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 40%, transparent); }
+  body[data-variant="cyber"] .hero-corner::before,
+  body[data-variant="cyber"] .hero-corner::after,
+  body[data-variant="cyber"] .hero-marks::before,
+  body[data-variant="cyber"] .hero-marks::after { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  body[data-variant="cyber"] .nav-link:hover,
+  body[data-variant="cyber"] .nav-link.active { color: var(--accent); text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 50%, transparent); }
+
+
+  /* ═══════════ TYPE ═══════════ */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before {
+    content: ""; width: 18px; height: 1px; background: currentColor;
+  }
+  body[data-variant="editorial"] .eyebrow { letter-spacing: 0.24em; }
+
+  .h1 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-size: clamp(48px, 7vw, 104px);
+    line-height: 0.95;
+    letter-spacing: var(--display-tracking);
+    text-transform: uppercase;
+  }
+  body[data-variant="editorial"] .h1 {
+    text-transform: none;
+    font-size: clamp(52px, 7.5vw, 112px);
+    line-height: 0.98;
+    font-weight: 600;
+  }
+  body[data-variant="cyber"] .h1 {
+    text-transform: none;
+    font-weight: 700;
+    font-size: clamp(48px, 7.2vw, 108px);
+    font-family: 'Exo 2', sans-serif;
+    letter-spacing: -0.02em;
+  }
+  body[data-variant="cyber"] .h2 {
+    text-transform: none;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  body[data-variant="cyber"] .h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-size: clamp(34px, 4.2vw, 60px);
+    line-height: 1;
+    letter-spacing: var(--display-tracking);
+    text-transform: uppercase;
+  }
+  body[data-variant="editorial"] .h2 { text-transform: none; letter-spacing: -0.015em; font-weight: 600; }
+  body[data-variant="cyber"] .h2 { text-transform: none; letter-spacing: -0.025em; font-weight: 600; }
+
+  .h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  body[data-variant="editorial"] .h3 { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 26px; }
+  body[data-variant="cyber"] .h3 { text-transform: none; letter-spacing: -0.02em; font-size: 22px; font-weight: 600; }
+
+  .italic-em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.02em;
+  }
+  body[data-variant="editorial"] .italic-em { font-family: 'Fraunces', serif; }
+
+  .mono { font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .dim { color: var(--fg-dim); }
+
+  /* ═══════════ ICON ═══════════ */
+  .ic { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+  .ic-lg { width: 28px; height: 28px; }
+  .ic-xl { width: 40px; height: 40px; }
+
+  /* ═══════════ BUTTONS ═══════════ */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 52px; padding: 0 26px;
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary { background: var(--accent); color: var(--accent-contrast); }
+  .btn-primary:hover { background: var(--fg); }
+  .btn-ghost { border-color: var(--line-bright); color: var(--fg); }
+  .btn-ghost:hover { border-color: var(--fg); background: var(--bg-raised); }
+  .btn.is-offline, .btn.is-offline:hover {
+    background: var(--fg-faint) !important;
+    border-color: var(--fg-faint) !important;
+    color: var(--bg) !important;
+    filter: none !important;
+    cursor: not-allowed;
+    opacity: 0.75;
+    transform: none !important;
+  }
+  body[data-variant="cyber"] .btn.is-offline,
+  body[data-variant="cyber"] .btn.is-offline:hover {
+    background: var(--fg-faint) !important;
+    border-color: var(--fg-faint) !important;
+    color: var(--bg) !important;
+    filter: none !important;
+  }
+  /* Kill the cyber shine sweep on disabled buttons */
+  body[data-variant="cyber"] .btn.is-offline::before,
+  body[data-variant="cyber"] .btn.is-offline:hover::before { display: none !important; }
+  /* Wrapper for Call Gin button so tooltip can use its own ::before/::after
+     without colliding with cyber's shine/corner pseudo-elements */
+  .call-gin-wrap { display: inline-block; position: relative; }
+  .call-gin-wrap .btn { display: inline-flex; }
+  /* Mobile: single-column, but keep classic "call first" hierarchy when online */
+  @media (max-width: 768px) {
+    .call-gin-wrap { display: block; }
+    .call-gin-wrap .btn { display: flex; }
+  }
+  /* variant button shapes */
+  body[data-variant="industrial"] .btn { border-radius: 0; }
+  body[data-variant="industrial"] .btn-primary { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); padding-right: 36px; }
+  body[data-variant="editorial"] .btn { border-radius: 999px; }
+  body[data-variant="cyber"] .btn { border-radius: 2px; }
+
+  /* quote highlight — pen-ink blue across variants, no background */
+  .team-quote-highlight {
+    background: transparent !important;
+    color: #1e3a8a !important;
+    padding: 0 !important;
+  }
+  body[data-theme="dark"] .team-quote-highlight {
+    color: #7a96e8 !important;
+  }
+  .theme-toggle {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--fg-dim);
+    cursor: pointer;
+    transition: all .2s ease;
+    flex-shrink: 0;
+  }
+  .theme-toggle .ic-lg { width: 16px; height: 16px; }
+  .theme-toggle:hover { color: var(--accent); }
+  .nav-divider { width: 1px; height: 20px; background: var(--line-bright); flex-shrink: 0; }
+
+  /* ═══════════ LIGHT MODE — INDUSTRIAL ═══════════ */
+  body[data-variant="industrial"][data-theme="light"] {
+    --bg: #f5f4f2;
+    --bg-2: #ebebea;
+    --bg-raised: #e2e1df;
+    --fg: #0e0f10;
+    --fg-dim: #4a4b48;
+    --fg-faint: #9a9a98;
+    --line: #d4d3d0;
+    --line-bright: #b8b7b4;
+    --accent-contrast: #f5f4f2;
+  }
+
+  /* ═══════════ LIGHT MODE — EDITORIAL ═══════════ */
+  body[data-variant="editorial"][data-theme="light"] {
+    --bg: #faf7f0;
+    --bg-2: #f2ede0;
+    --bg-raised: #e8e0cc;
+    --fg: #1a1714;
+    --fg-dim: #5a5040;
+    --fg-faint: #9a8e78;
+    --line: #ddd6c4;
+    --line-bright: #c8bea8;
+    --accent-contrast: #faf7f0;
+  }
+
+  /* ═══════════ LIGHT MODE — CYBER (disabled — dark only) ═══════════ */
+
+  /* header bg in light mode */
+  body[data-theme="light"] header.site {
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+  }
+
+  /* ═══════════ HEADER ═══════════ */
+  .alert {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    text-align: center;
+  }
+  .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 10px; vertical-align: 1px; animation: pulse 2s ease-in-out infinite; }
+  .alert.is-offline .dot { background: var(--fg-faint); animation: none; opacity: 0.5; }
+  .alert .offline-tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 1px 6px;
+    background: var(--fg-faint);
+    color: var(--bg);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    border-radius: 2px;
+    vertical-align: 1px;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .alert a { color: var(--accent); }
+
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklab, var(--bg) 85%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; color: var(--fg); }
+  .brand-logo { height: 44px; width: 220px; display: block; color: var(--fg); }
+  body[data-variant="editorial"] .brand-logo { color: var(--accent); }
+  body[data-variant="cyber"] .brand-logo { color: var(--fg); }
+
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 500;
+    color: var(--fg-dim);
+    position: relative;
+    transition: color .15s ease;
+  }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; bottom: 4px;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 0 !important;
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600;
+    color: var(--accent);
+    padding: 10px 16px;
+    border: 1px solid var(--line-bright);
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .nav-cta:hover { background: color-mix(in oklab, var(--accent) 10%, transparent); }
+
+  .menu-btn { display: none; color: var(--fg); padding: 8px; }
+
+  /* ═══════════ HERO ═══════════ */
+  .hero {
+    position: relative;
+    height: calc(100vh - 77px - 39px);
+    height: calc(100dvh - 77px - 39px);
+    min-height: 480px;
+    display: grid;
+    overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.42) contrast(1.08) saturate(0.85);
+  }
+  body[data-variant="editorial"] .hero-bg img { filter: brightness(0.38) contrast(1.05) saturate(0.6) sepia(0.3); }
+  body[data-variant="editorial"][data-theme="light"] .hero-bg img { filter: brightness(0.9) contrast(1.0) saturate(0.4) sepia(0.3); opacity: 0.18; }
+  body[data-variant="industrial"][data-theme="light"] .hero-bg img { filter: brightness(0.9) contrast(1.0) saturate(0.5); opacity: 0.18; }
+  body[data-variant="cyber"] .hero-bg img { filter: brightness(0.4) contrast(1.15) saturate(0.7) hue-rotate(-15deg); }
+
+  .hero-bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, transparent 30%, var(--bg) 100%),
+      linear-gradient(90deg, color-mix(in oklab, var(--bg) 70%, transparent) 0%, transparent 55%);
+  }
+  body[data-variant="industrial"] .hero-bg::after {
+    background:
+      linear-gradient(180deg, transparent 30%, var(--bg) 100%),
+      linear-gradient(90deg, color-mix(in oklab, var(--bg) 80%, transparent) 0%, transparent 60%);
+  }
+
+  .hero .wrap {
+    position: relative; z-index: 2;
+    width: 100%;
+    align-self: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  /* Editorial runs on heavier serif display type — push the trust strip
+     away from hero-meta so they don't crowd each other */
+  body[data-variant="editorial"] .trust { margin-top: 64px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: end;
+  }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .hero-title .line { display: block; }
+  .hero-title .accent { color: var(--accent); }
+  body[data-variant="editorial"] .hero-title .accent-word {
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  body[data-variant="industrial"] .hero-title .accent-word {
+    color: var(--accent);
+  }
+  body[data-variant="cyber"] .hero-title .accent-word {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--fg-dim);
+    max-width: 46ch;
+    margin-top: 16px;
+  }
+  .hero-cta-group {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 14px 12px;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+  .hero-ctas { display: contents; }
+  .hero-cta-group .btn { width: auto; align-self: start; }
+  .hero-cta-note {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    color: var(--fg-faint);
+    text-transform: uppercase;
+  }
+  .hero-cta-note a { color: var(--fg-dim); text-decoration: underline; }
+  .hero-cta-note .phone-hours { color: var(--fg-faint); white-space: nowrap; }
+
+  /* Contact-section live phone status tag (sibling of // Workshop — Gin / // Office landline) */
+  .contact-detail .v:has(.phone-live) { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px; }
+  .phone-live {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    white-space: nowrap;
+  }
+  .phone-live .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg-faint);
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .phone-live.is-online .dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .meta-item .mono { color: var(--fg-faint); opacity: 0.8; font-size: 11px; display: block; margin-bottom: 6px; }
+  /* Hero meta labels (// WORKSHOP RATE, // MOT FROM, …). Own class so
+     we can brighten them per-variant without disturbing other .mono
+     text. Default: inherit the faint .meta-item .mono look. */
+  .meta-label {}
+  /* Refined cyber: labels were hard to read at fg-faint 0.8. Bump to
+     a lighter blue-grey at full opacity + a touch more letter-spacing
+     so they read as a distinct caption rather than a murky accent. */
+  body[data-variant="cyber"] .meta-label {
+    color: #a4acc0;
+    opacity: 1;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+  }
+  .meta-item strong { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+  body[data-variant="editorial"] .meta-item strong { text-transform: none; font-weight: 600; letter-spacing: -0.01em; }
+  body[data-variant="cyber"] .meta-item strong { text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
+
+  .hero-marks { display: none; }
+
+  /* ═══════════ PINBOARD (sticky notes) ═══════════
+     A) Visitor personal notes — localStorage, yellow, editable/deletable,
+        live in #pinboard (fixed top-right column).
+     B) Gin's hero-notes — freeform stickies loaded from docs/hero-notes.json,
+        with individual position/size/colour/rotation/label/text. Rendered
+        into #heroNotes (absolute overlay inside .hero) on desktop, or
+        stacked into the same pinboard column on mobile for readability.
+        Edited via tools/hero-editor.html (duplicate of the live site + an
+        export module); Gin pastes the JSON into the data file on GitHub.
+
+     Desktop (≥901px): #pinboard stays top-right (user notes); #heroNotes
+     overlays .hero with stickies positioned at x%/y%.
+     Mobile (≤900px): hero-notes collapse into the #pinboard stack. */
+  .pinboard {
+    position: fixed;
+    /* Default position (top-right). JS overrides via inline top/left when the
+       user drags the handle, persists to localStorage. --pinboard-top is
+       set by JS: visibleAlertHeight + navHeight + 14px buffer. */
+    top: var(--pinboard-top, 128px);
+    right: 28px;
+    z-index: 40; /* below nav (50) so backdrop-blur still owns the top bar on scroll */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* let each sticky control its own width */
+    gap: 14px;
+    width: auto;
+    max-width: calc(100vw - 40px);
+    user-select: none;
+  }
+  .pinboard.is-dragging { transition: none; }
+  /* Invisible drag zone covering each sticky's red tape strip (::before).
+     Grab any sticky by its tape to move the whole pinboard. */
+  .sticky-drag {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 26px;
+    z-index: 3;
+    cursor: grab;
+    touch-action: none;
+  }
+  .pinboard.is-dragging .sticky-drag { cursor: grabbing; }
+  @media (max-width: 900px) {
+    /* Mobile: sticky notes are OFF by default. The pinboard only shows
+       hero-notes explicitly opted-in via visible_on_mobile:true (and not
+       yet dismissed by the visitor). If there's nothing to show,
+       render() adds .is-empty-mobile and we hide the whole column. */
+    .pinboard {
+      right: 12px;
+      width: auto;
+      gap: 10px;
+    }
+    .pinboard.is-empty-mobile { display: none !important; }
+    /* Swap the desktop tape for a 📌 emoji pin on mobile hero-stickies.
+       The emoji itself is a child element (.sticky-pin) — we just need
+       to suppress the tape pseudos here. */
+    .pinboard .sticky.is-hero::before,
+    .pinboard .sticky.is-hero::after { display: none !important; }
+    .pinboard .sticky.is-hero { padding-top: 22px; /* room for pin + close */ }
+    .sticky-pin {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
+      z-index: 2;
+    }
+    .sticky-close {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #2a2010;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.55;
+      z-index: 4;
+      transition: opacity 150ms ease;
+    }
+    .sticky-close:hover,
+    .sticky-close:focus-visible { opacity: 1; outline: none; }
+  }
+  /* On desktop the close button and emoji pin never appear. */
+  @media (min-width: 901px) {
+    .sticky-close, .sticky-pin { display: none !important; }
+  }
+  .sticky {
+    width: 200px;
+    min-height: 120px;
+    padding: 32px 16px 16px; /* extra top room for the red tape strip */
+    position: relative;
+    font-family: 'Caveat', 'Dancing Script', cursive;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #2a2010;
+    background: #fff59d;
+    /* Sharp paper corners — no rounding */
+    border-radius: 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.12);
+    transform: rotate(-1.4deg);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  /* Resize handle — bottom-right corner. Two diagonal lines (classic OS cue) */
+  .sticky-resize {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 16px; height: 16px;
+    cursor: nwse-resize;
+    z-index: 3;
+    touch-action: none;
+    background:
+      linear-gradient(135deg,
+        transparent 0%, transparent 55%,
+        rgba(0,0,0,0.28) 56%, rgba(0,0,0,0.28) 62%,
+        transparent 63%, transparent 72%,
+        rgba(0,0,0,0.28) 73%, rgba(0,0,0,0.28) 79%,
+        transparent 80%);
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  .sticky:hover .sticky-resize,
+  .sticky:focus-within .sticky-resize,
+  .sticky.is-resizing .sticky-resize { opacity: 1; }
+  .sticky.is-resizing { transition: none; }
+  /* Red tape strips — 6 randomized variants pick per sticky via data-tape.
+     Variants 1,5,6 use one strip (::before). Variants 2,3 use one diagonal
+     corner strip. Variant 4 uses two diagonal corners (::before + ::after).
+     Per-sticky --tape-rot and --tape-len fine-tune angle/length within a
+     variant so no two stickies look identical. */
+  .sticky::before,
+  .sticky::after {
+    content: "";
+    position: absolute;
+    height: 16px;
+    background: rgba(210, 50, 50, 0.78);
+    border-radius: 1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    pointer-events: none;
+    display: none; /* each variant opts in the pieces it needs */
+  }
+  /* Variant 1 — horizontal strip, centered on top edge (default). */
+  .sticky[data-tape="1"]::before,
+  .sticky:not([data-tape])::before {
+    display: block;
+    top: -6px;
+    left: 50%;
+    width: var(--tape-len, 62%);
+    transform: translateX(-50%) rotate(var(--tape-rot, -1.2deg));
+  }
+  /* Variant 2 — short diagonal tape across the TOP-LEFT corner. */
+  .sticky[data-tape="2"]::before {
+    display: block;
+    top: 10px;
+    left: -16px;
+    width: var(--tape-len, 72px);
+    transform: rotate(var(--tape-rot, -42deg));
+    transform-origin: 50% 50%;
+  }
+  /* Variant 3 — short diagonal tape across the TOP-RIGHT corner. */
+  .sticky[data-tape="3"]::before {
+    display: block;
+    top: 10px;
+    right: -16px;
+    width: var(--tape-len, 72px);
+    transform: rotate(var(--tape-rot, 42deg));
+    transform-origin: 50% 50%;
+  }
+  /* Variant 4 — both top corners taped diagonally. */
+  .sticky[data-tape="4"]::before {
+    display: block;
+    top: 10px; left: -16px;
+    width: var(--tape-len, 70px);
+    transform: rotate(var(--tape-rot, -42deg));
+  }
+  .sticky[data-tape="4"]::after {
+    display: block;
+    top: 10px; right: -16px;
+    width: var(--tape-len-2, 70px);
+    transform: rotate(var(--tape-rot-2, 42deg));
+  }
+  /* Variant 5 — short horizontal tape off-center LEFT on top edge. */
+  .sticky[data-tape="5"]::before {
+    display: block;
+    top: -6px;
+    left: 8%;
+    width: var(--tape-len, 40%);
+    transform: rotate(var(--tape-rot, -3deg));
+  }
+  /* Variant 6 — short horizontal tape off-center RIGHT on top edge. */
+  .sticky[data-tape="6"]::before {
+    display: block;
+    top: -6px;
+    right: 8%;
+    width: var(--tape-len, 40%);
+    transform: rotate(var(--tape-rot, 3deg));
+  }
+  .sticky:nth-child(even) { transform: rotate(1.8deg); }
+  .sticky:nth-child(3n) { transform: rotate(-0.6deg); }
+  .sticky:hover { transform: rotate(0); box-shadow: 0 12px 26px rgba(0,0,0,0.32), 0 3px 6px rgba(0,0,0,0.16); }
+  .sticky:focus-within { transform: rotate(0); }
+  .sticky-label {
+    position: absolute;
+    top: 16px; left: 12px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.42);
+  }
+  .sticky-body {
+    outline: none;
+    min-height: 70px;
+    margin-top: 10px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  /* "Send on WhatsApp" action at the bottom of each user sticky.
+     Turns the sticky into a draft-enquiry pad — write, then send. */
+  .sticky-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 6px 10px 6px 8px;
+    border-radius: 2px;
+    background: #25D366;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    cursor: pointer;
+    align-self: flex-start;
+    width: fit-content;
+    max-width: calc(100% - 24px); /* don't collide with the resize corner */
+  }
+  .sticky-wa svg {
+    width: 13px; height: 13px; fill: #fff;
+    flex-shrink: 0;
+  }
+  .sticky-wa:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.22);
+  }
+  .sticky-wa:active { transform: translateY(0); }
+  .sticky-wa.is-empty {
+    background: rgba(0,0,0,0.12);
+    color: rgba(0,0,0,0.35);
+    box-shadow: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .sticky-wa.is-empty svg { fill: rgba(0,0,0,0.35); }
+  .sticky-body:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(0,0,0,0.32);
+    font-style: italic;
+  }
+  .sticky-del {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 22px; height: 22px;
+    z-index: 4; /* above sticky-drag (3) so the close button remains clickable */
+    border: 0;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    line-height: 1;
+    color: rgba(0,0,0,0.4);
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 150ms ease, background 150ms ease, color 150ms ease;
+  }
+  .sticky:hover .sticky-del,
+  .sticky:focus-within .sticky-del { opacity: 1; }
+  .sticky-del:hover { background: rgba(0,0,0,0.08); color: rgba(180,20,20,0.9); }
+
+  /* Hero-notes (B) — Gin's stickies rendered from docs/hero-notes.json.
+     Five colour variants. Red tape is inherited from .sticky::before so
+     every note still reads as pinned to the board. */
+  .sticky.color-orange { background: #ffcc80; }
+  .sticky.color-pink   { background: #f8bbd0; }
+  .sticky.color-blue   { background: #b3e5fc; }
+  .sticky.color-green  { background: #c8e6c9; }
+  /* default .sticky background (#fff59d yellow) is also color-yellow */
+  .sticky.color-yellow { background: #fff59d; }
+  /* Legacy alias — old announcement class maps to orange. */
+  .sticky.is-announcement { background: #ffcc80; }
+  .sticky.is-announcement .sticky-label { color: rgba(139, 40, 0, 0.75); }
+
+  /* #heroNotes — absolute overlay inside .hero for Gin's freeform stickies.
+     On mobile (≤900px), hero-notes are NOT rendered here; JS puts them in
+     #pinboard so they stack readably with user notes. */
+  .hero-notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;            /* let clicks fall through to hero */
+    z-index: 3;                      /* above hero-bg overlay, below .wrap content when overlapping */
+  }
+  .hero-notes .sticky {
+    position: absolute;
+    pointer-events: auto;
+    /* Individual position/size set inline via style by JS. */
+  }
+  @media (max-width: 900px) {
+    .hero-notes { display: none; }   /* stickies rendered in mobile stack instead */
+  }
+
+  /* Mobile rotating sticky stack — desktop hidden, mobile shows fanned deck
+     of all hero-notes with swipe/tap cycling. Sits before .hero-meta in
+     hero-grid right column so it appears after the CTAs in mobile flow. */
+  .mobile-sticky-stack { display: none; }
+  @media (max-width: 900px) {
+    .mobile-sticky-stack {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 320px;
+      margin: 32px 0 20px;
+      border-top: 1px solid var(--line);
+      touch-action: pan-y;         /* let page scroll vertically; we handle horizontal */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .mobile-sticky-stack:empty { display: none; }
+    .mobile-sticky-stack::before {
+      content: "// GIN'S NEWS";
+      position: absolute;
+      top: 18px;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg-faint);
+      opacity: 0.8;
+    }
+    body[data-variant="cyber"] .mobile-sticky-stack::before {
+      color: #a4acc0;
+      opacity: 1;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+    }
+    .mobile-sticky-stack .sticky {
+      position: absolute;
+      top: 68px;
+      left: 50%;
+      width: 220px !important;     /* override inline width from buildHeroSticky */
+      height: 180px !important;
+      min-height: 0;
+      padding: 22px 16px 14px;
+      font-size: 15px;
+      transition: transform 340ms cubic-bezier(.25, .9, .3, 1),
+                  opacity 280ms ease-out;
+      cursor: grab;
+      will-change: transform;
+    }
+    .mobile-sticky-stack .sticky.is-top { cursor: pointer; }
+    .mobile-sticky-stack .sticky.is-dragging {
+      transition: none;
+      cursor: grabbing;
+    }
+    .mobile-sticky-stack .sticky.is-exiting {
+      transition: transform 320ms ease-in, opacity 220ms ease-in;
+    }
+    /* Pin emoji on mobile stack — subtler, top-center. Close button hidden
+       (cycling replaces dismissal). */
+    .mobile-sticky-stack .sticky-pin { display: none; }
+    .mobile-sticky-stack .sticky-close { display: none; }
+    /* Hint text below the stack — only visible when >1 note. */
+    .mobile-sticky-stack[data-count="1"] .stack-hint,
+    .mobile-sticky-stack[data-count="0"] .stack-hint { display: none; }
+    .mobile-sticky-stack .stack-hint {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      pointer-events: none;
+    }
+  }
+
+  /* Stagger pop + wobble on initial render (desktop only).
+     JS sets --rot (final rotation) and --anim-delay (stagger) per sticky. */
+  @media (min-width: 901px) {
+    @keyframes sticky-pop-in {
+      0%   { opacity: 0; transform: scale(0.92) rotate(0deg); }
+      70%  { opacity: 1; transform: scale(1)    rotate(calc(var(--rot, 0deg) * 1.15)); }
+      100% { opacity: 1; transform: scale(1)    rotate(var(--rot, 0deg)); }
+    }
+    .hero-notes .sticky.anim-in {
+      animation: sticky-pop-in 520ms cubic-bezier(.25, .9, .3, 1) both;
+      animation-delay: var(--anim-delay, 0ms);
+      transform-origin: 50% 50%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-notes .sticky.anim-in { animation: none; opacity: 1; }
+    }
+  }
+
+  /* "+ Add note" nav button — bordered pill, matches nav-cta rhythm. */
+  .nav-add-note {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 14px;
+    border: 1px solid var(--line-bright);
+    background: transparent;
+    color: var(--fg-dim);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .nav-add-note:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 8%, transparent);
+  }
+  .nav-add-note:active {
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+  }
+  .nav-add-note[disabled] {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: var(--line);
+    color: var(--fg-faint);
+    background: transparent;
+  }
+  @media (max-width: 900px) {
+    .nav-add-note { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .sticky { width: 100%; min-height: 110px; font-size: 16px; padding: 28px 13px 13px; }
+    .sticky-body { min-height: 58px; }
+  }
+
+  .hero-readout {
+    position: absolute; top: 28px; right: 28px;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-dim);
+    opacity: 0.88;
+    letter-spacing: 0.1em;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .hero-readout .val { color: var(--accent); }
+  @media (max-width: 900px) { .hero-readout { display: none; } }
+
+  /* ═══════════ TRUST STRIP ═══════════ */
+  .trust {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 24px 0;
+  }
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .trust-item { display: flex; align-items: center; gap: 14px; }
+  .trust-ic { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line-bright); color: var(--accent); }
+  body[data-variant="editorial"] .trust-ic { border-radius: 50%; }
+  .trust-text { font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.1; }
+  body[data-variant="editorial"] .trust-text { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; }
+  body[data-variant="cyber"] .trust-text { text-transform: none; font-weight: 600; letter-spacing: -0.02em; font-size: 15px; }
+  .trust-sub { font-family: var(--font-mono); font-size: 10px; color: var(--fg-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
+  @media (max-width: 720px) { .trust-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ═══════════ SECTION SCAFFOLD ═══════════ */
+  section.block { padding: 120px 0; position: relative; }
+  .block-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 64px; }
+  @media (max-width: 800px) { .block-head { grid-template-columns: 1fr; gap: 24px; } }
+  .block-head .h2 { max-width: 16ch; }
+  .block-head p { color: var(--fg-dim); max-width: 48ch; font-size: 17px; }
+  .section-index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    margin-bottom: 48px;
+  }
+  .section-index .tag { color: var(--accent); }
+
+  /* ═══════════ SERVICES ═══════════ */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  @media (max-width: 1000px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+  .svc {
+    padding: 32px 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    transition: background .2s ease;
+    min-height: 220px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+  }
+  .svc:hover { background: var(--bg-2); }
+  .svc-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-faint);
+    letter-spacing: 0.12em;
+    margin-bottom: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .svc-ic { color: var(--accent); }
+  .svc h3 { margin-bottom: 10px; }
+  .svc-desc { font-size: 14px; color: var(--fg-dim); line-height: 1.55; }
+  .svc-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* editorial serif slight change */
+  body[data-variant="editorial"] .services-grid {
+    border-top-color: var(--line-bright);
+    border-left: 0;
+  }
+  body[data-variant="editorial"] .svc {
+    border-left: 1px solid var(--line);
+    border-right: 0;
+  }
+
+  /* ═══════════ WHY ═══════════ */
+  .why-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .why-layout { grid-template-columns: 1fr; gap: 48px; } }
+  .why-lede { font-size: 19px; color: var(--fg-dim); line-height: 1.6; max-width: 54ch; margin-top: 24px; }
+  .why-list { margin-top: 36px; display: grid; gap: 18px; }
+  .why-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 15px; color: var(--fg); }
+  .why-list .ic { color: var(--accent); margin-top: 3px; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .stat {
+    padding: 40px 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 180px;
+    position: relative;
+  }
+  .stat-n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.02em; color: var(--accent); }
+  body[data-variant="editorial"] .stat-n { font-weight: 600; font-style: italic; }
+  .stat-l { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); }
+  .stat-note { font-size: 13px; color: var(--fg-faint); margin-top: auto; }
+
+  /* ═══════════ PROCESS ═══════════ */
+  .process {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    counter-reset: step;
+  }
+  @media (max-width: 900px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .process-steps { grid-template-columns: 1fr; } }
+  .step {
+    padding: 40px 28px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .step:last-child { border-right: 0; }
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    counter-increment: step;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .step h3 { margin-bottom: 10px; }
+  .step p { font-size: 14px; color: var(--fg-dim); line-height: 1.55; }
+  .step-mark { position: absolute; top: 40px; right: 28px; width: 32px; height: 32px; color: var(--fg-faint); }
+
+  /* ═══════════ PRICING ═══════════ */
+  .pricing-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+  @media (max-width: 900px) { .pricing-wrap { grid-template-columns: 1fr; gap: 40px; } }
+  .pricing-note {
+    padding: 24px;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-dim);
+    line-height: 1.7;
+    margin-top: 24px;
+  }
+  .pricing-note strong { color: var(--accent); display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid var(--line);
+  }
+  .price-table tr { border-bottom: 1px solid var(--line); transition: background .15s ease; }
+  .price-table tr:hover { background: var(--bg-2); }
+  .price-table td { padding: 22px 16px; vertical-align: top; }
+  .price-table td:first-child { padding-left: 0; width: 48%; }
+  .price-table td:last-child { padding-right: 0; text-align: right; white-space: nowrap; }
+  .price-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 0.02em; text-transform: uppercase; }
+  body[data-variant="editorial"] .price-name { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 20px; }
+  body[data-variant="cyber"] .price-name { text-transform: none; font-weight: 600; letter-spacing: -0.02em; font-size: 18px; }
+  .price-desc { font-size: 13px; color: var(--fg-dim); margin-top: 4px; }
+  .price-val { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.01em; color: var(--fg); }
+  body[data-variant="editorial"] .price-val { font-weight: 600; font-style: italic; }
+  .price-val .from { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-right: 6px; font-weight: 400; font-style: normal; }
+  .price-unit { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.12em; }
+
+  .rate-banner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 32px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    margin-top: 48px;
+  }
+  body[data-variant="editorial"] .rate-banner { border-radius: 4px; }
+  .rate-banner .rate-n { font-family: var(--font-display); font-size: 56px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+  body[data-variant="editorial"] .rate-banner .rate-n { font-weight: 600; font-style: italic; }
+  .rate-banner .rate-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
+  .rate-banner .rate-desc { font-size: 15px; font-weight: 500; max-width: 42ch; }
+
+  /* ═══════════ TEAM ═══════════ */
+  .team-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) { .team-layout { grid-template-columns: 1fr; gap: 48px; } }
+
+  .team-portrait {
+    aspect-ratio: 4/5;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .team-portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.3) contrast(1.05);
+  }
+  body[data-variant="editorial"] .team-portrait img { filter: sepia(0.25) contrast(1.05); }
+  body[data-variant="cyber"] .team-portrait img { filter: grayscale(0.4) contrast(1.1) hue-rotate(-10deg); }
+  .team-portrait::after { content: none; }
+  .team-badge {
+    position: absolute; left: 20px; bottom: 20px; z-index: 2;
+    background: #0d1b3d; color: #ffffff;
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  }
+  body[data-variant="editorial"] .team-badge { border-radius: 2px; }
+  body[data-variant="cyber"] .team-badge { background: #0d1b3d; color: #ffffff; }
+
+  .team-quote {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  body[data-variant="editorial"] .team-quote { font-weight: 600; font-style: italic; }
+  body[data-variant="industrial"] .team-quote { text-transform: none; font-weight: 600; letter-spacing: 0; }
+  body[data-variant="cyber"] .team-quote { font-family: var(--font-body); letter-spacing: -0.02em; }
+
+  .team-meta { margin-top: 32px; display: grid; gap: 14px; }
+  .team-meta-row { display: flex; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .team-meta-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.14em; text-transform: uppercase; min-width: 140px; }
+  .team-meta-row .v { color: var(--fg); }
+
+  /* ═══════════ REVIEWS ═══════════ */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+  .review {
+    padding: 32px 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  body[data-variant="editorial"] .review { border-radius: 4px; }
+  .review .stars { display: flex; gap: 3px; color: var(--accent-2); }
+  body[data-variant="industrial"] .review .stars { color: var(--accent-2); }
+  body[data-variant="editorial"] .review .stars { color: var(--accent); }
+  body[data-variant="cyber"] .review .stars { color: var(--accent-2); }
+  .review blockquote {
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  body[data-variant="editorial"] .review blockquote { font-weight: 500; letter-spacing: -0.01em; font-size: 20px; }
+  body[data-variant="industrial"] .review blockquote { font-family: var(--font-body); font-weight: 500; }
+  body[data-variant="cyber"] .review blockquote { font-family: var(--font-body); }
+  .review .byline {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .review.primary { grid-row: span 1; background: var(--accent); color: var(--accent-contrast); border-color: transparent; }
+  .review.primary .stars { color: var(--accent-contrast); }
+  .review.primary .byline { color: color-mix(in oklab, var(--accent-contrast) 70%, transparent); border-top-color: color-mix(in oklab, var(--accent-contrast) 20%, transparent); }
+  .review.primary blockquote { font-size: 22px; }
+  body[data-variant="editorial"] .review.primary blockquote { font-size: 26px; }
+
+  .reviews-badge {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid var(--line-bright);
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .reviews-badge strong { color: var(--accent); font-size: 16px; }
+
+  /* ═══════════ CTA STRIP ═══════════ */
+  .cta-strip {
+    padding: 64px 0;
+    background: var(--bg-2);
+    text-align: center;
+    /* Overlap the 1px borders of adjacent sections so this strip reads as a single block */
+    position: relative;
+    z-index: 1;
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
+  .cta-strip .big-phone {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(42px, 6vw, 80px);
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    line-height: 1;
+    display: inline-block;
+    margin-top: 18px;
+  }
+  body[data-variant="editorial"] .cta-strip .big-phone { font-weight: 600; font-style: italic; }
+  body[data-variant="industrial"] .cta-strip .big-phone { text-transform: uppercase; letter-spacing: 0.01em; }
+  .cta-strip .big-phone:hover { color: var(--accent); }
+
+  /* ═══════════ LOCATION ═══════════ */
+  #location { position: relative; z-index: 1; margin-top: -1px; }
+  .location-grid { display: grid; grid-template-columns: 1fr 1.2fr; min-height: 520px; }
+  @media (max-width: 900px) { .location-grid { grid-template-columns: 1fr; } }
+  .location-info { padding: 64px 48px; background: color-mix(in srgb, var(--bg-2), white 4%); display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 900px) { .location-info { padding: 48px 32px; } }
+  .location-addr { font-family: var(--font-display); font-size: 28px; line-height: 1.3; margin-top: 18px; }
+  body[data-variant="editorial"] .location-addr { font-weight: 600; letter-spacing: -0.01em; }
+  body[data-variant="industrial"] .location-addr { text-transform: uppercase; font-weight: 700; letter-spacing: 0.01em; font-size: 26px; }
+  body[data-variant="cyber"] .location-addr { font-family: var(--font-body); font-weight: 600; letter-spacing: -0.02em; }
+  .location-hours { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .location-hours-row { display: flex; justify-content: space-between; padding: 8px 0; font-family: var(--font-mono); font-size: 13px; }
+  .location-hours-row .day { color: var(--fg-dim); }
+  .location-hours-row .time { color: var(--fg); }
+  .location-hours-row.closed .time { color: var(--fg-faint); }
+  .location-ctas { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+  .location-map { position: relative; min-height: 520px; background: color-mix(in srgb, var(--bg-2), white 4%); }
+  .location-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* ═══════════ CONTACT FORM ═══════════ */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 64px;
+  }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .contact-details { display: grid; gap: 20px; margin-top: 32px; }
+  .contact-detail { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .contact-detail .ic { color: var(--accent); margin-top: 4px; }
+  .contact-detail .k { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .contact-detail .v { font-size: 16px; color: var(--fg); }
+  .contact-detail a { color: var(--accent); }
+  .contact-detail a:hover { color: var(--fg); }
+
+  form.quote {
+    padding: 36px;
+    background: color-mix(in srgb, var(--bg-2), white 4%);
+    display: grid; gap: 14px;
+    scroll-margin-top: 80px;
+  }
+  body[data-variant="editorial"] form.quote { border-radius: 4px; }
+  .form-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  input, select, textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    padding: 14px 16px;
+    font: inherit;
+    font-size: 15px;
+    border-radius: 0;
+    transition: border-color .15s ease;
+  }
+  body[data-variant="editorial"] input,
+  body[data-variant="editorial"] select,
+  body[data-variant="editorial"] textarea { border-radius: 4px; }
+  input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 120px; }
+
+  /* Quote form fields: no hard border, slightly darker inset bg so they read as wells
+     — mixed against black so they stay distinct in both dark and light themes */
+  form.quote input,
+  form.quote select,
+  form.quote textarea {
+    background: color-mix(in srgb, var(--bg-2), black 6%);
+    border: 0;
+  }
+  form.quote input:focus,
+  form.quote select:focus,
+  form.quote textarea:focus {
+    box-shadow: inset 0 -2px 0 0 var(--accent);
+  }
+  .form-status { padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; display: none; }
+  .form-status.show { display: block; }
+  .form-status.success { background: color-mix(in oklab, #00e0a8 15%, transparent); color: #00e0a8; border: 1px solid #00e0a8; }
+  .form-status.error { background: color-mix(in oklab, #ff3b5c 15%, transparent); color: #ff7b8c; border: 1px solid #ff3b5c; }
+  .wa-followup-btn {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border: 1px solid currentColor;
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .wa-followup-btn:hover { background: #00e0a8; color: var(--bg); }
+  button[type="submit"] {
+    margin-top: 6px;
+    width: auto;
+    justify-self: start;
+  }
+
+  /* ═══════════ FOOTER ═══════════ */
+  footer.site {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    padding: 80px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+  @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-about { color: var(--fg-dim); font-size: 14px; max-width: 36ch; margin-top: 18px; line-height: 1.6; }
+  .footer-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .footer-list { display: grid; gap: 10px; font-size: 14px; color: var(--fg-dim); }
+  .footer-list a:hover { color: var(--fg); }
+  .footer-list.hours li { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; }
+  .footer-list.hours li .closed { color: var(--accent); }
+  .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+  .footer-social a {
+    width: 40px; height: 40px; display: grid; place-items: center;
+    border: 1px solid var(--line-bright); color: var(--fg-dim);
+    transition: all .15s ease;
+  }
+  .footer-social a:hover { border-color: var(--accent); color: var(--accent); }
+  body[data-variant="editorial"] .footer-social a { border-radius: 50%; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    padding-top: 28px; border-top: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--fg-faint);
+  }
+
+  /* ═══════════ WHATSAPP FLOAT ═══════════ */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 80;
+    width: 56px; height: 56px;
+    background: #25d366; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 0 0 1px rgba(37,211,102,0.2);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    text-decoration: none;
+  }
+  .whatsapp-float::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 8px; height: 8px;
+    background: rgba(0,0,0,0.2);
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.08);
+    filter: brightness(1.15);
+    box-shadow: 0 6px 24px rgba(37,211,102,0.5), 0 0 0 1px rgba(37,211,102,0.3);
+    color: #fff;
+  }
+  .whatsapp-float:active { transform: scale(0.96); }
+  .whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
+  body[data-variant="editorial"] .whatsapp-float {
+    clip-path: none;
+    border-radius: 50%;
+  }
+  body[data-variant="editorial"] .whatsapp-float::after { display: none; }
+  @media (max-width: 768px) {
+    .whatsapp-float {
+      width: 48px; height: 48px;
+      bottom: 16px; right: 16px;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+    .whatsapp-float svg { width: 24px; height: 24px; }
+    .whatsapp-float::after { width: 6px; height: 6px; }
+  }
+
+  /* ═══════════ TWEAKS TOGGLE ═══════════ */
+  .tweaks-toggle {
+    position: fixed;
+    bottom: 100px; right: 28px;
+    z-index: 90;
+    width: 44px; height: 44px;
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    color: var(--fg-dim);
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s ease;
+  }
+  .tweaks-toggle svg { width: 20px; height: 20px; }
+  .tweaks-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 768px) {
+    .tweaks-toggle { bottom: 80px; right: 16px; left: auto; width: 40px; height: 40px; }
+    .tweaks-toggle svg { width: 18px; height: 18px; }
+  }
+
+  /* ═══════════ TWEAKS PANEL ═══════════ */
+  #tweaks {
+    position: fixed;
+    right: 24px; top: 100px;
+    z-index: 100;
+    background: var(--bg-2);
+    border: 1px solid var(--line-bright);
+    padding: 20px;
+    width: 260px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg);
+    display: none;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  }
+  #tweaks.show { display: block; }
+  #tweaks h4 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  #tweaks .tw-section { margin-bottom: 18px; }
+  #tweaks .tw-label { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; display: block; }
+  #tweaks .tw-opts { display: grid; gap: 6px; }
+  #tweaks .tw-opts button {
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--fg-dim);
+    text-align: left;
+    font: inherit;
+    transition: all .15s ease;
+  }
+  #tweaks .tw-opts button:hover { border-color: var(--line-bright); color: var(--fg); }
+  #tweaks .tw-opts button.active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+  #tweaks .tw-close { position: absolute; top: 10px; right: 14px; color: var(--fg-dim); font-size: 18px; }
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .menu-btn { display: inline-flex; }
+    section.block { padding: 80px 0; }
+    .block-head { margin-bottom: 40px; }
+    .hero-meta { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ═══════════ MOBILE POLISH ═══════════ */
+  @media (max-width: 768px) {
+    :root { --gutter: 20px; }
+
+    .alert { font-size: 10.5px; padding: 8px 12px; letter-spacing: 0.06em; line-height: 1.4; }
+
+    .nav { height: 64px; }
+    .brand-logo { height: 36px; width: 170px; }
+    .theme-toggle { width: 34px; height: 34px; }
+
+    .nav-links.is-open {
+      display: flex !important;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      gap: 0;
+    }
+    .nav-links.is-open a {
+      padding: 14px var(--gutter);
+      text-align: left;
+      color: var(--fg);
+      transition: background .15s ease, color .15s ease;
+    }
+    .nav-links.is-open a::after { display: none; }
+    .nav-links.is-open a:active,
+    .nav-links.is-open a:focus {
+      background: color-mix(in oklab, var(--accent) 12%, transparent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .hero { min-height: 560px; height: auto; padding: 48px 0 40px; }
+    .hero .wrap { padding-top: 0; padding-bottom: 0; }
+    .hero-grid { gap: 32px; }
+    .hero-greeting { font-size: 22px !important; }
+    .h1 { font-size: clamp(44px, 11vw, 68px) !important; }
+    .hero-title { margin-top: 18px !important; }
+    .hero-sub { font-size: 15px; margin-top: 14px; }
+
+    .hero-cta-group { grid-template-columns: 1fr; gap: 10px; width: 100%; }
+    .hero-cta-group .btn { width: 100%; justify-content: center; min-height: 52px; }
+
+    .hero-meta { gap: 14px 16px; padding-top: 20px; }
+    .meta-item strong { font-size: 16px; }
+
+    .trust { padding: 18px 0; }
+    .trust-row { gap: 16px; }
+    .trust-ic { width: 34px; height: 34px; border: 0; background: transparent; }
+    .trust-text { font-size: 13px !important; }
+    .trust-sub { font-size: 9px; }
+
+    section.block { padding: 64px 0 !important; }
+    .section-index { font-size: 10px; margin-bottom: 32px; flex-wrap: wrap; gap: 4px; }
+    .block-head { margin-bottom: 32px !important; gap: 16px !important; }
+    .block-head p { font-size: 15px; }
+    .h2 { font-size: clamp(30px, 8vw, 44px) !important; }
+    .h3 { font-size: 18px !important; }
+
+    .svc { min-height: auto; padding: 26px 22px; }
+    .svc-num { margin-bottom: 22px; }
+
+    .step { padding: 28px 22px; }
+    .step-mark { width: 24px; height: 24px; top: 28px; right: 22px; }
+
+    .why-lede { font-size: 16px; }
+    .why-list { margin-top: 26px; gap: 14px; }
+    .stat { padding: 26px 20px; min-height: 140px; }
+    .stat-n { font-size: 44px; }
+
+    .team-portrait { aspect-ratio: 3/4; }
+    .team-quote { font-size: 20px !important; line-height: 1.5 !important; }
+    .team-meta-row { flex-direction: column; gap: 4px; padding: 12px 0; }
+    .team-meta-row .k { min-width: 0; }
+
+    .pricing-wrap { gap: 28px; }
+    .price-table td { padding: 18px 0; font-size: 14px; }
+    .price-table td:first-child { padding-right: 12px; }
+    .price-name { font-size: 15px !important; }
+    .price-desc { font-size: 12px; }
+    .price-val { font-size: 22px; }
+    .price-unit { font-size: 10px; }
+
+    .rate-banner {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px 22px;
+      text-align: left;
+    }
+    .rate-banner .rate-n { font-size: 44px; }
+    .rate-banner .rate-desc { font-size: 14px; }
+
+    .review { padding: 24px 22px; }
+    .review blockquote { font-size: 15px !important; }
+    .review.primary blockquote { font-size: 17px !important; }
+    .review[style*="span 2"] { grid-column: span 1 !important; }
+
+    .cta-strip { padding: 48px 0; }
+    .cta-strip .big-phone { font-size: clamp(32px, 9vw, 52px) !important; }
+
+    .location-info { padding: 40px 22px !important; }
+    .location-addr { font-size: 22px !important; }
+    .location-map { min-height: 320px; }
+    .location-ctas .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
+
+    .contact-grid { gap: 32px; }
+    form.quote { padding: 24px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 10px; }
+    input, select, textarea { padding: 13px 14px; font-size: 16px; }
+
+    footer.site { padding: 56px 0 24px; }
+    .footer-grid { gap: 28px; margin-bottom: 32px; }
+    .footer-bottom { font-size: 10px; flex-direction: column; gap: 8px; }
+
+    .whatsapp-float { bottom: 16px; right: 16px; }
+
+    #tweaks {
+      right: 12px; left: 12px; top: auto; bottom: 80px;
+      width: auto; max-width: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero-meta { grid-template-columns: 1fr; }
+    .trust-row { grid-template-columns: 1fr; }
+    .section-index span:last-child { display: none; }
+    .location-ctas .btn { flex: 1 1 100%; }
+  }
+
+  /* Custom tooltip — replaces native title=""  */
+  [data-tip] {
+    position: relative;
+  }
+  [data-tip]::before,
+  [data-tip]::after {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 140ms ease, transform 140ms ease;
+    transition-delay: 0s; /* instant hide */
+    transform: translate(-50%, 4px);
+    z-index: 50;
+  }
+  [data-tip]::before {
+    content: attr(data-tip);
+    width: max-content;
+    max-width: 260px;
+    padding: 8px 11px;
+    background: rgba(20, 22, 26, 0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    color: #eaeaea;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 11px;
+    font-weight: 200;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    text-align: left;
+    white-space: normal;
+    border: 2px solid #ff5a1f;
+    border-radius: 2px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  [data-tip]::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: rgba(20, 22, 26, 0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border-right: 2px solid #ff5a1f;
+    border-bottom: 2px solid #ff5a1f;
+    bottom: calc(100% + 6px);
+    transform: translate(-50%, 4px) rotate(45deg);
+  }
+  [data-tip]:hover::before,
+  [data-tip]:hover::after,
+  [data-tip]:focus-visible::before,
+  [data-tip]:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition-delay: 450ms; /* delay appearance, instant hide */
+  }
+  [data-tip]:hover::after,
+  [data-tip]:focus-visible::after {
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+  /* Bottom-anchored tooltip for elements near top of viewport */
+  [data-tip][data-tip-pos="bottom"]::before {
+    bottom: auto;
+    top: calc(100% + 10px);
+  }
+  [data-tip][data-tip-pos="bottom"]::after {
+    bottom: auto;
+    top: calc(100% + 6px);
+    border: 2px solid #ff5a1f;
+    border-left: 0;
+    border-bottom: 0;
+  }
+  @media (hover: none) {
+    [data-tip]::before,
+    [data-tip]::after { display: none; }
+    /* Tap-to-reveal on touch devices: JS toggles .is-tip-open on the element
+       that owns data-tip (first tap shows, second tap allows default). */
+    [data-tip].is-tip-open::before,
+    [data-tip].is-tip-open::after {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition-delay: 0s;
+    }
+    [data-tip].is-tip-open::after {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+  }
+</style>
+</head>
+<body data-variant="cyber">
+
+<!-- Icon sprite (shared) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <defs>
+    <symbol id="i-mot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></symbol>
+    <symbol id="i-service" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="i-diag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M5 12l3-3 3 4 3-5 3 4h2"/></symbol>
+    <symbol id="i-tyre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></symbol>
+    <symbol id="i-weld" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l3-8 4 2 3-8"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-clutch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V6h3v3h4V6h3l2 3h2v6h-2l-2 3h-3v-3h-4v3H7v-2H5v-4h2z"/></symbol>
+    <symbol id="i-ac" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.5-2 2-2h2V2h-3c-3 0-5 1.8-5 5v3H6v4h3v8h4z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-pound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6a4 4 0 0 0-7 3v3H7m1 0h7M7 12v2a4 4 0 0 1-2 3.4.5.5 0 0 0 .3.9H18"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l2-5a2 2 0 0 1 2-1h6a2 2 0 0 1 2 1l2 5v5h-3v-2H8v2H5z"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="16" r="1.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6.3 6.3L9 9M15 15l2.7 2.7M6.3 17.7L9 15M15 9l2.7-2.7"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.75-.86-2-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.6-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.4.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12 2C6.5 2 2 6.5 2 12c0 2.1.65 4.05 1.75 5.65L2 22l4.5-1.7c1.55 1 3.45 1.7 5.5 1.7 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Alert (message swaps inside/outside opening hours by JS) -->
+<div class="alert" id="bookingAlert">
+  <span class="dot"></span>
+  <span id="bookingAlertText">Now booking &mdash; call <a href="tel:+447894550082">07894 550 082</a> to schedule your MOT or service</span>
+</div>
+
+<!-- Header -->
+<header class="site">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="GD Autocentre home">
+      <svg class="brand-logo" viewBox="0 0 200 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="currentColor">
+          <text x="0" y="30" font-family="var(--font-display), sans-serif" font-weight="700" font-size="19" textLength="200" lengthAdjust="spacing">GD AUTOCENTRE</text>
+          <text x="0" y="48" font-family="var(--font-mono), monospace" font-size="9" textLength="200" lengthAdjust="spacing" opacity="0.7">EST · 2015 · GLOUCESTER</text>
+        </g>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#location">Location</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">
+      <svg class="ic"><use href="#i-arrow"/></svg>
+      Free Quote
+    </a>
+    <span class="nav-divider" aria-hidden="true"></span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+      <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" id="themeIcon">
+        <!-- sun -->
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button class="menu-btn" aria-label="Menu">
+      <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80" alt="Mechanic working in workshop">
+  </div>
+  <div class="hero-marks"></div>
+  <div class="hero-readout">
+    <div>153a Bristol Road · GL1</div>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-greeting" id="heroGreeting" style="font-family:'Caveat',cursive; font-size:30px; font-weight:500; letter-spacing:0.01em; display:block; margin-bottom:6px; opacity:0.85; color:var(--fg);"></span>
+        <div style="margin-bottom:14px;">
+          <span id="heroStatus" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); display:inline-flex; align-items:center; gap:7px;"></span>
+        </div>
+        <h1 class="h1 hero-title" style="margin-top: 28px;">
+          <span class="line">Your Car</span>
+          <span class="line">In <span class="accent-word">Expert</span></span>
+          <span class="line">Hands.</span>
+        </h1>
+        <p class="hero-sub">
+          Independent garage with 10+ years experience. Honest service, fair prices, and no unnecessary work. All makes and models welcome.
+        </p>
+        <div class="hero-cta-group">
+          <div class="hero-ctas">
+            <span id="callGinWrap" class="call-gin-wrap">
+              <a href="tel:+447894550082" id="callGinBtn" class="btn btn-primary">
+                <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
+              </a>
+            </span>
+            <a href="#quoteForm" class="btn btn-ghost">
+              Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+          <p class="hero-cta-note">
+            Gin works on cars in the workshop — mobile gets picked up fastest.<br>
+            Office landline: <a href="tel:01452422405">01452 422 405</a> <span class="phone-hours">&middot; Mon&ndash;Fri 09:00&ndash;17:30</span>
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="mobile-sticky-stack" id="mobileStickyStack" aria-label="Pinned notes from Gin"></div>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span class="mono meta-label">// WORKSHOP RATE</span>
+            <strong>£75/hr + VAT</strong>
+          </div>
+          <div class="meta-item">
+            <span class="mono meta-label">// MOT FROM</span>
+            <strong>£50</strong>
+          </div>
+          <div class="meta-item">
+            <span class="mono meta-label">// AVERAGE REVIEW</span>
+            <strong>4.9 / 5.0</strong>
+          </div>
+          <div class="meta-item">
+            <span class="mono meta-label">// TURNAROUND</span>
+            <strong>Same day*</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Gin's hero-notes (B) live here — absolute-positioned freeform stickies.
+       Populated by JS from docs/hero-notes.json. On mobile, JS moves them
+       into #pinboard instead for readability. -->
+  <div class="hero-notes" id="heroNotes" aria-label="Pinned notes from Gin"></div>
+</section>
+
+<!-- Trust strip -->
+<section class="trust">
+  <div class="wrap trust-row">
+    <div class="trust-item">
+      <div class="trust-ic"><svg class="ic"><use href="#i-shield"/></svg></div>
+      <div>
+        <div class="trust-text">10+ Years</div>
+        <div class="trust-sub">Industry experience</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic"><svg class="ic"><use href="#i-star"/></svg></div>
+      <div>
+        <div class="trust-text">71+ Reviews</div>
+        <div class="trust-sub">Highly rated</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+      <div>
+        <div class="trust-text">Female-Friendly</div>
+        <div class="trust-sub">Everyone welcome</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-ic"><svg class="ic"><use href="#i-spark"/></svg></div>
+      <div>
+        <div class="trust-text">Performance</div>
+        <div class="trust-sub">Specialists welcome</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="section-index">
+      <span>01 · Services</span>
+      <span class="tag">What we do</span>
+    </div>
+    <div class="block-head">
+      <h2 class="h2">From routine care<br>to <span class="italic-em">major repairs.</span></h2>
+      <p>We keep your car running at its best with professional care and modern diagnostic equipment. All work is explained clearly, in plain English, before we start.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc">
+        <div class="svc-num"><span>01</span><svg class="ic-lg svc-ic"><use href="#i-mot"/></svg></div>
+        <div>
+          <h3 class="h3">MOT Testing</h3>
+          <p class="svc-desc">MOTs arranged with pre-inspection checks. Failed? We handle repairs to get you back on the road fast.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>02</span><svg class="ic-lg svc-ic"><use href="#i-service"/></svg></div>
+        <div>
+          <h3 class="h3">Full Servicing</h3>
+          <p class="svc-desc">Comprehensive services for all makes and models. Manufacturer standards without the dealer price tag.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>03</span><svg class="ic-lg svc-ic"><use href="#i-diag"/></svg></div>
+        <div>
+          <h3 class="h3">Diagnostics</h3>
+          <p class="svc-desc">Modern computer diagnostics to pinpoint engine faults, warning lights and electrical issues with precision.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>04</span><svg class="ic-lg svc-ic"><use href="#i-tyre"/></svg></div>
+        <div>
+          <h3 class="h3">Tyre Fitting</h3>
+          <p class="svc-desc">New tyres supplied and fitted. Competitive prices on all major brands with balancing available.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>05</span><svg class="ic-lg svc-ic"><use href="#i-weld"/></svg></div>
+        <div>
+          <h3 class="h3">Welding</h3>
+          <p class="svc-desc">Expert welding for MOT failures, rust damage, exhaust work and structural repairs.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>06</span><svg class="ic-lg svc-ic"><use href="#i-clutch"/></svg></div>
+        <div>
+          <h3 class="h3">Clutch &amp; Belts</h3>
+          <p class="svc-desc">Clutch replacements and timing belt changes. Prevent costly engine damage with timely service.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>07</span><svg class="ic-lg svc-ic"><use href="#i-engine"/></svg></div>
+        <div>
+          <h3 class="h3">Engine &amp; Gearbox</h3>
+          <p class="svc-desc">Major mechanical repairs including full engine and gearbox replacements. No job too big.</p>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-num"><span>08</span><svg class="ic-lg svc-ic"><use href="#i-ac"/></svg></div>
+        <div>
+          <h3 class="h3">Air Conditioning</h3>
+          <p class="svc-desc">A/C servicing, regas and leak repair. Stay cool — we service all vehicle air con systems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="block process" id="process" style="padding: 100px 0;">
+  <div class="wrap">
+    <div class="section-index">
+      <span>02 · How it works</span>
+      <span class="tag">Simple, honest process</span>
+    </div>
+    <div class="block-head">
+      <h2 class="h2">No surprises.<br>Just <span class="italic-em">straight talking.</span></h2>
+      <p>Here's exactly what to expect when you bring your car to us. No jargon, no pressure, no hidden costs.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <svg class="ic step-mark"><use href="#i-phone"/></svg>
+        <h3 class="h3">Get in touch</h3>
+        <p>Call, WhatsApp or use the form. Tell us what's happening — we'll give you a rough idea right away.</p>
+      </div>
+      <div class="step">
+        <svg class="ic step-mark"><use href="#i-car"/></svg>
+        <h3 class="h3">Drop off</h3>
+        <p>Bring your car in at a time that suits you. Free parking on-site and we're easy to find on Bristol Road.</p>
+      </div>
+      <div class="step">
+        <svg class="ic step-mark"><use href="#i-diag"/></svg>
+        <h3 class="h3">Inspect &amp; quote</h3>
+        <p>We inspect, explain what's needed, and give you a clear quote before any work begins. You decide.</p>
+      </div>
+      <div class="step">
+        <svg class="ic step-mark"><use href="#i-check"/></svg>
+        <h3 class="h3">Back on the road</h3>
+        <p>Most jobs done same day. We call as soon as it's ready and walk you through what was done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why / About -->
+<!-- Unified About + Team — single viewport, no redundant CTAs -->
+<section class="block" id="about" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-index">
+      <span>03 · About</span>
+      <span class="tag">Meet Gin</span>
+    </div>
+    <div class="team-layout" style="align-items: stretch;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="team-portrait" style="aspect-ratio: 4/3;">
+          <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1200&q=80" alt="Portrait of workshop owner in blue overalls">
+          <div class="team-badge">Owner · Mechanic</div>
+        </div>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d; border-right-color: rgba(255,255,255,0.18);"><div class="stat-n" style="font-size: 36px; color: #ffffff;">10+</div><div class="stat-l" style="color: #ffffff;">Years</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d;"><div class="stat-n" style="font-size: 36px; color: #ffffff;">All</div><div class="stat-l" style="color: #ffffff;">Makes &amp; models</div></div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <p class="eyebrow">Gintaras (Gin) · GD Autocentre</p>
+        <h2 class="h2" style="margin-top: 16px;">Honest work.<br><span class="italic-em">Fair prices.</span></h2>
+        <p class="team-quote" style="margin-top: 20px; font-family:'Caveat',cursive; font-weight:400; font-size:clamp(18px,2vw,24px); line-height:1.55; letter-spacing:0;">
+          <span class="team-quote-highlight">Every customer gets a straight answer and quality they can count on.</span>
+        </p>
+        <ul class="why-list" style="margin-top: 24px;">
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Transparent pricing · no hidden charges</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Female-friendly &amp; welcoming</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Performance specialists &amp; daily drivers</span></li>
+        </ul>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">100%</div><div class="stat-l">Independent</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">71+</div><div class="stat-l">Reviews · 4.9&#9733;</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="block" id="pricing">
+  <div class="wrap">
+    <div class="section-index">
+      <span>05 · Pricing</span>
+      <span class="tag">Indicative prices</span>
+    </div>
+    <div class="block-head">
+      <h2 class="h2">Straightforward<br><span class="italic-em">pricing.</span></h2>
+      <p>A clear starting point for the jobs we're asked about most. Every car's different — give us a call for a firm quote before we pick up a spanner.</p>
+    </div>
+
+    <div class="pricing-wrap">
+      <div>
+        <h3 class="h3" style="color: var(--accent); margin-bottom: 16px;">Servicing</h3>
+        <p style="color: var(--fg-dim); font-size: 15px; line-height: 1.6;">Indicative starting prices for servicing. For every other job Gin gives you a firm quote on-site — no guesswork, no surprises.</p>
+      </div>
+
+      <div>
+        <table class="price-table">
+          <tr>
+            <td>
+              <div class="price-name">Interim Service</div>
+              <div class="price-desc">Oil, filter, 30-point visual check</div>
+            </td>
+            <td>
+              <div class="price-val"><span class="from">From</span>£125</div>
+              <div class="price-unit">Including parts</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="price-name">Full Service</div>
+              <div class="price-desc">Oil, all filters, fluids, 60-point check</div>
+            </td>
+            <td>
+              <div class="price-val"><span class="from">From</span>£225</div>
+              <div class="price-unit">Including parts</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="rate-banner">
+      <div>
+        <div class="rate-label">Workshop labour</div>
+        <div class="rate-n">£75<span style="font-size: 22px; opacity: 0.6;">/hr + VAT</span></div>
+      </div>
+      <div class="rate-desc">
+        Flat rate. No diagnostics surcharge, no inflated shop fees. Most repairs billed in 15-minute increments after the first hour.
+      </div>
+      <a href="tel:+447894550082" class="btn" style="background: var(--accent-contrast); color: var(--accent); border: 1px solid var(--accent-contrast);">
+        <svg class="ic"><use href="#i-phone"/></svg> Get a firm quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="block" id="reviews" style="background: var(--bg-2);">
+  <div class="wrap">
+    <div class="section-index">
+      <span>06 · Reviews</span>
+      <span class="tag">Straight from customers</span>
+    </div>
+    <div class="block-head">
+      <h2 class="h2">What our<br><span class="italic-em">customers</span> say.</h2>
+      <p>71+ Google reviews and counting. Here's a taste straight from the map pin — <a href="https://maps.app.goo.gl/DwDZMNppEGjWnRPo9" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">read them all on Google</a>.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review primary">
+        <div class="stars">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+        </div>
+        <blockquote>"Best mechanics in Gloucester. Have used Gin for years. Always fair and reliable."</blockquote>
+        <div class="byline">V.D. · Google Review</div>
+      </div>
+      <div class="review">
+        <div class="stars">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+        </div>
+        <blockquote>"Always honest and never let me down. 5 stars and highly recommended."</blockquote>
+        <div class="byline">P.B. · Google Review</div>
+      </div>
+      <div class="review">
+        <div class="stars">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+        </div>
+        <blockquote>"Gintaras has always been a top man for us — genuine, helpful and honest."</blockquote>
+        <div class="byline">D.S. · Google Review</div>
+      </div>
+      <div class="review" style="grid-column: span 2;">
+        <div class="stars">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+        </div>
+        <blockquote>"Speedy service — I dropped it in when they opened and it was complete just after 12. Far cheaper than Ford."</blockquote>
+        <div class="byline">A.F. · Google Review · Front spring replacement</div>
+      </div>
+      <div class="review">
+        <div class="stars">
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+          <svg class="ic"><use href="#i-star"/></svg>
+        </div>
+        <blockquote>"Brilliant service, really reasonably priced and really professional."</blockquote>
+        <div class="byline">T.C. · Google Review · Brake work</div>
+      </div>
+    </div>
+    <div class="reviews-badge">
+      <strong>71+ Reviews</strong>
+      <span>Google &amp; Facebook · <a href="https://maps.app.goo.gl/DwDZMNppEGjWnRPo9" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Read all on Google</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="location-grid">
+    <div class="location-info">
+      <span class="eyebrow">07 · Find us</span>
+      <h2 class="location-addr" style="margin-top: 18px;">
+        153a Bristol Road<br>
+        Gloucester, GL1 5SY
+      </h2>
+      <p class="dim" style="margin-top: 12px; max-width: 40ch;">Located on Bristol Road — easy access from the A430 and city centre. Free on-site parking available.</p>
+      <div class="location-hours">
+        <div class="location-hours-row"><span class="day">Mon – Fri</span><span class="time">09:00 – 17:30</span></div>
+        <div class="location-hours-row closed"><span class="day">Saturday</span><span class="time">Closed</span></div>
+        <div class="location-hours-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div>
+      </div>
+      <div class="location-ctas">
+        <a href="https://www.google.com/maps/dir//153a+Bristol+Road,+Gloucester+GL1+5SY" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg class="ic"><use href="#i-pin"/></svg> Get directions
+        </a>
+        <a href="tel:+447894550082" class="btn btn-ghost">
+          <svg class="ic"><use href="#i-phone"/></svg> Call us
+        </a>
+      </div>
+    </div>
+    <div class="location-map">
+      <iframe
+        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=153a%20Bristol%20Road,%20Gloucester%20GL1%205SY+(GD%20Autocentre)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        loading="lazy"
+        title="GD Autocentre — 153a Bristol Road, Gloucester GL1 5SY">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="section-index">
+      <span>08 · Contact</span>
+      <span class="tag">Get in touch</span>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="h2">Get <span class="italic-em">in touch.</span></h2>
+        <p class="dim" style="margin-top: 16px; font-size: 17px; max-width: 40ch;">Call, WhatsApp, or drop us a message — we usually get back within an hour during business hours.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <svg class="ic ic-lg"><use href="#i-pin"/></svg>
+            <div>
+              <span class="k">Address</span>
+              <div class="v">153a Bristol Road<br>Gloucester, Gloucestershire GL1 5SY</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <svg class="ic ic-lg"><use href="#i-phone"/></svg>
+            <div>
+              <span class="k">Phone</span>
+              <div class="v"><a href="tel:+447894550082">07894 550 082</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px;">// Workshop — Gin</span><span class="phone-live" id="mobileStatus"></span></div>
+              <div class="v" style="margin-top:4px;"><a href="tel:01452422405" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">01452 422 405</a> <span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-faint); text-transform: uppercase; margin-left: 6px; cursor: help;" data-tip="Gin spends most of his time working on cars in the workshop — the mobile number above gets picked up fastest.">// Office landline</span><span class="phone-live" id="landlineStatus"></span></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <svg class="ic ic-lg"><use href="#i-mail"/></svg>
+            <div>
+              <span class="k">Email</span>
+              <div class="v"><a href="mailto:info@gdautocentre.com">info@gdautocentre.com</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <svg class="ic ic-lg"><use href="#i-clock"/></svg>
+            <div>
+              <span class="k">Opening Hours</span>
+              <div class="v">Monday – Friday · 09:00 – 17:30<br>Saturday &amp; Sunday · Closed</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <svg class="ic ic-lg"><use href="#i-fb"/></svg>
+            <div>
+              <span class="k">Facebook</span>
+              <div class="v"><a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener">GD Autocentre Ltd</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form id="quoteForm" class="quote" autocomplete="on">
+        <input type="hidden" name="access_key" value="1270a2af-6746-4da3-9e52-d649876aa959">
+        <input type="hidden" name="subject" value="New Quote Request - GD Autocentre Website">
+        <input type="hidden" name="from_name" value="GD Autocentre Website">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <input type="hidden" name="replyto" id="replyToField">
+        <div class="form-title">Request a quote</div>
+        <h3 class="h3" style="margin-bottom: 12px;">Tell us about the job.</h3>
+        <div class="form-status" id="formStatus"></div>
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="tel" name="phone" placeholder="Phone number" required>
+        </div>
+        <div class="form-row full">
+          <input type="email" name="email" placeholder="Email address (optional)" id="emailField">
+        </div>
+        <div class="form-row full">
+          <input type="text" name="vehicle" placeholder="Vehicle make &amp; model">
+        </div>
+        <div class="form-row full">
+          <select name="service">
+            <option value="" disabled selected>Select service needed</option>
+            <option>MOT Testing</option>
+            <option>Full Service</option>
+            <option>Diagnostics</option>
+            <option>Tyre Fitting</option>
+            <option>Welding Work</option>
+            <option>Clutch Replacement</option>
+            <option>Timing Belt</option>
+            <option>Gearbox Work</option>
+            <option>Engine Work</option>
+            <option>Air Conditioning</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row full">
+          <textarea name="message" placeholder="Tell us about the issue or what you need..."></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-ghost">Send enquiry <svg class="ic"><use href="#i-arrow"/></svg></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="brand">
+          <svg class="brand-logo" viewBox="0 0 200 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="currentColor">
+              <text x="0" y="30" font-family="inherit" font-weight="700" font-size="19" textLength="200" lengthAdjust="spacing">GD AUTOCENTRE</text>
+              <text x="0" y="48" font-family="monospace" font-size="9" textLength="200" lengthAdjust="spacing" opacity="0.7">EST · 2015 · GLOUCESTER</text>
+            </g>
+          </svg>
+        </a>
+        <p class="footer-about">Your local, friendly and reliable car repair and maintenance garage in Gloucester. Established 2015, serving the community with honest work and competitive prices.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/GDAutocentreLtd/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ic"><use href="#i-fb"/></svg></a>
+          <a href="https://wa.me/447894550082" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
+          <a href="tel:+447894550082" aria-label="Phone"><svg class="ic"><use href="#i-phone"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-head">Navigate</div>
+        <ul class="footer-list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Our process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-head">Hours</div>
+        <ul class="footer-list hours">
+          <li><span>Monday</span><span>09:00 – 17:30</span></li>
+          <li><span>Tuesday</span><span>09:00 – 17:30</span></li>
+          <li><span>Wednesday</span><span>09:00 – 17:30</span></li>
+          <li><span>Thursday</span><span>09:00 – 17:30</span></li>
+          <li><span>Friday</span><span>09:00 – 17:30</span></li>
+          <li><span>Saturday</span><span class="closed">Closed</span></li>
+          <li><span>Sunday</span><span class="closed">Closed</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-head">Visit</div>
+        <ul class="footer-list">
+          <li>153a Bristol Road</li>
+          <li>Gloucester, GL1 5SY</li>
+          <li><a href="tel:+447894550082">07894 550 082</a></li>
+          <li><a href="https://www.google.com/maps/dir//153a+Bristol+Road,+Gloucester+GL1+5SY" target="_blank" rel="noopener">Get directions →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 GD Autocentre Ltd · Company No. 12205703</div>
+      <div>Design upgrade · v2</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/447894550082" class="whatsapp-float" aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Tweaks toggle button -->
+<button class="tweaks-toggle" id="tweaksToggle" aria-label="Open design tweaks">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+    <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+    <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+  </svg>
+</button>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks">
+  <button class="tw-close" onclick="toggleTweaks(false)" aria-label="Close">×</button>
+  <h4>Tweaks</h4>
+  <div class="tw-section">
+    <label class="tw-label">Variant</label>
+    <div class="tw-opts" id="tw-variant">
+      <button data-v="industrial">A · Modern Industrial</button>
+      <button data-v="editorial">B · Editorial Workshop</button>
+      <button data-v="cyber">C · Refined Cyber</button>
+    </div>
+  </div>
+  <div class="tw-section">
+    <label class="tw-label">Accent</label>
+    <div class="tw-opts" id="tw-accent" style="grid-template-columns: repeat(4, 1fr); display: grid; gap: 6px;">
+      <button data-a="default" style="aspect-ratio:1; padding:0;" aria-label="Default"></button>
+      <button data-a="#ff5a1f" style="aspect-ratio:1; padding:0; background:#ff5a1f; border-color:#ff5a1f" aria-label="Orange"></button>
+      <button data-a="#d4a857" style="aspect-ratio:1; padding:0; background:#d4a857; border-color:#d4a857" aria-label="Gold"></button>
+      <button data-a="#00e0a8" style="aspect-ratio:1; padding:0; background:#00e0a8; border-color:#00e0a8" aria-label="Mint"></button>
+      <button data-a="#ef3e3e" style="aspect-ratio:1; padding:0; background:#ef3e3e; border-color:#ef3e3e" aria-label="Red"></button>
+      <button data-a="#5b9eff" style="aspect-ratio:1; padding:0; background:#5b9eff; border-color:#5b9eff" aria-label="Blue"></button>
+      <button data-a="#a78bfa" style="aspect-ratio:1; padding:0; background:#a78bfa; border-color:#a78bfa" aria-label="Violet"></button>
+      <button data-a="#f5f5f2" style="aspect-ratio:1; padding:0; background:#f5f5f2; border-color:#f5f5f2" aria-label="White"></button>
+    </div>
+  </div>
+  <div class="tw-section">
+    <label class="tw-label">Density</label>
+    <div class="tw-opts" id="tw-density">
+      <button data-d="comfy">Comfortable</button>
+      <button data-d="compact">Compact</button>
+    </div>
+  </div>
+  <div style="font-size: 10px; color: var(--fg-faint); margin-top: 12px; letter-spacing: 0.08em;">Tweaks persist across reload.</div>
+</div>
+
+<!-- Sticky notes pinboard — body-level so nothing affects its fixed positioning.
+     MUST be before the main <script> so pinboardModule can find it on run.
+     Mobile: pinboard is always visible; notes with visible_on_mobile:true
+     render here (no toggle). -->
+<div class="pinboard" id="pinboard" aria-label="Sticky notes"></div>
+
+<script>
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "variant": "cyber",
+    "accent": "default",
+    "density": "comfy"
+  }/*EDITMODE-END*/;
+
+  const LS_KEY = "gd-tweaks-v1";
+  function getTweaks() {
+    try { return { ...TWEAK_DEFAULTS, ...JSON.parse(localStorage.getItem(LS_KEY) || "{}") }; }
+    catch { return { ...TWEAK_DEFAULTS }; }
+  }
+  function setTweaks(t) {
+    localStorage.setItem(LS_KEY, JSON.stringify(t));
+    applyTweaks(t);
+  }
+  function applyTweaks(t) {
+    document.body.setAttribute("data-variant", t.variant);
+    // clear any previous overrides (on html, body, and all sections)
+    document.documentElement.style.removeProperty("--accent");
+    document.body.style.removeProperty("--accent");
+    document.querySelectorAll("section, .cta-strip").forEach(s => s.style.removeProperty("--accent"));
+    if (t.accent && t.accent !== "default") {
+      // use !important so it beats the variant-scoped and section-scoped rules
+      document.body.style.setProperty("--accent", t.accent, "important");
+    }
+    document.body.style.setProperty("--gutter", t.density === "compact" ? "24px" : "32px");
+    document.querySelectorAll("section.block").forEach(s => {
+      s.style.padding = t.density === "compact" ? "80px 0" : "";
+    });
+    // update active states
+    document.querySelectorAll("#tw-variant button").forEach(b => b.classList.toggle("active", b.dataset.v === t.variant));
+    document.querySelectorAll("#tw-accent button").forEach(b => b.classList.toggle("active", b.dataset.a === t.accent));
+    document.querySelectorAll("#tw-density button").forEach(b => b.classList.toggle("active", b.dataset.d === t.density));
+  }
+  function toggleTweaks(show) {
+    const el = document.getElementById("tweaks");
+    if (typeof show === "boolean") el.classList.toggle("show", show);
+    else el.classList.toggle("show");
+  }
+
+  document.querySelectorAll("#tw-variant button").forEach(b => {
+    b.addEventListener("click", () => {
+      const t = getTweaks(); t.variant = b.dataset.v; setTweaks(t);
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{variant:b.dataset.v}}, '*');
+    });
+  });
+  document.querySelectorAll("#tw-accent button").forEach(b => {
+    b.addEventListener("click", () => {
+      const t = getTweaks(); t.accent = b.dataset.a; setTweaks(t);
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accent:b.dataset.a}}, '*');
+    });
+  });
+  document.querySelectorAll("#tw-density button").forEach(b => {
+    b.addEventListener("click", () => {
+      const t = getTweaks(); t.density = b.dataset.d; setTweaks(t);
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{density:b.dataset.d}}, '*');
+    });
+  });
+
+  // edit mode protocol
+  window.addEventListener('message', (e) => {
+    if (!e.data || !e.data.type) return;
+    if (e.data.type === '__activate_edit_mode') toggleTweaks(true);
+    if (e.data.type === '__deactivate_edit_mode') toggleTweaks(false);
+  });
+  window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+  applyTweaks(getTweaks());
+
+  // ═══ THEME (light/dark) ═══
+  const THEME_KEY = "gd-theme-v1";
+  const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+  const sunSVG = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  function getSavedTheme() {
+    return localStorage.getItem(THEME_KEY) || 'auto';
+  }
+  function getEffectiveTheme(saved) {
+    return saved === 'auto' ? getSystemTheme() : saved;
+  }
+  function applyTheme(theme) {
+    const effective = getEffectiveTheme(theme);
+    const root = document.documentElement;
+    root.classList.add('no-transitions');
+    document.body.setAttribute('data-theme', effective);
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.innerHTML = effective === 'light' ? moonSVG : sunSVG;
+    // force reflow so the style change is committed while transitions are disabled
+    void root.offsetHeight;
+    setTimeout(() => root.classList.remove('no-transitions'), 60);
+  }
+  function toggleTheme() {
+    const current = getEffectiveTheme(getSavedTheme());
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  }
+
+  // init
+  applyTheme(getSavedTheme());
+
+  // greeting + workshop status (combined into one conversational 2-line block)
+  (function() {
+    const statusEl = document.getElementById('heroStatus');
+    const greetingEl = document.getElementById('heroGreeting');
+    if (!statusEl) return;
+
+    function getGreeting() {
+      const h = new Date().getHours();
+      return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+    }
+
+      const OPEN_H = 9;
+      const WORKSHOP_CLOSE_H = 17, WORKSHOP_CLOSE_M = 30; // cars on lift until 17:30
+      const PHONE_CLOSE_H = 18, PHONE_CLOSE_M = 0; // Gin picks up the phone until 18:00
+      // Legacy aliases used by existing status badge logic (workshop window)
+      const CLOSE_H = WORKSHOP_CLOSE_H, CLOSE_M = WORKSHOP_CLOSE_M;
+      const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+      // ── Opening-hours overrides (Google Sheets published as CSV) ───────────
+      // Gin edits a Google Sheet with columns: Date, Status, Open, Close, Note
+      // Sheet → File → Share → Publish to web → CSV. Paste the URL below.
+      // Empty URL = skip fetch; the site falls back to the default weekly schedule.
+      // See docs/opening-hours-sheet.md for the full template.
+      const OVERRIDES_CSV_URL = '';
+      let todayOverride = null; // { status: 'closed'|'open', openH, openM, closeH, closeM, note }
+
+      function todayISO() {
+        const d = new Date();
+        return d.getFullYear() + '-' +
+          String(d.getMonth() + 1).padStart(2, '0') + '-' +
+          String(d.getDate()).padStart(2, '0');
+      }
+      function parseCSV(text) {
+        const lines = text.trim().split(/\r?\n/);
+        if (!lines.length) return [];
+        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+        return lines.slice(1).map(line => {
+          const cells = line.split(',').map(c => c.trim());
+          const row = {};
+          headers.forEach((h, i) => row[h] = cells[i] || '');
+          return row;
+        });
+      }
+      function parseHM(s) {
+        if (!s) return null;
+        const [h, m] = s.split(':').map(Number);
+        if (isNaN(h)) return null;
+        return { h: h, m: isNaN(m) ? 0 : m };
+      }
+      async function fetchOverrides() {
+        if (!OVERRIDES_CSV_URL) return;
+        try {
+          const resp = await fetch(OVERRIDES_CSV_URL, { cache: 'no-store' });
+          if (!resp.ok) return;
+          const rows = parseCSV(await resp.text());
+          const today = todayISO();
+          const row = rows.find(r => r.date === today);
+          if (!row) return;
+          const status = (row.status || '').toLowerCase();
+          const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
+          if (status === 'open') {
+            const open = parseHM(row.open);
+            const close = parseHM(row.close);
+            if (open && close) {
+              o.openH = open.h; o.openM = open.m;
+              o.closeH = close.h; o.closeM = close.m;
+            } else {
+              return; // malformed row — ignore, use defaults
+            }
+          } else if (status !== 'closed') {
+            return; // unknown status — ignore
+          }
+          todayOverride = o;
+          if (typeof render === 'function') render();
+        } catch (e) {
+          // Silent fail — site continues on default schedule
+        }
+      }
+
+      function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
+      function fmt12(h, m) {
+        const period = h < 12 ? 'AM' : 'PM';
+        const h12 = h % 12 === 0 ? 12 : h % 12;
+        return h12 + ':' + String(m).padStart(2,'0') + ' ' + period;
+      }
+      function minsUntil(h, m, nowH, nowM) { return (h * 60 + m) - (nowH * 60 + nowM); }
+      function fmtDuration(mins) {
+        const h = Math.floor(mins / 60), m = mins % 60;
+        if (h > 0 && m > 0) return h + 'h ' + m + 'min';
+        if (h > 0) return h + 'h';
+        return m + 'min';
+      }
+      function nextOpenDay(dayOfWeek) {
+        // Mon=1..Fri=5 are open
+        let d = dayOfWeek;
+        for (let i = 1; i <= 7; i++) {
+          d = (d + 1) % 7;
+          if (d >= 1 && d <= 5) return DAYS[d];
+        }
+      }
+
+      function getStatus() {
+        const now = new Date();
+        const dow = now.getDay(); // 0=Sun,6=Sat
+        const h = now.getHours(), m = now.getMinutes();
+        const nowMins = h * 60 + m;
+
+        // Override path — today has a row in the Google Sheet
+        if (todayOverride) {
+          const noteSep = todayOverride.note ? ' · ' + todayOverride.note : '';
+          const nextOpen = nextOpenDay(dow);
+          if (todayOverride.status === 'closed') {
+            const notePrefix = todayOverride.note ? todayOverride.note + ' · ' : '';
+            return {
+              open: false,
+              text: 'Closed today' + noteSep,
+              line1Tail: "we're closed today",
+              line2: notePrefix + 'opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+            };
+          }
+          if (todayOverride.status === 'open' && todayOverride.openH != null) {
+            const openMins = todayOverride.openH * 60 + todayOverride.openM;
+            const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
+            if (nowMins < openMins) {
+              return {
+                open: false,
+                text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens at ' + fmt12(todayOverride.openH, todayOverride.openM) + ' · in ' + fmtDuration(openMins - nowMins)
+              };
+            }
+            if (nowMins >= closeMins) {
+              return {
+                open: false,
+                text: 'Closed' + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+              };
+            }
+            return {
+              open: true,
+              text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + noteSep,
+              line1Tail: "we're open",
+              line2: 'Closes at ' + fmt12(todayOverride.closeH, todayOverride.closeM) + ' · in ' + fmtDuration(closeMins - nowMins)
+            };
+          }
+        }
+
+        // Default path — regular Mon–Fri schedule
+        const isWeekday = dow >= 1 && dow <= 5;
+        const closeMins = CLOSE_H * 60 + CLOSE_M;
+        const openMins = OPEN_H * 60;
+
+        if (!isWeekday) {
+          return {
+            open: false,
+            text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed today",
+            line2: 'Opens ' + nextOpenDay(dow) + ' at ' + fmt12(OPEN_H, 0)
+          };
+        }
+        if (nowMins < openMins) {
+          return {
+            open: false,
+            text: 'Opens today at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens at ' + fmt12(OPEN_H, 0) + ' · in ' + fmtDuration(openMins - nowMins)
+          };
+        }
+        if (nowMins >= closeMins) {
+          const next = dow === 5 ? 'Monday' : DAYS[dow + 1];
+          return {
+            open: false,
+            text: 'Closed · opens ' + next + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens ' + next + ' at ' + fmt12(OPEN_H, 0)
+          };
+        }
+        const minsLeft = minsUntil(CLOSE_H, CLOSE_M, h, m);
+        return {
+          open: true,
+          text: 'Open · closes in ' + fmtDuration(minsLeft),
+          line1Tail: "we're open",
+          line2: 'Closes at ' + fmt12(CLOSE_H, CLOSE_M) + ' · in ' + fmtDuration(minsLeft)
+        };
+      }
+
+      const bookingAlert = document.getElementById('bookingAlert');
+      const bookingAlertText = document.getElementById('bookingAlertText');
+      const callGinBtn = document.getElementById('callGinBtn');
+      const callGinWrap = document.getElementById('callGinWrap');
+      const mobileStatusEl = document.getElementById('mobileStatus');
+      const landlineStatusEl = document.getElementById('landlineStatus');
+      const PHONE_LINK = '<a href="tel:+447894550082">07894 550 082</a>';
+      const ALERT_OPEN = 'Now booking &mdash; call ' + PHONE_LINK + ' to schedule your MOT or service';
+      const ALERT_CLOSED = '<span class="offline-tag">OFFLINE</span> To book your MOT or service &mdash; <a href="#contact" class="enquiry-link">leave an enquiry below</a> or call ' + PHONE_LINK + ' Mon&ndash;Fri 09:00&ndash;18:00';
+
+      // Touch-device first-tap-reveals-tooltip behaviour for the offline Call Gin button.
+      // Desktop keeps hover tooltip + single-click dial. On touch: first tap shows the
+      // tooltip and blocks dial; second tap (within TIP_TAP_WINDOW ms) dials normally.
+      const TIP_TAP_WINDOW = 6000;
+      let tipDismissTimer = null;
+      function closeCallTip() {
+        if (callGinWrap) callGinWrap.classList.remove('is-tip-open');
+        clearTimeout(tipDismissTimer);
+        tipDismissTimer = null;
+      }
+      if (callGinBtn && callGinWrap) {
+        callGinBtn.addEventListener('click', function(e) {
+          const isOffline = callGinBtn.classList.contains('is-offline');
+          const isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+          if (!isOffline || !isTouch) return; // desktop or online → normal click
+          if (callGinWrap.classList.contains('is-tip-open')) {
+            // Second tap → allow dial, close tooltip.
+            closeCallTip();
+            return;
+          }
+          // First tap → reveal tooltip, suppress dial.
+          e.preventDefault();
+          callGinWrap.classList.add('is-tip-open');
+          clearTimeout(tipDismissTimer);
+          tipDismissTimer = setTimeout(closeCallTip, TIP_TAP_WINDOW);
+        });
+        // Tap anywhere else closes the tooltip.
+        document.addEventListener('click', function(e) {
+          if (!callGinWrap.classList.contains('is-tip-open')) return;
+          if (callGinWrap.contains(e.target)) return;
+          closeCallTip();
+        }, true);
+      }
+
+      // Build the offline tooltip from the same schedule source as the status dot.
+      // Keep tel: clickable — voicemail still picks up; the tooltip just sets expectations.
+      function callOfflineTip(statusText) {
+        // statusText examples:
+        //   "Closed today · opens Saturday at 09:00"
+        //   "Opens today at 09:00"
+        //   "Closed · opens Monday at 09:00"
+        //   "Closed today · Christmas Day"
+        var tail = statusText ? statusText.replace(/^Closed( today)?(\s·\s)?/, '').replace(/^Open(s)?\s/, 'opens ') : '';
+        if (!tail) return 'Phone out of hours. You can still try — voicemail will pick up.';
+        return 'Phone out of hours — ' + tail + '. You can still try; voicemail picks up.';
+      }
+
+      function isPhoneOpen() {
+        const now = new Date();
+        const nowMins = now.getHours() * 60 + now.getMinutes();
+
+        // Override path — sheet row defines phone window same as workshop for overrides
+        if (todayOverride) {
+          if (todayOverride.status === 'closed') return false;
+          if (todayOverride.status === 'open' && todayOverride.openH != null) {
+            const openMins = todayOverride.openH * 60 + todayOverride.openM;
+            const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
+            return nowMins >= openMins && nowMins < closeMins;
+          }
+        }
+
+        // Default path — regular Mon–Fri 09:00–18:00
+        const dow = now.getDay();
+        const isWeekday = dow >= 1 && dow <= 5;
+        if (!isWeekday) return false;
+        return nowMins >= (OPEN_H * 60) && nowMins < (PHONE_CLOSE_H * 60 + PHONE_CLOSE_M);
+      }
+
+      function render() {
+        const s = getStatus();
+        if (greetingEl) {
+          greetingEl.textContent = getGreeting() + ' \u2014 ' + s.line1Tail + '.';
+        }
+        statusEl.innerHTML =
+          `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.line2}</span>`;
+        const phoneOpen = isPhoneOpen();
+        if (bookingAlertText) bookingAlertText.innerHTML = phoneOpen ? ALERT_OPEN : ALERT_CLOSED;
+        if (bookingAlert) bookingAlert.classList.toggle('is-offline', !phoneOpen);
+        if (callGinBtn) {
+          callGinBtn.classList.toggle('is-offline', !phoneOpen);
+          if (phoneOpen) {
+            callGinBtn.removeAttribute('aria-disabled');
+          } else {
+            callGinBtn.setAttribute('aria-disabled', 'true');
+          }
+        }
+        if (callGinWrap) {
+          if (phoneOpen) {
+            callGinWrap.removeAttribute('data-tip');
+          } else {
+            callGinWrap.setAttribute('data-tip', callOfflineTip(s.text));
+          }
+        }
+        // Mobile / landline: dot (green=online, grey=offline) + hours
+        if (mobileStatusEl) {
+          mobileStatusEl.classList.toggle('is-online', phoneOpen);
+          mobileStatusEl.innerHTML = '<span class="dot"></span>Mon\u2013Fri 09:00\u201318:00';
+        }
+        if (landlineStatusEl) {
+          landlineStatusEl.classList.toggle('is-online', s.open);
+          landlineStatusEl.innerHTML = '<span class="dot"></span>Mon\u2013Fri 09:00\u201317:30';
+        }
+      }
+
+      render();
+      fetchOverrides(); // async — will re-render if today has a row in the sheet
+      // update every minute
+      setInterval(render, 60000);
+  })();
+
+  // ═══════════ PINBOARD (sticky notes) ═══════════
+  // A) Visitor personal notes → localStorage, up to 2, editable/deletable,
+  //    rendered into #pinboard (fixed top-right column).
+  // B) Gin's hero-notes → freeform stickies loaded from docs/hero-notes.json,
+  //    with individual x%/y% position, size, colour, rotation, label, text.
+  //    Rendered into #heroNotes (absolute overlay inside .hero) on desktop,
+  //    or folded into the #pinboard column on mobile for readability.
+  //    Edited via tools/hero-editor.html (duplicate site + export module);
+  //    Gin pastes exported JSON into docs/hero-notes.json on GitHub.
+  //    Empty/missing file → hero-notes just don't render; A always works.
+  window.GD_PINBOARD_API = null; // editor module hooks into this to unlock edit mode
+  (function pinboardModule() {
+    const pinboard = document.getElementById('pinboard');
+    const heroNotesEl = document.getElementById('heroNotes');
+    const mobileStackEl = document.getElementById('mobileStickyStack');
+    if (!pinboard) return;
+
+    let stackActiveIdx = 0;
+    let stackNotes = [];          // notes currently rendered in the mobile stack
+    let stackHandlersBound = false;
+
+    const STORAGE_KEY = 'gd_user_notes';
+    const POS_KEY = 'gd_pinboard_pos';
+    const DISMISSED_KEY = 'gd_dismissed_hero_notes'; // mobile: ids the visitor has closed
+    const MAX_USER_NOTES = 2;
+    const HERO_NOTES_URL = 'docs/hero-notes.json';
+
+    let heroNotes = [];              // from docs/hero-notes.json — public to all visitors
+    let userNotes = loadUserNotes();
+    let dismissedIds = loadDismissed();
+    let customPos = loadPos(); // {left, top} in px, or null = default top-right
+
+    function loadDismissed() {
+      try {
+        const raw = localStorage.getItem(DISMISSED_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter(x => typeof x === 'string') : [];
+      } catch { return []; }
+    }
+    function saveDismissed() {
+      try { localStorage.setItem(DISMISSED_KEY, JSON.stringify(dismissedIds)); } catch {}
+    }
+    function dismissHeroNote(id) {
+      if (!id) return;
+      if (dismissedIds.indexOf(id) === -1) dismissedIds.push(id);
+      saveDismissed();
+      render();
+    }
+
+    function loadPos() {
+      try {
+        const raw = localStorage.getItem(POS_KEY);
+        if (!raw) return null;
+        const p = JSON.parse(raw);
+        if (typeof p.left === 'number' && typeof p.top === 'number') return p;
+        return null;
+      } catch { return null; }
+    }
+    function savePos(pos) {
+      try { localStorage.setItem(POS_KEY, JSON.stringify(pos)); } catch {}
+    }
+
+    function loadUserNotes() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.slice(0, MAX_USER_NOTES) : [];
+      } catch { return []; }
+    }
+    function saveUserNotes() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(userNotes)); } catch {}
+    }
+
+    // Valid colour enum → CSS class suffix. Anything else falls back to yellow.
+    const VALID_COLORS = { yellow: 1, orange: 1, pink: 1, blue: 1, green: 1 };
+
+    // Deterministic 32-bit hash of an arbitrary string — same input always
+    // yields the same number, so tape placement is stable across re-renders.
+    function hashString(s) {
+      s = String(s || '');
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < s.length; i++) {
+        h = (h ^ s.charCodeAt(i)) >>> 0;
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    // Pick a tape variant (1..6) + random-looking rotation/length from a
+    // seed. Sets data-tape and inline CSS custom properties on the sticky.
+    // Variant 1 is the most common (weighted) to keep the default look
+    // dominant; corner + off-center variants sprinkle in variety.
+    function applyTape(el, seed) {
+      const h = hashString(seed);
+      // Weighted pick: 35% v1, 15% each v2..v6 (approx).
+      const bucket = h % 100;
+      let variant;
+      if      (bucket < 35) variant = 1;
+      else if (bucket < 50) variant = 2;
+      else if (bucket < 65) variant = 3;
+      else if (bucket < 78) variant = 4;
+      else if (bucket < 89) variant = 5;
+      else                  variant = 6;
+      el.dataset.tape = variant;
+
+      // Extract extra entropy from other bits of the hash.
+      const b1 = (h >>> 7)  & 0xff;
+      const b2 = (h >>> 15) & 0xff;
+      const b3 = (h >>> 23) & 0xff;
+
+      if (variant === 1) {
+        // Horizontal top-center: rotation -4°..+4°, length 52%..74%.
+        const rot = ((b1 / 255) * 8 - 4).toFixed(2);
+        const len = Math.round(52 + (b2 / 255) * 22);
+        el.style.setProperty('--tape-rot', rot + 'deg');
+        el.style.setProperty('--tape-len', len + '%');
+      } else if (variant === 2) {
+        // TL corner diagonal: rotation -50°..-34°, length 58..90 px.
+        const rot = (-34 - (b1 / 255) * 16).toFixed(1);
+        const len = Math.round(58 + (b2 / 255) * 32);
+        el.style.setProperty('--tape-rot', rot + 'deg');
+        el.style.setProperty('--tape-len', len + 'px');
+      } else if (variant === 3) {
+        // TR corner diagonal: rotation +34°..+50°, length 58..90 px.
+        const rot = (34 + (b1 / 255) * 16).toFixed(1);
+        const len = Math.round(58 + (b2 / 255) * 32);
+        el.style.setProperty('--tape-rot', rot + 'deg');
+        el.style.setProperty('--tape-len', len + 'px');
+      } else if (variant === 4) {
+        // Both corners — independent rotations & lengths.
+        const rotL = (-34 - (b1 / 255) * 16).toFixed(1);
+        const rotR = (34 + (b2 / 255) * 16).toFixed(1);
+        const lenL = Math.round(58 + (b3 / 255) * 28);
+        const lenR = Math.round(58 + ((b1 ^ b3) / 255) * 28);
+        el.style.setProperty('--tape-rot',    rotL + 'deg');
+        el.style.setProperty('--tape-rot-2',  rotR + 'deg');
+        el.style.setProperty('--tape-len',    lenL + 'px');
+        el.style.setProperty('--tape-len-2',  lenR + 'px');
+      } else if (variant === 5 || variant === 6) {
+        // Off-center short horizontal: rotation -6°..+6°, length 32%..52%.
+        const rot = ((b1 / 255) * 12 - 6).toFixed(2);
+        const len = Math.round(32 + (b2 / 255) * 20);
+        el.style.setProperty('--tape-rot', rot + 'deg');
+        el.style.setProperty('--tape-len', len + '%');
+      }
+    }
+
+    function isValidHeroNote(n) {
+      return n
+        && typeof n.text === 'string'
+        && typeof n.x === 'number' && typeof n.y === 'number'
+        && typeof n.w === 'number' && typeof n.h === 'number';
+    }
+
+    // Check if a note has expired (optional expires_at field in YYYY-MM-DD format).
+    // Returns true if note should be visible, false if expired.
+    function isNotExpired(note) {
+      if (!note.expires_at) return true; // no expiry = always on
+      try {
+        const expiryDate = new Date(note.expires_at + 'T23:59:59Z');
+        const today = new Date();
+        today.setUTCHours(0, 0, 0, 0);
+        return today <= expiryDate; // show through end of expiry day (inclusive)
+      } catch { return true; } // invalid date = show anyway
+    }
+
+    // Build a DOM element for one hero-note. Used by both public render()
+    // and the editor module (which reuses .sticky.is-hero instances).
+    function buildHeroSticky(note, freeform) {
+      const el = document.createElement('div');
+      const color = VALID_COLORS[note.color] ? note.color : 'yellow';
+      el.className = 'sticky is-hero color-' + color;
+      el.dataset.id = note.id || '';
+      applyTape(el, note.id || note.text || '');
+
+      // Rotation — always applied (both modes).
+      const rot = typeof note.rotation === 'number'
+        ? Math.max(-6, Math.min(6, note.rotation))
+        : -1.4;
+      el.style.setProperty('--rot', rot + 'deg');
+      el.style.transform = 'rotate(' + rot + 'deg)';
+
+      // Freeform (desktop overlay): absolute x%/y% + full size from note.w/h.
+      // Stacked (mobile inside #pinboard): skip sizing + positioning, let
+      // the default .sticky CSS (200px wide, min-height 120px) drive layout
+      // so the sticky fits the pinboard column without clipping.
+      if (freeform) {
+        el.style.width  = Math.max(140, Math.min(400, note.w)) + 'px';
+        el.style.height = Math.max(100, Math.min(400, note.h)) + 'px';
+        const x = Math.max(0, Math.min(100, note.x));
+        const y = Math.max(0, Math.min(100, note.y));
+        el.style.left = x + '%';
+        el.style.top  = y + '%';
+      }
+
+      const label = document.createElement('div');
+      label.className = 'sticky-label';
+      label.textContent = note.label || '';
+      const body = document.createElement('div');
+      body.className = 'sticky-body';
+      body.textContent = note.text;
+
+      el.appendChild(label);
+      el.appendChild(body);
+
+      // Mobile extras: 📌 pin emoji on top, × close button top-right.
+      // CSS hides these on desktop so we can append unconditionally.
+      if (!freeform) {
+        const pin = document.createElement('div');
+        pin.className = 'sticky-pin';
+        pin.setAttribute('aria-hidden', 'true');
+        pin.textContent = '📌';
+        el.appendChild(pin);
+
+        const close = document.createElement('button');
+        close.className = 'sticky-close';
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Dismiss this note');
+        close.title = 'Dismiss';
+        close.textContent = '\u00D7';
+        close.addEventListener('click', function() {
+          dismissHeroNote(note.id);
+        });
+        el.appendChild(close);
+      }
+      return el;
+    }
+
+    // ── Mobile rotating sticky stack ──────────────────────────────────
+    // Desktop: hero-notes live in #heroNotes overlay (freeform).
+    // Mobile:  all non-expired hero-notes stack as a fanned deck inside
+    //          #mobileStickyStack. Top card active; swipe/tap cycles to next.
+    function applyStackLayout(animate) {
+      if (!mobileStackEl) return;
+      const cards = mobileStackEl.querySelectorAll('.sticky');
+      const n = cards.length;
+      if (!n) return;
+      cards.forEach(function(el, i) {
+        const pos = ((i - stackActiveIdx) % n + n) % n; // 0 = top, 1 = below, ...
+        const baseRot = parseFloat(el.dataset.baseRot || '0');
+        let rot = baseRot, tx = 0, ty = 0, sc = 1, z = 100 - pos, op = 1;
+        if (pos === 0)      { rot = baseRot;        tx = 0;    ty = 0;   sc = 1;    }
+        else if (pos === 1) { rot = baseRot + 4;    tx = -10;  ty = 10;  sc = 0.96; }
+        else if (pos === 2) { rot = baseRot - 5;    tx = 12;   ty = 18;  sc = 0.92; }
+        else { op = 0; sc = 0.88; ty = 24; }
+        el.style.transition = animate ? '' : 'none';
+        el.style.zIndex = z;
+        el.style.opacity = op;
+        el.style.pointerEvents = pos === 0 ? 'auto' : 'none';
+        el.style.transform = 'translate(calc(-50% + ' + tx + 'px),' + ty + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
+        el.classList.toggle('is-top', pos === 0);
+      });
+    }
+
+    function advanceStack() {
+      if (!stackNotes.length) return;
+      stackActiveIdx = (stackActiveIdx + 1) % stackNotes.length;
+      applyStackLayout(true);
+    }
+
+    function bindStackHandlers() {
+      if (stackHandlersBound || !mobileStackEl) return;
+      stackHandlersBound = true;
+      let startX = 0, startY = 0, dragging = false, moved = false, topEl = null;
+      const SWIPE_PX = 50;
+      const SLOP_PX = 8;
+
+      mobileStackEl.addEventListener('touchstart', function(e) {
+        if (!e.touches.length) return;
+        topEl = mobileStackEl.querySelector('.sticky.is-top');
+        if (!topEl) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dragging = true; moved = false;
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchmove', function(e) {
+        if (!dragging || !topEl || !e.touches.length) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!moved && (Math.abs(dx) > SLOP_PX || Math.abs(dy) > SLOP_PX)) {
+          moved = true;
+          if (Math.abs(dx) < Math.abs(dy)) { dragging = false; return; } // vertical → let page scroll
+        }
+        if (!moved) return;
+        const baseRot = parseFloat(topEl.dataset.baseRot || '0');
+        topEl.classList.add('is-dragging');
+        topEl.style.transform = 'translate(calc(-50% + ' + dx + 'px),0) rotate(' + (baseRot + dx * 0.05) + 'deg)';
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchend', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        if (!topEl) return;
+        topEl.classList.remove('is-dragging');
+        const dx = (e.changedTouches[0] ? e.changedTouches[0].clientX : startX) - startX;
+        if (Math.abs(dx) >= SWIPE_PX) advanceStack();
+        else applyStackLayout(true); // snap back
+        topEl = null;
+      });
+
+      // Tap to advance (desktop debug + mobile fallback when swipe too short).
+      mobileStackEl.addEventListener('click', function(e) {
+        const top = mobileStackEl.querySelector('.sticky.is-top');
+        if (!top) return;
+        if (e.target.closest('.sticky') !== top) return;
+        advanceStack();
+      });
+    }
+
+    function renderMobileStack(notes) {
+      if (!mobileStackEl) return;
+      stackNotes = notes;
+      mobileStackEl.innerHTML = '';
+      mobileStackEl.setAttribute('data-count', String(notes.length));
+      if (!notes.length) return;
+      if (stackActiveIdx >= notes.length) stackActiveIdx = 0;
+      notes.forEach(function(note) {
+        const el = buildHeroSticky(note, false);
+        el.dataset.baseRot = (typeof note.rotation === 'number'
+          ? Math.max(-6, Math.min(6, note.rotation))
+          : -1.4).toString();
+        mobileStackEl.appendChild(el);
+      });
+      if (notes.length > 1) {
+        const hint = document.createElement('div');
+        hint.className = 'stack-hint';
+        hint.textContent = 'Swipe \u2190 \u2192';
+        mobileStackEl.appendChild(hint);
+      }
+      applyStackLayout(false);
+      bindStackHandlers();
+    }
+
+    function render(focusIndex) {
+      pinboard.innerHTML = '';
+      if (heroNotesEl) heroNotesEl.innerHTML = '';
+
+      const freeform = window.innerWidth > 900 && !!heroNotesEl;
+      // Priority by date: soonest expires_at first; notes without expiry last.
+      // Stable within each group (preserves JSON order).
+      const visibleHeroNotes = heroNotes.filter(isNotExpired).slice().sort(function(a, b) {
+        const ax = a.expires_at || '';
+        const bx = b.expires_at || '';
+        if (ax && bx) return ax < bx ? -1 : ax > bx ? 1 : 0;
+        if (ax && !bx) return -1;
+        if (!ax && bx) return 1;
+        return 0;
+      });
+
+      let freeformIdx = 0;
+      if (freeform) {
+        visibleHeroNotes.forEach(function(note) {
+          const el = buildHeroSticky(note, true);
+          el.classList.add('anim-in');
+          el.style.setProperty('--anim-delay', (freeformIdx * 90) + 'ms');
+          freeformIdx++;
+          heroNotesEl.appendChild(el);
+        });
+        if (mobileStackEl) {
+          mobileStackEl.innerHTML = '';
+          mobileStackEl.setAttribute('data-count', '0');
+          stackNotes = [];
+        }
+      } else {
+        renderMobileStack(visibleHeroNotes);
+      }
+
+      // Pinboard column is desktop-only now (legacy user-notes). On mobile
+      // we collapse it so hero-notes don't double up with the new stack.
+      if (!freeform) {
+        const hasAnything = userNotes.length > 0;
+        pinboard.classList.toggle('is-empty-mobile', !hasAnything);
+      } else {
+        pinboard.classList.remove('is-empty-mobile');
+      }
+
+      // A: user notes
+      userNotes.forEach(function(note, idx) {
+        const el = document.createElement('div');
+        el.className = 'sticky is-user';
+        applyTape(el, 'u' + idx + ':' + (note.text || ''));
+        if (typeof note.width === 'number')  el.style.width  = note.width  + 'px';
+        if (typeof note.height === 'number') el.style.height = note.height + 'px';
+        const drag = document.createElement('div');
+        drag.className = 'sticky-drag';
+        drag.setAttribute('aria-label', 'Drag to move sticky notes');
+        drag.title = 'Drag tape to move';
+        attachDrag(drag);
+        const label = document.createElement('div');
+        label.className = 'sticky-label';
+        label.textContent = 'Your note';
+        const del = document.createElement('button');
+        del.className = 'sticky-del';
+        del.type = 'button';
+        del.setAttribute('aria-label', 'Delete note');
+        del.textContent = '\u00D7';
+        const body = document.createElement('div');
+        body.className = 'sticky-body';
+        body.setAttribute('contenteditable', 'true');
+        body.setAttribute('spellcheck', 'true');
+        body.setAttribute('data-placeholder', 'Write a note\u2026');
+        body.textContent = note.text || '';
+        body.addEventListener('blur', function() {
+          const text = body.textContent.trim();
+          const current = userNotes.indexOf(note);
+          if (current === -1) return; // already removed
+          if (text) {
+            userNotes[current].text = text;
+            saveUserNotes();
+          } else {
+            userNotes.splice(current, 1);
+            saveUserNotes();
+            render();
+          }
+        });
+        del.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const current = userNotes.indexOf(note);
+          if (current !== -1) {
+            userNotes.splice(current, 1);
+            saveUserNotes();
+            render();
+          }
+        });
+        // Send-on-WhatsApp button — opens wa.me with the note text prefilled.
+        // Disabled (but always rendered) while the note is empty.
+        const wa = document.createElement('a');
+        wa.className = 'sticky-wa';
+        wa.target = '_blank';
+        wa.rel = 'noopener noreferrer';
+        wa.setAttribute('aria-label', 'Save note on WhatsApp to GD Autocentre');
+        wa.title = 'Save this note on WhatsApp';
+        wa.innerHTML =
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>' +
+          '<span>Save on WhatsApp</span>';
+        function refreshWaState() {
+          const text = (body.textContent || '').trim();
+          if (text) {
+            wa.href = 'https://wa.me/447894550082?text=' + encodeURIComponent(text);
+            wa.classList.remove('is-empty');
+          } else {
+            wa.removeAttribute('href');
+            wa.classList.add('is-empty');
+          }
+        }
+        refreshWaState();
+        body.addEventListener('input', refreshWaState);
+        body.addEventListener('blur', refreshWaState);
+
+        const resize = document.createElement('div');
+        resize.className = 'sticky-resize';
+        resize.setAttribute('aria-label', 'Resize note');
+        resize.title = 'Drag to resize';
+        attachResize(resize, el, note);
+
+        el.appendChild(drag);
+        el.appendChild(label);
+        el.appendChild(del);
+        el.appendChild(body);
+        el.appendChild(wa);
+        el.appendChild(resize);
+        pinboard.appendChild(el);
+
+        if (focusIndex === idx) {
+          requestAnimationFrame(function() {
+            body.focus();
+            const range = document.createRange();
+            range.selectNodeContents(body);
+            range.collapse(false);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+          });
+        }
+      });
+
+    }
+    // "Add note" button removed — Gin's hero-notes only.
+
+    // On window resize, re-render so hero-notes hop between overlay/pinboard
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() { render(); }, 100);
+    });
+
+    function addNote() {
+      if (userNotes.length >= MAX_USER_NOTES) return;
+      userNotes.push({ id: Date.now(), text: '', created: new Date().toISOString() });
+      saveUserNotes();
+      render(userNotes.length - 1);
+    }
+
+    // Drag the whole pinboard by its top handle. Saves {left,top} in
+     // localStorage. Pointer events cover mouse + touch + pen in one listener.
+    function attachDrag(handle) {
+      let startX = 0, startY = 0, startLeft = 0, startTop = 0, dragging = false;
+
+      handle.addEventListener('pointerdown', function(e) {
+        if (e.button !== undefined && e.button !== 0) return; // primary button only
+        const rect = pinboard.getBoundingClientRect();
+        startLeft = rect.left;
+        startTop = rect.top;
+        startX = e.clientX;
+        startY = e.clientY;
+        dragging = true;
+        // Pin the pinboard to current position using left/top, clear right so
+        // it stops snapping to the right edge.
+        pinboard.style.left = startLeft + 'px';
+        pinboard.style.top = startTop + 'px';
+        pinboard.style.right = 'auto';
+        pinboard.classList.add('is-dragging');
+        handle.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      handle.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const w = pinboard.offsetWidth;
+        const h = pinboard.offsetHeight;
+        let nl = startLeft + dx;
+        let nt = startTop + dy;
+        // Clamp inside viewport with small margin
+        const m = 8;
+        nl = Math.max(m, Math.min(window.innerWidth - w - m, nl));
+        nt = Math.max(m, Math.min(window.innerHeight - h - m, nt));
+        pinboard.style.left = nl + 'px';
+        pinboard.style.top = nt + 'px';
+      });
+
+      function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        pinboard.classList.remove('is-dragging');
+        try { handle.releasePointerCapture(e.pointerId); } catch {}
+        const rect = pinboard.getBoundingClientRect();
+        customPos = { left: rect.left, top: rect.top };
+        savePos(customPos);
+      }
+      handle.addEventListener('pointerup', endDrag);
+      handle.addEventListener('pointercancel', endDrag);
+    }
+
+    // Resize a single sticky from its bottom-right corner. Persists
+    // width/height on the note object so it survives reloads.
+    function attachResize(handle, stickyEl, note) {
+      const MIN_W = 140, MIN_H = 100, MAX_W = 520, MAX_H = 520;
+      let startX = 0, startY = 0, startW = 0, startH = 0, resizing = false;
+
+      handle.addEventListener('pointerdown', function(e) {
+        if (e.button !== undefined && e.button !== 0) return;
+        startW = stickyEl.offsetWidth;
+        startH = stickyEl.offsetHeight;
+        startX = e.clientX;
+        startY = e.clientY;
+        resizing = true;
+        stickyEl.classList.add('is-resizing');
+        handle.setPointerCapture(e.pointerId);
+        e.stopPropagation();
+        e.preventDefault();
+      });
+
+      handle.addEventListener('pointermove', function(e) {
+        if (!resizing) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const nw = Math.max(MIN_W, Math.min(MAX_W, startW + dx));
+        const nh = Math.max(MIN_H, Math.min(MAX_H, startH + dy));
+        stickyEl.style.width = nw + 'px';
+        stickyEl.style.height = nh + 'px';
+      });
+
+      function endResize(e) {
+        if (!resizing) return;
+        resizing = false;
+        stickyEl.classList.remove('is-resizing');
+        try { handle.releasePointerCapture(e.pointerId); } catch {}
+        const current = userNotes.indexOf(note);
+        if (current !== -1) {
+          userNotes[current].width  = stickyEl.offsetWidth;
+          userNotes[current].height = stickyEl.offsetHeight;
+          saveUserNotes();
+        }
+      }
+      handle.addEventListener('pointerup', endResize);
+      handle.addEventListener('pointercancel', endResize);
+    }
+
+    // Apply saved custom position if any; otherwise default top-right applies
+    // via CSS (right/top variables).
+    function applyCustomPos() {
+      if (!customPos) return;
+      const w = pinboard.offsetWidth || 216;
+      const h = pinboard.offsetHeight || 200;
+      const m = 8;
+      const left = Math.max(m, Math.min(window.innerWidth - w - m, customPos.left));
+      const top = Math.max(m, Math.min(window.innerHeight - h - m, customPos.top));
+      pinboard.style.left = left + 'px';
+      pinboard.style.top = top + 'px';
+      pinboard.style.right = 'auto';
+    }
+
+    async function fetchHeroNotes() {
+      if (!HERO_NOTES_URL) return;
+      try {
+        // Cache-bust so edits appear on next reload, not after CDN TTL.
+        const res = await fetch(HERO_NOTES_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!Array.isArray(data)) return;
+        heroNotes = data.filter(isValidHeroNote);
+        render();
+      } catch {}
+    }
+
+    // Keep pinboard positioned just below the visible top stack (alert + nav).
+    // The alert scrolls away normally; nav is sticky at top:0. So the pinboard
+    // must track "how much alert is still in view" as the user scrolls.
+    const alertEl = document.querySelector('.alert');
+    const navEl = document.querySelector('.nav');
+    let topRaf = 0;
+    function updatePinboardTop() {
+      const alertH = alertEl ? alertEl.offsetHeight : 0;
+      const navH = navEl ? navEl.offsetHeight : 76;
+      const y = window.scrollY || window.pageYOffset || 0;
+      const visibleAlert = Math.max(0, alertH - y);
+      const top = visibleAlert + navH + 14;
+      document.documentElement.style.setProperty('--pinboard-top', top + 'px');
+    }
+    function scheduleTopUpdate() {
+      if (topRaf) return;
+      topRaf = requestAnimationFrame(function() {
+        topRaf = 0;
+        updatePinboardTop();
+      });
+    }
+    updatePinboardTop();
+    window.addEventListener('scroll', scheduleTopUpdate, { passive: true });
+    window.addEventListener('resize', scheduleTopUpdate, { passive: true });
+    if (alertEl && 'ResizeObserver' in window) {
+      new ResizeObserver(scheduleTopUpdate).observe(alertEl);
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updatePinboardTop);
+    }
+
+    render();
+    applyCustomPos();
+    fetchHeroNotes();
+
+    // Re-render on breakpoint crossings so hero-notes hop between
+    // the overlay (desktop) and the pinboard column (mobile).
+    let wasDesktop = window.innerWidth > 900;
+    window.addEventListener('resize', function() {
+      if (customPos) applyCustomPos();
+      const isDesktop = window.innerWidth > 900;
+      if (isDesktop !== wasDesktop) {
+        wasDesktop = isDesktop;
+        render();
+      }
+    }, { passive: true });
+
+    // Expose internals for the editor module (tools/hero-editor.html).
+    // Only the editor module calls these; public visitors never touch them.
+    window.GD_PINBOARD_API = {
+      getHeroNotes: function() { return JSON.parse(JSON.stringify(heroNotes)); },
+      setHeroNotes: function(next) {
+        if (!Array.isArray(next)) return;
+        heroNotes = next.filter(isValidHeroNote);
+        render();
+      },
+      render: render,
+      buildHeroSticky: buildHeroSticky
+    };
+  })();
+
+  // listen to system changes when set to auto
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+    if (getSavedTheme() === 'auto') applyTheme('auto');
+  });
+
+  document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('tweaksToggle')?.addEventListener('click', () => toggleTweaks());
+
+  // Mobile nav
+  (function() {
+    const nav = document.querySelector('.nav-links');
+    const btn = document.querySelector('.menu-btn');
+    if (!nav || !btn) return;
+    btn.addEventListener('click', () => nav.classList.toggle('is-open'));
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('is-open'));
+    });
+  })();
+
+  // form submission
+  (function() {
+    var form = document.getElementById('quoteForm');
+    var statusEl = document.getElementById('formStatus');
+    var submitBtn = document.getElementById('submitBtn');
+    var replyTo = document.getElementById('replyToField');
+    var emailField = document.getElementById('emailField');
+    var statusTimer;
+    if (!form) return;
+    emailField.addEventListener('input', function() { replyTo.value = this.value; });
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var name = form.querySelector('[name="name"]').value.trim();
+      var phone = form.querySelector('[name="phone"]').value.trim();
+      var email = emailField.value.trim();
+      var vehicle = form.querySelector('[name="vehicle"]').value.trim();
+      var service = form.querySelector('[name="service"]').value || 'Not specified';
+      var message = form.querySelector('[name="message"]').value.trim();
+      if (!name || !phone) { showStatus('Please fill in your name and phone number.', 'error'); return; }
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending...';
+      submitBtn.style.opacity = '0.6';
+      try {
+        var response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+        var result = await response.json();
+        if (result.success) {
+          var waMsg = encodeURIComponent('NEW QUOTE REQUEST\nName: ' + name + '\nPhone: ' + phone + (email ? '\nEmail: ' + email : '') + (vehicle ? '\nVehicle: ' + vehicle : '') + '\nService: ' + service + (message ? '\nDetails: ' + message : '') + '\n\n-- GD Autocentre Website');
+          var waUrl = 'https://wa.me/447894550082?text=' + waMsg;
+          showSuccess(name, email, phone, waUrl);
+          form.reset();
+        } else { showStatus('Something went wrong. Please call us on 01452 422 405.', 'error'); }
+      } catch (err) { showStatus('Connection error. Please call us on 01452 422 405.', 'error'); }
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send enquiry <svg class="ic"><use href="#i-arrow"></use></svg>';
+      submitBtn.style.opacity = '1';
+    });
+    function showStatus(msg, type) {
+      statusEl.className = 'form-status show ' + type;
+      statusEl.textContent = msg;
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 8000);
+    }
+    function showSuccess(name, email, phone, waUrl) {
+      statusEl.className = 'form-status show success';
+      statusEl.innerHTML = '';
+
+      var line1 = document.createElement('div');
+      line1.appendChild(document.createTextNode(
+        (name ? 'Thanks ' + name + ' \u2014 your ' : 'Your ') +
+        'enquiry has been sent to '
+      ));
+      var strong = document.createElement('strong');
+      strong.textContent = 'info@gdautocentre.com';
+      line1.appendChild(strong);
+      line1.appendChild(document.createTextNode('.'));
+      statusEl.appendChild(line1);
+
+      var line2 = document.createElement('div');
+      line2.style.marginTop = '6px';
+      line2.style.opacity = '0.85';
+      if (email) {
+        line2.textContent = "We'll reply to " + email +
+          " or call you on " + phone + " within one working day.";
+      } else {
+        line2.textContent = "We'll call you on " + phone +
+          " within one working day.";
+      }
+      statusEl.appendChild(line2);
+
+      if (waUrl) {
+        var waBtn = document.createElement('a');
+        waBtn.href = waUrl;
+        waBtn.target = '_blank';
+        waBtn.rel = 'noopener noreferrer';
+        waBtn.className = 'wa-followup-btn';
+        waBtn.textContent = 'Also send via WhatsApp for a faster reply \u2192';
+        statusEl.appendChild(waBtn);
+      }
+
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(function() { statusEl.className = 'form-status'; }, 20000);
+    }
+  })();
+
+</script>
+</body>
+</html>
