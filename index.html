@@ -1061,6 +1061,25 @@
     .hero-notes { display: none; }   /* stickies rendered in #pinboard instead */
   }
 
+  /* Stagger pop + wobble on initial render (desktop only).
+     JS sets --rot (final rotation) and --anim-delay (stagger) per sticky. */
+  @media (min-width: 901px) {
+    @keyframes sticky-pop-in {
+      0%   { opacity: 0; transform: translateY(-14px) scale(0.55) rotate(0deg); }
+      55%  { opacity: 1; transform: translateY(0)    scale(1.08) rotate(calc(var(--rot, 0deg) * 1.9)); }
+      78%  { opacity: 1; transform: translateY(0)    scale(0.96) rotate(calc(var(--rot, 0deg) * 0.35)); }
+      100% { opacity: 1; transform: translateY(0)    scale(1)    rotate(var(--rot, 0deg)); }
+    }
+    .hero-notes .sticky.anim-in {
+      animation: sticky-pop-in 560ms cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: var(--anim-delay, 0ms);
+      transform-origin: 50% 0%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-notes .sticky.anim-in { animation: none; }
+    }
+  }
+
   /* "+ Add note" nav button — bordered pill, matches nav-cta rhythm. */
   .nav-add-note {
     display: inline-flex;
@@ -1488,6 +1507,7 @@
     padding: 36px;
     background: color-mix(in srgb, var(--bg-2), white 4%);
     display: grid; gap: 14px;
+    scroll-margin-top: 80px;
   }
   body[data-variant="editorial"] form.quote { border-radius: 4px; }
   .form-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -2012,7 +2032,7 @@
                 <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
               </a>
             </span>
-            <a href="#contact" class="btn btn-ghost">
+            <a href="#quoteForm" class="btn btn-ghost">
               Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
             </a>
           </div>
@@ -2281,7 +2301,7 @@
         </div>
         <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="tel:+447894550082" class="btn btn-primary"><svg class="ic"><use href="#i-phone"/></svg> Speak to Gin</a>
-          <a href="#contact" class="btn btn-ghost">Send an enquiry <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#quoteForm" class="btn btn-ghost">Send an enquiry <svg class="ic"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </div>
@@ -3208,6 +3228,7 @@
       const rot = typeof note.rotation === 'number'
         ? Math.max(-6, Math.min(6, note.rotation))
         : -1.4;
+      el.style.setProperty('--rot', rot + 'deg');
       el.style.transform = 'rotate(' + rot + 'deg)';
 
       // Freeform (desktop overlay): absolute x%/y% + full size from note.w/h.
@@ -3268,10 +3289,15 @@
       //            that the visitor hasn't dismissed yet (× button).
       //            Pin emoji + close button get appended by buildHeroSticky.
       let mobileRendered = 0;
+      let freeformIdx = 0;
       heroNotes.forEach(function(note) {
         if (!isNotExpired(note)) return; // skip expired notes
         if (freeform) {
-          heroNotesEl.appendChild(buildHeroSticky(note, true));
+          const el = buildHeroSticky(note, true);
+          el.classList.add('anim-in');
+          el.style.setProperty('--anim-delay', (freeformIdx * 90) + 'ms');
+          freeformIdx++;
+          heroNotesEl.appendChild(el);
         } else {
           if (!note.visible_on_mobile) return;
           if (note.id && dismissedIds.indexOf(note.id) !== -1) return;
