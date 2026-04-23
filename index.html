@@ -1079,6 +1079,17 @@
       -webkit-user-select: none;
     }
     .mobile-sticky-stack:empty { display: none; }
+    .mobile-sticky-stack::before {
+      content: "// Gin's notes";
+      position: absolute;
+      top: 14px;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+    }
     .mobile-sticky-stack .sticky {
       position: absolute;
       top: 0;
