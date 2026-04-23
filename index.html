@@ -1065,15 +1065,14 @@
      JS sets --rot (final rotation) and --anim-delay (stagger) per sticky. */
   @media (min-width: 901px) {
     @keyframes sticky-pop-in {
-      0%   { opacity: 0; transform: translateY(-14px) scale(0.55) rotate(0deg); }
-      55%  { opacity: 1; transform: translateY(0)    scale(1.08) rotate(calc(var(--rot, 0deg) * 1.9)); }
-      78%  { opacity: 1; transform: translateY(0)    scale(0.96) rotate(calc(var(--rot, 0deg) * 0.35)); }
-      100% { opacity: 1; transform: translateY(0)    scale(1)    rotate(var(--rot, 0deg)); }
+      0%   { opacity: 0; transform: scale(0.92) rotate(0deg); }
+      70%  { opacity: 1; transform: scale(1)    rotate(calc(var(--rot, 0deg) * 1.15)); }
+      100% { opacity: 1; transform: scale(1)    rotate(var(--rot, 0deg)); }
     }
     .hero-notes .sticky.anim-in {
-      animation: sticky-pop-in 560ms cubic-bezier(.34, 1.56, .64, 1) both;
+      animation: sticky-pop-in 520ms cubic-bezier(.25, .9, .3, 1) both;
       animation-delay: var(--anim-delay, 0ms);
-      transform-origin: 50% 0%;
+      transform-origin: 50% 50%;
     }
     @keyframes sticky-tape-in {
       from { opacity: 0; }
