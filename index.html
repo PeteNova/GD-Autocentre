@@ -2289,95 +2289,51 @@
 </section>
 
 <!-- Why / About -->
-<section class="block" id="about">
+<style>
+@media (max-width: 900px) {
+  #about .team-layout { display: flex; flex-direction: column; gap: 24px; }
+  #about .team-layout > div { display: contents; }
+  #about .team-layout .team-portrait { order: 1; }
+  #about .team-layout > div > .eyebrow { order: 2; margin-top: 8px; }
+  #about .team-layout > div > .h2 { order: 3; }
+  #about .team-layout > div > .team-quote { order: 4; }
+  #about .team-layout > div > .why-list { order: 5; }
+  #about .team-layout .stats { order: 6; margin-top: 0 !important; }
+  #about .team-layout .stats + .stats { margin-top: -1px; }
+}
+</style>
+<!-- Unified About + Team — single viewport, no redundant CTAs -->
+<section class="block" id="about" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
   <div class="wrap">
     <div class="section-index">
       <span>03 · About</span>
-      <span class="tag">Why GD Autocentre</span>
+      <span class="tag">Meet Gin</span>
     </div>
-    <div class="why-layout">
-      <div>
-        <h2 class="h2">Honest work.<br><span class="italic-em">Fair prices.</span></h2>
-        <p class="why-lede">We're an independent garage that treats every customer like family. No jargon, no pressure, no unnecessary work — just straight-talking advice and quality repairs at a fair price. We're proud to be female-friendly, making sure everyone feels welcome and informed.</p>
-        <ul class="why-list">
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Transparent pricing — no hidden charges</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Clear explanations of all work needed</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Female-friendly &amp; welcoming to everyone</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Emergency repairs handled fast</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>High-performance car specialists</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Established since 2015 in Gloucester</span></li>
-        </ul>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-n">10+</div>
-          <div class="stat-l">Years experience</div>
-          <div class="stat-note">Serving Gloucester since 2015</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">71+</div>
-          <div class="stat-l">Customer reviews</div>
-          <div class="stat-note">4.9 avg across Google &amp; Facebook</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">100%</div>
-          <div class="stat-l">Independent</div>
-          <div class="stat-note">No pressure, no upsell culture</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">All</div>
-          <div class="stat-l">Makes &amp; models</div>
-          <div class="stat-note">From daily drivers to performance</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Team / Meet the Team -->
-<section class="block" id="team" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-index">
-      <span>04 · The team</span>
-      <span class="tag">Meet the team</span>
-    </div>
-    <div class="team-layout">
-      <div style="position: relative;">
-        <div class="team-portrait">
+    <div class="team-layout" style="align-items: stretch;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="team-portrait" style="aspect-ratio: 4/3;">
           <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1200&q=80" alt="Portrait of workshop owner in blue overalls">
           <div class="team-badge">Owner · Mechanic</div>
         </div>
-      </div>
-      <div>
-        <p class="eyebrow">Gintaras (Gin) · GD Autocentre</p>
-        <h2 class="team-quote" style="margin-top: 24px; font-family:'Caveat',cursive; font-optical-sizing:auto; font-style:normal; font-weight:400; font-size:clamp(18px,2vw,26px); line-height:1.7; letter-spacing:0;">
-          <span class="team-quote-highlight">Honest work, fair prices — that's what we're about. Every customer gets a straight answer and quality they can count on.</span>
-        </h2>
-        <div class="team-meta">
-          <div class="team-meta-row">
-            <span class="k">Trading since</span>
-            <span class="v">2015 · incorporated as Ltd in September 2019</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Experience</span>
-            <span class="v">10+ years serving Gloucester and surrounding areas</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Specialities</span>
-            <span class="v">Performance cars, diagnostics, welding, engine rebuilds</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Approach</span>
-            <span class="v">Independent · female-friendly · plain-English advice</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Fleet we service</span>
-            <span class="v">All makes &amp; models — daily drivers to performance builds</span>
-          </div>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d; border-right-color: rgba(255,255,255,0.18);"><div class="stat-n" style="font-size: 36px; color: #ffffff;">10+</div><div class="stat-l" style="color: #ffffff;">Years</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d;"><div class="stat-n" style="font-size: 36px; color: #ffffff;">All</div><div class="stat-l" style="color: #ffffff;">Makes &amp; models</div></div>
         </div>
-        <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="tel:+447894550082" class="btn btn-primary"><svg class="ic"><use href="#i-phone"/></svg> Speak to Gin</a>
-          <a href="#quoteForm" class="btn btn-ghost">Send an enquiry <svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <p class="eyebrow">Gintaras (Gin) · GD Autocentre</p>
+        <h2 class="h2" style="margin-top: 16px;">Honest work.<br><span class="italic-em">Fair prices.</span></h2>
+        <p class="team-quote" style="margin-top: 20px; font-family:'Caveat',cursive; font-weight:400; font-size:clamp(18px,2vw,24px); line-height:1.55; letter-spacing:0;">
+          <span class="team-quote-highlight">Every customer gets a straight answer and quality they can count on.</span>
+        </p>
+        <ul class="why-list" style="margin-top: 24px;">
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Transparent pricing · no hidden charges</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Female-friendly &amp; welcoming</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Performance specialists &amp; daily drivers</span></li>
+        </ul>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">100%</div><div class="stat-l">Independent</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">71+</div><div class="stat-l">Reviews · 4.9&#9733;</div></div>
         </div>
       </div>
     </div>
@@ -2388,7 +2344,7 @@
 <section class="block" id="pricing">
   <div class="wrap">
     <div class="section-index">
-      <span>05 · Pricing</span>
+      <span>04 · Pricing</span>
       <span class="tag">Indicative prices</span>
     </div>
     <div class="block-head">
@@ -2447,7 +2403,7 @@
 <section class="block" id="reviews" style="background: var(--bg-2);">
   <div class="wrap">
     <div class="section-index">
-      <span>06 · Reviews</span>
+      <span>05 · Reviews</span>
       <span class="tag">Straight from customers</span>
     </div>
     <div class="block-head">
@@ -2522,7 +2478,7 @@
 <section id="location">
   <div class="location-grid">
     <div class="location-info">
-      <span class="eyebrow">07 · Find us</span>
+      <span class="eyebrow">06 · Find us</span>
       <h2 class="location-addr" style="margin-top: 18px;">
         153a Bristol Road<br>
         Gloucester, GL1 5SY
@@ -2556,7 +2512,7 @@
 <section class="block" id="contact">
   <div class="wrap">
     <div class="section-index">
-      <span>08 · Contact</span>
+      <span>07 · Contact</span>
       <span class="tag">Get in touch</span>
     </div>
     <div class="contact-grid">
