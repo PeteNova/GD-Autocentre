@@ -1058,7 +1058,70 @@
     /* Individual position/size set inline via style by JS. */
   }
   @media (max-width: 900px) {
-    .hero-notes { display: none; }   /* stickies rendered in #pinboard instead */
+    .hero-notes { display: none; }   /* stickies rendered in mobile stack instead */
+  }
+
+  /* Mobile rotating sticky stack — desktop hidden, mobile shows fanned deck
+     of all hero-notes with swipe/tap cycling. Sits before .hero-meta in
+     hero-grid right column so it appears after the CTAs in mobile flow. */
+  .mobile-sticky-stack { display: none; }
+  @media (max-width: 900px) {
+    .mobile-sticky-stack {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 210px;
+      margin: 12px 0 28px;
+      touch-action: pan-y;         /* let page scroll vertically; we handle horizontal */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .mobile-sticky-stack:empty { display: none; }
+    .mobile-sticky-stack .sticky {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 220px !important;     /* override inline width from buildHeroSticky */
+      height: 180px !important;
+      min-height: 0;
+      padding: 22px 16px 14px;
+      font-size: 15px;
+      transition: transform 340ms cubic-bezier(.25, .9, .3, 1),
+                  opacity 280ms ease-out;
+      cursor: grab;
+      will-change: transform;
+    }
+    .mobile-sticky-stack .sticky.is-top { cursor: pointer; }
+    .mobile-sticky-stack .sticky.is-dragging {
+      transition: none;
+      cursor: grabbing;
+    }
+    .mobile-sticky-stack .sticky.is-exiting {
+      transition: transform 320ms ease-in, opacity 220ms ease-in;
+    }
+    /* Pin emoji on mobile stack — subtler, top-center. Close button hidden
+       (cycling replaces dismissal). */
+    .mobile-sticky-stack .sticky-pin {
+      top: 4px;
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .mobile-sticky-stack .sticky-close { display: none; }
+    /* Hint text below the stack — only visible when >1 note. */
+    .mobile-sticky-stack[data-count="1"] .stack-hint,
+    .mobile-sticky-stack[data-count="0"] .stack-hint { display: none; }
+    .mobile-sticky-stack .stack-hint {
+      position: absolute;
+      left: 0; right: 0; bottom: -20px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      pointer-events: none;
+    }
   }
 
   /* Stagger pop + wobble on initial render (desktop only).
@@ -2042,6 +2105,7 @@
         </div>
       </div>
       <div>
+        <div class="mobile-sticky-stack" id="mobileStickyStack" aria-label="Pinned notes from Gin"></div>
         <div class="hero-meta">
           <div class="meta-item">
             <span class="mono meta-label">// WORKSHOP RATE</span>
@@ -3111,7 +3175,12 @@
   (function pinboardModule() {
     const pinboard = document.getElementById('pinboard');
     const heroNotesEl = document.getElementById('heroNotes');
+    const mobileStackEl = document.getElementById('mobileStickyStack');
     if (!pinboard) return;
+
+    let stackActiveIdx = 0;
+    let stackNotes = [];          // notes currently rendered in the mobile stack
+    let stackHandlersBound = false;
 
     const STORAGE_KEY = 'gd_user_notes';
     const POS_KEY = 'gd_pinboard_pos';
@@ -3322,40 +3391,141 @@
       return el;
     }
 
+    // ── Mobile rotating sticky stack ──────────────────────────────────
+    // Desktop: hero-notes live in #heroNotes overlay (freeform).
+    // Mobile:  all non-expired hero-notes stack as a fanned deck inside
+    //          #mobileStickyStack. Top card active; swipe/tap cycles to next.
+    function applyStackLayout(animate) {
+      if (!mobileStackEl) return;
+      const cards = mobileStackEl.querySelectorAll('.sticky');
+      const n = cards.length;
+      if (!n) return;
+      cards.forEach(function(el, i) {
+        const pos = ((i - stackActiveIdx) % n + n) % n; // 0 = top, 1 = below, ...
+        const baseRot = parseFloat(el.dataset.baseRot || '0');
+        let rot = baseRot, tx = 0, ty = 0, sc = 1, z = 100 - pos, op = 1;
+        if (pos === 0)      { rot = baseRot;        tx = 0;    ty = 0;   sc = 1;    }
+        else if (pos === 1) { rot = baseRot + 4;    tx = -10;  ty = 10;  sc = 0.96; }
+        else if (pos === 2) { rot = baseRot - 5;    tx = 12;   ty = 18;  sc = 0.92; }
+        else { op = 0; sc = 0.88; ty = 24; }
+        el.style.transition = animate ? '' : 'none';
+        el.style.zIndex = z;
+        el.style.opacity = op;
+        el.style.pointerEvents = pos === 0 ? 'auto' : 'none';
+        el.style.transform = 'translate(calc(-50% + ' + tx + 'px),' + ty + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
+        el.classList.toggle('is-top', pos === 0);
+      });
+    }
+
+    function advanceStack() {
+      if (!stackNotes.length) return;
+      stackActiveIdx = (stackActiveIdx + 1) % stackNotes.length;
+      applyStackLayout(true);
+    }
+
+    function bindStackHandlers() {
+      if (stackHandlersBound || !mobileStackEl) return;
+      stackHandlersBound = true;
+      let startX = 0, startY = 0, dragging = false, moved = false, topEl = null;
+      const SWIPE_PX = 50;
+      const SLOP_PX = 8;
+
+      mobileStackEl.addEventListener('touchstart', function(e) {
+        if (!e.touches.length) return;
+        topEl = mobileStackEl.querySelector('.sticky.is-top');
+        if (!topEl) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dragging = true; moved = false;
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchmove', function(e) {
+        if (!dragging || !topEl || !e.touches.length) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!moved && (Math.abs(dx) > SLOP_PX || Math.abs(dy) > SLOP_PX)) {
+          moved = true;
+          if (Math.abs(dx) < Math.abs(dy)) { dragging = false; return; } // vertical → let page scroll
+        }
+        if (!moved) return;
+        const baseRot = parseFloat(topEl.dataset.baseRot || '0');
+        topEl.classList.add('is-dragging');
+        topEl.style.transform = 'translate(calc(-50% + ' + dx + 'px),0) rotate(' + (baseRot + dx * 0.05) + 'deg)';
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchend', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        if (!topEl) return;
+        topEl.classList.remove('is-dragging');
+        const dx = (e.changedTouches[0] ? e.changedTouches[0].clientX : startX) - startX;
+        if (Math.abs(dx) >= SWIPE_PX) advanceStack();
+        else applyStackLayout(true); // snap back
+        topEl = null;
+      });
+
+      // Tap to advance (desktop debug + mobile fallback when swipe too short).
+      mobileStackEl.addEventListener('click', function(e) {
+        const top = mobileStackEl.querySelector('.sticky.is-top');
+        if (!top) return;
+        if (e.target.closest('.sticky') !== top) return;
+        advanceStack();
+      });
+    }
+
+    function renderMobileStack(notes) {
+      if (!mobileStackEl) return;
+      stackNotes = notes;
+      mobileStackEl.innerHTML = '';
+      mobileStackEl.setAttribute('data-count', String(notes.length));
+      if (!notes.length) return;
+      if (stackActiveIdx >= notes.length) stackActiveIdx = 0;
+      notes.forEach(function(note) {
+        const el = buildHeroSticky(note, false);
+        el.dataset.baseRot = (typeof note.rotation === 'number'
+          ? Math.max(-6, Math.min(6, note.rotation))
+          : -1.4).toString();
+        mobileStackEl.appendChild(el);
+      });
+      if (notes.length > 1) {
+        const hint = document.createElement('div');
+        hint.className = 'stack-hint';
+        hint.textContent = 'Swipe \u2190 \u2192';
+        mobileStackEl.appendChild(hint);
+      }
+      applyStackLayout(false);
+      bindStackHandlers();
+    }
+
     function render(focusIndex) {
       pinboard.innerHTML = '';
       if (heroNotesEl) heroNotesEl.innerHTML = '';
 
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
+      const visibleHeroNotes = heroNotes.filter(isNotExpired);
 
-      // B: Gin's hero-notes.
-      //   Desktop: freeform overlay inside .hero, all non-expired notes.
-      //   Mobile:  pinboard column, ONLY notes with visible_on_mobile:true
-      //            that the visitor hasn't dismissed yet (× button).
-      //            Pin emoji + close button get appended by buildHeroSticky.
-      let mobileRendered = 0;
       let freeformIdx = 0;
-      heroNotes.forEach(function(note) {
-        if (!isNotExpired(note)) return; // skip expired notes
-        if (freeform) {
+      if (freeform) {
+        visibleHeroNotes.forEach(function(note) {
           const el = buildHeroSticky(note, true);
           el.classList.add('anim-in');
           el.style.setProperty('--anim-delay', (freeformIdx * 90) + 'ms');
           freeformIdx++;
           heroNotesEl.appendChild(el);
-        } else {
-          if (!note.visible_on_mobile) return;
-          if (note.id && dismissedIds.indexOf(note.id) !== -1) return;
-          pinboard.appendChild(buildHeroSticky(note, false));
-          mobileRendered++;
+        });
+        if (mobileStackEl) {
+          mobileStackEl.innerHTML = '';
+          mobileStackEl.setAttribute('data-count', '0');
+          stackNotes = [];
         }
-      });
+      } else {
+        renderMobileStack(visibleHeroNotes);
+      }
 
-      // On mobile, hide the pinboard entirely if nothing survived the
-      // opt-in + dismissed filters. (Also hides it when legacy user-notes
-      // are absent, which is the normal case now that Add Note is gone.)
+      // Pinboard column is desktop-only now (legacy user-notes). On mobile
+      // we collapse it so hero-notes don't double up with the new stack.
       if (!freeform) {
-        const hasAnything = mobileRendered > 0 || userNotes.length > 0;
+        const hasAnything = userNotes.length > 0;
         pinboard.classList.toggle('is-empty-mobile', !hasAnything);
       } else {
         pinboard.classList.remove('is-empty-mobile');
