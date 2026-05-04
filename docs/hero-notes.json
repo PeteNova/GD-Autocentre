@@ -3,25 +3,109 @@
     "id": "schedule",
     "type": "schedule",
     "entries": [
-      {"date":"2026-04-03","status":"closed","note":"Good Friday"},
-      {"date":"2026-04-06","status":"closed","note":"Easter Monday"},
-      {"date":"2026-05-04","status":"closed","note":"Early May bank holiday"},
-      {"date":"2026-05-25","status":"closed","note":"Spring bank holiday"},
-      {"date":"2026-08-31","status":"closed","note":"Summer bank holiday"},
-      {"date":"2026-12-24","status":"open","open":"09:00","close":"14:00","note":"Christmas Eve — early close"},
-      {"date":"2026-12-25","status":"closed","note":"Christmas Day"},
-      {"date":"2026-12-28","status":"closed","note":"Boxing Day (substitute day)"},
-      {"date":"2026-12-31","status":"open","open":"09:00","close":"14:00","note":"New Year's Eve — early close"},
-      {"date":"2027-01-01","status":"closed","note":"New Year's Day"},
-      {"date":"2027-03-26","status":"closed","note":"Good Friday"},
-      {"date":"2027-03-29","status":"closed","note":"Easter Monday"},
-      {"date":"2027-05-03","status":"closed","note":"Early May bank holiday"},
-      {"date":"2027-05-31","status":"closed","note":"Spring bank holiday"},
-      {"date":"2027-08-30","status":"closed","note":"Summer bank holiday"},
-      {"date":"2027-12-24","status":"open","open":"09:00","close":"14:00","note":"Christmas Eve — early close"},
-      {"date":"2027-12-27","status":"closed","note":"Christmas Day (substitute day)"},
-      {"date":"2027-12-28","status":"closed","note":"Boxing Day (substitute day)"},
-      {"date":"2027-12-31","status":"open","open":"09:00","close":"14:00","note":"New Year's Eve — early close"}
+      {
+        "date": "2026-04-03",
+        "status": "closed",
+        "note": "Good Friday"
+      },
+      {
+        "date": "2026-04-06",
+        "status": "closed",
+        "note": "Easter Monday"
+      },
+      {
+        "date": "2026-05-04",
+        "status": "closed",
+        "note": "Early May bank holiday"
+      },
+      {
+        "date": "2026-05-25",
+        "status": "closed",
+        "note": "Spring bank holiday"
+      },
+      {
+        "date": "2026-08-31",
+        "status": "closed",
+        "note": "Summer bank holiday"
+      },
+      {
+        "date": "2026-12-24",
+        "status": "open",
+        "open": "09:00",
+        "close": "14:00",
+        "note": "Christmas Eve — early close"
+      },
+      {
+        "date": "2026-12-25",
+        "status": "closed",
+        "note": "Christmas Day"
+      },
+      {
+        "date": "2026-12-28",
+        "status": "closed",
+        "note": "Boxing Day (substitute day)"
+      },
+      {
+        "date": "2026-12-31",
+        "status": "open",
+        "open": "09:00",
+        "close": "14:00",
+        "note": "New Year's Eve — early close"
+      },
+      {
+        "date": "2027-01-01",
+        "status": "closed",
+        "note": "New Year's Day"
+      },
+      {
+        "date": "2027-03-26",
+        "status": "closed",
+        "note": "Good Friday"
+      },
+      {
+        "date": "2027-03-29",
+        "status": "closed",
+        "note": "Easter Monday"
+      },
+      {
+        "date": "2027-05-03",
+        "status": "closed",
+        "note": "Early May bank holiday"
+      },
+      {
+        "date": "2027-05-31",
+        "status": "closed",
+        "note": "Spring bank holiday"
+      },
+      {
+        "date": "2027-08-30",
+        "status": "closed",
+        "note": "Summer bank holiday"
+      },
+      {
+        "date": "2027-12-24",
+        "status": "open",
+        "open": "09:00",
+        "close": "14:00",
+        "note": "Christmas Eve — early close"
+      },
+      {
+        "date": "2027-12-27",
+        "status": "closed",
+        "note": "Christmas Day (substitute day)"
+      },
+      {
+        "date": "2027-12-28",
+        "status": "closed",
+        "note": "Boxing Day (substitute day)"
+      },
+      {
+        "date": "2027-12-31",
+        "status": "open",
+        "open": "09:00",
+        "close": "14:00",
+        "note": "New Year's Eve — early close"
+      }
     ]
   },
   {
@@ -39,10 +123,10 @@
   {
     "id": "gmo8waise",
     "text": "Garage Closed 4 May\nBank Holiday",
-    "x": 54.176536831459984,
-    "y": 11.710927957630446,
-    "w": 175.20001220703125,
-    "h": 100,
+    "x": 54.756250192996546,
+    "y": 36.82204373114933,
+    "w": 171.2000732421875,
+    "h": 105.5999755859375,
     "color": "pink",
     "rotation": -1.7,
     "label": "notice",
@@ -51,20 +135,20 @@
   {
     "id": "may25-bank-hol",
     "text": "Garage Closed 25 May\nSpring Bank Holiday",
-    "x": 72,
-    "y": 12,
+    "x": 54.924908423141055,
+    "y": 12.111117892795143,
     "w": 175.2,
     "h": 110,
     "color": "pink",
-    "rotation": 2.2,
+    "rotation": 0,
     "label": "notice",
     "expires_at": "2026-05-25"
   },
   {
     "id": "warriors-training-may9",
     "text": "Gloucester Warriors training\nthis Saturday 6pm\nRiverside, St Oswalds Rd\nGloucester GL1 2TF\nOpen-run — casuals welcome\n£5 entry",
-    "x": 70,
-    "y": 39,
+    "x": 70.63241347965045,
+    "y": 11.99999025132921,
     "w": 185,
     "h": 245,
     "color": "orange",
