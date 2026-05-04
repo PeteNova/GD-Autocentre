@@ -7,14 +7,7 @@
 <html lang="en">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<!-- ═══════════════════════════════════════════════════════════════════
-     GD AUTOCENTRE — HERO-NOTES EDITOR
-     This file is a GENERATED duplicate of index.html with an editor
-     module appended before </body>. Do NOT hand-edit this file —
-     regenerate it via:  node tools/build-editor.mjs
-     The editor panel lets Gin design the hero pinboard visually and
-     export JSON to paste into docs/hero-notes.json.
-     ═══════════════════════════════════════════════════════════════════ -->
+<!-- GENERATED — run: node tools/build-editor.mjs -->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -463,13 +456,14 @@
   body[data-variant="editorial"] .btn { border-radius: 999px; }
   body[data-variant="cyber"] .btn { border-radius: 2px; }
 
-  /* quote highlight — deep teal across all variants/themes */
+  /* quote highlight — pen-ink blue across variants, no background */
   .team-quote-highlight {
-    background: #7fb0a0 !important;
-    color: #0e0f10 !important;
-    padding: 0.08em 0.28em !important;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+    background: transparent !important;
+    color: #1e3a8a !important;
+    padding: 0 !important;
+  }
+  body[data-theme="dark"] .team-quote-highlight {
+    color: #7a96e8 !important;
   }
   .theme-toggle {
     width: 28px; height: 28px;
@@ -1068,7 +1062,100 @@
     /* Individual position/size set inline via style by JS. */
   }
   @media (max-width: 900px) {
-    .hero-notes { display: none; }   /* stickies rendered in #pinboard instead */
+    .hero-notes { display: none; }   /* stickies rendered in mobile stack instead */
+  }
+
+  /* Mobile rotating sticky stack — desktop hidden, mobile shows fanned deck
+     of all hero-notes with swipe/tap cycling. Sits before .hero-meta in
+     hero-grid right column so it appears after the CTAs in mobile flow. */
+  .mobile-sticky-stack { display: none; }
+  @media (max-width: 900px) {
+    .mobile-sticky-stack {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 320px;
+      margin: 32px 0 20px;
+      border-top: 1px solid var(--line);
+      touch-action: pan-y;         /* let page scroll vertically; we handle horizontal */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .mobile-sticky-stack:empty { display: none; }
+    .mobile-sticky-stack::before {
+      content: "// GIN'S NEWS";
+      position: absolute;
+      top: 18px;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fg-faint);
+      opacity: 0.8;
+    }
+    body[data-variant="cyber"] .mobile-sticky-stack::before {
+      color: #a4acc0;
+      opacity: 1;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+    }
+    .mobile-sticky-stack .sticky {
+      position: absolute;
+      top: 68px;
+      left: 50%;
+      width: 220px !important;     /* override inline width from buildHeroSticky */
+      height: 180px !important;
+      min-height: 0;
+      padding: 22px 16px 14px;
+      font-size: 15px;
+      transition: transform 340ms cubic-bezier(.25, .9, .3, 1),
+                  opacity 280ms ease-out;
+      cursor: grab;
+      will-change: transform;
+    }
+    .mobile-sticky-stack .sticky.is-top { cursor: pointer; }
+    .mobile-sticky-stack .sticky.is-dragging {
+      transition: none;
+      cursor: grabbing;
+    }
+    .mobile-sticky-stack .sticky.is-exiting {
+      transition: transform 320ms ease-in, opacity 220ms ease-in;
+    }
+    /* Pin emoji on mobile stack — subtler, top-center. Close button hidden
+       (cycling replaces dismissal). */
+    .mobile-sticky-stack .sticky-pin { display: none; }
+    .mobile-sticky-stack .sticky-close { display: none; }
+    /* Hint text below the stack — only visible when >1 note. */
+    .mobile-sticky-stack[data-count="1"] .stack-hint,
+    .mobile-sticky-stack[data-count="0"] .stack-hint { display: none; }
+    .mobile-sticky-stack .stack-hint {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-faint);
+      pointer-events: none;
+    }
+  }
+
+  /* Stagger pop + wobble on initial render (desktop only).
+     JS sets --rot (final rotation) and --anim-delay (stagger) per sticky. */
+  @media (min-width: 901px) {
+    @keyframes sticky-pop-in {
+      0%   { opacity: 0; transform: scale(0.92) rotate(0deg); }
+      70%  { opacity: 1; transform: scale(1)    rotate(calc(var(--rot, 0deg) * 1.15)); }
+      100% { opacity: 1; transform: scale(1)    rotate(var(--rot, 0deg)); }
+    }
+    .hero-notes .sticky.anim-in {
+      animation: sticky-pop-in 520ms cubic-bezier(.25, .9, .3, 1) both;
+      animation-delay: var(--anim-delay, 0ms);
+      transform-origin: 50% 50%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-notes .sticky.anim-in { animation: none; opacity: 1; }
+    }
   }
 
   /* "+ Add note" nav button — bordered pill, matches nav-cta rhythm. */
@@ -1498,6 +1585,7 @@
     padding: 36px;
     background: color-mix(in srgb, var(--bg-2), white 4%);
     display: grid; gap: 14px;
+    scroll-margin-top: 80px;
   }
   body[data-variant="editorial"] form.quote { border-radius: 4px; }
   .form-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -1747,7 +1835,7 @@
 
     .trust { padding: 18px 0; }
     .trust-row { gap: 16px; }
-    .trust-ic { width: 34px; height: 34px; }
+    .trust-ic { width: 34px; height: 34px; border: 0; background: transparent; }
     .trust-text { font-size: 13px !important; }
     .trust-sub { font-size: 9px; }
 
@@ -2003,7 +2091,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="hero-greeting" id="heroGreeting" style="font-family:'Dancing Script',cursive; font-size:28px; font-weight:500; letter-spacing:0.01em; display:block; margin-bottom:6px; opacity:0.85; color:var(--fg);"></span>
+        <span class="hero-greeting" id="heroGreeting" style="font-family:'Caveat',cursive; font-size:30px; font-weight:500; letter-spacing:0.01em; display:block; margin-bottom:6px; opacity:0.85; color:var(--fg);"></span>
         <div style="margin-bottom:14px;">
           <span id="heroStatus" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); display:inline-flex; align-items:center; gap:7px;"></span>
         </div>
@@ -2022,7 +2110,7 @@
                 <svg class="ic"><use href="#i-phone"/></svg> Call Gin · 07894 550 082
               </a>
             </span>
-            <a href="#contact" class="btn btn-ghost">
+            <a href="#quoteForm" class="btn btn-ghost">
               Request a quote <svg class="ic"><use href="#i-arrow"/></svg>
             </a>
           </div>
@@ -2033,6 +2121,7 @@
         </div>
       </div>
       <div>
+        <div class="mobile-sticky-stack" id="mobileStickyStack" aria-label="Pinned notes from Gin"></div>
         <div class="hero-meta">
           <div class="meta-item">
             <span class="mono meta-label">// WORKSHOP RATE</span>
@@ -2203,95 +2292,52 @@
 </section>
 
 <!-- Why / About -->
-<section class="block" id="about">
+<style>
+@media (max-width: 900px) {
+  #about .team-layout { display: flex; flex-direction: column; gap: 24px; }
+  #about .team-layout > div { display: contents !important; }
+  #about .team-layout .team-portrait { order: 1; }
+  #about .team-layout > div > .eyebrow { order: 2; margin-top: 8px; }
+  #about .team-layout > div > .h2 { order: 3; }
+  #about .team-layout > div > .team-quote { order: 4; }
+  #about .team-layout > div > .why-list { order: 5; }
+  #about .team-layout .stats { order: 6; }
+  #about .team-layout > div:nth-child(1) > .stats { margin-top: 24px !important; }
+  #about .team-layout > div:nth-child(2) > .stats { margin-top: -1px !important; }
+}
+</style>
+<!-- Unified About + Team — single viewport, no redundant CTAs -->
+<section class="block" id="about" style="background: var(--bg-2);">
   <div class="wrap">
     <div class="section-index">
       <span>03 · About</span>
-      <span class="tag">Why GD Autocentre</span>
+      <span class="tag">Meet Gin</span>
     </div>
-    <div class="why-layout">
-      <div>
-        <h2 class="h2">Honest work.<br><span class="italic-em">Fair prices.</span></h2>
-        <p class="why-lede">We're an independent garage that treats every customer like family. No jargon, no pressure, no unnecessary work — just straight-talking advice and quality repairs at a fair price. We're proud to be female-friendly, making sure everyone feels welcome and informed.</p>
-        <ul class="why-list">
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Transparent pricing — no hidden charges</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Clear explanations of all work needed</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Female-friendly &amp; welcoming to everyone</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Emergency repairs handled fast</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>High-performance car specialists</span></li>
-          <li><svg class="ic"><use href="#i-check"/></svg><span>Established since 2015 in Gloucester</span></li>
-        </ul>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-n">10+</div>
-          <div class="stat-l">Years experience</div>
-          <div class="stat-note">Serving Gloucester since 2015</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">71+</div>
-          <div class="stat-l">Customer reviews</div>
-          <div class="stat-note">4.9 avg across Google &amp; Facebook</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">100%</div>
-          <div class="stat-l">Independent</div>
-          <div class="stat-note">No pressure, no upsell culture</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n">All</div>
-          <div class="stat-l">Makes &amp; models</div>
-          <div class="stat-note">From daily drivers to performance</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Team / Meet the Team -->
-<section class="block" id="team" style="background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-index">
-      <span>04 · The team</span>
-      <span class="tag">Meet the team</span>
-    </div>
-    <div class="team-layout">
-      <div style="position: relative;">
-        <div class="team-portrait">
+    <div class="team-layout" style="align-items: stretch;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="team-portrait" style="aspect-ratio: 4/3;">
           <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1200&q=80" alt="Portrait of workshop owner in blue overalls">
           <div class="team-badge">Owner · Mechanic</div>
         </div>
-      </div>
-      <div>
-        <p class="eyebrow">Gintaras (Gin) · GD Autocentre</p>
-        <h2 class="team-quote" style="margin-top: 24px; font-family:'Caveat',cursive; font-optical-sizing:auto; font-style:normal; font-weight:400; font-size:clamp(18px,2vw,26px); line-height:1.7; letter-spacing:0;">
-          <span class="team-quote-highlight">Honest work, fair prices — that's what we're about. Every customer gets a straight answer and quality they can count on.</span>
-        </h2>
-        <div class="team-meta">
-          <div class="team-meta-row">
-            <span class="k">Trading since</span>
-            <span class="v">2015 · incorporated as Ltd in September 2019</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Experience</span>
-            <span class="v">10+ years serving Gloucester and surrounding areas</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Specialities</span>
-            <span class="v">Performance cars, diagnostics, welding, engine rebuilds</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Approach</span>
-            <span class="v">Independent · female-friendly · plain-English advice</span>
-          </div>
-          <div class="team-meta-row">
-            <span class="k">Fleet we service</span>
-            <span class="v">All makes &amp; models — daily drivers to performance builds</span>
-          </div>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d; border-right-color: rgba(255,255,255,0.18);"><div class="stat-n" style="font-size: 36px; color: #ffffff;">10+</div><div class="stat-l" style="color: #ffffff;">Years</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px; background: #0d1b3d; border-color: #0d1b3d;"><div class="stat-n" style="font-size: 36px; color: #ffffff;">All</div><div class="stat-l" style="color: #ffffff;">Makes &amp; models</div></div>
         </div>
-        <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="tel:+447894550082" class="btn btn-primary"><svg class="ic"><use href="#i-phone"/></svg> Speak to Gin</a>
-          <a href="#contact" class="btn btn-ghost">Send an enquiry <svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <p class="eyebrow" style="color: var(--fg);">Gintaras (Gin) · GD Autocentre</p>
+        <h2 class="h2" style="margin-top: 16px;">Honest work.<br><span class="italic-em">Fair prices.</span></h2>
+        <p class="team-quote" style="margin-top: 20px; font-family:'Caveat',cursive; font-weight:400; font-size:clamp(18px,2vw,24px); line-height:1.55; letter-spacing:0;">
+          <span class="team-quote-highlight">Every customer gets a straight answer and quality they can count on.</span>
+        </p>
+        <ul class="why-list" style="margin-top: 24px;">
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Transparent pricing · no hidden charges</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Female-friendly &amp; welcoming</span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span>Performance specialists &amp; daily drivers</span></li>
+        </ul>
+        <div class="stats" style="margin-top: auto;">
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">100%</div><div class="stat-l">Independent</div></div>
+          <div class="stat" style="padding: 20px; min-height: 104px;"><div class="stat-n" style="font-size: 36px;">71+</div><div class="stat-l">Reviews · 4.9&#9733;</div></div>
         </div>
       </div>
     </div>
@@ -2302,7 +2348,7 @@
 <section class="block" id="pricing">
   <div class="wrap">
     <div class="section-index">
-      <span>05 · Pricing</span>
+      <span>04 · Pricing</span>
       <span class="tag">Indicative prices</span>
     </div>
     <div class="block-head">
@@ -2361,7 +2407,7 @@
 <section class="block" id="reviews" style="background: var(--bg-2);">
   <div class="wrap">
     <div class="section-index">
-      <span>06 · Reviews</span>
+      <span>05 · Reviews</span>
       <span class="tag">Straight from customers</span>
     </div>
     <div class="block-head">
@@ -2436,7 +2482,7 @@
 <section id="location">
   <div class="location-grid">
     <div class="location-info">
-      <span class="eyebrow">07 · Find us</span>
+      <span class="eyebrow">06 · Find us</span>
       <h2 class="location-addr" style="margin-top: 18px;">
         153a Bristol Road<br>
         Gloucester, GL1 5SY
@@ -2470,7 +2516,7 @@
 <section class="block" id="contact">
   <div class="wrap">
     <div class="section-index">
-      <span>08 · Contact</span>
+      <span>07 · Contact</span>
       <span class="tag">Get in touch</span>
     </div>
     <div class="contact-grid">
@@ -2781,17 +2827,16 @@
   // init
   applyTheme(getSavedTheme());
 
-  // greeting
+  // greeting + workshop status (combined into one conversational 2-line block)
   (function() {
-    const h = new Date().getHours();
-    const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-    const el = document.getElementById('heroGreeting');
-    if (el) el.textContent = greet;
+    const statusEl = document.getElementById('heroStatus');
+    const greetingEl = document.getElementById('heroGreeting');
+    if (!statusEl) return;
 
-    // workshop status
-    (function() {
-      const statusEl = document.getElementById('heroStatus');
-      if (!statusEl) return;
+    function getGreeting() {
+      const h = new Date().getHours();
+      return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+    }
 
       const OPEN_H = 9;
       const WORKSHOP_CLOSE_H = 17, WORKSHOP_CLOSE_M = 30; // cars on lift until 17:30
@@ -2800,68 +2845,62 @@
       const CLOSE_H = WORKSHOP_CLOSE_H, CLOSE_M = WORKSHOP_CLOSE_M;
       const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-      // ── Opening-hours overrides (Google Sheets published as CSV) ───────────
-      // Gin edits a Google Sheet with columns: Date, Status, Open, Close, Note
-      // Sheet → File → Share → Publish to web → CSV. Paste the URL below.
-      // Empty URL = skip fetch; the site falls back to the default weekly schedule.
-      // See docs/opening-hours-sheet.md for the full template.
-      const OVERRIDES_CSV_URL = '';
+      // ── Opening-hours overrides ───────────────────────────────────────────
+      // Source of truth = a single sticker with type:"schedule" inside
+      // docs/hero-notes.json. The pinboard module fetches that file, peels
+      // the schedule sticker out, and pushes its entries[] here via
+      // window.GD_SCHEDULE_API.applyScheduleEntries(entries). Empty / no
+      // sticker → site falls back to the default Mon–Fri weekly schedule.
       let todayOverride = null; // { status: 'closed'|'open', openH, openM, closeH, closeM, note }
 
-      function todayISO() {
-        const d = new Date();
-        return d.getFullYear() + '-' +
-          String(d.getMonth() + 1).padStart(2, '0') + '-' +
-          String(d.getDate()).padStart(2, '0');
-      }
-      function parseCSV(text) {
-        const lines = text.trim().split(/\r?\n/);
-        if (!lines.length) return [];
-        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-        return lines.slice(1).map(line => {
-          const cells = line.split(',').map(c => c.trim());
-          const row = {};
-          headers.forEach((h, i) => row[h] = cells[i] || '');
-          return row;
-        });
-      }
+      // Today's date in Europe/London — survives users browsing from other
+      // timezones and the BST/GMT switch.
+      const LONDON_DATE_FMT = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/London',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+      });
+      function todayISO() { return LONDON_DATE_FMT.format(new Date()); }
       function parseHM(s) {
         if (!s) return null;
-        const [h, m] = s.split(':').map(Number);
+        const [h, m] = String(s).split(':').map(Number);
         if (isNaN(h)) return null;
         return { h: h, m: isNaN(m) ? 0 : m };
       }
-      async function fetchOverrides() {
-        if (!OVERRIDES_CSV_URL) return;
-        try {
-          const resp = await fetch(OVERRIDES_CSV_URL, { cache: 'no-store' });
-          if (!resp.ok) return;
-          const rows = parseCSV(await resp.text());
+      function applyScheduleEntries(entries) {
+        todayOverride = null;
+        if (Array.isArray(entries)) {
           const today = todayISO();
-          const row = rows.find(r => r.date === today);
-          if (!row) return;
-          const status = (row.status || '').toLowerCase();
-          const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
-          if (status === 'open') {
-            const open = parseHM(row.open);
-            const close = parseHM(row.close);
-            if (open && close) {
-              o.openH = open.h; o.openM = open.m;
-              o.closeH = close.h; o.closeM = close.m;
-            } else {
-              return; // malformed row — ignore, use defaults
+          const row = entries.find(e => e && (
+            e.date === today ||
+            (e.from && e.to && e.from <= today && today <= e.to)
+          ));
+          if (row) {
+            const status = String(row.status || '').toLowerCase();
+            const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
+            if (status === 'open') {
+              const open = parseHM(row.open);
+              const close = parseHM(row.close);
+              if (open && close) {
+                o.openH = open.h; o.openM = open.m;
+                o.closeH = close.h; o.closeM = close.m;
+                todayOverride = o;
+              }
+              // malformed open row → leave todayOverride null, use defaults
+            } else if (status === 'closed') {
+              todayOverride = o;
             }
-          } else if (status !== 'closed') {
-            return; // unknown status — ignore
           }
-          todayOverride = o;
-          if (typeof render === 'function') render();
-        } catch (e) {
-          // Silent fail — site continues on default schedule
         }
+        if (typeof render === 'function') render();
       }
+      window.GD_SCHEDULE_API = { applyScheduleEntries: applyScheduleEntries };
 
       function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
+      function fmt12(h, m) {
+        const period = h < 12 ? 'AM' : 'PM';
+        const h12 = h % 12 === 0 ? 12 : h % 12;
+        return h12 + ':' + String(m).padStart(2,'0') + ' ' + period;
+      }
       function minsUntil(h, m, nowH, nowM) { return (h * 60 + m) - (nowH * 60 + nowM); }
       function fmtDuration(mins) {
         const h = Math.floor(mins / 60), m = mins % 60;
@@ -2886,20 +2925,42 @@
 
         // Override path — today has a row in the Google Sheet
         if (todayOverride) {
-          const note = todayOverride.note ? ' · ' + todayOverride.note : '';
+          const noteSep = todayOverride.note ? ' · ' + todayOverride.note : '';
+          const nextOpen = nextOpenDay(dow);
           if (todayOverride.status === 'closed') {
-            return { open: false, text: 'Closed today' + note };
+            const notePrefix = todayOverride.note ? todayOverride.note + ' · ' : '';
+            return {
+              open: false,
+              text: 'Closed today' + noteSep,
+              line1Tail: "we're closed today",
+              line2: notePrefix + 'opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+            };
           }
           if (todayOverride.status === 'open' && todayOverride.openH != null) {
             const openMins = todayOverride.openH * 60 + todayOverride.openM;
             const closeMins = todayOverride.closeH * 60 + todayOverride.closeM;
             if (nowMins < openMins) {
-              return { open: false, text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + note };
+              return {
+                open: false,
+                text: 'Opens today at ' + fmt(todayOverride.openH, todayOverride.openM) + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens at ' + fmt12(todayOverride.openH, todayOverride.openM) + ' · in ' + fmtDuration(openMins - nowMins)
+              };
             }
             if (nowMins >= closeMins) {
-              return { open: false, text: 'Closed' + note };
+              return {
+                open: false,
+                text: 'Closed' + noteSep,
+                line1Tail: "we're closed",
+                line2: 'Opens ' + nextOpen + ' at ' + fmt12(OPEN_H, 0)
+              };
             }
-            return { open: true, text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + note };
+            return {
+              open: true,
+              text: 'Open · closes in ' + fmtDuration(closeMins - nowMins) + noteSep,
+              line1Tail: "we're open",
+              line2: 'Closes at ' + fmt12(todayOverride.closeH, todayOverride.closeM) + ' · in ' + fmtDuration(closeMins - nowMins)
+            };
           }
         }
 
@@ -2909,17 +2970,37 @@
         const openMins = OPEN_H * 60;
 
         if (!isWeekday) {
-          return { open: false, text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Closed today · opens ' + nextOpenDay(dow) + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed today",
+            line2: 'Opens ' + nextOpenDay(dow) + ' at ' + fmt12(OPEN_H, 0)
+          };
         }
         if (nowMins < openMins) {
-          return { open: false, text: 'Opens today at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Opens today at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens at ' + fmt12(OPEN_H, 0) + ' · in ' + fmtDuration(openMins - nowMins)
+          };
         }
         if (nowMins >= closeMins) {
           const next = dow === 5 ? 'Monday' : DAYS[dow + 1];
-          return { open: false, text: 'Closed · opens ' + next + ' at ' + fmt(OPEN_H, 0) };
+          return {
+            open: false,
+            text: 'Closed · opens ' + next + ' at ' + fmt(OPEN_H, 0),
+            line1Tail: "we're closed",
+            line2: 'Opens ' + next + ' at ' + fmt12(OPEN_H, 0)
+          };
         }
         const minsLeft = minsUntil(CLOSE_H, CLOSE_M, h, m);
-        return { open: true, text: 'Open · closes in ' + fmtDuration(minsLeft) };
+        return {
+          open: true,
+          text: 'Open · closes in ' + fmtDuration(minsLeft),
+          line1Tail: "we're open",
+          line2: 'Closes at ' + fmt12(CLOSE_H, CLOSE_M) + ' · in ' + fmtDuration(minsLeft)
+        };
       }
 
       const bookingAlert = document.getElementById('bookingAlert');
@@ -3002,10 +3083,11 @@
 
       function render() {
         const s = getStatus();
-        const dotColor = s.open ? '#22c55e' : 'var(--fg-faint)';
+        if (greetingEl) {
+          greetingEl.textContent = getGreeting() + ' \u2014 ' + s.line1Tail + '.';
+        }
         statusEl.innerHTML =
-          `<span style="width:7px;height:7px;border-radius:50%;background:${dotColor};display:inline-block;flex-shrink:0;${s.open ? 'box-shadow:0 0 6px ' + dotColor : ''}"></span>` +
-          `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.text}</span>`;
+          `<span style="color:${s.open ? 'var(--fg)' : 'var(--fg-faint)'};">${s.line2}</span>`;
         const phoneOpen = isPhoneOpen();
         if (bookingAlertText) bookingAlertText.innerHTML = phoneOpen ? ALERT_OPEN : ALERT_CLOSED;
         if (bookingAlert) bookingAlert.classList.toggle('is-offline', !phoneOpen);
@@ -3036,10 +3118,10 @@
       }
 
       render();
-      fetchOverrides(); // async — will re-render if today has a row in the sheet
+      // pinboardModule fetches docs/hero-notes.json and pushes the
+      // schedule sticker's entries[] in via GD_SCHEDULE_API.applyScheduleEntries.
       // update every minute
       setInterval(render, 60000);
-    })();
   })();
 
   // ═══════════ PINBOARD (sticky notes) ═══════════
@@ -3056,7 +3138,12 @@
   (function pinboardModule() {
     const pinboard = document.getElementById('pinboard');
     const heroNotesEl = document.getElementById('heroNotes');
+    const mobileStackEl = document.getElementById('mobileStickyStack');
     if (!pinboard) return;
+
+    let stackActiveIdx = 0;
+    let stackNotes = [];          // notes currently rendered in the mobile stack
+    let stackHandlersBound = false;
 
     const STORAGE_KEY = 'gd_user_notes';
     const POS_KEY = 'gd_pinboard_pos';
@@ -3193,6 +3280,19 @@
         && typeof n.w === 'number' && typeof n.h === 'number';
     }
 
+    // Schedule sticker — opening-hours overrides (one sticker, no visual render).
+    // Picked up by fetchHeroNotes and pushed into GD_SCHEDULE_API. Stays inside
+    // heroNotes so the editor roundtrips it on Copy/Export without dropping it.
+    function isValidScheduleSticker(n) {
+      return n && n.type === 'schedule' && Array.isArray(n.entries);
+    }
+    function isAcceptedHeroEntry(n) {
+      return isValidHeroNote(n) || isValidScheduleSticker(n);
+    }
+    function isVisualSticky(n) {
+      return n && n.type !== 'schedule' && isValidHeroNote(n);
+    }
+
     // Check if a note has expired (optional expires_at field in YYYY-MM-DD format).
     // Returns true if note should be visible, false if expired.
     function isNotExpired(note) {
@@ -3218,6 +3318,7 @@
       const rot = typeof note.rotation === 'number'
         ? Math.max(-6, Math.min(6, note.rotation))
         : -1.4;
+      el.style.setProperty('--rot', rot + 'deg');
       el.style.transform = 'rotate(' + rot + 'deg)';
 
       // Freeform (desktop overlay): absolute x%/y% + full size from note.w/h.
@@ -3266,35 +3367,150 @@
       return el;
     }
 
+    // ── Mobile rotating sticky stack ──────────────────────────────────
+    // Desktop: hero-notes live in #heroNotes overlay (freeform).
+    // Mobile:  all non-expired hero-notes stack as a fanned deck inside
+    //          #mobileStickyStack. Top card active; swipe/tap cycles to next.
+    function applyStackLayout(animate) {
+      if (!mobileStackEl) return;
+      const cards = mobileStackEl.querySelectorAll('.sticky');
+      const n = cards.length;
+      if (!n) return;
+      cards.forEach(function(el, i) {
+        const pos = ((i - stackActiveIdx) % n + n) % n; // 0 = top, 1 = below, ...
+        const baseRot = parseFloat(el.dataset.baseRot || '0');
+        let rot = baseRot, tx = 0, ty = 0, sc = 1, z = 100 - pos, op = 1;
+        if (pos === 0)      { rot = baseRot;        tx = 0;    ty = 0;   sc = 1;    }
+        else if (pos === 1) { rot = baseRot + 4;    tx = -10;  ty = 10;  sc = 0.96; }
+        else if (pos === 2) { rot = baseRot - 5;    tx = 12;   ty = 18;  sc = 0.92; }
+        else { op = 0; sc = 0.88; ty = 24; }
+        el.style.transition = animate ? '' : 'none';
+        el.style.zIndex = z;
+        el.style.opacity = op;
+        el.style.pointerEvents = pos === 0 ? 'auto' : 'none';
+        el.style.transform = 'translate(calc(-50% + ' + tx + 'px),' + ty + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
+        el.classList.toggle('is-top', pos === 0);
+      });
+    }
+
+    function advanceStack() {
+      if (!stackNotes.length) return;
+      stackActiveIdx = (stackActiveIdx + 1) % stackNotes.length;
+      applyStackLayout(true);
+    }
+
+    function bindStackHandlers() {
+      if (stackHandlersBound || !mobileStackEl) return;
+      stackHandlersBound = true;
+      let startX = 0, startY = 0, dragging = false, moved = false, topEl = null;
+      const SWIPE_PX = 50;
+      const SLOP_PX = 8;
+
+      mobileStackEl.addEventListener('touchstart', function(e) {
+        if (!e.touches.length) return;
+        topEl = mobileStackEl.querySelector('.sticky.is-top');
+        if (!topEl) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dragging = true; moved = false;
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchmove', function(e) {
+        if (!dragging || !topEl || !e.touches.length) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!moved && (Math.abs(dx) > SLOP_PX || Math.abs(dy) > SLOP_PX)) {
+          moved = true;
+          if (Math.abs(dx) < Math.abs(dy)) { dragging = false; return; } // vertical → let page scroll
+        }
+        if (!moved) return;
+        const baseRot = parseFloat(topEl.dataset.baseRot || '0');
+        topEl.classList.add('is-dragging');
+        topEl.style.transform = 'translate(calc(-50% + ' + dx + 'px),0) rotate(' + (baseRot + dx * 0.05) + 'deg)';
+      }, { passive: true });
+
+      mobileStackEl.addEventListener('touchend', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        if (!topEl) return;
+        topEl.classList.remove('is-dragging');
+        const dx = (e.changedTouches[0] ? e.changedTouches[0].clientX : startX) - startX;
+        if (Math.abs(dx) >= SWIPE_PX) advanceStack();
+        else applyStackLayout(true); // snap back
+        topEl = null;
+      });
+
+      // Tap to advance (desktop debug + mobile fallback when swipe too short).
+      mobileStackEl.addEventListener('click', function(e) {
+        const top = mobileStackEl.querySelector('.sticky.is-top');
+        if (!top) return;
+        if (e.target.closest('.sticky') !== top) return;
+        advanceStack();
+      });
+    }
+
+    function renderMobileStack(notes) {
+      if (!mobileStackEl) return;
+      stackNotes = notes;
+      mobileStackEl.innerHTML = '';
+      mobileStackEl.setAttribute('data-count', String(notes.length));
+      if (!notes.length) return;
+      if (stackActiveIdx >= notes.length) stackActiveIdx = 0;
+      notes.forEach(function(note) {
+        const el = buildHeroSticky(note, false);
+        el.dataset.baseRot = (typeof note.rotation === 'number'
+          ? Math.max(-6, Math.min(6, note.rotation))
+          : -1.4).toString();
+        mobileStackEl.appendChild(el);
+      });
+      if (notes.length > 1) {
+        const hint = document.createElement('div');
+        hint.className = 'stack-hint';
+        hint.textContent = 'Swipe \u2190 \u2192';
+        mobileStackEl.appendChild(hint);
+      }
+      applyStackLayout(false);
+      bindStackHandlers();
+    }
+
     function render(focusIndex) {
       pinboard.innerHTML = '';
       if (heroNotesEl) heroNotesEl.innerHTML = '';
 
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
-
-      // B: Gin's hero-notes.
-      //   Desktop: freeform overlay inside .hero, all non-expired notes.
-      //   Mobile:  pinboard column, ONLY notes with visible_on_mobile:true
-      //            that the visitor hasn't dismissed yet (× button).
-      //            Pin emoji + close button get appended by buildHeroSticky.
-      let mobileRendered = 0;
-      heroNotes.forEach(function(note) {
-        if (!isNotExpired(note)) return; // skip expired notes
-        if (freeform) {
-          heroNotesEl.appendChild(buildHeroSticky(note, true));
-        } else {
-          if (!note.visible_on_mobile) return;
-          if (note.id && dismissedIds.indexOf(note.id) !== -1) return;
-          pinboard.appendChild(buildHeroSticky(note, false));
-          mobileRendered++;
-        }
+      // Priority by date: soonest expires_at first; notes without expiry last.
+      // Stable within each group (preserves JSON order).
+      const visibleHeroNotes = heroNotes.filter(isVisualSticky).filter(isNotExpired).slice().sort(function(a, b) {
+        const ax = a.expires_at || '';
+        const bx = b.expires_at || '';
+        if (ax && bx) return ax < bx ? -1 : ax > bx ? 1 : 0;
+        if (ax && !bx) return -1;
+        if (!ax && bx) return 1;
+        return 0;
       });
 
-      // On mobile, hide the pinboard entirely if nothing survived the
-      // opt-in + dismissed filters. (Also hides it when legacy user-notes
-      // are absent, which is the normal case now that Add Note is gone.)
+      let freeformIdx = 0;
+      if (freeform) {
+        visibleHeroNotes.forEach(function(note) {
+          const el = buildHeroSticky(note, true);
+          el.classList.add('anim-in');
+          el.style.setProperty('--anim-delay', (freeformIdx * 90) + 'ms');
+          freeformIdx++;
+          heroNotesEl.appendChild(el);
+        });
+        if (mobileStackEl) {
+          mobileStackEl.innerHTML = '';
+          mobileStackEl.setAttribute('data-count', '0');
+          stackNotes = [];
+        }
+      } else {
+        renderMobileStack(visibleHeroNotes);
+      }
+
+      // Pinboard column is desktop-only now (legacy user-notes). On mobile
+      // we collapse it so hero-notes don't double up with the new stack.
       if (!freeform) {
-        const hasAnything = mobileRendered > 0 || userNotes.length > 0;
+        const hasAnything = userNotes.length > 0;
         pinboard.classList.toggle('is-empty-mobile', !hasAnything);
       } else {
         pinboard.classList.remove('is-empty-mobile');
@@ -3536,7 +3752,11 @@
         if (!res.ok) return;
         const data = await res.json();
         if (!Array.isArray(data)) return;
-        heroNotes = data.filter(isValidHeroNote);
+        heroNotes = data.filter(isAcceptedHeroEntry);
+        const schedule = heroNotes.find(isValidScheduleSticker);
+        if (window.GD_SCHEDULE_API && typeof window.GD_SCHEDULE_API.applyScheduleEntries === 'function') {
+          window.GD_SCHEDULE_API.applyScheduleEntries(schedule ? schedule.entries : null);
+        }
         render();
       } catch {}
     }
@@ -3594,7 +3814,11 @@
       getHeroNotes: function() { return JSON.parse(JSON.stringify(heroNotes)); },
       setHeroNotes: function(next) {
         if (!Array.isArray(next)) return;
-        heroNotes = next.filter(isValidHeroNote);
+        heroNotes = next.filter(isAcceptedHeroEntry);
+        const schedule = heroNotes.find(isValidScheduleSticker);
+        if (window.GD_SCHEDULE_API && typeof window.GD_SCHEDULE_API.applyScheduleEntries === 'function') {
+          window.GD_SCHEDULE_API.applyScheduleEntries(schedule ? schedule.entries : null);
+        }
         render();
       },
       render: render,
@@ -4359,7 +4583,11 @@
         const parsed = JSON.parse(txt);
         if (!Array.isArray(parsed)) throw new Error('not an array');
         notes = parsed.filter(function(n) {
-          return n && typeof n.text === 'string'
+          if (!n) return false;
+          // Schedule sticker (opening-hours overrides) — opaque to editor UI
+          // but preserved on roundtrip so Gin's paste doesn't wipe it.
+          if (n.type === 'schedule' && Array.isArray(n.entries)) return true;
+          return typeof n.text === 'string'
             && typeof n.x === 'number' && typeof n.y === 'number'
             && typeof n.w === 'number' && typeof n.h === 'number';
         });

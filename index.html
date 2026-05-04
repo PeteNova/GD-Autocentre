@@ -2842,66 +2842,55 @@
       const CLOSE_H = WORKSHOP_CLOSE_H, CLOSE_M = WORKSHOP_CLOSE_M;
       const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-      // ── Opening-hours overrides (Google Sheets published as CSV) ───────────
-      // Gin edits a Google Sheet with columns: Date, Status, Open, Close, Note
-      // Sheet → File → Share → Publish to web → CSV. Paste the URL below.
-      // Empty URL = skip fetch; the site falls back to the default weekly schedule.
-      // See docs/opening-hours-sheet.md for the full template.
-      const OVERRIDES_CSV_URL = '';
+      // ── Opening-hours overrides ───────────────────────────────────────────
+      // Source of truth = a single sticker with type:"schedule" inside
+      // docs/hero-notes.json. The pinboard module fetches that file, peels
+      // the schedule sticker out, and pushes its entries[] here via
+      // window.GD_SCHEDULE_API.applyScheduleEntries(entries). Empty / no
+      // sticker → site falls back to the default Mon–Fri weekly schedule.
       let todayOverride = null; // { status: 'closed'|'open', openH, openM, closeH, closeM, note }
 
-      function todayISO() {
-        const d = new Date();
-        return d.getFullYear() + '-' +
-          String(d.getMonth() + 1).padStart(2, '0') + '-' +
-          String(d.getDate()).padStart(2, '0');
-      }
-      function parseCSV(text) {
-        const lines = text.trim().split(/\r?\n/);
-        if (!lines.length) return [];
-        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-        return lines.slice(1).map(line => {
-          const cells = line.split(',').map(c => c.trim());
-          const row = {};
-          headers.forEach((h, i) => row[h] = cells[i] || '');
-          return row;
-        });
-      }
+      // Today's date in Europe/London — survives users browsing from other
+      // timezones and the BST/GMT switch.
+      const LONDON_DATE_FMT = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/London',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+      });
+      function todayISO() { return LONDON_DATE_FMT.format(new Date()); }
       function parseHM(s) {
         if (!s) return null;
-        const [h, m] = s.split(':').map(Number);
+        const [h, m] = String(s).split(':').map(Number);
         if (isNaN(h)) return null;
         return { h: h, m: isNaN(m) ? 0 : m };
       }
-      async function fetchOverrides() {
-        if (!OVERRIDES_CSV_URL) return;
-        try {
-          const resp = await fetch(OVERRIDES_CSV_URL, { cache: 'no-store' });
-          if (!resp.ok) return;
-          const rows = parseCSV(await resp.text());
+      function applyScheduleEntries(entries) {
+        todayOverride = null;
+        if (Array.isArray(entries)) {
           const today = todayISO();
-          const row = rows.find(r => r.date === today);
-          if (!row) return;
-          const status = (row.status || '').toLowerCase();
-          const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
-          if (status === 'open') {
-            const open = parseHM(row.open);
-            const close = parseHM(row.close);
-            if (open && close) {
-              o.openH = open.h; o.openM = open.m;
-              o.closeH = close.h; o.closeM = close.m;
-            } else {
-              return; // malformed row — ignore, use defaults
+          const row = entries.find(e => e && (
+            e.date === today ||
+            (e.from && e.to && e.from <= today && today <= e.to)
+          ));
+          if (row) {
+            const status = String(row.status || '').toLowerCase();
+            const o = { status: status, openH: null, openM: null, closeH: null, closeM: null, note: row.note || '' };
+            if (status === 'open') {
+              const open = parseHM(row.open);
+              const close = parseHM(row.close);
+              if (open && close) {
+                o.openH = open.h; o.openM = open.m;
+                o.closeH = close.h; o.closeM = close.m;
+                todayOverride = o;
+              }
+              // malformed open row → leave todayOverride null, use defaults
+            } else if (status === 'closed') {
+              todayOverride = o;
             }
-          } else if (status !== 'closed') {
-            return; // unknown status — ignore
           }
-          todayOverride = o;
-          if (typeof render === 'function') render();
-        } catch (e) {
-          // Silent fail — site continues on default schedule
         }
+        if (typeof render === 'function') render();
       }
+      window.GD_SCHEDULE_API = { applyScheduleEntries: applyScheduleEntries };
 
       function fmt(h, m) { return h + ':' + String(m).padStart(2,'0'); }
       function fmt12(h, m) {
@@ -3126,7 +3115,8 @@
       }
 
       render();
-      fetchOverrides(); // async — will re-render if today has a row in the sheet
+      // pinboardModule fetches docs/hero-notes.json and pushes the
+      // schedule sticker's entries[] in via GD_SCHEDULE_API.applyScheduleEntries.
       // update every minute
       setInterval(render, 60000);
   })();
@@ -3285,6 +3275,19 @@
         && typeof n.text === 'string'
         && typeof n.x === 'number' && typeof n.y === 'number'
         && typeof n.w === 'number' && typeof n.h === 'number';
+    }
+
+    // Schedule sticker — opening-hours overrides (one sticker, no visual render).
+    // Picked up by fetchHeroNotes and pushed into GD_SCHEDULE_API. Stays inside
+    // heroNotes so the editor roundtrips it on Copy/Export without dropping it.
+    function isValidScheduleSticker(n) {
+      return n && n.type === 'schedule' && Array.isArray(n.entries);
+    }
+    function isAcceptedHeroEntry(n) {
+      return isValidHeroNote(n) || isValidScheduleSticker(n);
+    }
+    function isVisualSticky(n) {
+      return n && n.type !== 'schedule' && isValidHeroNote(n);
     }
 
     // Check if a note has expired (optional expires_at field in YYYY-MM-DD format).
@@ -3474,7 +3477,7 @@
       const freeform = window.innerWidth > 900 && !!heroNotesEl;
       // Priority by date: soonest expires_at first; notes without expiry last.
       // Stable within each group (preserves JSON order).
-      const visibleHeroNotes = heroNotes.filter(isNotExpired).slice().sort(function(a, b) {
+      const visibleHeroNotes = heroNotes.filter(isVisualSticky).filter(isNotExpired).slice().sort(function(a, b) {
         const ax = a.expires_at || '';
         const bx = b.expires_at || '';
         if (ax && bx) return ax < bx ? -1 : ax > bx ? 1 : 0;
@@ -3746,7 +3749,11 @@
         if (!res.ok) return;
         const data = await res.json();
         if (!Array.isArray(data)) return;
-        heroNotes = data.filter(isValidHeroNote);
+        heroNotes = data.filter(isAcceptedHeroEntry);
+        const schedule = heroNotes.find(isValidScheduleSticker);
+        if (window.GD_SCHEDULE_API && typeof window.GD_SCHEDULE_API.applyScheduleEntries === 'function') {
+          window.GD_SCHEDULE_API.applyScheduleEntries(schedule ? schedule.entries : null);
+        }
         render();
       } catch {}
     }
@@ -3804,7 +3811,11 @@
       getHeroNotes: function() { return JSON.parse(JSON.stringify(heroNotes)); },
       setHeroNotes: function(next) {
         if (!Array.isArray(next)) return;
-        heroNotes = next.filter(isValidHeroNote);
+        heroNotes = next.filter(isAcceptedHeroEntry);
+        const schedule = heroNotes.find(isValidScheduleSticker);
+        if (window.GD_SCHEDULE_API && typeof window.GD_SCHEDULE_API.applyScheduleEntries === 'function') {
+          window.GD_SCHEDULE_API.applyScheduleEntries(schedule ? schedule.entries : null);
+        }
         render();
       },
       render: render,

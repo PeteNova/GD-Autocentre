@@ -650,7 +650,11 @@
         const parsed = JSON.parse(txt);
         if (!Array.isArray(parsed)) throw new Error('not an array');
         notes = parsed.filter(function(n) {
-          return n && typeof n.text === 'string'
+          if (!n) return false;
+          // Schedule sticker (opening-hours overrides) — opaque to editor UI
+          // but preserved on roundtrip so Gin's paste doesn't wipe it.
+          if (n.type === 'schedule' && Array.isArray(n.entries)) return true;
+          return typeof n.text === 'string'
             && typeof n.x === 'number' && typeof n.y === 'number'
             && typeof n.w === 'number' && typeof n.h === 'number';
         });

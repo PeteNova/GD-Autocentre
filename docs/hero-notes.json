@@ -1,5 +1,30 @@
 [
   {
+    "id": "schedule",
+    "type": "schedule",
+    "entries": [
+      {"date":"2026-04-03","status":"closed","note":"Good Friday"},
+      {"date":"2026-04-06","status":"closed","note":"Easter Monday"},
+      {"date":"2026-05-04","status":"closed","note":"Early May bank holiday"},
+      {"date":"2026-05-25","status":"closed","note":"Spring bank holiday"},
+      {"date":"2026-08-31","status":"closed","note":"Summer bank holiday"},
+      {"date":"2026-12-24","status":"open","open":"09:00","close":"14:00","note":"Christmas Eve — early close"},
+      {"date":"2026-12-25","status":"closed","note":"Christmas Day"},
+      {"date":"2026-12-28","status":"closed","note":"Boxing Day (substitute day)"},
+      {"date":"2026-12-31","status":"open","open":"09:00","close":"14:00","note":"New Year's Eve — early close"},
+      {"date":"2027-01-01","status":"closed","note":"New Year's Day"},
+      {"date":"2027-03-26","status":"closed","note":"Good Friday"},
+      {"date":"2027-03-29","status":"closed","note":"Easter Monday"},
+      {"date":"2027-05-03","status":"closed","note":"Early May bank holiday"},
+      {"date":"2027-05-31","status":"closed","note":"Spring bank holiday"},
+      {"date":"2027-08-30","status":"closed","note":"Summer bank holiday"},
+      {"date":"2027-12-24","status":"open","open":"09:00","close":"14:00","note":"Christmas Eve — early close"},
+      {"date":"2027-12-27","status":"closed","note":"Christmas Day (substitute day)"},
+      {"date":"2027-12-28","status":"closed","note":"Boxing Day (substitute day)"},
+      {"date":"2027-12-31","status":"open","open":"09:00","close":"14:00","note":"New Year's Eve — early close"}
+    ]
+  },
+  {
     "id": "warriors-match",
     "text": "Warriors vs Bears\n02 May 6pm\nRiverside\nMatch day!",
     "label": "Game",
@@ -22,6 +47,18 @@
     "rotation": -1.7,
     "label": "notice",
     "expires_at": "2026-05-04"
+  },
+  {
+    "id": "spring-bh-2026",
+    "text": "Garage Closed 25 May\nSpring Bank Holiday",
+    "x": 72,
+    "y": 12,
+    "w": 175.2,
+    "h": 110,
+    "color": "pink",
+    "rotation": 2.2,
+    "label": "notice",
+    "expires_at": "2026-05-25"
   },
   {
     "id": "gmo8x8ldn",
