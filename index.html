@@ -12,7 +12,7 @@
 <meta name="description" content="Independent Gloucester garage on Bristol Road. MOT testing, servicing, diagnostics, tyres, welding, clutch &amp; timing belt. Honest pricing. Call 01452 422 405.">
 <meta name="author" content="Piotr Nowakowski">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#ff5a1f">
+<meta name="theme-color" content="#5b9eff">
 <link rel="canonical" href="https://gd-autocentre.vercel.app/">
 
 <!-- Favicon -->
@@ -84,10 +84,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Instrument+Serif:ital@0;1&family=Barlow+Condensed:wght@500;600;700;800&family=Dancing+Script:wght@500;600&family=Exo+2:wght@300;400;600;700;800&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Instrument+Serif:ital@0;1&family=Dancing+Script:wght@500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ═══════════════════════════════════════════════════
-     GD AUTOCENTRE — three variants, shared spine
+     GD AUTOCENTRE — final editorial style
      ═══════════════════════════════════════════════════ */
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,26 +124,6 @@
 
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
-  /* ═══════════ VARIANT A — MODERN INDUSTRIAL ═══════════ */
-  body[data-variant="industrial"] {
-    --bg: #0e0f10;
-    --bg-2: #15171a;
-    --bg-raised: #1a1d20;
-    --fg: #ededec;
-    --fg-dim: #9a9a98;
-    --fg-faint: #5a5b58;
-    --line: #26282b;
-    --line-bright: #3a3d40;
-    --accent: #ff5a1f;
-    --accent-2: #ffb020;
-    --accent-contrast: #0e0f10;
-    --font-display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
-    --font-body: 'Space Grotesk', 'Helvetica Neue', sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-    --display-tracking: 0.01em;
-    --display-weight: 700;
-  }
-
   /* ═══════════ VARIANT B — EDITORIAL WORKSHOP ═══════════ */
   body[data-variant="editorial"] {
     --bg: #12110f;
@@ -154,7 +134,7 @@
     --fg-faint: #6a6352;
     --line: #2b2820;
     --line-bright: #3e3a2e;
-    --accent: #d4a857;
+    --accent: #5b9eff;
     --accent-2: #c45a3a;
     --accent-contrast: #12110f;
     --font-display: 'Fraunces', 'Times New Roman', serif;
@@ -164,155 +144,6 @@
     --display-weight: 700;
   }
 
-  /* ═══════════ VARIANT C — REFINED CYBER ═══════════ */
-  body[data-variant="cyber"] {
-    --bg: #050508;
-    --bg-2: #0a0b12;
-    --bg-raised: #11141c;
-    --fg: #f4f5fb;
-    --fg-dim: #a4acc0;
-    --fg-faint: #4a506a;
-    --line: #1a2036;
-    --line-bright: #2d3550;
-    --neon-cyan: #00f0ff;
-    --neon-pink: #ff2e88;
-    --neon-violet: #b26bff;
-    --neon-blue: #3d8bff;
-    --neon-amber: #ffaa00;
-    --weld-orange: #ff5500;
-    --accent: #00f0ff;
-    --accent-2: #ff2e88;
-    --accent-3: #b26bff;
-    --accent-4: #ffaa00;
-    --accent-contrast: #050508;
-    --font-display: 'Space Grotesk', 'Helvetica Neue', sans-serif;
-    --font-body: 'Space Grotesk', 'Helvetica Neue', sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-    --display-tracking: -0.03em;
-    --display-weight: 600;
-    --clip-cyber-btn: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-    --clip-notch-tl: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
-    --clip-notch-tr: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
-    --clip-notch-both: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
-    --clip-notch-diag: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
-  }
-
-  /* scanlines on cyber */
-  body[data-variant="cyber"]::before {
-    content: "";
-    position: fixed; inset: 0; pointer-events: none; z-index: 200;
-    background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.015) 2px 3px);
-    mix-blend-mode: overlay;
-  }
-  body[data-variant="cyber"] section.block,
-  body[data-variant="cyber"] .trust,
-  body[data-variant="cyber"] .location-info,
-  body[data-variant="cyber"] footer.site {
-    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 4px);
-  }
-  /* rotating accent palette by section */
-  body[data-variant="cyber"] #services { --accent: var(--neon-cyan); }
-  body[data-variant="cyber"] #process { --accent: var(--neon-amber); }
-  body[data-variant="cyber"] #about { --accent: var(--neon-violet); }
-  body[data-variant="cyber"] #team { --accent: var(--neon-pink); }
-  body[data-variant="cyber"] #pricing { --accent: var(--neon-cyan); }
-  body[data-variant="cyber"] #reviews { --accent: var(--neon-amber); }
-  body[data-variant="cyber"] #location,
-  body[data-variant="cyber"] #contact { --accent: var(--neon-cyan); }
-  body[data-variant="cyber"] .cta-strip { --accent: var(--weld-orange); }
-  /* cyber-specific clip-path + glow styling for buttons */
-  body[data-variant="cyber"] .btn {
-    border-radius: 0;
-    clip-path: var(--clip-cyber-btn);
-    overflow: hidden;
-    position: relative;
-  }
-  body[data-variant="cyber"] .btn::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -150%;
-    width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-    transform: skewX(-25deg);
-    transition: left 0.6s ease-in-out;
-  }
-  body[data-variant="cyber"] .btn:hover::before { left: 150%; }
-  body[data-variant="cyber"] .btn::after {
-    content: "";
-    position: absolute; top: 0; right: 0;
-    width: 10px; height: 10px;
-    background: rgba(0,0,0,0.5);
-  }
-  body[data-variant="cyber"] .btn-primary {
-    background: linear-gradient(135deg, var(--weld-orange), var(--neon-pink));
-    border-color: var(--weld-orange);
-    color: #fff;
-    filter: drop-shadow(0 4px 12px rgba(255,85,0,0.3));
-  }
-  body[data-variant="cyber"] .btn-primary:hover {
-    filter: drop-shadow(0 0 18px rgba(255,46,136,0.7)) brightness(1.1);
-    color: #fff;
-  }
-  body[data-variant="cyber"] .btn-ghost {
-    background: rgba(0,240,255,0.04);
-    border-color: rgba(0,240,255,0.5);
-    color: var(--neon-cyan);
-  }
-  body[data-variant="cyber"] .btn-ghost:hover {
-    background: rgba(0,240,255,0.15);
-    border-color: var(--neon-cyan);
-    color: #fff;
-    filter: drop-shadow(0 0 12px rgba(0,240,255,0.6));
-  }
-  body[data-variant="cyber"] button[type="submit"].btn-ghost {
-    background: rgba(37,211,102,0.06);
-    border-color: rgba(37,211,102,0.55);
-    color: #25D366;
-  }
-  body[data-variant="cyber"] button[type="submit"].btn-ghost:hover {
-    background: rgba(37,211,102,0.18);
-    border-color: #25D366;
-    color: #fff;
-    filter: drop-shadow(0 0 12px rgba(37,211,102,0.6));
-  }
-  /* notched surfaces */
-  body[data-variant="cyber"] .svc { clip-path: var(--clip-notch-tl); background: rgba(17,20,28,0.65); backdrop-filter: blur(6px); }
-  /* cyber .stat — keep default card look */
-  body[data-variant="cyber"] .review { clip-path: var(--clip-notch-tl); }
-  body[data-variant="cyber"] .review:nth-child(even) { clip-path: var(--clip-notch-tr); }
-  body[data-variant="cyber"] form.quote { clip-path: var(--clip-notch-diag); }
-  body[data-variant="cyber"] .rate-banner { clip-path: var(--clip-notch-both); background: var(--weld-orange); color: #fff; }
-  body[data-variant="cyber"] .trust-ic { clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); border: 0; background: rgba(0,240,255,0.08); }
-  body[data-variant="cyber"] .contact-detail .ic { color: var(--neon-cyan); }
-  /* cyber accent roles by section */
-  body[data-variant="cyber"] #services .svc:nth-child(4n+1) .svc-ic { color: var(--neon-cyan); }
-  body[data-variant="cyber"] #services .svc:nth-child(4n+2) .svc-ic { color: var(--neon-pink); }
-  body[data-variant="cyber"] #services .svc:nth-child(4n+3) .svc-ic { color: var(--neon-violet); }
-  body[data-variant="cyber"] #services .svc:nth-child(4n+4) .svc-ic { color: var(--neon-amber); }
-  body[data-variant="cyber"] #services .svc:hover { background: var(--bg-2); }
-  body[data-variant="cyber"] #process .step::before { color: var(--neon-amber); }
-  body[data-variant="cyber"] #process .step:nth-child(2)::before { color: var(--neon-cyan); }
-  body[data-variant="cyber"] #process .step:nth-child(3)::before { color: var(--neon-violet); }
-  body[data-variant="cyber"] #process .step:nth-child(4)::before { color: var(--neon-pink); }
-  /* cyber stat numbers — keep default accent color */
-  body[data-variant="cyber"] .hero-title .accent-word { border-color: transparent; color: var(--accent); text-shadow: 0 0 12px color-mix(in oklab, var(--accent) 50%, transparent); }
-  body[data-variant="cyber"] .hero-readout .val { color: var(--accent); text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 50%, transparent); }
-  body[data-variant="cyber"] .team-badge { clip-path: var(--clip-cyber-btn); }
-  body[data-variant="cyber"] .theme-toggle,
-  body[data-variant="cyber"] .nav-divider { display: none; }
-  body[data-variant="cyber"] .nav-cta { clip-path: var(--clip-notch-tr); color: var(--neon-amber); border-color: rgba(255,170,0,0.3); }
-  body[data-variant="cyber"] .nav-cta:hover { border-color: var(--neon-amber); background: rgba(255,170,0,0.1); color: var(--neon-amber); text-shadow: 0 0 8px rgba(255,170,0,0.5); }
-  body[data-variant="cyber"] .alert { background: var(--bg-2); border: 0; border-bottom: 1px solid var(--line); padding: 10px 0; }
-  body[data-variant="cyber"] .alert > * { background: transparent; padding: 0; display: inline; color: var(--fg); }
-  body[data-variant="cyber"] .alert .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--neon-amber); margin-right: 10px; vertical-align: 1px; padding: 0; }
-  body[data-variant="cyber"] .alert a { color: var(--neon-amber); }
-  body[data-variant="cyber"] .eyebrow { color: var(--accent); text-shadow: 0 0 6px color-mix(in oklab, var(--accent) 40%, transparent); }
-  body[data-variant="cyber"] .hero-corner::before,
-  body[data-variant="cyber"] .hero-corner::after,
-  body[data-variant="cyber"] .hero-marks::before,
-  body[data-variant="cyber"] .hero-marks::after { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-  body[data-variant="cyber"] .nav-link:hover,
-  body[data-variant="cyber"] .nav-link.active { color: var(--accent); text-shadow: 0 0 8px color-mix(in oklab, var(--accent) 50%, transparent); }
 
 
   /* ═══════════ TYPE ═══════════ */
@@ -341,29 +172,9 @@
     text-transform: none;
     font-size: clamp(52px, 7.5vw, 112px);
     line-height: 0.98;
-    font-weight: 600;
-  }
-  body[data-variant="cyber"] .h1 {
-    text-transform: none;
     font-weight: 700;
-    font-size: clamp(48px, 7.2vw, 108px);
-    font-family: 'Exo 2', sans-serif;
-    letter-spacing: -0.02em;
   }
-  body[data-variant="cyber"] .h2 {
-    text-transform: none;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  body[data-variant="cyber"] .h3 {
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: -0.01em;
-  }
-
-  .h2 {
+.h2 {
     font-family: var(--font-display);
     font-weight: var(--display-weight);
     font-size: clamp(34px, 4.2vw, 60px);
@@ -372,9 +183,7 @@
     text-transform: uppercase;
   }
   body[data-variant="editorial"] .h2 { text-transform: none; letter-spacing: -0.015em; font-weight: 600; }
-  body[data-variant="cyber"] .h2 { text-transform: none; letter-spacing: -0.025em; font-weight: 600; }
-
-  .h3 {
+.h3 {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 22px;
@@ -383,9 +192,7 @@
     text-transform: uppercase;
   }
   body[data-variant="editorial"] .h3 { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 26px; }
-  body[data-variant="cyber"] .h3 { text-transform: none; letter-spacing: -0.02em; font-size: 22px; font-weight: 600; }
-
-  .italic-em {
+.italic-em {
     font-family: 'Instrument Serif', serif;
     font-style: italic;
     font-weight: 400;
@@ -428,18 +235,7 @@
     opacity: 0.75;
     transform: none !important;
   }
-  body[data-variant="cyber"] .btn.is-offline,
-  body[data-variant="cyber"] .btn.is-offline:hover {
-    background: var(--fg-faint) !important;
-    border-color: var(--fg-faint) !important;
-    color: var(--bg) !important;
-    filter: none !important;
-  }
-  /* Kill the cyber shine sweep on disabled buttons */
-  body[data-variant="cyber"] .btn.is-offline::before,
-  body[data-variant="cyber"] .btn.is-offline:hover::before { display: none !important; }
-  /* Wrapper for Call Gin button so tooltip can use its own ::before/::after
-     without colliding with cyber's shine/corner pseudo-elements */
+/* Wrapper for Call Gin button so tooltip can use its own ::before/::after */
   .call-gin-wrap { display: inline-block; position: relative; }
   .call-gin-wrap .btn { display: inline-flex; }
   /* Mobile: single-column, but keep classic "call first" hierarchy when online */
@@ -447,13 +243,8 @@
     .call-gin-wrap { display: block; }
     .call-gin-wrap .btn { display: flex; }
   }
-  /* variant button shapes */
-  body[data-variant="industrial"] .btn { border-radius: 0; }
-  body[data-variant="industrial"] .btn-primary { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); padding-right: 36px; }
-  body[data-variant="editorial"] .btn { border-radius: 999px; }
-  body[data-variant="cyber"] .btn { border-radius: 2px; }
-
-  /* quote highlight — pen-ink blue across variants, no background */
+body[data-variant="editorial"] .btn { border-radius: 999px; }
+  /* quote highlight — pen-ink blue, no background */
   .team-quote-highlight {
     background: transparent !important;
     color: #1e3a8a !important;
@@ -475,21 +266,7 @@
   .theme-toggle .ic-lg { width: 16px; height: 16px; }
   .theme-toggle:hover { color: var(--accent); }
   .nav-divider { width: 1px; height: 20px; background: var(--line-bright); flex-shrink: 0; }
-
-  /* ═══════════ LIGHT MODE — INDUSTRIAL ═══════════ */
-  body[data-variant="industrial"][data-theme="light"] {
-    --bg: #f5f4f2;
-    --bg-2: #ebebea;
-    --bg-raised: #e2e1df;
-    --fg: #0e0f10;
-    --fg-dim: #4a4b48;
-    --fg-faint: #9a9a98;
-    --line: #d4d3d0;
-    --line-bright: #b8b7b4;
-    --accent-contrast: #f5f4f2;
-  }
-
-  /* ═══════════ LIGHT MODE — EDITORIAL ═══════════ */
+/* ═══════════ LIGHT MODE — EDITORIAL ═══════════ */
   body[data-variant="editorial"][data-theme="light"] {
     --bg: #faf7f0;
     --bg-2: #f2ede0;
@@ -501,10 +278,7 @@
     --line-bright: #c8bea8;
     --accent-contrast: #faf7f0;
   }
-
-  /* ═══════════ LIGHT MODE — CYBER (disabled — dark only) ═══════════ */
-
-  /* header bg in light mode */
+/* header bg in light mode */
   body[data-theme="light"] header.site {
     background: color-mix(in oklab, var(--bg) 92%, transparent);
   }
@@ -551,9 +325,7 @@
   .brand { display: flex; align-items: center; gap: 14px; color: var(--fg); }
   .brand-logo { height: 44px; width: 220px; display: block; color: var(--fg); }
   body[data-variant="editorial"] .brand-logo { color: var(--accent); }
-  body[data-variant="cyber"] .brand-logo { color: var(--fg); }
-
-  .nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links { display: flex; gap: 4px; align-items: center; }
   .nav-links a {
     padding: 10px 14px;
     font-family: var(--font-body);
@@ -603,23 +375,14 @@
   }
   body[data-variant="editorial"] .hero-bg img { filter: brightness(0.38) contrast(1.05) saturate(0.6) sepia(0.3); }
   body[data-variant="editorial"][data-theme="light"] .hero-bg img { filter: brightness(0.9) contrast(1.0) saturate(0.4) sepia(0.3); opacity: 0.18; }
-  body[data-variant="industrial"][data-theme="light"] .hero-bg img { filter: brightness(0.9) contrast(1.0) saturate(0.5); opacity: 0.18; }
-  body[data-variant="cyber"] .hero-bg img { filter: brightness(0.4) contrast(1.15) saturate(0.7) hue-rotate(-15deg); }
-
-  .hero-bg::after {
+.hero-bg::after {
     content: "";
     position: absolute; inset: 0;
     background:
       linear-gradient(180deg, transparent 30%, var(--bg) 100%),
       linear-gradient(90deg, color-mix(in oklab, var(--bg) 70%, transparent) 0%, transparent 55%);
   }
-  body[data-variant="industrial"] .hero-bg::after {
-    background:
-      linear-gradient(180deg, transparent 30%, var(--bg) 100%),
-      linear-gradient(90deg, color-mix(in oklab, var(--bg) 80%, transparent) 0%, transparent 60%);
-  }
-
-  .hero .wrap {
+.hero .wrap {
     position: relative; z-index: 2;
     width: 100%;
     align-self: center;
@@ -646,14 +409,7 @@
     font-weight: 600;
     color: var(--accent);
   }
-  body[data-variant="industrial"] .hero-title .accent-word {
-    color: var(--accent);
-  }
-  body[data-variant="cyber"] .hero-title .accent-word {
-    color: var(--accent);
-  }
-
-  .hero-sub {
+.hero-sub {
     font-size: 16px;
     color: var(--fg-dim);
     max-width: 46ch;
@@ -719,20 +475,9 @@
      we can brighten them per-variant without disturbing other .mono
      text. Default: inherit the faint .meta-item .mono look. */
   .meta-label {}
-  /* Refined cyber: labels were hard to read at fg-faint 0.8. Bump to
-     a lighter blue-grey at full opacity + a touch more letter-spacing
-     so they read as a distinct caption rather than a murky accent. */
-  body[data-variant="cyber"] .meta-label {
-    color: #a4acc0;
-    opacity: 1;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-  }
-  .meta-item strong { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+.meta-item strong { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
   body[data-variant="editorial"] .meta-item strong { text-transform: none; font-weight: 600; letter-spacing: -0.01em; }
-  body[data-variant="cyber"] .meta-item strong { text-transform: none; letter-spacing: -0.02em; font-weight: 600; }
-
-  .hero-marks { display: none; }
+.hero-marks { display: none; }
 
   /* ═══════════ PINBOARD (sticky notes) ═══════════
      A) Visitor personal notes — localStorage, yellow, editable/deletable,
@@ -1089,13 +834,7 @@
       color: var(--fg-faint);
       opacity: 0.8;
     }
-    body[data-variant="cyber"] .mobile-sticky-stack::before {
-      color: #a4acc0;
-      opacity: 1;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-    }
-    .mobile-sticky-stack .sticky {
+.mobile-sticky-stack .sticky {
       position: absolute;
       top: 68px;
       left: 50%;
@@ -1226,8 +965,7 @@
   body[data-variant="editorial"] .trust-ic { border-radius: 50%; }
   .trust-text { font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.1; }
   body[data-variant="editorial"] .trust-text { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; }
-  body[data-variant="cyber"] .trust-text { text-transform: none; font-weight: 600; letter-spacing: -0.02em; font-size: 15px; }
-  .trust-sub { font-family: var(--font-mono); font-size: 10px; color: var(--fg-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
+.trust-sub { font-family: var(--font-mono); font-size: 10px; color: var(--fg-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
   @media (max-width: 720px) { .trust-row { grid-template-columns: repeat(2, 1fr); } }
 
   /* ═══════════ SECTION SCAFFOLD ═══════════ */
@@ -1388,8 +1126,7 @@
   .price-table td:last-child { padding-right: 0; text-align: right; white-space: nowrap; }
   .price-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 0.02em; text-transform: uppercase; }
   body[data-variant="editorial"] .price-name { text-transform: none; font-weight: 600; letter-spacing: -0.01em; font-size: 20px; }
-  body[data-variant="cyber"] .price-name { text-transform: none; font-weight: 600; letter-spacing: -0.02em; font-size: 18px; }
-  .price-desc { font-size: 13px; color: var(--fg-dim); margin-top: 4px; }
+.price-desc { font-size: 13px; color: var(--fg-dim); margin-top: 4px; }
   .price-val { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.01em; color: var(--fg); }
   body[data-variant="editorial"] .price-val { font-weight: 600; font-style: italic; }
   .price-val .from { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-right: 6px; font-weight: 400; font-style: normal; }
@@ -1432,8 +1169,7 @@
     filter: grayscale(0.3) contrast(1.05);
   }
   body[data-variant="editorial"] .team-portrait img { filter: sepia(0.25) contrast(1.05); }
-  body[data-variant="cyber"] .team-portrait img { filter: grayscale(0.4) contrast(1.1) hue-rotate(-10deg); }
-  .team-portrait::after { content: none; }
+.team-portrait::after { content: none; }
   .team-badge {
     position: absolute; left: 20px; bottom: 20px; z-index: 2;
     background: #0d1b3d; color: #ffffff;
@@ -1442,9 +1178,7 @@
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
   }
   body[data-variant="editorial"] .team-badge { border-radius: 2px; }
-  body[data-variant="cyber"] .team-badge { background: #0d1b3d; color: #ffffff; }
-
-  .team-quote {
+.team-quote {
     font-family: var(--font-display);
     font-size: clamp(26px, 3vw, 36px);
     line-height: 1.2;
@@ -1452,10 +1186,7 @@
     font-weight: 600;
   }
   body[data-variant="editorial"] .team-quote { font-weight: 600; font-style: italic; }
-  body[data-variant="industrial"] .team-quote { text-transform: none; font-weight: 600; letter-spacing: 0; }
-  body[data-variant="cyber"] .team-quote { font-family: var(--font-body); letter-spacing: -0.02em; }
-
-  .team-meta { margin-top: 32px; display: grid; gap: 14px; }
+.team-meta { margin-top: 32px; display: grid; gap: 14px; }
   .team-meta-row { display: flex; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
   .team-meta-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.14em; text-transform: uppercase; min-width: 140px; }
   .team-meta-row .v { color: var(--fg); }
@@ -1476,10 +1207,8 @@
   }
   body[data-variant="editorial"] .review { border-radius: 4px; }
   .review .stars { display: flex; gap: 3px; color: var(--accent-2); }
-  body[data-variant="industrial"] .review .stars { color: var(--accent-2); }
-  body[data-variant="editorial"] .review .stars { color: var(--accent); }
-  body[data-variant="cyber"] .review .stars { color: var(--accent-2); }
-  .review blockquote {
+body[data-variant="editorial"] .review .stars { color: var(--accent); }
+.review blockquote {
     font-family: var(--font-display);
     font-size: 18px;
     line-height: 1.45;
@@ -1487,9 +1216,7 @@
     letter-spacing: 0;
   }
   body[data-variant="editorial"] .review blockquote { font-weight: 500; letter-spacing: -0.01em; font-size: 20px; }
-  body[data-variant="industrial"] .review blockquote { font-family: var(--font-body); font-weight: 500; }
-  body[data-variant="cyber"] .review blockquote { font-family: var(--font-body); }
-  .review .byline {
+.review .byline {
     margin-top: auto;
     font-family: var(--font-mono);
     font-size: 11px;
@@ -1540,8 +1267,7 @@
     margin-top: 18px;
   }
   body[data-variant="editorial"] .cta-strip .big-phone { font-weight: 600; font-style: italic; }
-  body[data-variant="industrial"] .cta-strip .big-phone { text-transform: uppercase; letter-spacing: 0.01em; }
-  .cta-strip .big-phone:hover { color: var(--accent); }
+.cta-strip .big-phone:hover { color: var(--accent); }
 
   /* ═══════════ LOCATION ═══════════ */
   #location { position: relative; z-index: 1; margin-top: -1px; }
@@ -1551,9 +1277,7 @@
   @media (max-width: 900px) { .location-info { padding: 48px 32px; } }
   .location-addr { font-family: var(--font-display); font-size: 28px; line-height: 1.3; margin-top: 18px; }
   body[data-variant="editorial"] .location-addr { font-weight: 600; letter-spacing: -0.01em; }
-  body[data-variant="industrial"] .location-addr { text-transform: uppercase; font-weight: 700; letter-spacing: 0.01em; font-size: 26px; }
-  body[data-variant="cyber"] .location-addr { font-family: var(--font-body); font-weight: 600; letter-spacing: -0.02em; }
-  .location-hours { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+.location-hours { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
   .location-hours-row { display: flex; justify-content: space-between; padding: 8px 0; font-family: var(--font-mono); font-size: 13px; }
   .location-hours-row .day { color: var(--fg-dim); }
   .location-hours-row .time { color: var(--fg); }
@@ -1718,61 +1442,6 @@
     .whatsapp-float::after { width: 6px; height: 6px; }
   }
 
-  /* ═══════════ TWEAKS TOGGLE ═══════════ */
-  .tweaks-toggle {
-    position: fixed;
-    bottom: 100px; right: 28px;
-    z-index: 90;
-    width: 44px; height: 44px;
-    background: var(--bg-2);
-    border: 1px solid var(--line-bright);
-    color: var(--fg-dim);
-    display: flex; align-items: center; justify-content: center;
-    transition: all .2s ease;
-  }
-  .tweaks-toggle svg { width: 20px; height: 20px; }
-  .tweaks-toggle:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-  @media (max-width: 768px) {
-    .tweaks-toggle { bottom: 80px; right: 16px; left: auto; width: 40px; height: 40px; }
-    .tweaks-toggle svg { width: 18px; height: 18px; }
-  }
-
-  /* ═══════════ TWEAKS PANEL ═══════════ */
-  #tweaks {
-    position: fixed;
-    right: 24px; top: 100px;
-    z-index: 100;
-    background: var(--bg-2);
-    border: 1px solid var(--line-bright);
-    padding: 20px;
-    width: 260px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--fg);
-    display: none;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-  }
-  #tweaks.show { display: block; }
-  #tweaks h4 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-  #tweaks .tw-section { margin-bottom: 18px; }
-  #tweaks .tw-label { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; display: block; }
-  #tweaks .tw-opts { display: grid; gap: 6px; }
-  #tweaks .tw-opts button {
-    padding: 10px 12px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    color: var(--fg-dim);
-    text-align: left;
-    font: inherit;
-    transition: all .15s ease;
-  }
-  #tweaks .tw-opts button:hover { border-color: var(--line-bright); color: var(--fg); }
-  #tweaks .tw-opts button.active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
-  #tweaks .tw-close { position: absolute; top: 10px; right: 14px; color: var(--fg-dim); font-size: 18px; }
   @media (max-width: 900px) {
     .nav-links, .nav-cta { display: none; }
     .menu-btn { display: inline-flex; }
@@ -1899,12 +1568,7 @@
     .footer-bottom { font-size: 10px; flex-direction: column; gap: 8px; }
 
     .whatsapp-float { bottom: 16px; right: 16px; }
-
-    #tweaks {
-      right: 12px; left: 12px; top: auto; bottom: 80px;
-      width: auto; max-width: none;
-    }
-  }
+}
 
   @media (max-width: 420px) {
     .hero-meta { grid-template-columns: 1fr; }
@@ -2004,7 +1668,7 @@
   }
 </style>
 </head>
-<body data-variant="cyber">
+<body data-variant="editorial">
 
 <!-- Icon sprite (shared) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -2668,50 +2332,6 @@
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- Tweaks toggle button -->
-<button class="tweaks-toggle" id="tweaksToggle" aria-label="Open design tweaks">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
-    <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
-    <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
-    <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
-  </svg>
-</button>
-
-<!-- TWEAKS PANEL -->
-<div id="tweaks">
-  <button class="tw-close" onclick="toggleTweaks(false)" aria-label="Close">×</button>
-  <h4>Tweaks</h4>
-  <div class="tw-section">
-    <label class="tw-label">Variant</label>
-    <div class="tw-opts" id="tw-variant">
-      <button data-v="industrial">A · Modern Industrial</button>
-      <button data-v="editorial">B · Editorial Workshop</button>
-      <button data-v="cyber">C · Refined Cyber</button>
-    </div>
-  </div>
-  <div class="tw-section">
-    <label class="tw-label">Accent</label>
-    <div class="tw-opts" id="tw-accent" style="grid-template-columns: repeat(4, 1fr); display: grid; gap: 6px;">
-      <button data-a="default" style="aspect-ratio:1; padding:0;" aria-label="Default"></button>
-      <button data-a="#ff5a1f" style="aspect-ratio:1; padding:0; background:#ff5a1f; border-color:#ff5a1f" aria-label="Orange"></button>
-      <button data-a="#d4a857" style="aspect-ratio:1; padding:0; background:#d4a857; border-color:#d4a857" aria-label="Gold"></button>
-      <button data-a="#00e0a8" style="aspect-ratio:1; padding:0; background:#00e0a8; border-color:#00e0a8" aria-label="Mint"></button>
-      <button data-a="#ef3e3e" style="aspect-ratio:1; padding:0; background:#ef3e3e; border-color:#ef3e3e" aria-label="Red"></button>
-      <button data-a="#5b9eff" style="aspect-ratio:1; padding:0; background:#5b9eff; border-color:#5b9eff" aria-label="Blue"></button>
-      <button data-a="#a78bfa" style="aspect-ratio:1; padding:0; background:#a78bfa; border-color:#a78bfa" aria-label="Violet"></button>
-      <button data-a="#f5f5f2" style="aspect-ratio:1; padding:0; background:#f5f5f2; border-color:#f5f5f2" aria-label="White"></button>
-    </div>
-  </div>
-  <div class="tw-section">
-    <label class="tw-label">Density</label>
-    <div class="tw-opts" id="tw-density">
-      <button data-d="comfy">Comfortable</button>
-      <button data-d="compact">Compact</button>
-    </div>
-  </div>
-  <div style="font-size: 10px; color: var(--fg-faint); margin-top: 12px; letter-spacing: 0.08em;">Tweaks persist across reload.</div>
-</div>
 
 <!-- Sticky notes pinboard — body-level so nothing affects its fixed positioning.
      MUST be before the main <script> so pinboardModule can find it on run.
@@ -2720,76 +2340,7 @@
 <div class="pinboard" id="pinboard" aria-label="Sticky notes"></div>
 
 <script>
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "variant": "cyber",
-    "accent": "default",
-    "density": "comfy"
-  }/*EDITMODE-END*/;
-
-  const LS_KEY = "gd-tweaks-v1";
-  function getTweaks() {
-    try { return { ...TWEAK_DEFAULTS, ...JSON.parse(localStorage.getItem(LS_KEY) || "{}") }; }
-    catch { return { ...TWEAK_DEFAULTS }; }
-  }
-  function setTweaks(t) {
-    localStorage.setItem(LS_KEY, JSON.stringify(t));
-    applyTweaks(t);
-  }
-  function applyTweaks(t) {
-    document.body.setAttribute("data-variant", t.variant);
-    // clear any previous overrides (on html, body, and all sections)
-    document.documentElement.style.removeProperty("--accent");
-    document.body.style.removeProperty("--accent");
-    document.querySelectorAll("section, .cta-strip").forEach(s => s.style.removeProperty("--accent"));
-    if (t.accent && t.accent !== "default") {
-      // use !important so it beats the variant-scoped and section-scoped rules
-      document.body.style.setProperty("--accent", t.accent, "important");
-    }
-    document.body.style.setProperty("--gutter", t.density === "compact" ? "24px" : "32px");
-    document.querySelectorAll("section.block").forEach(s => {
-      s.style.padding = t.density === "compact" ? "80px 0" : "";
-    });
-    // update active states
-    document.querySelectorAll("#tw-variant button").forEach(b => b.classList.toggle("active", b.dataset.v === t.variant));
-    document.querySelectorAll("#tw-accent button").forEach(b => b.classList.toggle("active", b.dataset.a === t.accent));
-    document.querySelectorAll("#tw-density button").forEach(b => b.classList.toggle("active", b.dataset.d === t.density));
-  }
-  function toggleTweaks(show) {
-    const el = document.getElementById("tweaks");
-    if (typeof show === "boolean") el.classList.toggle("show", show);
-    else el.classList.toggle("show");
-  }
-
-  document.querySelectorAll("#tw-variant button").forEach(b => {
-    b.addEventListener("click", () => {
-      const t = getTweaks(); t.variant = b.dataset.v; setTweaks(t);
-      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{variant:b.dataset.v}}, '*');
-    });
-  });
-  document.querySelectorAll("#tw-accent button").forEach(b => {
-    b.addEventListener("click", () => {
-      const t = getTweaks(); t.accent = b.dataset.a; setTweaks(t);
-      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accent:b.dataset.a}}, '*');
-    });
-  });
-  document.querySelectorAll("#tw-density button").forEach(b => {
-    b.addEventListener("click", () => {
-      const t = getTweaks(); t.density = b.dataset.d; setTweaks(t);
-      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{density:b.dataset.d}}, '*');
-    });
-  });
-
-  // edit mode protocol
-  window.addEventListener('message', (e) => {
-    if (!e.data || !e.data.type) return;
-    if (e.data.type === '__activate_edit_mode') toggleTweaks(true);
-    if (e.data.type === '__deactivate_edit_mode') toggleTweaks(false);
-  });
-  window.parent.postMessage({type:'__edit_mode_available'}, '*');
-
-  applyTweaks(getTweaks());
-
-  // ═══ THEME (light/dark) ═══
+// ═══ THEME (light/dark) ═══
   const THEME_KEY = "gd-theme-v1";
   const moonSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
   const sunSVG = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
@@ -3829,9 +3380,7 @@
   });
 
   document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
-  document.getElementById('tweaksToggle')?.addEventListener('click', () => toggleTweaks());
-
-  // Mobile nav
+// Mobile nav
   (function() {
     const nav = document.querySelector('.nav-links');
     const btn = document.querySelector('.menu-btn');
