@@ -145,8 +145,8 @@
     "expires_at": "2026-05-25"
   },
   {
-    "id": "warriors-training-may9",
-    "text": "Gloucester Warriors training\nthis Saturday 6pm\nRiverside, St Oswalds Rd\nGloucester GL1 2TF\nOpen-run — casuals welcome\n£5 entry",
+    "id": "warriors-training-may16",
+    "text": "Gloucester Warriors training\nSaturday 16 May, 6pm\nRiverside, St Oswalds Rd\nGloucester GL1 2TF\nOpen-run — casuals welcome\n£5 entry",
     "x": 70.63241347965045,
     "y": 11.99999025132921,
     "w": 185,
@@ -154,7 +154,7 @@
     "color": "orange",
     "rotation": -2.4,
     "label": "basketball",
-    "expires_at": "2026-05-09"
+    "expires_at": "2026-05-16"
   },
   {
     "id": "gmo8x8ldn",
